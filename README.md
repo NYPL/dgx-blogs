@@ -1,11 +1,4 @@
-# NYPL React Router Boilerplate
-
-Isomorphic React boilplate
-
-* ES6 - compile with Babel and Webpack
-* Alt and Iso
-* Webpack-dev-server
-* React Router
+# NYPL Blogs app
 
 # Install
 Checkout the `development` branch and perform `npm install`

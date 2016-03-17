@@ -3,6 +3,10 @@ import Router from 'react-router';
 
 import Store from '../../stores/Store.js';
 
+import Header from 'dgx-header-component';
+import Footer from 'dgx-react-footer';
+
+
 const RouteHandler = Router.RouteHandler;
 const Navigation = Router.Navigation;
 const App = React.createClass({
@@ -18,6 +22,7 @@ const App = React.createClass({
 
     return (
       <div className='app-wrapper'>
+        <Header />
         <h2>NYPL Rocks!</h2>
         <ul>
           <li><a onClick={this.transitionTo.bind(this, 'angularApps')}>Angular Apps</a></li>
@@ -25,6 +30,8 @@ const App = React.createClass({
         </ul>
 
         <RouteHandler {...this.props} />
+
+        <Footer />
       </div>
     );
   },

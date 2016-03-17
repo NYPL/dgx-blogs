@@ -1,20 +1,16 @@
 {
-  "name": "dgx-react-router-boilerplate",
-  "version": "0.1.0",
-  "description": "Isomorphic React Router boilerplate",
+  "name": "dgx-blogs",
+  "version": "0.0.1",
+  "description": "NYPL Blogs React App",
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "postinstall": "npm run build"
+    "dist": "NODE_ENV=production webpack --config webpack.config.js",
+    "postinstall": "npm run dist"
   },
   "repository": {
     "type": "git",
     "url": ""
-  },
-  "engines": {
-    "node": "0.10",
-    "npm": "2.12"
   },
   "keywords": [
     "react",
@@ -24,7 +20,7 @@
     "hot",
     "reload"
   ],
-  "author": "Edwin Guzman",
+  "author": "NYPL Digital Experience",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com//issues"
@@ -45,18 +41,26 @@
   "dependencies": {
     "alt": "^0.18.2",
     "axios": "^0.9.1",
+    "breakpoint-sass": "^2.6.1",
     "clean-webpack-plugin": "^0.1.8",
     "colors": "^1.1.2",
     "compression": "^1.6.1",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
+    "dgx-header-component": "git+ssh://git@bitbucket.org/NYPL/dgx-header-component.git#master",
+    "dgx-react-footer": "git+ssh://git@bitbucket.org/NYPL/dgx-react-footer.git#v0.0.4.1",
+    "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#v0.0.2",
     "iso": "^5.1.0",
+    "jsonapi-parserinator": "^0.4.7",
+    "radium": "^0.13.5",
     "react": "0.13.3",
     "react-doc-meta": "^0.2.0",
     "react-ga": "^1.2.0",
     "react-router": "0.13.3",
     "rootpath": "^0.1.2",
+    "sassy-maps": "at-import/Sassy-Maps#v0.4.0",
+    "singularitygs": "^1.6.2",
     "underscore": "^1.8.3",
     "webpack": "^1.12.13",
     "webpack-merge": "^0.7.3"
