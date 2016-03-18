@@ -4,7 +4,7 @@ import _ from 'underscore';
 
 import Store from '../../stores/Store.js';
 
-class AngularApps extends React.Component {
+class DummyBlogs extends React.Component {
   constructor(props) {
     super(props);
 
@@ -36,4 +36,4 @@ class AngularApps extends React.Component {
   }
 }
 
-export default AngularApps;
+export default DummyBlogs;
