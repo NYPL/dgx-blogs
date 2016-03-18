@@ -8,7 +8,7 @@ import Router from 'react-router';
 import DocMeta from 'react-doc-meta';
 
 import Iso from 'iso';
-import alt from './src/app/alt.js';
+import alt from 'dgx-alt-center';
 
 import appConfig from './appConfig.js';
 import analytics from './analytics.js';

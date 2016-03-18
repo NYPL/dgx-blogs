@@ -1,7 +1,7 @@
 import BookActions from '../actions/Actions.js';
-import alt from '../alt.js';
+import alt from 'dgx-alt-center';
 
-class Store {
+class BlogStore {
   constructor() {
     this.bindListeners({
       updateAngularApps: BookActions.UPDATE_ANGULAR_APPS,
@@ -23,4 +23,4 @@ class Store {
   }
 }
 
-export default alt.createStore(Store, 'Store');
+export default alt.createStore(BlogStore, 'BlogStore');
