@@ -26,4 +26,10 @@ export default {
       'relationships': {'parent': 'null'}
     }
   },
+  blogsApi: {
+    endpoint: '/api/nypl/ndo/v0.1/content/nodes/blogs',
+    includes: ['authors'],
+    pageSize: '&page[size]=10',
+    pageNumber: '&page[number]=1',
+  },
 };
