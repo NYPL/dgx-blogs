@@ -6,6 +6,7 @@ import Store from '../../stores/Store.js';
 import Header from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 
+import DummyBlogs from  '../DummyBlogs/DummyBlogs.jsx';
 
 const RouteHandler = Router.RouteHandler;
 const Navigation = Router.Navigation;
@@ -30,6 +31,8 @@ const App = React.createClass({
         </ul>
 
         <RouteHandler {...this.props} />
+
+        <DummyBlogs />
 
         <Footer />
       </div>
