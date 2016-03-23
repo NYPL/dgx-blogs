@@ -10,12 +10,11 @@ class BlogListingHero extends React.Component {
   }
   
   render() {
-    const blogData = {title: 'FirstBlog', description:'blah blah blah'};
     //TODO use a helper funtion like this._getList(this.state._angularApps);
 
     return (
-      <div>
-        BlogListingHero not sure what it is yet
+      <div className="blogListingHero">
+        BlogListingHero block should be here
       </div>
     );
   }

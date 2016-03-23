@@ -33,7 +33,7 @@ function getHeaderData() {
 
 function BlogsApp(req, res, next) {
   // Uncomment out the end of the next line to limit to 10 blogs.
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions) + blogsApi.pageSize;
 
   axios
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
@@ -56,7 +56,7 @@ function BlogsApp(req, res, next) {
       next();
     }))
     .catch(error => {
-      console.log('error calling API : ' + error);
+      console.log('error calling API : ', error);
       console.log('Attempted to call : ' + blogsApiUrl);
 
       res.locals.data = {

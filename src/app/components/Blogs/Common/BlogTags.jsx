@@ -10,10 +10,10 @@ class BlogTags extends React.Component {
   }
   
   render() {
-    var tags = this._getList(this.props.data.tags);
+    var tags = this._getList(['dummy tag one', 'dummy tag two']); //TODO replace this by real tags later
 
     return (
-      <div>
+      <div className="blogTags">
         <ul>
           {tags}
         </ul>

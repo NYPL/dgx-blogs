@@ -1,0 +1,11 @@
+//blogRow
+
+.blogRow {
+	@extend %clearfix;
+	@include add-grid(6);
+
+	&-sidebar {
+		@include grid-span(1);
+		margin-right: 0;
+	}
+}

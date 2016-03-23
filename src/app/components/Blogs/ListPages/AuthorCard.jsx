@@ -13,8 +13,11 @@ class AuthorCard extends React.Component {
     //TODO use a helper funtion like this._getList(this.state._angularApps);
 
     return (
-      <div>
-      	Author card
+      <div className="authorCard">
+        <p>date here</p>
+      	<img className="authorCard-profilePic" src="http://placehold.it/50x50" />
+        <h4 className="authorCard-name">{this.props.data ? this.props.data[0].attributes['full-name'] : null}</h4>
+        <p className="authorCard-title">{this.props.data ? this.props.data[0].attributes['title'] : null}</p>
       </div>
     );
   }

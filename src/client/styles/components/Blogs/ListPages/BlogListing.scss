@@ -1,0 +1,15 @@
+//BlogListing
+
+.blogListing {
+
+  @include grid-span(5, 2);
+
+  &-title {
+
+  }
+
+  &-image {
+    float: left;
+    margin-right: 22px;
+  }
+}

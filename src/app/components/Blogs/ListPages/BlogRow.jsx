@@ -17,11 +17,12 @@ class BlogRow extends React.Component {
   render() {
     //TODO use a helper funtion like this._getList(this.state._angularApps);
     return (
-      <li>
-        <h2>{this.props.data.title}</h2>
-      	<AuthorCard />
-      	<BlogTags data={this.props.data.tags}/>
-      	<BlogListing data={this.props.data}/>
+      <li className='blogRow'>
+        <div className="blogRow-sidebar">
+        	<AuthorCard data={this.props.data.authors} />
+          <BlogTags />
+        </div>
+      	<BlogListing data={this.props.data.attributes} />
       </li>
     );
   }

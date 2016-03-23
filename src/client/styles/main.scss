@@ -23,6 +23,17 @@ Import style rules from NYPL React module components
 @import "~dgx-header-component/dist/styles/main";
 @import "~dgx-react-footer/dist/styles/styles.scss";
 
+/*
+Import components styling
+*/
+@import "components/Blogs/BlogsWrapper";
+@import "components/Blogs/ListPages/AuthorCard";
+@import "components/Blogs/ListPages/BlogRow";
+@import "components/Blogs/ListPages/BlogListing";
+@import "components/Blogs/ListPages/BlogListingHero";
+@import "components/Blogs/ListPages/BlogsLandingPage";
+
+@import "components/Blogs/Common/BlogTags";
 
 #app {
   margin: 0;

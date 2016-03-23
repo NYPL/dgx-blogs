@@ -10,13 +10,13 @@ class BlogListing extends React.Component {
   }
   
   render() {
-    const blogData = {title: 'FirstBlog', description:'blah blah blah'};
     //TODO use a helper funtion like this._getList(this.state._angularApps);
 
     return (
-      <div>
-      	<h2>{this.props.data.title}</h2>
-      	<h3>{this.props.data.body}</h3>
+      <div className="blogListing">
+      	<h2 className="blogListing-title">{this.props.data.title.en.text}</h2>
+        <img className="blogListing-image" src="http://placehold.it/200x300" />
+        <p>{this.props.data.body.en['short-text']}</p>
       </div>
     );
   }

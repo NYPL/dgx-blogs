@@ -27,8 +27,6 @@ const App = React.createClass({
 
         <RouteHandler {...this.props} />
 
-        <DummyBlogs />
-
         <Footer />
       </div>
     );
