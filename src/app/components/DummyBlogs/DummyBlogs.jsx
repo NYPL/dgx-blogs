@@ -12,7 +12,7 @@ class DummyBlogs extends React.Component {
   }
   
   render() {
-    console.log(this.state.blogs);
+    // console.log(this.state.blogs);
     const blogsData = this.state.blogs;
     const blogs = _.map(blogsData, blog => {
         return (

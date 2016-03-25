@@ -9,15 +9,17 @@ import AngularApps from '../components/Lists/AngularApps.jsx';
 
 const routes = {
   client: (
-    <Route name="root" path="/" handler={Application}>
-      <Route name='angularApps' path='/angular/?' handler={AngularApps} ignoreScrollBehavior />
-      <Route name='reactApps' path='/react/?' handler={ReactApps} ignoreScrollBehavior />
+    <Route name="root" path="blog/?" handler={Application}>
+      <Route name='angularApps' path='author/?' handler={AngularApps} ignoreScrollBehavior />
+      <Route name='reactApps' path='series/?' handler={ReactApps} ignoreScrollBehavior />
+      <Route name='all' path='*' handler={ReactApps} ignoreScrollBehavior />
     </Route>
   ),
   server: (
-    <Route name="root" path="/" handler={Application}>
-      <Route name='angularApps' path='/angular/?' handler={AngularApps} ignoreScrollBehavior />
-      <Route name='reactApps' path='/react/?' handler={ReactApps} ignoreScrollBehavior />
+    <Route name="root" path="blog/?" handler={Application}>
+      <Route name='angularApps' path='author/?' handler={AngularApps} ignoreScrollBehavior />
+      <Route name='reactApps' path='series/?' handler={ReactApps} ignoreScrollBehavior />
+      <Route name='all' path='*' handler={ReactApps} ignoreScrollBehavior />
     </Route>
   ),
 };
