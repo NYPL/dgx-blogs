@@ -4,16 +4,22 @@ import _ from 'underscore';
 
 import Store from '../../stores/Store.js';
 
-import BlogListingHero from '../Blogs/ListPages/BlogListingHero';
-import BlogRow from '../Blogs/ListPages/BlogRow';
-import BlogTags from '../Blogs/Common/BlogTags';
+import BlogListingHero from '../BlogListingHero/BlogListingHero';
+import BlogRow from '../BlogRow/BlogRow';
+import BlogTags from '../BlogTags/BlogTags';
 
-//TODO: rename as blogsBody or similar
-class DummyBlogs extends React.Component {
+class BlogsWrapper extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = Store.getState();
+  }
+
+  _getList(blogsList) {
+    return blogsList.map(function(blogRow) {
+
+      return <BlogRow data={blogRow} />;
+    });
   }
   
   render() {
@@ -45,13 +51,6 @@ class DummyBlogs extends React.Component {
       </div>
     );
   }
-
-  _getList(blogsList) {
-    return blogsList.map(function(blogRow) {
-      console.log(blogRow);
-      return <BlogRow data={blogRow} />;
-    });
-  }
 }
 
-export default DummyBlogs;
+export default BlogsWrapper;

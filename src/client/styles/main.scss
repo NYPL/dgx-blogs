@@ -26,14 +26,14 @@ Import style rules from NYPL React module components
 /*
 Import components styling
 */
-@import "components/Blogs/BlogsWrapper";
-@import "components/Blogs/ListPages/AuthorCard";
-@import "components/Blogs/ListPages/BlogRow";
-@import "components/Blogs/ListPages/BlogListing";
-@import "components/Blogs/ListPages/BlogListingHero";
-@import "components/Blogs/ListPages/BlogsLandingPage";
+@import "components/_BlogsWrapper";
+@import "components/_AuthorCard";
+@import "components/_BlogRow";
+@import "components/_BlogListing";
+@import "components/_BlogListingHero";
+@import "components/_BlogsLandingPage";
 
-@import "components/Blogs/Common/BlogTags";
+@import "components/_BlogTags";
 
 #app {
   margin: 0;
