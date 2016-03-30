@@ -1,0 +1,20 @@
+//BlogListing
+
+.blogListing {
+
+  @include grid-span(5, 2);
+
+  border-top: 2px solid $COOLGRAY_COLOR;
+  padding-bottom: 40px;
+
+  &-title {
+  	@include Milo-Light;
+  	font-weight: 400;
+    font-size: 30px;
+  }
+
+  &-image {
+    float: left;
+    margin-right: 22px;
+  }
+}

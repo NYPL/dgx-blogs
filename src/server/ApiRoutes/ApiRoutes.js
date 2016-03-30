@@ -4,6 +4,11 @@ import parser from 'jsonapi-parserinator';
 
 import Model from 'dgx-model-data';
 
+/*
+ * @todo check how to make this work as in homepage 
+ */
+import BlogsModel from '../../app/utils/BlogsModel';
+
 import appConfig from '../../../appConfig.js';
 
 const { HeaderItemModel } = Model;
@@ -33,21 +38,20 @@ function getHeaderData() {
 
 function BlogsApp(req, res, next) {
   // Uncomment out the end of the next line to limit to 10 blogs.
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions) + blogsApi.pageSize;
 
   axios
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
     .then(axios.spread((headerData, blogsData) => {
       const headerParsed = parser.parse(headerData.data, headerOptions);
       const headerModelData = HeaderItemModel.build(headerParsed)
+
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
-      // Still need to model the blog data.
+      const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
         BlogStore: {
-          _angularApps: ['Locations', 'Divisions', 'Profiles'],
-          _reactApps: ['Staff Picks', 'Header', 'Book Lists'],
-          blogs: blogsParsed,
+          blogs: blogsModelData,
         },
         HeaderStore: {
           headerData: headerModelData,
@@ -56,13 +60,12 @@ function BlogsApp(req, res, next) {
       next();
     }))
     .catch(error => {
-      console.log('error calling API : ' + error);
+      console.log('error calling API : ', error);
       console.log('Attempted to call : ' + blogsApiUrl);
 
       res.locals.data = {
         BlogStore: {
-          _angularApps: ['Locations', 'Divisions', 'Profiles'],
-          _reactApps: ['Staff Picks', 'Header', 'Book Lists'],
+          blogs: []
         },
       };
 

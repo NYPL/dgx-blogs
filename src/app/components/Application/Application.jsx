@@ -6,45 +6,26 @@ import Store from '../../stores/Store.js';
 import Header from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 
-import DummyBlogs from  '../DummyBlogs/DummyBlogs.jsx';
-
 const RouteHandler = Router.RouteHandler;
 const Navigation = Router.Navigation;
 const App = React.createClass({
+
+  mixins: [Navigation],
+
   getInitialState() {
     return Store.getState();
   },
 
-  mixins: [Navigation],
-  
   render() {
-    let angularApps = this._getList(this.state._angularApps),
-      reactApps = this._getList(this.state._reactApps);
-
     return (
-      <div className='app-wrapper'>
+      <div className="app-wrapper">
         <Header />
-        <h2>NYPL Rocks!</h2>
-        <ul>
-          <li><a onClick={this.transitionTo.bind(this, 'angularApps')}>Angular Apps</a></li>
-          <li><a onClick={this.transitionTo.bind(this, 'reactApps')}>React Apps</a></li>
-        </ul>
-
         <RouteHandler {...this.props} />
-
-        <DummyBlogs />
-
         <Footer />
       </div>
     );
   },
 
-  // Helper functions below the render() function:
-  _getList(appsArray) {
-    return appsArray.map((appName, index) => {
-      return (<li key={index}>{appName}</li>);
-    });
-  },
 });
 
 export default App;
