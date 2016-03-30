@@ -11,14 +11,20 @@ class BlogRow extends React.Component {
   }
   
   render() {
+    const { authors, tags, title, body } = this.props.data;
+    const blogListingData = {
+      title: title, 
+      body: body.short,
+      image: null 
+      };
     
     return (
       <li className='blogRow'>
         <div className="blogRow-sidebar">
-        	<AuthorCard data={this.props.data.authors} />
-          <BlogTags data={this.props.data.tags}/>
+        	<AuthorCard data={authors} />
+          <BlogTags data={tags}/>
         </div>
-      	<BlogListing data={this.props.data} />
+      	<BlogListing title={title} body={body.short} />
       </li>
     );
   }

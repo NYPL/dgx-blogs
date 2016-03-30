@@ -16,9 +16,9 @@ class BlogsWrapper extends React.Component {
   }
 
   _getList(blogsList) {
-    return blogsList.map(function(blogRow) {
+    return blogsList.map(function(blogRow, k) {
 
-      return <BlogRow data={blogRow} />;
+      return <BlogRow data={blogRow} key={k}/>;
     });
   }
   

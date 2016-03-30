@@ -28,4 +28,8 @@ BlogTags.propTypes = {
   data: React.PropTypes.array.isRequired
 };
 
+BlogTags.defaultProps = {
+  data: [],
+};
+
 export default BlogTags;

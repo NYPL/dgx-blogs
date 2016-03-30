@@ -9,16 +9,17 @@ class BlogListing extends React.Component {
 
     return (
       <div className="blogListing">
-      	<h2 className="blogListing-title">{this.props.data.title}</h2>
+      	<h2 className="blogListing-title">{this.props.title}</h2>
         <img className="blogListing-image" src="http://placehold.it/200x300" />
-        <p>{this.props.data.body.short}</p>
+        <p>{this.props.body}</p>
       </div>
     );
   }
 }
 
 BlogListing.propTypes = {
-  data: React.PropTypes.object.isRequired
+  title: React.PropTypes.string.isRequired,
+  body: React.PropTypes.string.isRequired
 };
 
 export default BlogListing;

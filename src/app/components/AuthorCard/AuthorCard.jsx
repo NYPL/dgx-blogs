@@ -25,4 +25,8 @@ AuthorCard.propTypes = {
   data: React.PropTypes.array.isRequired
 };
 
+AuthorCard.defaultProps = {
+  data: [],
+};
+
 export default AuthorCard;
