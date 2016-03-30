@@ -16,12 +16,16 @@ class BlogRow extends React.Component {
       <li className='blogRow'>
         <div className="blogRow-sidebar">
         	<AuthorCard data={this.props.data.authors} />
-          <BlogTags />
+          <BlogTags data={this.props.data.tags}/>
         </div>
-      	<BlogListing data={this.props.data.attributes} />
+      	<BlogListing data={this.props.data} />
       </li>
     );
   }
 }
+
+BlogRow.propTypes = {
+  data: React.PropTypes.object.isRequired
+};
 
 export default BlogRow;

@@ -16,12 +16,6 @@ const App = React.createClass({
     return Store.getState();
   },
 
-  _getList(appsArray) {
-    return appsArray.map((appName, index) => {
-      return (<li key={index}>{appName}</li>);
-    });
-  },
-
   render() {
     return (
       <div className="app-wrapper">

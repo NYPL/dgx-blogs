@@ -14,11 +14,15 @@ class AuthorCard extends React.Component {
       <div className="authorCard">
         <p>date here</p>
       	<img className="authorCard-profilePic" src="http://placehold.it/50x50" />
-        <h4 className="authorCard-name">{this.props.data ? this.props.data[0].attributes['full-name'] : null}</h4>
-        <p className="authorCard-title">{this.props.data ? this.props.data[0].attributes.title : null}</p>
+        <h4 className="authorCard-name">{this.props.data[0].name}</h4>
+        <p className="authorCard-title">{this.props.data[0].role}</p>
       </div>
     );
   }
 }
+
+AuthorCard.propTypes = {
+  data: React.PropTypes.array.isRequired
+};
 
 export default AuthorCard;

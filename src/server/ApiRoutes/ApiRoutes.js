@@ -4,6 +4,11 @@ import parser from 'jsonapi-parserinator';
 
 import Model from 'dgx-model-data';
 
+/*
+ * @todo check how to make this work as in homepage 
+ */
+import BlogsModel from '../../app/utils/BlogsModel';
+
 import appConfig from '../../../appConfig.js';
 
 const { HeaderItemModel } = Model;
@@ -40,14 +45,13 @@ function BlogsApp(req, res, next) {
     .then(axios.spread((headerData, blogsData) => {
       const headerParsed = parser.parse(headerData.data, headerOptions);
       const headerModelData = HeaderItemModel.build(headerParsed)
+
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
-      // Still need to model the blog data.
+      const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
         BlogStore: {
-          _angularApps: ['Locations', 'Divisions', 'Profiles'],
-          _reactApps: ['Staff Picks', 'Header', 'Book Lists'],
-          blogs: blogsParsed,
+          blogs: blogsModelData,
         },
         HeaderStore: {
           headerData: headerModelData,
@@ -61,8 +65,7 @@ function BlogsApp(req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          _angularApps: ['Locations', 'Divisions', 'Profiles'],
-          _reactApps: ['Staff Picks', 'Header', 'Book Lists'],
+          blogs: []
         },
       };
 

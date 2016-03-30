@@ -3,7 +3,7 @@ import React from 'react';
 import Store from '../../stores/Store.js';
 
 //blog components
-import BlogHero from '../BlogHero/BlogHero';
+import Hero from '../Hero/Hero';
 import BlogTags from '../BlogTags/BlogTags';
 import Blog from '../Blog/Blog';
 
@@ -18,7 +18,7 @@ class BlogPage extends React.Component {
     return (
       <div className='blog-wrapper'>
         <h1>{blogName}</h1>
-        <BlogHero />
+        <Hero />
         <BlogTags />
         <Blog />
       </div>
