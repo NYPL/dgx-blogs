@@ -11,19 +11,22 @@ import BlogPage from '../components/BlogPage/BlogPage';
 import BlogsLandingPage from '../components/BlogsLandingPage/BlogsLandingPage';
 import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
 
+//<Route name='blog' path='/blogs/:blogId' handler={BlogPage} ignoreScrollBehavior />
 const routes = {
   client: (
-    <Route name="root" path="blog/?" handler={Application}>
-      <Route name='angularApps' path='author/?' handler={AngularApps} ignoreScrollBehavior />
-      <Route name='reactApps' path='series/?' handler={ReactApps} ignoreScrollBehavior />
-      <Route name='all' path='*' handler={ReactApps} ignoreScrollBehavior />
+    <Route name="root" path="/" handler={Application}>
+      <Route name='blogs' path='blogs/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='author' path='author/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='series' path='series/?' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='all' path='*' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
   server: (
-    <Route name="root" path="blog/?" handler={Application}>
-      <Route name='angularApps' path='author/?' handler={AngularApps} ignoreScrollBehavior />
-      <Route name='reactApps' path='series/?' handler={ReactApps} ignoreScrollBehavior />
-      <Route name='all' path='*' handler={ReactApps} ignoreScrollBehavior />
+    <Route name="root" path="/" handler={Application}>
+      <Route name='blogs' path='blogs/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='author' path='author/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='series' path='series/?' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='all' path='*' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
 };
