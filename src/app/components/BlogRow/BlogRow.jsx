@@ -19,12 +19,19 @@ class BlogRow extends React.Component {
       };
     
     return (
-      <li className='blogRow'>
-        <div className="blogRow-sidebar">
-        	<AuthorCard data={authors} />
-          <BlogTags data={tags}/>
+      <li 
+        className='blogRow'>
+        <div>
+        	<AuthorCard 
+            data={authors} />
+          <BlogTags 
+            className="blogPage-sidebar"
+            renderAs="blogRow-sidebar"
+            data={tags}/>
         </div>
-      	<BlogListing title={title} body={body.short} />
+      	<BlogListing 
+          title={title} 
+          body={body.short} />
       </li>
     );
   }

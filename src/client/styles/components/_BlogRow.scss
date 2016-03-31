@@ -1,11 +1,16 @@
 //blogRow
 
 .blogRow {
-	@extend %clearfix;
-	@include add-grid(6);
+  @extend %clearfix;
+  @include add-grid(6);
 
-	&-sidebar {
-		@include grid-span(1);
-		margin-right: 0;
-	}
+  &-sidebar {
+    @include grid-span(1);
+    margin-right: 0;
+
+    & ul {
+      list-style: none;
+      padding: 0;
+    }
+  }
 }

@@ -1,0 +1,17 @@
+.hero {
+  
+ /*
+  * @todo what about the mobile, portrait ..etc?
+  * @todo use variables for breakpoints
+  */
+  
+  @include layout-at(9, '1024px') {
+    @extend %clearfix;
+    @include grid-span(9);
+    float: none;
+
+    & > img {
+      width: 100%;
+    }
+  }
+}

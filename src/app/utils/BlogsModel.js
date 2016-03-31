@@ -23,7 +23,7 @@ class BlogsModel {
      */
     if (data.length > 0) {
 
-      return _.map(data, b => {
+      return _.map(data, b => { console.log('b', b);
         return this.modelBlog(b);
       });
     }

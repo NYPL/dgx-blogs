@@ -1,0 +1,13 @@
+.blogPage {
+
+ /*
+  * @todo what about the mobile, portrait ..etc?
+  *	@todo use variables for breakpoints
+  */
+  
+  @include layout-at(9, '1024px') {
+
+    @include grid-span(9);
+    @include add-grid(9);
+  }
+}
