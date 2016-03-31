@@ -99,7 +99,7 @@ class BlogsModel {
       return null;
     }
 
-    result = _.map(array, serie => {
+    result = _.map(array, series => {
       let obj;
       try {
         const {
@@ -114,7 +114,7 @@ class BlogsModel {
               'full-uri': fullUri = '',
             }
           }
-        } = serie;
+        } = series;
 
         obj = {
           title: text,
