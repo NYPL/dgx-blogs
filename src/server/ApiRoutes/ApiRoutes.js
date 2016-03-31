@@ -50,7 +50,7 @@ function BlogsApp(req, res, next) {
 
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
-console.log(blogsModelData);
+// console.log(blogsModelData);
       res.locals.data = {
         BlogStore: {
           blogs: blogsModelData,
@@ -79,8 +79,7 @@ console.log(blogsModelData);
 }
 
 function SingleBlog(req, res, next) {
-  blogsOptions.filters = { alias: `blog/${req.params[0]}`};
-  console.log(blogsOptions);
+  // blogsOptions.filters = { alias: `blog/${req.params[0]}`};
   const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
   console.log('SINGLE BLOG');
   console.log(req.params[0]);
@@ -92,11 +91,11 @@ function SingleBlog(req, res, next) {
       const headerModelData = HeaderItemModel.build(headerParsed);
 
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
-      // const blogsModelData = BlogsModel.build(blogsParsed);
+      const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
         BlogStore: {
-          blogs: blogsParsed,
+          blogs: blogsModelData,
         },
         HeaderStore: {
           headerData: headerModelData,
@@ -122,20 +121,14 @@ function SingleBlog(req, res, next) {
     }); /* end Axios call */
 }
 
+
 router
   .route('/blogs')
   .get(BlogsApp);
 
 router
-  .route(/\/blogs\/author/)
-  .get(BlogsApp);
-
-router
-  .route(/\/blogs\/series/)
-  .get(BlogsApp);
-
-router
   .route(/\/blogs\/([^]+)\/?/)
   .get(SingleBlog);
+
 
 export default router;

@@ -14,7 +14,7 @@ class BlogRow extends React.Component {
     const { authors, tags, title, body } = this.props.data;
     const blogListingData = {
       title: title, 
-      body: body.short,
+      body: body,
       image: null 
       };
     
@@ -24,7 +24,7 @@ class BlogRow extends React.Component {
         	<AuthorCard data={authors} />
           <BlogTags data={tags}/>
         </div>
-      	<BlogListing title={title} body={body.short} />
+      	<BlogListing title={title} body={body} />
       </li>
     );
   }

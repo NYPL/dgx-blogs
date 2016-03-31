@@ -14,7 +14,6 @@ class BlogPage extends React.Component {
   
   render() {
     const blogName = this.props.params.blogId;
-
     return (
       <div className='blog-wrapper'>
         <h1>{blogName}</h1>

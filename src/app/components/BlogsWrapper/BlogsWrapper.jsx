@@ -23,7 +23,6 @@ class BlogsWrapper extends React.Component {
   }
   
   render() {
-
     const blogs = this._getList(this.state.blogs);
 
     return (
