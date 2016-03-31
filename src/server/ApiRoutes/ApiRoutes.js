@@ -14,7 +14,7 @@ import appConfig from '../../../appConfig.js';
 const { HeaderItemModel } = Model;
 const { api, headerApi, blogsApi } = appConfig;
 const router = express.Router();
-const appEnvironment = process.env.APP_ENV || 'production';
+const appEnvironment = 'development'; //process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
 const headerOptions = createOptions(headerApi);
 const blogsOptions = createOptions(blogsApi);
@@ -50,7 +50,7 @@ function BlogsApp(req, res, next) {
 
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
-
+console.log(blogsModelData);
       res.locals.data = {
         BlogStore: {
           blogs: blogsModelData,
@@ -89,14 +89,13 @@ function SingleBlog(req, res, next) {
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
     .then(axios.spread((headerData, blogsData) => {
       const headerParsed = parser.parse(headerData.data, headerOptions);
-      const headerModelData = HeaderItemModel.build(headerParsed)
+      const headerModelData = HeaderItemModel.build(headerParsed);
+
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
-      // Still need to model the blog data.
+      // const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
         BlogStore: {
-          _angularApps: ['Locations', 'Divisions', 'Profiles'],
-          _reactApps: ['Staff Picks', 'Header', 'Book Lists'],
           blogs: blogsParsed,
         },
         HeaderStore: {
@@ -124,19 +123,19 @@ function SingleBlog(req, res, next) {
 }
 
 router
-  .route('/blog')
+  .route('/blogs')
   .get(BlogsApp);
 
 router
-  .route(/\/blog\/author/)
+  .route(/\/blogs\/author/)
   .get(BlogsApp);
 
 router
-  .route(/\/blog\/series/)
+  .route(/\/blogs\/series/)
   .get(BlogsApp);
 
 router
-  .route(/\/blog\/([^]+)\/?/)
+  .route(/\/blogs\/([^]+)\/?/)
   .get(SingleBlog);
 
 export default router;
