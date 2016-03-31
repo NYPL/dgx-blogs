@@ -3,7 +3,7 @@ import React from 'react';
 //blog row inner components
 import AuthorCard from '../AuthorCard/AuthorCard';
 import BlogListing from '../BlogListing/BlogListing';
-import BlogTags from '../BlogTags/BlogTags';
+import BlogSubjects from '../BlogSubjects/BlogSubjects';
 
 class BlogRow extends React.Component {
   constructor(props) {
@@ -11,20 +11,20 @@ class BlogRow extends React.Component {
   }
   
   render() {
-    const { authors, tags, title, body } = this.props.data;
+    const { author, subjects, title, body } = this.props.data;
     const blogListingData = {
       title: title, 
-      body: body,
+      body: body.short,
       image: null 
-      };
-    
+    };
+
     return (
       <li className='blogRow'>
         <div className="blogRow-sidebar">
-        	<AuthorCard data={authors} />
-          <BlogTags data={tags}/>
+        	<AuthorCard data={author} />
+          <BlogSubjects data={subjects}/>
         </div>
-      	<BlogListing title={title} body={body} />
+      	<BlogListing title={title} body={body.short} />
       </li>
     );
   }

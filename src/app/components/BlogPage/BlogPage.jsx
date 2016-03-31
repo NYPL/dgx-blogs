@@ -4,21 +4,28 @@ import Store from '../../stores/Store.js';
 
 //blog components
 import Hero from '../Hero/Hero';
-import BlogTags from '../BlogTags/BlogTags';
+import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
 
 class BlogPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = Store.getState();
   }
   
   render() {
-    const blogName = this.props.params.blogId;
+    const blog = this.state.blogPost[0];
+    const title = blog.title;
+    const fullName = blog.author.fullName;
+    // console.log(blog);
+
     return (
       <div className='blog-wrapper'>
-        <h1>{blogName}</h1>
         <Hero />
-        <BlogTags />
+        <h1>{title}</h1>
+        <p>{fullName}</p>
+        <BlogSubjects />
         <Blog />
       </div>
     );

@@ -4,12 +4,12 @@ import alt from 'dgx-alt-center';
 class BlogStore {
   constructor() {
     this.bindListeners({
-
-      //updateAngularApps: Actions.UPDATE_ANGULAR_APPS
+      
     });
 
     this.on('init', () => {
       this.blogs = [];
+      this.blogPost = [];
     });
   }
 }

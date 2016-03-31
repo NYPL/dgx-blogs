@@ -1,5 +1,5 @@
 export default {
-  appTitle: 'NYPL | App Name',
+  appTitle: 'NYPL | Blogs',
   appName: 'NYPL App',
   favIconPath: 'http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/images/favicon.ico',
   port: 3001,
@@ -28,7 +28,7 @@ export default {
   },
   blogsApi: {
     endpoint: '/api/nypl/ndo/v0.1/content/nodes/blogs',
-    includes: ['authors'],
+    includes: ['blog-profiles.author', 'blog-series', 'blog-subjects'],
     pageSize: '&page[size]=10',
     pageNumber: '&page[number]=1',
   },

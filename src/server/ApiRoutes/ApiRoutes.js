@@ -14,7 +14,7 @@ import appConfig from '../../../appConfig.js';
 const { HeaderItemModel } = Model;
 const { api, headerApi, blogsApi } = appConfig;
 const router = express.Router();
-const appEnvironment = 'development'; //process.env.APP_ENV || 'production';
+const appEnvironment = 'qa'; //process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
 const headerOptions = createOptions(headerApi);
 const blogsOptions = createOptions(blogsApi);
@@ -36,12 +36,9 @@ function getHeaderData() {
   return fetchApiData(headerApiUrl);
 }
 
-function BlogsApp(req, res, next) {
-  // Uncomment out the end of the next line to limit to 10 blogs.
+function BlogsMainList(req, res, next) {
   const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-  console.log('ALL BLOGS');
-  console.log(req.params);
-
+console.log(blogsApiUrl);
   axios
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
     .then(axios.spread((headerData, blogsData) => {
@@ -50,7 +47,7 @@ function BlogsApp(req, res, next) {
 
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
-// console.log(blogsModelData);
+
       res.locals.data = {
         BlogStore: {
           blogs: blogsModelData,
@@ -69,6 +66,9 @@ function BlogsApp(req, res, next) {
         BlogStore: {
           blogs: []
         },
+        HeaderStore: {
+          headerData: [],
+        },
       };
 
       // The next is needed so that Express knows to go to the
@@ -78,11 +78,23 @@ function BlogsApp(req, res, next) {
     }); /* end Axios call */
 }
 
-function SingleBlog(req, res, next) {
-  // blogsOptions.filters = { alias: `blog/${req.params[0]}`};
+function BlogQuery(req, res, next) {
+  const param = req.params[0];
+
+  if (param.indexOf('author') !== -1) {
+    console.log('hit the author url');
+  } else if (param.indexOf('series') !== -1) {
+    console.log('hit the series url');
+  } else if (param.indexOf('subject') !== -1) {
+    console.log('hit the subject url');
+  } else {
+    // Single blog post, query by blog post alias:
+    blogsOptions.filters = { alias: `blog/${req.params[0]}`};
+    // blogsOptions.includes = blogsOptions.includes.concat(['blog-subjects', 'blog-series']);
+  }
+
   const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-  console.log('SINGLE BLOG');
-  console.log(req.params[0]);
+  // console.log(blogsApiUrl);
 
   axios
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
@@ -95,7 +107,7 @@ function SingleBlog(req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          blogs: blogsModelData,
+          blogPost: blogsModelData,
         },
         HeaderStore: {
           headerData: headerModelData,
@@ -109,8 +121,10 @@ function SingleBlog(req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          _angularApps: ['Locations', 'Divisions', 'Profiles'],
-          _reactApps: ['Staff Picks', 'Header', 'Book Lists'],
+          blogPost: [],
+        },
+        HeaderStore: {
+          headerData: [],
         },
       };
 
@@ -124,11 +138,11 @@ function SingleBlog(req, res, next) {
 
 router
   .route('/blogs')
-  .get(BlogsApp);
+  .get(BlogsMainList);
 
 router
   .route(/\/blogs\/([^]+)\/?/)
-  .get(SingleBlog);
+  .get(BlogQuery);
 
 
 export default router;
