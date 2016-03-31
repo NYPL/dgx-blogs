@@ -1,11 +1,15 @@
-// React libraries
+
 import React from 'react';
-// Import Router
+
 import { DefaultRoute, NotFoundRoute, Route } from 'react-router';
-// Import components
-import Application from '../components/Application/Application.jsx';
-import ReactApps from '../components/Lists/ReactApps.jsx';
-import AngularApps from '../components/Lists/AngularApps.jsx';
+
+/*
+ * Components
+ */
+import Application from '../components/Application/Application';
+import BlogPage from '../components/BlogPage/BlogPage';
+import BlogsLandingPage from '../components/BlogsLandingPage/BlogsLandingPage';
+import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
 
 const routes = {
   client: (
