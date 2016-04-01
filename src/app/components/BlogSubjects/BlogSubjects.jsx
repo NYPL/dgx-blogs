@@ -1,6 +1,6 @@
 import React from 'react';
 
-class BlogTags extends React.Component {
+class BlogSubjects extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -20,8 +20,7 @@ class BlogTags extends React.Component {
   }
   
   render() {
-    const tags = this._getList(this.props.data); 
-
+    const tags = this.props.data ? this._getList(this.props.data) : null;
     const mainClass = this.props.renderAs;
 
     return (
@@ -34,13 +33,13 @@ class BlogTags extends React.Component {
   }
 }
 
-BlogTags.propTypes = {
+BlogSubjects.propTypes = {
   data: React.PropTypes.array.isRequired
 };
 
-BlogTags.defaultProps = {
+BlogSubjects.defaultProps = {
   data: [],
   renderAs: 'blogTagsSidebar'
 };
 
-export default BlogTags;
+export default BlogSubjects;

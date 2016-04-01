@@ -20,7 +20,9 @@ const App = React.createClass({
     return (
       <div className="app-wrapper">
         <Header />
+
         <RouteHandler {...this.props} />
+
         <Footer />
       </div>
     );

@@ -15,13 +15,17 @@ const routes = {
   client: (
     <Route name="root" path="/" handler={Application}>
       <Route name='blogs' path='/blogs/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='blog' path='/blogs/:blogId' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='author' path='/blogs/author/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='series' path='/blogs/series/?' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='blog' path='/blogs/**' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
   server: (
     <Route name="root" path="/" handler={Application}>
       <Route name='blogs' path='/blogs/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='blog' path='/blogs/:blogId' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='author' path='/blogs/author/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='series' path='/blogs/series/?' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='blog' path='/blogs/**' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
 };

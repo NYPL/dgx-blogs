@@ -8,7 +8,7 @@ import Store from '../../stores/Store.js';
  */
 import BlogListingHero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
-import BlogTags from '../BlogTags/BlogTags';
+import BlogSubjects from '../BlogSubjects/BlogSubjects';
 
 class BlogsLandingPage extends React.Component {
   constructor(props) {

@@ -6,7 +6,7 @@ import Store from '../../stores/Store.js';
 
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
-import BlogTags from '../BlogTags/BlogTags';
+import BlogSubjects from '../BlogSubjects/BlogSubjects';
 
 class BlogsWrapper extends React.Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class BlogsWrapper extends React.Component {
   }
   
   render() {
-
     const blogs = this._getList(this.state.blogs);
 
     return (
