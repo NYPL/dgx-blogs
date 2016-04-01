@@ -20,7 +20,7 @@
     }
   }
 
-  @include layout-at(9, '1024px') {
+  @include layout-at(9, $landscape) {
     @include grid-span(4, 4);
     margin-top: -100px;
     z-index: 10000;

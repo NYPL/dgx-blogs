@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 
 class BlogTags extends React.Component {
   constructor(props) {
@@ -9,8 +8,7 @@ class BlogTags extends React.Component {
   _getList(tagsArray) {
     return tagsArray.map((tag, index) => {
       return (
-        <li 
-          key={index}>
+        <li key={index}>
           <a 
             className="tagLink"
             href="#">
@@ -22,22 +20,12 @@ class BlogTags extends React.Component {
   }
   
   render() {
-    var tags = this._getList(this.props.data); 
-    var link = '';
+    const tags = this._getList(this.props.data); 
 
-    var mainClass = this.props.renderAs;
-    
-    if(this.props.renderAs == 'sidebar') {
-      link = (<Link 
-          className="backToLink" 
-          to="blogs">
-          back to blogs
-        </Link>);
-    }
+    const mainClass = this.props.renderAs;
 
     return (
       <div className={mainClass}>
-        {link}
         <ul className={mainClass + "-list"}>
           {tags}
         </ul>

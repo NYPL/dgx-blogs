@@ -21,9 +21,8 @@ class BlogRow extends React.Component {
     return (
       <li 
         className='blogRow'>
-        <div>
-        	<AuthorCard 
-            data={authors} />
+        <div className="blogRow-leftSidebar">
+        	<AuthorCard data={authors} />
           <BlogTags 
             className="blogPage-sidebar"
             renderAs="blogRow-sidebar"

@@ -5,7 +5,7 @@
   * @todo use variables for breakpoints
   */
   
-  @include layout-at(9, '1024px') {
+  @include layout-at(9, $landscape) {
     @extend %clearfix;
     @include grid-span(9);
     float: none;

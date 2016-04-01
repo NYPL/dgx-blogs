@@ -6,17 +6,10 @@
     margin-top: 120px;
 	}
 
-  @include layout-at(9, '1024px') {
+  @include layout-at(9, $landscape) {
     @include grid-span(2, 2);
     text-align: right;
     margin-top: 16px;
-
-    .backToLink {
-      text-transform: uppercase;
-      color: $COOLGRAY_COLOR;
-      font-size: 12px;
-      text-decoration: none;
-    }
 
     .tagLink {
       text-transform: uppercase;

@@ -1,16 +1,24 @@
-//blogRow
-
 .blogRow {
   @extend %clearfix;
   @include add-grid(6);
 
-  &-sidebar {
+  &-leftSidebar {
     @include grid-span(1);
     margin-right: 0;
 
     & ul {
       list-style: none;
       padding: 0;
+
+      & > li {
+        padding: 5px 0;
+      }
     }
+  }
+
+  .tagLink {
+    text-transform: uppercase;
+    color: $SECONDARY_UI_COLOR;
+    font-size: 13px;
   }
 }

@@ -1,31 +1,33 @@
-//BlogsWrapper, basic grid for blogs
-
 .blogsWrapper {
-	
-	@include add-grid(3);
+  
+  @include add-grid(3);
 
-	//TODO use variables for breakpoints
-	@include layout-at(9, '1024px') {
-		background: red;
+  @include layout-at(9, $landscape) {
 
-		.sidebar {
+    .sidebar {
 
-			@include grid-span(1);
+      @include grid-span(1);
+      border-top: 2px solid $CHARCOAL;
+      margin-top: 16px;
+      color: $CHARCOAL;
 
-			&-title {
-				text-align: right;
-			}
+      &-title {
+        text-align: right;
+      }
 
       &-link {
         display: block;
         text-align: right;
+        color: $CHARCOAL;
+        text-decoration: none;
+        padding: 5px 0;
       }
-		}
+    }
 
-		.blogsList {
+    .blogsList {
 
-			@include grid-span(6, 2);
-			list-style: none;
-		}
-	}
+      @include grid-span(6, 2);
+      list-style: none;
+    }
+  }
 }
