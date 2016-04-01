@@ -20,11 +20,16 @@ class BlogRow extends React.Component {
 
     return (
       <li className='blogRow'>
-        <div className="blogRow-sidebar">
-        	<AuthorCard data={author} />
-          <BlogSubjects data={subjects}/>
+        <div className="blogRow-leftSidebar">
+          <AuthorCard data={author} />
+          <BlogSubjects 
+            className="blogPage-sidebar"
+            renderAs="blogRow-sidebar"
+            data={subjects}/>
         </div>
-      	<BlogListing title={title} body={body.short} />
+      	<BlogListing 
+          title={title} 
+          body={body.short} />
       </li>
     );
   }

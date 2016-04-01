@@ -38,7 +38,9 @@ function getHeaderData() {
 
 function BlogsMainList(req, res, next) {
   const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-console.log(blogsApiUrl);
+  // console.log(blogsApiUrl);
+  blogsOptions.filters = {};
+
   axios
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
     .then(axios.spread((headerData, blogsData) => {
@@ -80,6 +82,8 @@ console.log(blogsApiUrl);
 
 function BlogQuery(req, res, next) {
   const param = req.params[0];
+
+  blogsOptions.filters = {};
 
   if (param.indexOf('author') !== -1) {
     console.log('hit the author url');

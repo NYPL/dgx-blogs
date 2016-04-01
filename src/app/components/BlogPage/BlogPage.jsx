@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 import Store from '../../stores/Store.js';
 
@@ -17,16 +18,23 @@ class BlogPage extends React.Component {
   render() {
     const blog = this.state.blogPost[0];
     const title = blog.title;
-    const fullName = blog.author.fullName;
-    // console.log(blog);
+    const body = blog.body.short;
+    const author = blog.author;
+    const imgPlaceholder = "http://placehold.it/1513x406/";
 
     return (
-      <div className='blog-wrapper'>
-        <Hero />
-        <h1>{title}</h1>
-        <p>{fullName}</p>
-        <BlogSubjects />
-        <Blog />
+      <div className='blogPage'>
+        <Hero imageUrl={imgPlaceholder} />
+        <Link 
+          className="backToLink" 
+          to="blogs">
+          back to blogs
+        </Link>
+        <BlogSubjects data={this.state.tags} />
+        <Blog 
+          title={title} 
+          body={body} 
+          author={author}/>
       </div>
     );
   }
