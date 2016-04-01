@@ -20,6 +20,7 @@ class BlogPage extends React.Component {
     const title = blog.title;
     const body = blog.body.short;
     const author = blog.author;
+    const subjects = blog.subjects;
     const imgPlaceholder = "http://placehold.it/1513x406/";
 
     return (
@@ -30,7 +31,7 @@ class BlogPage extends React.Component {
           to="blogs">
           back to blogs
         </Link>
-        <BlogSubjects data={this.state.tags} />
+        <BlogSubjects data={subjects} />
         <Blog 
           title={title} 
           body={body} 
