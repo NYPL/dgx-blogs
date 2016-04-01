@@ -22,6 +22,7 @@ class BlogRow extends React.Component {
       <li 
         className='blogRow'>
         <div className="blogRow-leftSidebar">
+          <p className="blogRow-date">January 1, 1970</p>
         	<AuthorCard data={authors} />
           <BlogTags 
             className="blogPage-sidebar"

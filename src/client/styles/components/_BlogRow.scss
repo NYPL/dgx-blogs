@@ -16,6 +16,11 @@
     }
   }
 
+  &-date {
+    font-size: 13px;
+    color: $COOLGRAY_COLOR;
+  }
+
   .tagLink {
     text-transform: uppercase;
     color: $SECONDARY_UI_COLOR;

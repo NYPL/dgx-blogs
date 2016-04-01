@@ -31,6 +31,41 @@ class BlogsModel {
     return null;
   }
 
+  emptyAuthor() {
+
+    return {
+      name: '',
+      role: ''
+    }
+  }
+
+  modelAuthor(author) {
+    let tmpAuthor = this.emptyAuthor();
+    tmpAuthor.name = author.attributes['full-name'];
+    tmpAuthor.role = author.attributes.title;
+
+    return tmpAuthor;
+  }
+
+  extractAuthors(authors) {
+
+    if (!authors || !(_.isArray(authors))) {
+      return [this.emptyAuthor()];
+    }
+
+    /**
+     * If authors is an array
+     */
+    if (authors.length > 0) {
+
+      return _.map(authors, b => {
+        return this.modelAuthor(b);
+      });
+    }
+
+    return [this.emptyAuthor()];
+  }
+
   emptyBlog() {
 
     return {
@@ -54,9 +89,7 @@ class BlogsModel {
   /**
     * @todo fetch real authors
     */
-    newBlog.authors = [
-      {name: "John Doe", role: "Assistant"}
-    ];
+    newBlog.authors = this.extractAuthors(b.authors);
 
     newBlog.body.short = b.attributes.body.en["short-text"];
     newBlog.body.full = b.attributes.body.en["full-text"];
