@@ -11,8 +11,15 @@ class Blog extends React.Component {
   render() {
 
     return (
-      <div>
-      	Blog itself
+      <div className="blogContent">
+      	<h1 
+          className="blogContent-title">
+          {this.props.title}
+        </h1>
+        <div className="blogContent-author">
+          by <b>{this.props.author.name}</b>. {this.props.author.role}
+        </div>
+        {this.props.body}
       </div>
     );
   }

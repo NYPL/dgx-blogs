@@ -7,16 +7,26 @@ class BlogTags extends React.Component {
 
   _getList(tagsArray) {
     return tagsArray.map((tag, index) => {
-      return (<li key={index}>{tag.name}</li>);
+      return (
+        <li key={index}>
+          <a 
+            className="tagLink"
+            href="#">
+            {tag.name}
+          </a>
+        </li>
+        );
     });
   }
   
   render() {
-    var tags = this._getList(this.props.data); 
+    const tags = this._getList(this.props.data); 
+
+    const mainClass = this.props.renderAs;
 
     return (
-      <div className="blogTags">
-        <ul>
+      <div className={mainClass}>
+        <ul className={mainClass + "-list"}>
           {tags}
         </ul>
       </div>
@@ -30,6 +40,7 @@ BlogTags.propTypes = {
 
 BlogTags.defaultProps = {
   data: [],
+  renderAs: 'blogTagsSidebar'
 };
 
 export default BlogTags;

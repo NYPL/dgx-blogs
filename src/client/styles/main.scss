@@ -1,6 +1,7 @@
 /*
 Import utils and fonts
 */
+@import 'utils/variables';
 @import 'utils/mixins';
 @import 'utils/colors';
 @import 'utils/utils';
@@ -32,8 +33,10 @@ Import components styling
 @import "components/_BlogListing";
 @import "components/_BlogListingHero";
 @import "components/_BlogsLandingPage";
-
+@import "components/_BlogPage";
 @import "components/_BlogTags";
+@import "components/_BlogContent";
+@import "components/_Hero";
 
 #app {
   margin: 0;

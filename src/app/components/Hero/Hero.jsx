@@ -8,8 +8,8 @@ class Hero extends React.Component {
   render() {
 
     return (
-      <div>
-      	heroImage
+      <div className="hero">
+      	<img src={this.props.imageUrl} />
       </div>
     );
   }
