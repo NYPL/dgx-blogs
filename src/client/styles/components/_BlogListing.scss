@@ -11,10 +11,16 @@
   	@include Milo-Light;
   	font-weight: 400;
     font-size: 30px;
+    color: $BLACK_COLOR;
+    text-decoration: none;
   }
 
   &-image {
     float: left;
     margin-right: 22px;
+  }
+
+  &-paragraph {
+    line-height: 1.5;
   }
 }

@@ -17,9 +17,9 @@ class Blog extends React.Component {
           {this.props.title}
         </h1>
         <div className="blogContent-author">
-          by <b>{this.props.author.name}</b>. {this.props.author.role}
+          by <b>{this.props.author.fullName}</b>. {this.props.author.title}
         </div>
-        {this.props.body}
+        {this.props.dangerouslySetInnerHTML}
       </div>
     );
   }

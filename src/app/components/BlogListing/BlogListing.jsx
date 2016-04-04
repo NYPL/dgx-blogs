@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 class BlogListing extends React.Component {
   constructor(props) {
@@ -9,9 +10,13 @@ class BlogListing extends React.Component {
 
     return (
       <div className="blogListing">
-      	<h2 className="blogListing-title">{this.props.title}</h2>
-        <img className="blogListing-image" src="http://placehold.it/200x300" />
-        <p>{this.props.body}</p>
+      	<h2>
+          <a className="blogListing-title" href={'/blogs/' + this.props.slug}>
+            {this.props.title}
+          </a>
+        </h2>
+        <img className="blogListing-image" src={this.props.mainPicture} />
+        <p className="blogListing-paragraph">{this.props.body}</p>
       </div>
     );
   }

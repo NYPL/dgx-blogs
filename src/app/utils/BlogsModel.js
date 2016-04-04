@@ -31,6 +31,9 @@ class BlogsModel {
     return null;
   }
 
+  /*
+   * @todo not used anymore?
+   */
   emptyAuthor() {
 
     return {
@@ -47,6 +50,9 @@ class BlogsModel {
     return tmpAuthor;
   }
 
+  /*
+   * @todo not used anymore?
+   */
   extractAuthors(authors) {
 
     if (!authors || !(_.isArray(authors))) {
@@ -71,37 +77,149 @@ class BlogsModel {
     return {
       id: null,
       title: null,
-      authors: [],
+      author: {},
       body: {
         short: null,
         full: null
       },
-      tags: []
+      series: [],
+      subjects: [],
+      uri: null
     }
   }
 
-  modelBlog(b) {
+  /**
+   * Uses ES6 Destructuring to extract author's properties.
+   * @returns {object}
+   */
+  getAuthor(obj) {
+    let result;
+    if (!obj && _.isEmpty(obj)) {
+      return null;
+    }
 
+    try {
+      const {
+        ['blog-profiles']: [
+          {
+            author: {
+              id: id = '',
+              attributes: {
+                ['display-name']: displayName = '',
+                location: location = '',
+                ['first-name']: firstName = '',
+                ['last-name']: lastName = '',
+                ['full-name']: fullName = '',
+                unit: unit = '',
+                title: title = ''
+              }
+            }
+          },
+          ...rest
+        ]
+      } = obj;
+
+      result = {
+        id,
+        displayName,
+        location,
+        firstName,
+        lastName,
+        fullName,
+        unit,
+        title
+      };
+    }  catch (e) {
+      // result = null;
+      result = undefined;
+    }
+
+    return result;
+  }
+
+  getSeries(array) {
+    let result;
+    if (!array || array.length === 0) {
+      return null;
+    }
+
+    result = _.map(array, series => {
+      let obj;
+      try {
+        const {
+          id: id = '',
+          attributes: {
+            title: {
+              en: {
+                text: text = '',
+              },
+            },
+            'rss-uri': {
+              'full-uri': fullUri = '',
+            }
+          }
+        } = series;
+
+        obj = {
+          title: text,
+          fullUri,
+          id,
+        };
+      }  catch (e) {
+        obj = undefined;
+      }
+
+      return obj;
+    });
+
+    return result;
+  }
+
+  getSubjects(array) {
+    let result;
+    if (!array || array.length === 0) {
+      return null;
+    }
+
+    result = _.map(array, subject => {
+      return {
+        id: subject.id,
+        name: subject.attributes.name,
+      };
+    });
+
+    return result;
+  }
+
+  getSlug(uriObject) {
+    let slug = uriObject['full-uri'].split('/blog/').pop();
+
+    return slug;
+  }
+
+  modelBlog(b) {
     let newBlog = this.emptyBlog();
     newBlog.id = b.id;
     newBlog.title = b.attributes.title.en.text;
 
-  /**
-    * @todo fetch real authors
-    */
-    newBlog.authors = this.extractAuthors(b.authors);
+    newBlog.body.short = b.attributes.body.en['short-text'];
+    newBlog.body.full = b.attributes.body.en['full-text'];
 
-    newBlog.body.short = b.attributes.body.en["short-text"];
-    newBlog.body.full = b.attributes.body.en["full-text"];
+    newBlog.author = this.getAuthor(b);
+    newBlog.series = this.getSeries(b['blog-series']);
+    newBlog.subjects = this.getSubjects(b['blog-subjects']);
+    newBlog.slug = this.getSlug(b.attributes.uri);
 
-  /**
-    * @todo fetch real tags
-    */
-    newBlog.tags = [
-      {id: 123456, name: 'Educators'},
-      {id: 123457, name: 'Children\'s books'},
-      {id: 123458, name: 'Toddlers'}
-    ];
+    /* @todo harcoded picture by now,delete this when available from refinery */
+    if(newBlog.author == undefined) newBlog.author = {};
+    newBlog.author.picture = 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
+    
+    /* @todo harcoded date for now, update when available from ref */
+    newBlog.date = 'January 1, 1970';
+
+    /* @todo harcoded pictures for now update when availaber from refinery */
+    newBlog.mainPicture = 'http://lorempixel.com/400/300/?' + Math.random();
+    newBlog.coverPicture = 'http://lorempixel.com/1513/406/?' + Math.random();
 
     return newBlog;
   }
