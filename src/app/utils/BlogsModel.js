@@ -31,47 +31,6 @@ class BlogsModel {
     return null;
   }
 
-  /*
-   * @todo not used anymore?
-   */
-  emptyAuthor() {
-
-    return {
-      name: '',
-      role: ''
-    }
-  }
-
-  modelAuthor(author) {
-    let tmpAuthor = this.emptyAuthor();
-    tmpAuthor.name = author.attributes['full-name'];
-    tmpAuthor.role = author.attributes.title;
-
-    return tmpAuthor;
-  }
-
-  /*
-   * @todo not used anymore?
-   */
-  extractAuthors(authors) {
-
-    if (!authors || !(_.isArray(authors))) {
-      return [this.emptyAuthor()];
-    }
-
-    /**
-     * If authors is an array
-     */
-    if (authors.length > 0) {
-
-      return _.map(authors, b => {
-        return this.modelAuthor(b);
-      });
-    }
-
-    return [this.emptyAuthor()];
-  }
-
   emptyBlog() {
 
     return {
@@ -84,7 +43,6 @@ class BlogsModel {
       },
       series: [],
       subjects: [],
-      uri: null
     }
   }
 
@@ -111,7 +69,6 @@ class BlogsModel {
                 ['last-name']: lastName = '',
                 ['full-name']: fullName = '',
                 unit: unit = '',
-                title: title = ''
               }
             },
             headshot: {
@@ -134,7 +91,6 @@ class BlogsModel {
         lastName,
         fullName,
         unit,
-        title,
         profileImgUrl,
       };
     }  catch (e) {
@@ -199,12 +155,6 @@ class BlogsModel {
     return result;
   }
 
-  getSlug(uriObject) {
-    let slug = uriObject['full-uri'].split('/blog/').pop();
-
-    return slug;
-  }
-
   modelBlog(b) {
     let newBlog = this.emptyBlog();
     newBlog.id = b.id;
@@ -216,18 +166,6 @@ class BlogsModel {
     newBlog.author = this.getAuthor(b);
     newBlog.series = this.getSeries(b['blog-series']);
     newBlog.subjects = this.getSubjects(b['blog-subjects']);
-    newBlog.slug = this.getSlug(b.attributes.uri);
-
-    /* @todo harcoded picture by now,delete this when available from refinery */
-    if(newBlog.author == undefined) newBlog.author = {};
-    newBlog.author.picture = 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
-    
-    /* @todo harcoded date for now, update when available from ref */
-    newBlog.date = 'January 1, 1970';
-
-    /* @todo harcoded pictures for now update when availaber from refinery */
-    newBlog.mainPicture = 'http://lorempixel.com/400/300/?' + Math.random();
-    newBlog.coverPicture = 'http://lorempixel.com/1513/406/?' + Math.random();
 
     return newBlog;
   }
