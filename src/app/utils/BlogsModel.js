@@ -31,6 +31,14 @@ class BlogsModel {
     return null;
   }
 
+  modelAuthor(author) {
+    let tmpAuthor = this.emptyAuthor();
+    tmpAuthor.name = author.attributes['full-name'];
+    tmpAuthor.role = author.attributes.title;
+
+    return tmpAuthor;
+  }
+
   emptyBlog() {
 
     return {
@@ -43,6 +51,7 @@ class BlogsModel {
       },
       series: [],
       subjects: [],
+      uri: null
     }
   }
 
@@ -69,6 +78,7 @@ class BlogsModel {
                 ['last-name']: lastName = '',
                 ['full-name']: fullName = '',
                 unit: unit = '',
+                title: title = ''
               }
             }
           },
@@ -84,6 +94,7 @@ class BlogsModel {
         lastName,
         fullName,
         unit,
+        title
       };
     }  catch (e) {
       // result = null;
@@ -147,6 +158,12 @@ class BlogsModel {
     return result;
   }
 
+  getSlug(uriObject) {
+    let slug = uriObject['full-uri'].split('/blog/').pop();
+
+    return slug;
+  }
+
   modelBlog(b) {
     let newBlog = this.emptyBlog();
     newBlog.id = b.id;
@@ -158,6 +175,18 @@ class BlogsModel {
     newBlog.author = this.getAuthor(b);
     newBlog.series = this.getSeries(b['blog-series']);
     newBlog.subjects = this.getSubjects(b['blog-subjects']);
+    newBlog.slug = this.getSlug(b.attributes.uri);
+
+    /* @todo harcoded picture by now,delete this when available from refinery */
+    if(newBlog.author == undefined) newBlog.author = {};
+    newBlog.author.picture = 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
+    
+    /* @todo harcoded date for now, update when available from ref */
+    newBlog.date = 'January 1, 1970';
+
+    /* @todo harcoded pictures for now update when availaber from refinery */
+    newBlog.mainPicture = 'http://placekitten.com/400/300';
+    newBlog.coverPicture = 'http://placekitten.com/1500/300';
 
     return newBlog;
   }

@@ -7,11 +7,19 @@ class BlogListing extends React.Component {
   
   render() {
 
+    const seriesTitle = (this.props.series != null && this.props.series[0] != null) ?
+      <p className="blogListing-series">{this.props.series[0].title}</p> : null;
+
     return (
       <div className="blogListing">
-      	<h2 className="blogListing-title">{this.props.title}</h2>
-        <img className="blogListing-image" src="http://placehold.it/200x300" />
-        <p>{this.props.body}</p>
+        {seriesTitle}
+      	<h2>
+          <a className="blogListing-title" href={'/blogs/' + this.props.slug}>
+            {this.props.title}
+          </a>
+        </h2>
+        <img className="blogListing-image" src={this.props.mainPicture} />
+        <p className="blogListing-paragraph">{this.props.body}</p>
       </div>
     );
   }
@@ -19,7 +27,13 @@ class BlogListing extends React.Component {
 
 BlogListing.propTypes = {
   title: React.PropTypes.string.isRequired,
-  body: React.PropTypes.string.isRequired
+  body: React.PropTypes.string.isRequired,
+  slug: React.PropTypes.string.isRequired,
+  series: React.PropTypes.array
+};
+
+BlogListing.defaultProps = {
+  seriesTitle: ''
 };
 
 export default BlogListing;

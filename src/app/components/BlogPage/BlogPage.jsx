@@ -7,6 +7,7 @@ import Store from '../../stores/Store.js';
 import Hero from '../Hero/Hero';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
+import AuthorCard from '../AuthorCard/AuthorCard';
 
 class BlogPage extends React.Component {
   constructor(props) {
@@ -14,18 +15,19 @@ class BlogPage extends React.Component {
 
     this.state = Store.getState();
   }
+
+  createMarkup(bodyText) { 
+    return {__html: bodyText}
+  };
   
   render() {
     const blog = this.state.blogPost[0];
-    const title = blog.title;
-    const body = blog.body.short;
-    const author = blog.author;
-    const subjects = blog.subjects;
-    const imgPlaceholder = "http://placehold.it/1513x406/";
+    const { author, subjects, title, date, coverPicture } = blog;
+    const body = this.createMarkup(blog.body.full);
 
     return (
       <div className='blogPage'>
-        <Hero imageUrl={imgPlaceholder} />
+        <Hero imageUrl={coverPicture} />
         <Link 
           className="backToLink" 
           to="blogs">
@@ -35,7 +37,12 @@ class BlogPage extends React.Component {
         <Blog 
           title={title} 
           body={body} 
-          author={author}/>
+          author={author}
+          coverPicture={coverPicture}
+          dangerouslySetInnerHTML={body}/>
+        <AuthorCard 
+          data={author} 
+          className="authorCardFooter"/>
       </div>
     );
   }
