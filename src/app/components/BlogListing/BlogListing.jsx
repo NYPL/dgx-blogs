@@ -1,21 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router';
-import _ from 'underscore';
 
 class BlogListing extends React.Component {
   constructor(props) {
     super(props);
-
-    if(this.props.series != null && this.props.series[0] != null) {
-      this.props.seriesTitle = this.props.series[0].title;
-    }
   }
   
   render() {
 
+    const seriesTitle = (this.props.series != null && this.props.series[0] != null) ?
+      <p className="blogListing-series">{this.props.series[0].title}</p> : null;
+
     return (
       <div className="blogListing">
-        <p className="blogListing-series">{this.props.seriesTitle}</p>
+        {seriesTitle}
       	<h2>
           <a className="blogListing-title" href={'/blogs/' + this.props.slug}>
             {this.props.title}

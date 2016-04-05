@@ -9,7 +9,6 @@ class AuthorCard extends React.Component {
   }
   
   render() {
-    console.log('authorcard data', this.props.data);
 
     return (
       <div className={this.props.className}>
