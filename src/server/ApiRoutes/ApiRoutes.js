@@ -27,12 +27,11 @@ function createOptions(api) {
   };
 }
 
-function getBlogEndpoint(endpoint) {
+function getBlogEndpoint(endpoint = '') {
   return `${apiRoot}${blogsApi.common}${endpoint}`;
 }
 
 function fetchApiData(url) {
-  console.log(url)
   return axios.get(url);
 }
 
@@ -94,19 +93,22 @@ function BlogQuery(req, res, next) {
   blogsOptions.filters = {};
 
   if (param.indexOf('author') !== -1) {
+    blogsOptions.endpoint = getBlogEndpoint(blogsApi.bloggerEndpoint);
+    blogsOptions.includes = ['author', 'blog-series', 'blog-subjects', 'blog-posts'];
     console.log('hit the author url');
   } else if (param.indexOf('series') !== -1) {
     console.log('hit the series url');
   } else if (param.indexOf('subject') !== -1) {
     console.log('hit the subject url');
   } else {
+    blogsOptions.endpoint = getBlogEndpoint(blogsApi.mainEndpoint);
     // Single blog post, query by blog post alias:
     blogsOptions.filters = { alias: `blog/${req.params[0]}`};
     // blogsOptions.includes = blogsOptions.includes.concat(['blog-subjects', 'blog-series']);
   }
 
   blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-  // console.log(blogsApiUrl);
+  console.log(blogsApiUrl);
 
   axios
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
