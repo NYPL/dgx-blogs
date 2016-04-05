@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'underscore';
+import { map as _map } from 'underscore';
 
 import Store from '../../stores/Store.js';
 
@@ -16,9 +16,8 @@ class BlogsWrapper extends React.Component {
   }
 
   _getList(blogsList) {
-    return blogsList.map(function(blogRow, k) {
-
-      return <BlogRow data={blogRow} key={k}/>;
+    return _map(blogsList, (blogRow, index) => {
+      return <BlogRow data={blogRow} key={index}/>;
     });
   }
   

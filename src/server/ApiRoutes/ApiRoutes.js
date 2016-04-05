@@ -27,10 +27,6 @@ function createOptions(api) {
   };
 }
 
-function getBlogEndpoint(endpoint = '') {
-  return `${apiRoot}${blogsApi.common}${endpoint}`;
-}
-
 function fetchApiData(url) {
   return axios.get(url);
 }
@@ -40,15 +36,9 @@ function getHeaderData() {
   return fetchApiData(headerApiUrl);
 }
 
-function BlogsMainList(req, res, next) {
-  blogsOptions.endpoint = getBlogEndpoint(blogsApi.mainEndpoint);
-  blogsOptions.filters = {};
-
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-
-
+function fetchData(url, storeValue, req, res, next) {
   axios
-    .all([getHeaderData(), fetchApiData(blogsApiUrl)])
+    .all([getHeaderData(), fetchApiData(url)])
     .then(axios.spread((headerData, blogsData) => {
       const headerParsed = parser.parse(headerData.data, headerOptions);
       const headerModelData = HeaderItemModel.build(headerParsed)
@@ -58,7 +48,7 @@ function BlogsMainList(req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          blogs: blogsModelData,
+          [storeValue]: blogsModelData,
         },
         HeaderStore: {
           headerData: headerModelData,
@@ -67,12 +57,12 @@ function BlogsMainList(req, res, next) {
       next();
     }))
     .catch(error => {
-      console.log('error calling API : ', error);
-      console.log('Attempted to call : ' + blogsApiUrl);
+      console.log(`error calling API : ${error}`);
+      console.log(`Attempted to call : ${url}`);
 
       res.locals.data = {
         BlogStore: {
-          blogs: []
+          [storeValue]: []
         },
         HeaderStore: {
           headerData: [],
@@ -86,76 +76,54 @@ function BlogsMainList(req, res, next) {
     }); /* end Axios call */
 }
 
+// For the main /blog route
+function BlogsMainList(req, res, next) {
+  // Needs to be called before `parser.getCompleteApi()`
+  blogsOptions.filters = {};
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+
+  fetchData(blogsApiUrl, 'blogs', req, res, next);
+}
+
+// This will be used to any route on:
+// /blog/:blog /blog/subjects/:subject /blog/series/:series blog/author/:author
 function BlogQuery(req, res, next) {
   const param = req.params[0];
-  let blogsApiUrl = '';
-
+  const paramArray = param.split('/');
   blogsOptions.filters = {};
 
-  if (param.indexOf('author') !== -1) {
-    blogsOptions.endpoint = getBlogEndpoint(blogsApi.bloggerEndpoint);
-    blogsOptions.includes = ['author', 'blog-series', 'blog-subjects', 'blog-posts'];
-    console.log('hit the author url');
-  } else if (param.indexOf('series') !== -1) {
-    console.log('hit the series url');
-  } else if (param.indexOf('subject') !== -1) {
-    console.log('hit the subject url');
+  let storeValue = 'blogs';
+
+  if (paramArray[0] === 'author') {
+    if (paramArray[1] !== '') {
+      blogsOptions.filters = { relationships: { 'blog-profiles': paramArray[1] } };
+    }
+  } else if (paramArray[0] === 'series') {
+    if (paramArray[1] !== '') {
+      blogsOptions.filters = { relationships: { 'blog-series': paramArray[1] } };
+    }
+  } else if (paramArray[0] === 'subjects') {
+    if (paramArray[1] !== '') {
+      blogsOptions.filters = { relationships: { 'blog-subjects': paramArray[1] } };
+    }
   } else {
-    blogsOptions.endpoint = getBlogEndpoint(blogsApi.mainEndpoint);
     // Single blog post, query by blog post alias:
     blogsOptions.filters = { alias: `blog/${req.params[0]}`};
-    // blogsOptions.includes = blogsOptions.includes.concat(['blog-subjects', 'blog-series']);
+    storeValue = 'blogPost';
   }
 
-  blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
   console.log(blogsApiUrl);
 
-  axios
-    .all([getHeaderData(), fetchApiData(blogsApiUrl)])
-    .then(axios.spread((headerData, blogsData) => {
-      const headerParsed = parser.parse(headerData.data, headerOptions);
-      const headerModelData = HeaderItemModel.build(headerParsed);
-
-      const blogsParsed = parser.parse(blogsData.data, blogsOptions);
-      const blogsModelData = BlogsModel.build(blogsParsed);
-
-      res.locals.data = {
-        BlogStore: {
-          blogPost: blogsModelData,
-        },
-        HeaderStore: {
-          headerData: headerModelData,
-        },
-      };
-      next();
-    }))
-    .catch(error => {
-      console.log('error calling API : ' + error);
-      console.log('Attempted to call : ' + blogsApiUrl);
-
-      res.locals.data = {
-        BlogStore: {
-          blogPost: [],
-        },
-        HeaderStore: {
-          headerData: [],
-        },
-      };
-
-      // The next is needed so that Express knows to go to the
-      // next middleware in the line.
-      // This would be the app.use('/', ...) call in server.js.
-      next();
-    }); /* end Axios call */
+  fetchData(blogsApiUrl, storeValue, req, res, next);
 }
 
-
 router
-  .route('/blogs')
+  .route('/blog')
   .get(BlogsMainList);
 
 router
-  .route(/\/blogs\/([^]+)\/?/)
+  .route(/\/blog\/([^]+)\/?/)
   .get(BlogQuery);
 
 

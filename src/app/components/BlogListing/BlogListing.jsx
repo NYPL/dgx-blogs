@@ -14,7 +14,7 @@ class BlogListing extends React.Component {
       <div className="blogListing">
         {seriesTitle}
       	<h2>
-          <a className="blogListing-title" href={'/blogs/' + this.props.slug}>
+          <a className="blogListing-title" href={'/blog/' + this.props.slug}>
             {this.props.title}
           </a>
         </h2>
