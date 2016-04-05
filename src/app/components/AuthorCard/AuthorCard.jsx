@@ -9,12 +9,12 @@ class AuthorCard extends React.Component {
   }
   
   render() {
-    console.log(this.props.data.title);
+    console.log('authorcard data', this.props.data);
 
     return (
-      <div className={this.props.renderAs}>
-      	<img className={this.props.renderAs + "-profilePic"} src={this.props.data.picture} />
-        <h4 className={this.props.renderAs + "-name"}>{this.props.data.fullName}</h4>
+      <div className={this.props.className}>
+      	<img className={this.props.className + "-profilePic"} src={this.props.data.picture} />
+        <h4 className={this.props.className + "-name"}>{this.props.data.fullName}</h4>
         <p className="authorCard-title">{this.props.data.title}</p>
       </div>
     );
@@ -23,7 +23,7 @@ class AuthorCard extends React.Component {
 
 AuthorCard.propTypes = {
   data: React.PropTypes.object.isRequired,
-  renderAs: React.PropTypes.string
+  className: React.PropTypes.string
 };
 
 AuthorCard.defaultProps = {
@@ -31,7 +31,7 @@ AuthorCard.defaultProps = {
     picture: 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg',
     title: ''
   },
-  renderAs: 'authorCard'
+  className: 'authorCard'
 };
 
 export default AuthorCard;

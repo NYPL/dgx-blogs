@@ -31,45 +31,12 @@ class BlogsModel {
     return null;
   }
 
-  /*
-   * @todo not used anymore?
-   */
-  emptyAuthor() {
-
-    return {
-      name: '',
-      role: ''
-    }
-  }
-
   modelAuthor(author) {
     let tmpAuthor = this.emptyAuthor();
     tmpAuthor.name = author.attributes['full-name'];
     tmpAuthor.role = author.attributes.title;
 
     return tmpAuthor;
-  }
-
-  /*
-   * @todo not used anymore?
-   */
-  extractAuthors(authors) {
-
-    if (!authors || !(_.isArray(authors))) {
-      return [this.emptyAuthor()];
-    }
-
-    /**
-     * If authors is an array
-     */
-    if (authors.length > 0) {
-
-      return _.map(authors, b => {
-        return this.modelAuthor(b);
-      });
-    }
-
-    return [this.emptyAuthor()];
   }
 
   emptyBlog() {
@@ -218,8 +185,8 @@ class BlogsModel {
     newBlog.date = 'January 1, 1970';
 
     /* @todo harcoded pictures for now update when availaber from refinery */
-    newBlog.mainPicture = 'http://lorempixel.com/400/300/?' + Math.random();
-    newBlog.coverPicture = 'http://lorempixel.com/1513/406/?' + Math.random();
+    newBlog.mainPicture = 'http://placekitten.com/400/300/';
+    newBlog.coverPicture = 'http://placekitten.com/1513/406/';
 
     return newBlog;
   }

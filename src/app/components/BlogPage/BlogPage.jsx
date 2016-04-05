@@ -42,7 +42,7 @@ class BlogPage extends React.Component {
           dangerouslySetInnerHTML={body}/>
         <AuthorCard 
           data={author} 
-          renderAs="authorCardFooter"/>
+          className="authorCardFooter"/>
       </div>
     );
   }

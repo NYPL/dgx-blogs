@@ -4,8 +4,7 @@
 
   @include grid-span(5, 2);
 
-  border-top: 2px solid $COOLGRAY_COLOR;
-  padding-bottom: 40px;
+  padding-bottom: 80px;
 
   &-title {
   	@include Milo-Light;
@@ -15,6 +14,7 @@
     text-decoration: none;
   }
 
+
   &-image {
     float: left;
     margin-right: 22px;
@@ -22,5 +22,12 @@
 
   &-paragraph {
     line-height: 1.5;
+  }
+
+  &-series {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 0;
   }
 }

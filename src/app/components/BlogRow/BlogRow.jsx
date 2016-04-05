@@ -11,7 +11,7 @@ class BlogRow extends React.Component {
   }
   
   render() {
-    const { author, subjects, title, body, date, mainPicture, slug } = this.props.data;
+    const { author, subjects, title, body, date, mainPicture, slug, series } = this.props.data;
 
     return (
       <li className='blogRow'>
@@ -24,6 +24,7 @@ class BlogRow extends React.Component {
             data={subjects}/>
         </div>
       	<BlogListing 
+          series={series}
           title={title} 
           body={body.short} 
           mainPicture={mainPicture}
