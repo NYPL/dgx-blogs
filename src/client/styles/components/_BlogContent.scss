@@ -1,4 +1,5 @@
 .blogContent {
+  @extend %clearfix;
   @include Milo-Regular;
   font-size: 18px;
   line-height: 26px;
@@ -9,6 +10,7 @@
     font-weight: 400;
     font-size: 42px;
     margin: 40px 0 47px 0;
+    line-height: 1.5;
   }
 
   &-author {
@@ -22,8 +24,9 @@
 
   @include layout-at(9, $landscape) {
     @include grid-span(4, 4);
+    margin-right: 0;
     margin-top: -100px;
-    z-index: 10000;
+    z-index: 10;
     background: white;
     min-height: 500px;
     position: relative;

@@ -1,6 +1,7 @@
 .blogRow {
   @extend %clearfix;
   @include add-grid(6);
+  border-top: 2px solid $COOLGRAY_COLOR;
 
   &-leftSidebar {
     @include grid-span(1);
@@ -16,8 +17,14 @@
     }
   }
 
+  &-date {
+    font-size: 13px;
+    color: $COOLGRAY_COLOR;
+  }
+
   .tagLink {
     text-transform: uppercase;
+    text-decoration: none;
     color: $SECONDARY_UI_COLOR;
     font-size: 13px;
   }
