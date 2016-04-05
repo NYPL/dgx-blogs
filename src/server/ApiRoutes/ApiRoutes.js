@@ -27,7 +27,12 @@ function createOptions(api) {
   };
 }
 
+function getBlogEndpoint(endpoint) {
+  return `${apiRoot}${blogsApi.common}${endpoint}`;
+}
+
 function fetchApiData(url) {
+  console.log(url)
   return axios.get(url);
 }
 
@@ -37,9 +42,11 @@ function getHeaderData() {
 }
 
 function BlogsMainList(req, res, next) {
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-  // console.log(blogsApiUrl);
+  blogsOptions.endpoint = getBlogEndpoint(blogsApi.mainEndpoint);
   blogsOptions.filters = {};
+
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+
 
   axios
     .all([getHeaderData(), fetchApiData(blogsApiUrl)])
@@ -82,6 +89,7 @@ function BlogsMainList(req, res, next) {
 
 function BlogQuery(req, res, next) {
   const param = req.params[0];
+  let blogsApiUrl = '';
 
   blogsOptions.filters = {};
 
@@ -97,7 +105,7 @@ function BlogQuery(req, res, next) {
     // blogsOptions.includes = blogsOptions.includes.concat(['blog-subjects', 'blog-series']);
   }
 
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+  blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
   // console.log(blogsApiUrl);
 
   axios
