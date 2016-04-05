@@ -13,6 +13,19 @@ class BlogsWrapper extends React.Component {
     super(props);
 
     this.state = Store.getState();
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount() {
+    Store.listen(this._onChange);
+  }
+
+  componentWillUnmount() {
+    Store.unlisten(this._onChange);
+  }
+
+  _onChange() {
+    this.setState(Store.getState());
   }
 
   _getList(blogsList) {

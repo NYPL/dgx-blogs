@@ -118,6 +118,34 @@ function BlogQuery(req, res, next) {
   fetchData(blogsApiUrl, storeValue, req, res, next);
 }
 
+function fetchThroughAjax(req, res, next) {
+  const query = req.query;
+  const subject = query.subject || '';
+
+  if (subject !== '') {
+    blogsOptions.filters = { relationships: { 'blog-subjects': subject } };
+  }
+
+  const apiUrl = parser.getCompleteApi(blogsOptions);
+
+  axios
+    .get(apiUrl)
+    .then(response => {
+      const blogsParsed = parser.parse(response.data, blogsOptions);
+      const blogsModelData = BlogsModel.build(blogsParsed);
+
+      res.json(blogsModelData);
+    })
+    .catch(error => {
+      console.log(`Error calling API : ${error}`);
+      console.log(`Attempted to call : ${apiUrl}`);
+
+      res.json({
+        error
+      });
+    }); /* end axios call */
+}
+
 router
   .route('/blog')
   .get(BlogsMainList);
@@ -126,5 +154,8 @@ router
   .route(/\/blog\/([^]+)\/?/)
   .get(BlogQuery);
 
+router
+  .route('/api')
+  .get(fetchThroughAjax);
 
 export default router;
