@@ -1,23 +1,18 @@
 .blogRow {
   @extend %clearfix;
-  @include add-grid(6);
+  @include add-grid(5);
   border-top: 2px solid $COOLGRAY_COLOR;
+  margin: 0 18px;
 
   &-leftSidebar {
-    @include grid-span(1);
-    margin-right: 0;
 
     & ul {
-      list-style: none;
-      padding: 0;
-
-      & > li {
-        padding: 5px 0;
-      }
+      @include visuallyHidden;
     }
   }
 
   &-date {
+    @include grid-span(1, 5);
     font-size: 13px;
     color: $COOLGRAY_COLOR;
   }
@@ -27,5 +22,28 @@
     text-decoration: none;
     color: $SECONDARY_UI_COLOR;
     font-size: 13px;
+  }
+
+  @include layout-at(9, $landscape) {
+
+    &-leftSidebar {
+      @include displayVisuallyHidden;
+      @include grid-span(1);
+
+      & ul {
+        @include displayVisuallyHidden;
+        list-style: none;
+        padding: 0;
+
+        & > li {
+          padding: 5px 0;
+        }
+      }
+    }
+
+    &-date {
+      float: none;
+      width: auto;
+    }
   }
 }

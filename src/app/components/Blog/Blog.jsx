@@ -12,6 +12,7 @@ class Blog extends React.Component {
 
     return (
       <div className="blogContent">
+        <p className="blogContent-date">{this.props.date}</p>
       	<h1 
           className="blogContent-title">
           {this.props.title}
@@ -19,7 +20,10 @@ class Blog extends React.Component {
         <div className="blogContent-author">
           by <b>{this.props.author.fullName}</b>. {this.props.author.title}
         </div>
-        {this.props.dangerouslySetInnerHTML}
+        <img className="blogContent-mainPicture" src={this.props.mainPicture} />
+        <div className="blogContent-bodyText">
+          {this.props.dangerouslySetInnerHTML}
+        </div>
       </div>
     );
   }

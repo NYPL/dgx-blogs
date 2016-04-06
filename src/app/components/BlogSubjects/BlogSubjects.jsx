@@ -37,6 +37,7 @@ BlogSubjects.propTypes = {
   data: React.PropTypes.array.isRequired
 };
 
+/* @todo change renderAs by className */
 BlogSubjects.defaultProps = {
   data: [],
   renderAs: 'blogTagsSidebar'

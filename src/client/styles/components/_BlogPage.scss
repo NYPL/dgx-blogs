@@ -1,17 +1,16 @@
 .blogPage {
 
- /*
-  * @todo what about the mobile, portrait ..etc?
-  */
+  .backToLink {
+    @include visuallyHidden;
+  }
   
   @include layout-at(9, $landscape) {
 
     @include grid-span(9);
     @include add-grid(9);
 
-
     .backToLink {
-      
+      @include displayVisuallyHidden;
       @include grid-span(2, 2);     
       text-transform: uppercase;
       color: $COOLGRAY_COLOR;
