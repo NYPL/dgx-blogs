@@ -2,6 +2,11 @@
   @extend %clearfix;
   @include add-grid(5);
   border-top: 2px solid $COOLGRAY_COLOR;
+
+  &:nth-child(1) {
+    border: none;
+  }
+
   margin: 0 18px;
 
   &-leftSidebar {
@@ -15,16 +20,18 @@
     @include grid-span(1, 5);
     font-size: 13px;
     color: $COOLGRAY_COLOR;
+    margin-top: 23px;
+    line-height: 1.6;
   }
 
   .tagLink {
     text-transform: uppercase;
     text-decoration: none;
     color: $SECONDARY_UI_COLOR;
-    font-size: 13px;
+    font-size: 12px;
   }
 
-  @include layout-at(9, $landscape) {
+  @include layout-at(7, $landscape) {
 
     &-leftSidebar {
       @include displayVisuallyHidden;
@@ -42,6 +49,7 @@
     }
 
     &-date {
+      margin-top: 20px;
       float: none;
       width: auto;
     }

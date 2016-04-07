@@ -1,7 +1,7 @@
 .blogListing {
   @include grid-span(5);
   @include add-grid(5);
-  padding-bottom: 80px;
+  padding-bottom: 40px;
   margin-top: 20px;
 
   &-title {
@@ -35,12 +35,17 @@
     margin-top: 0;
   }
 
-  @include layout-at(9, $landscape) {
-    @include grid-span(8, 2);
-    @include add-grid(6);  
+  @include layout-at(6, $landscape) {
+    @include grid-span(5, 2);
+    padding-bottom: 80px;  
+
+    &-series {
+      @include grid-span(6);
+    }
 
     &-title {
-      @include grid-span(3, 4);
+      @include grid-span(6);
+
     }
 
     &-paragraph {
@@ -52,6 +57,7 @@
 
     &-image {
       @include grid-span(3);
+      clear: both;
     }
   }
 }
