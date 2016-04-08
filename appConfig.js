@@ -28,7 +28,7 @@ export default {
   },
   blogsApi: {
     endpoint: '/api/nypl/ndo/v0.1/content/nodes/blogs',
-    includes: ['blog-profiles.author', 'blog-series', 'blog-subjects'],
+    includes: ['blog-profiles.author.headshot', 'blog-series', 'blog-subjects'],
     pageSize: '&page[size]=10',
     pageNumber: '&page[number]=1',
   },

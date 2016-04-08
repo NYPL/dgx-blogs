@@ -80,7 +80,14 @@ class BlogsModel {
                 unit: unit = '',
                 title: title = ''
               }
-            }
+            },
+            headshot: {
+              attributes: {
+                uri: {
+                  ['full-uri']: profileImgUrl = '',
+                },
+              },
+            },
           },
           ...rest
         ]
@@ -94,7 +101,8 @@ class BlogsModel {
         lastName,
         fullName,
         unit,
-        title
+        title,
+        profileImgUrl,
       };
     }  catch (e) {
       // result = null;
