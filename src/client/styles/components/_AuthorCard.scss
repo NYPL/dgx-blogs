@@ -39,46 +39,45 @@
       width: 60px;
     }    
   } 
-}
 
-/*
- * Used to render authorCard on single blog page 
- */
-.authorCardFooter {
-  @extend %clearfix;
-  @include add-grid(4);
-  @include add-gutter(1/3);
-  margin: 60px 18px;
-  border: 2px solid $COOLGRAY_COLOR;
-  padding: 10px;
-
-  &-profilePic {
-    @include grid-span(1);
-    @extend .authorCard-profilePic;
-    width: 80px;
-  }
-
-  &-name {
-    @include grid-span(3, 2);
-    margin-top: 35px;
-    margin-bottom: 0px;
-  }
-
-  &-title {
-    @include grid-span(3, 2);
-    margin-top: 20px;
-  }
-
-  @include layout-at(9, $landscape) {
-    @include grid-span(4, 4);
-    margin-top: 60px;
-    margin-right: 0;
+  /*
+   * Used to render authorCard on single blog page 
+   */
+  &Footer {
+    @extend %clearfix;
+    @include add-grid(4);
+    @include add-gutter(1/3);
+    margin: 60px 18px;
+    border: 2px solid $COOLGRAY_COLOR;
+    padding: 10px;
 
     &-profilePic {
+      @include grid-span(1);
       @extend .authorCard-profilePic;
-      float: left;
-      margin-right: 20px;
+      width: 80px;
+    }
+
+    &-name {
+      @include grid-span(3, 2);
+      margin-top: 35px;
+      margin-bottom: 0px;
+    }
+
+    &-title {
+      @include grid-span(3, 2);
+      margin-top: 20px;
+    }
+
+    @include layout-at(9, $landscape) {
+      @include grid-span(4, 4);
+      margin-top: 60px;
+      margin-right: 0;
+
+      &-profilePic {
+        @extend .authorCard-profilePic;
+        float: left;
+        margin-right: 20px;
+      }
     }
   }
-
 }

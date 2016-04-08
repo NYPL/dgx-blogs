@@ -11,9 +11,7 @@
 
   &-leftSidebar {
 
-    & ul {
-      @include visuallyHidden;
-    }
+    @include visuallyHidden;
   }
 
   &-date {
@@ -38,7 +36,6 @@
       @include grid-span(1);
 
       & ul {
-        @include displayVisuallyHidden;
         list-style: none;
         padding: 0;
 
