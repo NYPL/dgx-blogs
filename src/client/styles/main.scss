@@ -1,6 +1,7 @@
 /*
 Import utils and fonts
 */
+@import 'utils/variables';
 @import 'utils/mixins';
 @import 'utils/colors';
 @import 'utils/utils';
@@ -23,7 +24,21 @@ Import style rules from NYPL React module components
 @import "~dgx-header-component/dist/styles/main";
 @import "~dgx-react-footer/dist/styles/styles.scss";
 
+/*
+Import components styling
+*/
+@import "components/_BlogsWrapper";
+@import "components/_AuthorCard";
+@import "components/_BlogRow";
+@import "components/_BlogListing";
+@import "components/_BlogListingHero";
+@import "components/_BlogsLandingPage";
+@import "components/_BlogSubjects";
+@import "components/_BlogPage";
+@import "components/_BlogContent";
+@import "components/_Hero";
 
 #app {
   margin: 0;
+  @include Kievit-Regular;
 }

@@ -1,0 +1,33 @@
+.blogsWrapper {
+  
+  @include add-grid(3);
+
+  @include layout-at(9, $landscape) {
+
+    .sidebar {
+
+      @include grid-span(1);
+      border-top: 2px solid $CHARCOAL;
+      margin-top: 16px;
+      color: $CHARCOAL;
+
+      &-title {
+        text-align: right;
+      }
+
+      &-link {
+        display: block;
+        text-align: right;
+        color: $CHARCOAL;
+        text-decoration: none;
+        padding: 5px 0;
+      }
+    }
+
+    .blogsList {
+
+      @include grid-span(6, 2);
+      list-style: none;
+    }
+  }
+}
