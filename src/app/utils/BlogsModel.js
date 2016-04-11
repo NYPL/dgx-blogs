@@ -94,7 +94,7 @@ class BlogsModel {
   getAuthor(array) {
     let result;
     if (!array || array.length === 0) {
-      return null;
+      return undefined;
     }
 
     try {
@@ -218,10 +218,6 @@ class BlogsModel {
     newBlog.subjects = this.getSubjects(b['blog-subjects']);
     newBlog.slug = this.getSlug(b.attributes.uri);
 
-    /* @todo harcoded picture by now,delete this when available from refinery */
-    if(newBlog.author == undefined) newBlog.author = {};
-    newBlog.author.picture = 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
-    
     /* @todo harcoded date for now, update when available from ref */
     newBlog.date = this.convertDate(b.attributes.uri);
 

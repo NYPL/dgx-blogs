@@ -9,7 +9,7 @@ class AuthorCard extends React.Component {
   }
   
   render() {
-    const profileImgUrl = this.props.data.profileImgUrl ?
+    const profileImgUrl = this.props.data && this.props.data.profileImgUrl ?
       this.props.data.profileImgUrl :
       'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
 
