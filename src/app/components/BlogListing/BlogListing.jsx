@@ -18,7 +18,7 @@ class BlogListing extends React.Component {
             {this.props.title}
           </a>
         </h2>
-        <img className="blogListing-image" src={this.props.mainPicture} />
+        <img className="blogListing-image" src={this.props.mainPicture['full-uri']} />
         <p className="blogListing-paragraph">{this.props.body}</p>
       </div>
     );
