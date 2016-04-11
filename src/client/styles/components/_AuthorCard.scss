@@ -5,6 +5,7 @@
 
   &-profilePic {
     border-radius: 50%;
+    max-width: 100px;
   }
 }
 
@@ -26,6 +27,7 @@
     @extend .authorCard-profilePic;
     float: left;
     margin-right: 20px;
+    max-width: 100px;
   }
 
   &-name {

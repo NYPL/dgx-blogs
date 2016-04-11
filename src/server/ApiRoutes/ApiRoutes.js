@@ -82,6 +82,7 @@ function BlogsMainList(req, res, next) {
   blogsOptions.filters = {};
   const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
 
+  // console.log(blogsApiUrl);
   fetchData(blogsApiUrl, 'blogs', req, res, next);
 }
 
