@@ -2,16 +2,19 @@
   @extend %clearfix;
   @include add-grid(5);
   border-top: 2px solid $COOLGRAY_COLOR;
-
-  &:nth-child(1) {
-    border: none;
-  }
-
   margin: 0 18px;
 
   &-leftSidebar {
 
-    @include visuallyHidden;
+    & ul {
+      @include visuallyHidden;
+      list-style: none;
+      padding: 0;
+
+      & > li {
+        padding: 5px 0;
+      }
+    }
   }
 
   &-date {
@@ -31,22 +34,21 @@
 
   @include layout-at(7, $landscape) {
 
+    &:nth-child(1) {
+      border: none;
+    }
+
     &-leftSidebar {
       @include displayVisuallyHidden;
       @include grid-span(1);
 
       & ul {
-        list-style: none;
-        padding: 0;
-
-        & > li {
-          padding: 5px 0;
-        }
+        @include displayVisuallyHidden;
       }
     }
 
     &-date {
-      margin-top: 20px;
+      margin-top: 17px;
       float: none;
       width: auto;
     }

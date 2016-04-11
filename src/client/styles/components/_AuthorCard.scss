@@ -23,21 +23,23 @@
     margin-top: 45px;
   } 
 
-  @include layout-at(9, $landscape) {
+  @include layout-at(1, $landscape) {
 
-    &-name, &-title {
-      float: none;
-      margin: 20px 0;
-      width: auto;
-      word-wrap: break-word;
+
+    &-name {
+      @include grid-span(1);
+      clear: both;
+    }
+
+    &-title {
+      @include grid-span(1);
+      margin-top: 0;
       font-size: 14px;
     }
 
-    &-profilePic {
-      float: none;
-      margin: 20px 0;
-      width: 60px;
-    }    
+    &-name, &-title {
+      word-wrap: break-word;
+    }   
   } 
 
   /*
@@ -59,7 +61,7 @@
 
     &-name {
       @include grid-span(3, 2);
-      margin-top: 35px;
+      margin-top: 27px;
       margin-bottom: 0px;
     }
 
@@ -69,7 +71,7 @@
     }
 
     @include layout-at(9, $landscape) {
-      @include grid-span(4, 4);
+      @include grid-span(5, 4);
       margin-top: 60px;
       margin-right: 0;
 

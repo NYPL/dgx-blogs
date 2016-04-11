@@ -3,8 +3,14 @@
   .backToLink {
     @include visuallyHidden;
   }
+
+  display: flex;
+  flex-direction: column;
   
   @include layout-at(9, $landscape) {
+
+    /* reset display */
+    display: block;
 
     @include grid-span(9);
     @include add-grid(9);
