@@ -56,42 +56,65 @@ class BlogsModel {
   }
 
   /**
-   * Uses ES6 Destructuring to extract author's properties.
+   * Uses ES6 Destructuring to extract author's headshot image.
    * @returns {object}
    */
-  getAuthor(obj) {
+  getHeadshotImage(array) {
     let result;
-    if (!obj && _.isEmpty(obj)) {
+    if (!array || array.length === 0) {
       return null;
     }
 
     try {
-      const {
-        ['blog-profiles']: [
-          {
-            author: {
-              id: id = '',
-              attributes: {
-                ['display-name']: displayName = '',
-                location: location = '',
-                ['first-name']: firstName = '',
-                ['last-name']: lastName = '',
-                ['full-name']: fullName = '',
-                unit: unit = '',
-                title: title = ''
-              }
-            },
-            headshot: {
-              attributes: {
-                uri: {
-                  ['full-uri']: profileImgUrl = '',
-                },
+      const [
+        {
+          headshot: {
+            attributes: {
+              uri: {
+                ['full-uri']: profileImgUrl = '',
               },
             },
           },
-          ...rest
-        ]
-      } = obj;
+        },
+        ...rest
+      ] = array;
+
+      result = profileImgUrl;
+    }  catch (e) {
+      result = undefined;
+    }
+
+    return result;
+  }
+
+  /**
+   * Uses ES6 Destructuring to extract author's properties.
+   * @returns {object}
+   */
+  getAuthor(array) {
+    let result;
+    if (!array || array.length === 0) {
+      return undefined;
+    }
+
+    try {
+      const [
+        {
+          author: {
+            id: id = '',
+            attributes: {
+              ['display-name']: displayName = '',
+              location: location = '',
+              ['first-name']: firstName = '',
+              ['last-name']: lastName = '',
+              ['full-name']: fullName = '',
+              unit: unit = '',
+              title: title = ''
+            }
+          },
+        },
+        ...rest
+      ] = array;
 
       result = {
         id,
@@ -102,9 +125,10 @@ class BlogsModel {
         fullName,
         unit,
         title,
-        profileImgUrl,
+        profileImgUrl: this.getHeadshotImage(array),
       };
     }  catch (e) {
+      console.log(e);
       // result = null;
       result = undefined;
     }
@@ -189,15 +213,11 @@ class BlogsModel {
     newBlog.body.short = b.attributes.body.en['short-text'];
     newBlog.body.full = b.attributes.body.en['full-text'];
 
-    newBlog.author = this.getAuthor(b);
+    newBlog.author = this.getAuthor(b['blog-profiles']);
     newBlog.series = this.getSeries(b['blog-series']);
     newBlog.subjects = this.getSubjects(b['blog-subjects']);
     newBlog.slug = this.getSlug(b.attributes.uri);
 
-    /* @todo harcoded picture by now,delete this when available from refinery */
-    if(newBlog.author == undefined) newBlog.author = {};
-    newBlog.author.picture = 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
-    
     /* @todo harcoded date for now, update when available from ref */
     newBlog.date = this.convertDate(b.attributes.uri);
 

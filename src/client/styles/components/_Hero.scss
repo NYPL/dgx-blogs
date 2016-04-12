@@ -1,17 +1,42 @@
 .hero {
   
- /*
-  * @todo what about the mobile, portrait ..etc?
-  * @todo use variables for breakpoints
-  */
+  background: $BLOGS_DARK_COLOR;
+  height: 100px;
+
+  & > img {
+    @include visuallyHidden;
+    width: 100%;
+  }
+
+  &-title {
+    @include Kievit-Regular;
+    margin-left: 18px;
+    color: $WHITE_COLOR;
+    text-transform: uppercase;
+    font-size: 28px;
+    margin-top: 35px;
+  }
+
+  @include layout-at(9, $portrait) {
+
+    &-title {
+      margin-left: 45px;
+    }
+  }
   
   @include layout-at(9, $landscape) {
     @extend %clearfix;
     @include grid-span(9);
+    height: auto;
+    background: transparent;
     float: none;
 
-    & > img {
-      width: 100%;
+    &-title {
+      @include visuallyHidden;
     }
+
+    & > img {
+      @include displayVisuallyHidden;
+    }    
   }
 }

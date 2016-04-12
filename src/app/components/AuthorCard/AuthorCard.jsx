@@ -9,12 +9,15 @@ class AuthorCard extends React.Component {
   }
   
   render() {
+    const profileImgUrl = this.props.data && this.props.data.profileImgUrl ?
+      this.props.data.profileImgUrl :
+      'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
 
     return (
       <div className={this.props.className}>
-      	<img className={this.props.className + "-profilePic"} src={this.props.data.picture} />
+      	<img className={this.props.className + "-profilePic"} src={profileImgUrl} />
         <h4 className={this.props.className + "-name"}>{this.props.data.fullName}</h4>
-        <p className="authorCard-title">{this.props.data.title}</p>
+        <p className={this.props.className + "-title"}>{this.props.data.title}</p>
       </div>
     );
   }
@@ -27,7 +30,7 @@ AuthorCard.propTypes = {
 
 AuthorCard.defaultProps = {
   data: {
-    picture: 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg',
+    profileImgUrl: 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg',
     title: ''
   },
   className: 'authorCard'
