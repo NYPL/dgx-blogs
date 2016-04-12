@@ -7,14 +7,11 @@ import Header from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 
 const RouteHandler = Router.RouteHandler;
-const Navigation = Router.Navigation;
-const App = React.createClass({
 
-  mixins: [Navigation],
-
-  getInitialState() {
-    return Store.getState();
-  },
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     return (
@@ -26,8 +23,7 @@ const App = React.createClass({
         <Footer />
       </div>
     );
-  },
-
-});
+  }
+}
 
 export default App;
