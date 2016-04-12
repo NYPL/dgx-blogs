@@ -153,7 +153,7 @@ class BlogsModel {
   getSubjects(array) {
     let result;
     if (!array || array.length === 0) {
-      return null;
+      return [];
     }
 
     result = _.map(array, subject => {
@@ -170,6 +170,15 @@ class BlogsModel {
     let slug = uriObject['full-uri'].split('/blog/').pop();
 
     return slug;
+  }
+
+  convertDate(uriObject) {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+      'August', 'September', 'October', 'November', 'December'];
+    const dateStr = this.getSlug(uriObject).substring(0, 10);
+    const date = new Date(dateStr);
+
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
   }
 
   modelBlog(b) {
@@ -190,7 +199,7 @@ class BlogsModel {
     newBlog.author.picture = 'http://cdn-prod.www.aws.nypl.org/sites/default/files/styles/square_thumb/public/pictures/picture-800-1456857570.jpg';
     
     /* @todo harcoded date for now, update when available from ref */
-    newBlog.date = 'January 1, 1970';
+    newBlog.date = this.convertDate(b.attributes.uri);
 
     /* @todo harcoded pictures for now update when availaber from refinery */
     newBlog.mainPicture = 'http://placekitten.com/300/400';
