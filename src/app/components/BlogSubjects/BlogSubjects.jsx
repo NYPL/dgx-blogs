@@ -12,7 +12,7 @@ class BlogSubjects extends React.Component {
           <a 
             className="tagLink"
             href="#">
-            {tag.id}
+            {tag.name.en.text}
           </a>
         </li>
         );
