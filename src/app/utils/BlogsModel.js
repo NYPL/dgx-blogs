@@ -221,8 +221,9 @@ class BlogsModel {
     /* @todo harcoded date for now, update when available from ref */
     newBlog.date = this.convertDate(b.attributes.uri);
 
+    newBlog.mainPicture = b.attributes['featured-image'];
+
     /* @todo harcoded pictures for now update when availaber from refinery */
-    newBlog.mainPicture = 'http://placekitten.com/300/400';
     newBlog.coverPicture = 'http://placekitten.com/1500/300';
 
     return newBlog;
