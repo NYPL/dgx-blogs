@@ -6,9 +6,9 @@
   @include add-grid(5);
 
   &-profilePic {
-    @include grid-span(1);
     border-radius: 50%;
-    width: 60px;
+    width: 18%;
+    max-width: 60px;
     margin-top: 10px;
   }
 
