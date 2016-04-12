@@ -13,8 +13,8 @@ class BlogListing extends React.Component {
     return (
       <div className="blogListing">
         {seriesTitle}
-      	<h2>
-          <a className="blogListing-title" href={'/blogs/' + this.props.slug}>
+      	<h2 className="blogListing-title">
+          <a href={'/blogs/' + this.props.slug}>
             {this.props.title}
           </a>
         </h2>

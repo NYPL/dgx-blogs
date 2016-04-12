@@ -12,7 +12,7 @@ class BlogSubjects extends React.Component {
           <a 
             className="tagLink"
             href="#">
-            {tag.name}
+            {tag.name.en.text}
           </a>
         </li>
         );
@@ -37,6 +37,7 @@ BlogSubjects.propTypes = {
   data: React.PropTypes.array.isRequired
 };
 
+/* @todo change renderAs by className */
 BlogSubjects.defaultProps = {
   data: [],
   renderAs: 'blogTagsSidebar'

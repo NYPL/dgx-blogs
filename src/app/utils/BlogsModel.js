@@ -193,7 +193,7 @@ class BlogsModel {
     newBlog.date = 'January 1, 1970';
 
     /* @todo harcoded pictures for now update when availaber from refinery */
-    newBlog.mainPicture = 'http://placekitten.com/400/300';
+    newBlog.mainPicture = 'http://placekitten.com/300/400';
     newBlog.coverPicture = 'http://placekitten.com/1500/300';
 
     return newBlog;
