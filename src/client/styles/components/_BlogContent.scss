@@ -1,34 +1,81 @@
+/* @todo change className to match component name (Blog) */
 .blogContent {
   @extend %clearfix;
   @include Milo-Regular;
   font-size: 18px;
   line-height: 26px;
-  padding: 0 40px;
+
+  &-date {
+    @include Kievit-Regular;
+    text-transform: uppercase;
+    margin-top: 30px;
+    padding: 0 20px;   
+
+    &:nth-child(even) {
+      @include visuallyHidden;
+    }
+  }
 
   &-title {
     @include Milo-Light;
     font-weight: 400;
     font-size: 42px;
-    margin: 40px 0 47px 0;
-    line-height: 1.5;
+    margin: 20px 0 30px 0;
+    line-height: 1.3;
+    padding: 0 20px;
   }
 
   &-author {
     @include Kievit-Regular;
     margin-bottom: 60px;
-
+    padding: 0 20px;
+    
     & > b {
       font-weight: 600;
     }
   }
 
+  &-mainPicture {
+    width: 100%;
+  }
+
+  &-bodyText {
+    padding: 0 20px;
+    margin-top: 50px;
+    word-wrap: break-word;
+  }
+
   @include layout-at(9, $landscape) {
-    @include grid-span(4, 4);
+    @include grid-span(5, 4);
+    padding: 0;
     margin-right: 0;
     margin-top: -100px;
     z-index: 10;
     background: white;
     min-height: 500px;
     position: relative;
+
+    &-date {
+      margin: 0;
+      margin-bottom: 40px;
+      font-size: 16px;
+    
+      &:nth-child(odd) {
+        @include visuallyHidden;
+      }
+
+      &:nth-child(even) {
+        @include displayVisuallyHidden;
+      }
+    }
+
+
+    &-title {
+      margin: 40px 0 47px 0;
+    }
+
+    &-author {
+      margin-bottom: 0;
+    }
   }
 }

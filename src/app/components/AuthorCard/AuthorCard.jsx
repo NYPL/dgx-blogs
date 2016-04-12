@@ -14,7 +14,7 @@ class AuthorCard extends React.Component {
       <div className={this.props.className}>
       	<img className={this.props.className + "-profilePic"} src={this.props.data.picture} />
         <h4 className={this.props.className + "-name"}>{this.props.data.fullName}</h4>
-        <p className="authorCard-title">{this.props.data.title}</p>
+        <p className={this.props.className + "-title"}>{this.props.data.title}</p>
       </div>
     );
   }
