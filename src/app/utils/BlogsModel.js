@@ -183,7 +183,7 @@ class BlogsModel {
     result = _.map(array, subject => {
       return {
         id: subject.id,
-        name: subject.attributes.name,
+        name: subject.attributes.name.en.text,
       };
     });
 

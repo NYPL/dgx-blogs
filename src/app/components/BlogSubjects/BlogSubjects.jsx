@@ -41,12 +41,15 @@ class BlogSubjects extends React.Component {
   }
   
   render() {
-    const subjects = this.props.data ? this._getList(this.props.data) : null;
-    const mainClass = this.props.renderAs;
+    
+    const filteredSubjects = this.props.maxSubjectsShown ? this.props.data.slice(0, this.props.maxSubjectsShown) : this.props.data;
+    let subjects = this.props.data ? this._getList(this.props.data) : null;
+    subjects = this.props.maxSubjectsShown ? subjects.slice(0, this.props.maxSubjectsShown) : subjects;
+    const className = this.props.className;
 
     return (
-      <div className={mainClass}>
-        <ul className={mainClass + "-list"}>
+      <div className={className}>
+        <ul className={className + "-list"}>
           {subjects}
         </ul>
       </div>
@@ -58,10 +61,10 @@ BlogSubjects.propTypes = {
   data: React.PropTypes.array.isRequired
 };
 
-/* @todo change renderAs by className */
 BlogSubjects.defaultProps = {
   data: [],
-  renderAs: 'blogTagsSidebar'
+  className: 'blogTagsSidebar',
+  maxSubjectsShown: undefined
 };
 
 export default BlogSubjects;
