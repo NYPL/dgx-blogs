@@ -48,7 +48,7 @@ BlogListing.propTypes = {
   series: React.PropTypes.array,
   mainPicture: React.PropTypes.shape(
     {
-      'full-uri': React.propTypes.string,
+      'full-uri': React.PropTypes.string,
     }),
 };
 
