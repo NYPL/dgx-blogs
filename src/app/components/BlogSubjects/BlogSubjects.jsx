@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 import axios from 'axios';
 
 import Actions from '../../actions/Actions.js';
@@ -15,7 +15,6 @@ class BlogSubjects extends React.Component {
     axios
       .get(`/api?subject=${subject}`)
       .then(response => {
-        console.log(response.data);
         Actions.updateBlogs(response.data);
       })
       .catch(error => {
@@ -24,12 +23,12 @@ class BlogSubjects extends React.Component {
   }
 
   _getList(subjects) {
-    return subjects.map((subject, index) => {
+    const subjectsList = subjects.map((subject, index) => {
       return (
         <li key={index}>
           <Link
-            to='subjects'
-            params={{subject: subject.id}}
+            to="subjects"
+            params={{ subject: subject.id }}
             className="tagLink"
             onClick={this._fetchSubject.bind(this, subject.id)}
           >
@@ -38,18 +37,19 @@ class BlogSubjects extends React.Component {
         </li>
         );
     });
+
+    /* slice the subjects to the specified size */
+    return subjectsList.slice(0, this.props.maxSubjectsShown);
   }
-  
+
   render() {
-    
-    const filteredSubjects = this.props.maxSubjectsShown ? this.props.data.slice(0, this.props.maxSubjectsShown) : this.props.data;
     let subjects = this.props.data ? this._getList(this.props.data) : null;
-    subjects = this.props.maxSubjectsShown ? subjects.slice(0, this.props.maxSubjectsShown) : subjects;
+    subjects = this.props.maxSubjectsShown ? subjects : subjects;
     const className = this.props.className;
 
     return (
       <div className={className}>
-        <ul className={className + "-list"}>
+        <ul className={ `${className} + -list`}>
           {subjects}
         </ul>
       </div>
@@ -58,13 +58,15 @@ class BlogSubjects extends React.Component {
 }
 
 BlogSubjects.propTypes = {
-  data: React.PropTypes.array.isRequired
+  data: React.PropTypes.array.isRequired,
+  className: React.propTypes.string.isRequired,
+  maxSubjectsShown: React.propTypes.number,
 };
 
 BlogSubjects.defaultProps = {
   data: [],
   className: 'blogTagsSidebar',
-  maxSubjectsShown: undefined
+  maxSubjectsShown: 3,
 };
 
 export default BlogSubjects;
