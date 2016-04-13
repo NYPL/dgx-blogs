@@ -27,9 +27,11 @@
   @include layout-at(9, $landscape) {
     @extend %clearfix;
     @include grid-span(9);
-    height: auto;
-    background: transparent;
+    height: 270px;
+    /* @todo determine background color or what should be shown when no image */
+    background: grey;
     float: none;
+    overflow: hidden;
 
     &-title {
       @include visuallyHidden;

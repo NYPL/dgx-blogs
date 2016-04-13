@@ -30,4 +30,8 @@ class Blog extends React.Component {
   }
 }
 
+Blog.defaultProps = {
+  author: {}
+};
+
 export default Blog;

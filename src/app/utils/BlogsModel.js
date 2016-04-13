@@ -208,6 +208,7 @@ class BlogsModel {
   }
 
   modelBlog(b) {
+
     let newBlog = this.emptyBlog();
     newBlog.id = b.id;
     newBlog.title = b.attributes.title.en.text;
@@ -219,14 +220,8 @@ class BlogsModel {
     newBlog.series = this.getSeries(b['blog-series']);
     newBlog.subjects = this.getSubjects(b['blog-subjects']);
     newBlog.slug = this.getSlug(b.attributes.uri);
-
-    /* @todo harcoded date for now, update when available from ref */
     newBlog.date = this.convertDate(b.attributes.uri);
-
-    newBlog.mainPicture = b.attributes['featured-image'];
-
-    /* @todo harcoded pictures for now update when availaber from refinery */
-    newBlog.coverPicture = 'http://placekitten.com/1500/300';
+    newBlog.mainPicture = b.attributes['featured-image'] ? b.attributes['featured-image'] : {};
 
     return newBlog;
   }

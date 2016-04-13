@@ -26,6 +26,10 @@
     @include visuallyHidden;
   }
 
+  &-fullWidthParagraph {
+    @extend .blogListing-paragraph;
+  }
+
   &-series {
     @include grid-span(3, 3);
     text-transform: uppercase;
@@ -53,7 +57,11 @@
       @include grid-span(3, 4);
       line-height: 1.5;
       clear: right;
-    } 
+    }
+
+    &-fullWidthParagraph {
+      @include grid-span(6);
+    }
 
     &-image {
       @include grid-span(3);
