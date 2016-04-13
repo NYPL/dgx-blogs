@@ -16,12 +16,6 @@ class BlogPage extends React.Component {
     this.state = Store.getState();
   }
 
-  _renderHero(mainPicture) {
-    if(mainPicture['full-uri']) {
-      return (<Hero coverUrl={mainPicture['full-uri']} />);
-    }
-  }
-
   createMarkup(bodyText) { 
     return {__html: bodyText}
   };
@@ -33,7 +27,7 @@ class BlogPage extends React.Component {
 
     return (
       <div className='blogPage'>
-        {this._renderHero(mainPicture)}
+        <Hero coverUrl={mainPicture['full-uri']} />
         <Link 
           className="backToLink" 
           to="blogs">
