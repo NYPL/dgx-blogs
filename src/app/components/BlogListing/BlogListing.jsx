@@ -6,29 +6,31 @@ class BlogListing extends React.Component {
   }
 
   _mainPicture(pictureObject) {
-
-    if(pictureObject) {
-      return (<img
-        className="blogListing-image"
-        src={this.props.mainPicture['full-uri']} />);
+    if (pictureObject && pictureObject['full-uri']) {
+      return (
+        <img
+          className="blogListing-image"
+          src={pictureObject['full-uri']}
+        />
+      );
     }
 
     return null;
   }
-  
-  render() {
 
-    const seriesTitle = (this.props.series != null && this.props.series[0] != null) ?
+  render() {
+    const seriesTitle = (this.props.series !== null && this.props.series[0] !== null) ?
       <p className="blogListing-series">{this.props.series[0].title}</p> : null;
 
     /* apply a different class to the text paragraph when there's no image to show */
-    const paragraphClass = this._mainPicture(this.props.mainPicture) ? 'blogListing-paragraph' : 'blogListing-fullWidthParagraph';
+    const paragraphClass = this.props.mainPicture && this.props.mainPicture['full-uri'] ?
+      'blogListing-paragraph' : 'blogListing-fullWidthParagraph';
 
     return (
       <div className="blogListing">
         {seriesTitle}
-      	<h2 className="blogListing-title">
-          <a href={'/blog/' + this.props.slug}>
+        <h2 className="blogListing-title">
+          <a href={`/blog/${this.props.slug}`}>
             {this.props.title}
           </a>
         </h2>
@@ -43,11 +45,15 @@ BlogListing.propTypes = {
   title: React.PropTypes.string.isRequired,
   body: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string.isRequired,
-  series: React.PropTypes.array
+  series: React.PropTypes.array,
+  mainPicture: React.PropTypes.shape(
+    {
+      'full-uri': React.propTypes.string,
+    }),
 };
 
 BlogListing.defaultProps = {
-  seriesTitle: ''
+  seriesTitle: '',
 };
 
 export default BlogListing;

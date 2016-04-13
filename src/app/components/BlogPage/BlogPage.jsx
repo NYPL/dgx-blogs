@@ -16,6 +16,12 @@ class BlogPage extends React.Component {
     this.state = Store.getState();
   }
 
+  _renderHero(mainPicture) {
+    if(mainPicture['full-uri']) {
+      return (<Hero coverUrl={mainPicture['full-uri']} />);
+    }
+  }
+
   createMarkup(bodyText) { 
     return {__html: bodyText}
   };
@@ -27,7 +33,7 @@ class BlogPage extends React.Component {
 
     return (
       <div className='blogPage'>
-        <Hero coverUrl={mainPicture['full-uri']} />
+        {this._renderHero(mainPicture)}
         <Link 
           className="backToLink" 
           to="blogs">
@@ -38,7 +44,7 @@ class BlogPage extends React.Component {
           date={date}
           title={title} 
           body={body} 
-          author={author}
+          author={author ? author : {}}
           mainPicture={mainPicture['full-uri']}
           dangerouslySetInnerHTML={body}/>
         <AuthorCard 

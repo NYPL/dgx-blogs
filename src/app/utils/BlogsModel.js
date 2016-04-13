@@ -219,7 +219,7 @@ class BlogsModel {
     newBlog.subjects = this.getSubjects(b['blog-subjects']);
     newBlog.slug = this.getSlug(b.attributes.uri);
     newBlog.date = this.convertDate(b.attributes.uri);
-    newBlog.mainPicture = b.attributes['featured-image'] ? b.attributes['featured-image'] : undefined;
+    newBlog.mainPicture = b.attributes['featured-image'] ? b.attributes['featured-image'] : {};
 
     return newBlog;
   }
