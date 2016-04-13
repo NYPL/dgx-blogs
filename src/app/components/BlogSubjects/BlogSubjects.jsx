@@ -23,7 +23,9 @@ class BlogSubjects extends React.Component {
   }
 
   _getList(subjects) {
-    const subjectsList = subjects.map((subject, index) => {
+    const subjectsList = subjects.slice(0, this.props.maxSubjectsShown);
+    
+    return subjectsList.map((subject, index) => {
       return (
         <li key={index}>
           <Link
@@ -37,19 +39,15 @@ class BlogSubjects extends React.Component {
         </li>
         );
     });
-
-    /* slice the subjects to the specified size */
-    return subjectsList.slice(0, this.props.maxSubjectsShown);
   }
 
   render() {
     let subjects = this.props.data ? this._getList(this.props.data) : null;
     subjects = this.props.maxSubjectsShown ? subjects : subjects;
-    const className = this.props.className;
 
     return (
-      <div className={className}>
-        <ul className={ `${className} + -list`}>
+      <div className={this.props.className}>
+        <ul className={ `${this.props.className} + -list`}>
           {subjects}
         </ul>
       </div>

@@ -186,6 +186,7 @@ class BlogsModel {
         };
       } catch (e) {
         console.log(e);
+        return undefined;
       }
     });
 
