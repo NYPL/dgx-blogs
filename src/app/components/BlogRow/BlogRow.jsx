@@ -21,7 +21,9 @@ class BlogRow extends React.Component {
           <BlogSubjects 
             className="blogPage-sidebar"
             renderAs="blogRow-sidebar"
-            data={subjects}/>
+            subjects={subjects}
+            maxSubjectsShown={3}
+            />
         </div>
       	<BlogListing 
           series={series}

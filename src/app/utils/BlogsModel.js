@@ -22,7 +22,6 @@ class BlogsModel {
      * Make sure the data is not empty.
      */
     if (data.length > 0) {
-
       return _.map(data, b => {
         return this.modelBlog(b);
       });
@@ -32,7 +31,7 @@ class BlogsModel {
   }
 
   modelAuthor(author) {
-    let tmpAuthor = this.emptyAuthor();
+    const tmpAuthor = this.emptyAuthor();
     tmpAuthor.name = author.attributes['full-name'];
     tmpAuthor.role = author.attributes.title;
 
@@ -40,19 +39,18 @@ class BlogsModel {
   }
 
   emptyBlog() {
-
     return {
       id: null,
       title: null,
       author: {},
       body: {
         short: null,
-        full: null
+        full: null,
       },
       series: [],
       subjects: [],
-      uri: null
-    }
+      uri: null,
+    };
   }
 
   /**
@@ -80,7 +78,7 @@ class BlogsModel {
       ] = array;
 
       result = profileImgUrl;
-    }  catch (e) {
+    } catch (e) {
       result = undefined;
     }
 
@@ -109,8 +107,8 @@ class BlogsModel {
               ['last-name']: lastName = '',
               ['full-name']: fullName = '',
               unit: unit = '',
-              title: title = ''
-            }
+              title: title = '',
+            },
           },
         },
         ...rest
@@ -127,7 +125,7 @@ class BlogsModel {
         title,
         profileImgUrl: this.getHeadshotImage(array),
       };
-    }  catch (e) {
+    } catch (e) {
       console.log(e);
       // result = null;
       result = undefined;
@@ -155,8 +153,8 @@ class BlogsModel {
             },
             'rss-uri': {
               'full-uri': fullUri = '',
-            }
-          }
+            },
+          },
         } = series;
 
         obj = {
@@ -164,7 +162,7 @@ class BlogsModel {
           fullUri,
           id,
         };
-      }  catch (e) {
+      } catch (e) {
         obj = undefined;
       }
 
@@ -181,17 +179,22 @@ class BlogsModel {
     }
 
     result = _.map(array, subject => {
-      return {
-        id: subject.id,
-        name: subject.attributes.name,
-      };
+      try {
+        return {
+          id: subject.id,
+          name: subject.attributes.name.en.text,
+        };
+      } catch (e) {
+        console.log(e);
+        return undefined;
+      }
     });
 
     return result;
   }
 
   getSlug(uriObject) {
-    let slug = uriObject['full-uri'].split('/blog/').pop();
+    const slug = uriObject['full-uri'].split('/blog/').pop();
 
     return slug;
   }
