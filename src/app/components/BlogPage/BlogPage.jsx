@@ -22,12 +22,12 @@ class BlogPage extends React.Component {
   
   render() {
     const blog = this.state.blogPost[0];
-    const { author, subjects, title, date, coverPicture, mainPicture } = blog;
+    const { author, subjects, title, date, mainPicture } = blog;
     const body = this.createMarkup(blog.body.full);
 
     return (
       <div className='blogPage'>
-        <Hero imageUrl={coverPicture} />
+        <Hero coverUrl={mainPicture['full-uri']} />
         <Link 
           className="backToLink" 
           to="blogs">
@@ -38,9 +38,8 @@ class BlogPage extends React.Component {
           date={date}
           title={title} 
           body={body} 
-          author={author}
-          coverPicture={coverPicture}
-          mainPicture={mainPicture}
+          author={author ? author : {}}
+          mainPicture={mainPicture['full-uri']}
           dangerouslySetInnerHTML={body}/>
         <AuthorCard 
           data={author} 
