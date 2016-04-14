@@ -41,17 +41,27 @@ class BlogSubjects extends React.Component {
     });
   }
 
-  render() {
-    let subjects = this.props.data ? this._getList(this.props.data) : null;
-    subjects = this.props.maxSubjectsShown ? subjects : subjects;
+  _renderContent() {
+    /* if there is not any subject this component musnt generate any html */
+    if (! this.props.subjects || this.props.subjects.length == 0){ 
+      return null;
+    }
 
+    /* if there are subjects*/
+    let subjects = this.props.subjects ? this._getList(this.props.subjects) : null;
+    subjects = this.props.maxSubjectsShown ? subjects : subjects;
+    
     return (
       <div className={this.props.className}>
-        <ul className={ `${this.props.className} + -list`}>
+        <ul className={ `${this.props.className}-list`}>
           {subjects}
         </ul>
       </div>
     );
+  }
+
+  render() {
+    return this._renderContent();
   }
 }
 
@@ -62,7 +72,7 @@ BlogSubjects.propTypes = {
 };
 
 BlogSubjects.defaultProps = {
-  data: [],
+  subjects: [],
   className: 'blogTagsSidebar',
   maxSubjectsShown: 3,
 };

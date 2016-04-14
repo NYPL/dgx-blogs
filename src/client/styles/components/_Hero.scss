@@ -41,4 +41,12 @@
       @include displayVisuallyHidden;
     }    
   }
+
+  &NoImage {
+    @extend .hero;
+
+    @include layout-at(9, $landscape) {
+      height: 170px;
+    }
+  }  
 }
