@@ -33,7 +33,7 @@ class BlogPage extends React.Component {
           to="blogs">
           back to blogs
         </Link>
-        <BlogSubjects data={subjects} />
+        <BlogSubjects subjects={subjects} />
         <Blog 
           date={date}
           title={title} 

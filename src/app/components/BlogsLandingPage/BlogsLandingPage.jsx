@@ -1,6 +1,4 @@
-//BlogsLandingPage
 import React from 'react';
-
 import Store from '../../stores/Store.js';
 
 /*
@@ -8,7 +6,6 @@ import Store from '../../stores/Store.js';
  */
 import BlogListingHero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
-import BlogSubjects from '../BlogSubjects/BlogSubjects';
 
 class BlogsLandingPage extends React.Component {
   constructor(props) {
