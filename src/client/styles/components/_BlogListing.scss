@@ -54,7 +54,7 @@
 
     &-paragraph {
       @include displayVisuallyHidden;
-      @include grid-span(3, 4);
+      @include grid-span(4, 3);
       line-height: 1.5;
       clear: right;
     }
@@ -64,7 +64,7 @@
     }
 
     &-image {
-      @include grid-span(3);
+      @include grid-span(2);
       clear: both;
     }
   }

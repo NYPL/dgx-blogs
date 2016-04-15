@@ -34,10 +34,6 @@
 
   @include layout-at(7, $landscape) {
 
-    &:nth-child(1) {
-      border: none;
-    }
-
     &-leftSidebar {
       @include displayVisuallyHidden;
       @include grid-span(1);

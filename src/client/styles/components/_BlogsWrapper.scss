@@ -2,6 +2,12 @@
   
   @include add-grid(3);
 
+  .content {
+    @extend %clearfix;
+    max-width: 1312px;
+    margin: auto;
+  }
+
   .sidebar {
     @include visuallyHidden;
   }
@@ -35,7 +41,7 @@
 
     .blogsList {
 
-      @include grid-span(6, 2);
+      @include grid-span(8, 2);
     }
   }
 }

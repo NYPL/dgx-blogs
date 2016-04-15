@@ -39,14 +39,16 @@ class BlogsWrapper extends React.Component {
     return (
       <div className="blogsWrapper">
         <Hero />
-        <div className="sidebar">
-          <h3 className="sidebar-title">Blog</h3>
-          <a href="#" className="sidebar-link">Blogger Profiles</a>
-          <a href="#" className="sidebar-link">Blog Topics</a>
+        <div className="content">
+          <div className="sidebar">
+            <h3 className="sidebar-title">Blog</h3>
+            <a href="#" className="sidebar-link">Blogger Profiles</a>
+            <a href="#" className="sidebar-link">Blog Topics</a>
+          </div>
+          <ul className="blogsList">
+            {blogs}
+          </ul>
         </div>
-        <ul className="blogsList">
-          {blogs}
-        </ul>
       </div>
     );
   }
