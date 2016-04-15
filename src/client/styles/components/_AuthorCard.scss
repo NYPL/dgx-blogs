@@ -74,6 +74,11 @@
       margin-top: 20px;
     }
 
+    .authorLink {
+      @include grid-span(3, 2);
+      color: $COOLGRAY_COLOR;
+    }
+
     @include layout-at(9, $landscape) {
       @include grid-span(5, 4);
       margin-top: 60px;
@@ -84,6 +89,7 @@
         float: left;
         margin-right: 20px;
       }
+
     }
   }
 }
