@@ -4,6 +4,12 @@
     @include visuallyHidden;
   }
 
+  .content {
+    @extend %clearfix;
+    max-width: 1312px;
+    margin: auto;
+  }
+
   display: flex;
   flex-direction: column;
   

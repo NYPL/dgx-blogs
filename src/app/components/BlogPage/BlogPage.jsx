@@ -28,22 +28,27 @@ class BlogPage extends React.Component {
     return (
       <div className='blogPage'>
         <Hero coverUrl={mainPicture['full-uri']} />
-        <Link 
-          className="backToLink" 
-          to="blogs">
-          back to blogs
-        </Link>
-        <BlogSubjects subjects={subjects} />
-        <Blog 
-          date={date}
-          title={title} 
-          body={body} 
-          author={author ? author : {}}
-          mainPicture={mainPicture['full-uri']}
-          dangerouslySetInnerHTML={body}/>
-        <AuthorCard 
-          data={author} 
-          className="authorCardFooter"/>
+        <div className="content">
+          <Link 
+            className="backToLink" 
+            to="blogs"
+          >
+            back to blogs
+          </Link>
+          <BlogSubjects subjects={subjects} />
+          <Blog 
+            date={date}
+            title={title} 
+            body={body} 
+            author={author ? author : {}}
+            mainPicture={mainPicture['full-uri']}
+            dangerouslySetInnerHTML={body}
+          />
+          <AuthorCard 
+            data={author} 
+            className="authorCardFooter"
+          />
+        </div>
       </div>
     );
   }
