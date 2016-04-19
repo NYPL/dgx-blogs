@@ -7,8 +7,13 @@ class Blog extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  createMarkup(bodyText) { 
+    return {__html: bodyText}
+  }
   
   render() {
+    const unescapedBody = this.createMarkup(this.props.body);
 
     return (
       <div className="blogContent">
@@ -22,8 +27,9 @@ class Blog extends React.Component {
         </div>
         <p className="blogContent-date">{this.props.date}</p>
         <img className="blogContent-mainPicture" src={this.props.mainPicture} />
-        <div className="blogContent-bodyText">
-          {this.props.dangerouslySetInnerHTML}
+        <div 
+          className="blogContent-bodyText"
+          dangerouslySetInnerHTML={unescapedBody}>
         </div>
       </div>
     );

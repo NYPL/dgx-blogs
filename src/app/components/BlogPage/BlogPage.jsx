@@ -15,15 +15,10 @@ class BlogPage extends React.Component {
 
     this.state = Store.getState();
   }
-
-  createMarkup(bodyText) { 
-    return {__html: bodyText}
-  };
   
   render() {
     const blog = this.state.blogPost[0];
     const { author, subjects, title, date, mainPicture } = blog;
-    const body = this.createMarkup(blog.body.full);
 
     return (
       <div className='blogPage'>
@@ -38,11 +33,10 @@ class BlogPage extends React.Component {
           <BlogSubjects subjects={subjects} />
           <Blog 
             date={date}
-            title={title} 
-            body={body} 
+            title={title}  
             author={author ? author : {}}
             mainPicture={mainPicture['full-uri']}
-            dangerouslySetInnerHTML={body}
+            body={blog.body.full ? blog.body.full : ''}
           />
           <AuthorCard 
             data={author} 
