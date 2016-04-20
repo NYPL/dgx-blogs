@@ -7,7 +7,7 @@ import Store from '../../stores/Store.js';
 import Hero from '../Hero/Hero';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
-import AuthorCard from '../AuthorCard/AuthorCard';
+import BlogAuthorCard from '../BlogAuthorCard/BlogAuthorCard';
 
 class BlogPage extends React.Component {
   constructor(props) {
@@ -38,9 +38,8 @@ class BlogPage extends React.Component {
             mainPicture={mainPicture['full-uri']}
             body={blog.body.full ? blog.body.full : ''}
           />
-          <AuthorCard 
+          <BlogAuthorCard 
             data={author} 
-            className="authorCardFooter"
           />
         </div>
       </div>

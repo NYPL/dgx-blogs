@@ -89,7 +89,7 @@ class BlogsModel {
    * Uses ES6 Destructuring to extract author's properties.
    * @returns {object}
    */
-  getAuthor(array) {
+  getAuthor(array) { 
     let result;
     if (!array || array.length === 0) {
       return undefined;
@@ -110,6 +110,14 @@ class BlogsModel {
               title: title = '',
             },
           },
+          attributes: {
+            ['profile-slug']: slug = '',
+            ['profile-text']: {
+              en: {
+                text: profileText = ''
+              }
+            }
+          }
         },
         ...rest
       ] = array;
@@ -124,9 +132,11 @@ class BlogsModel {
         unit,
         title,
         profileImgUrl: this.getHeadshotImage(array),
+        slug,
+        profileText,
       };
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       // result = null;
       result = undefined;
     }

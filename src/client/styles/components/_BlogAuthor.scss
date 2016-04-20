@@ -1,0 +1,66 @@
+/*
+ * Used to render authorCard on listing blogs page 
+ */
+.blogAuthor {
+  @extend %clearfix;
+  @include add-grid(5);
+
+  &-profilePicWrap {
+    display: inline;
+    
+    &-picture {
+      border-radius: 50%;
+      height: 60px;
+      width: 18%;
+      max-width: 60px;
+      margin-top: 10px;
+      fill: $COOLGRAY_COLOR;
+    }
+  }
+
+
+  &-name {
+    @include grid-span(3, 2);
+    font-size: 18px;
+    font-weight: bold;
+
+    &-link {
+      color: black;
+      text-decoration: none;
+    }
+  }
+
+  &-title {
+    @include grid-span(3, 2);
+    font-size: 18px;
+    margin-top: 45px;
+  } 
+
+  @include layout-at(1, $landscape) {
+
+
+    &-name {
+      @include grid-span(1);
+      clear: both;
+      
+      &-name {
+        margin-bottom: 10px;
+      }
+    }
+
+    &-title {
+      @include grid-span(1);
+      margin-top: 0;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    &-name, &-title {
+      word-wrap: break-word;
+    } 
+
+    &-profilePicWrap-picture {
+      width: 80px;
+    }  
+  } 
+}

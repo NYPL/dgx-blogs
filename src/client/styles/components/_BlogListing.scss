@@ -1,5 +1,5 @@
 .blogListing {
-  @include grid-span(5);
+  @include grid-span(4);
   @include add-grid(5);
   padding-bottom: 40px;
   margin-top: 20px;
