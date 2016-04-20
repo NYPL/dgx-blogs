@@ -1,7 +1,7 @@
 import React from 'react';
 
 //blog row inner components
-import AuthorCard from '../AuthorCard/AuthorCard';
+import BlogAuthor from '../BlogAuthor/BlogAuthor';
 import BlogListing from '../BlogListing/BlogListing';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 
@@ -17,7 +17,7 @@ class BlogRow extends React.Component {
       <li className='blogRow'>
         <div className="blogRow-leftSidebar">
           <p className="blogRow-date">{date}</p>
-        	<AuthorCard data={author} />
+        	<BlogAuthor data={author} />
           <BlogSubjects 
             className="blogPage-sidebar"
             renderAs="blogRow-sidebar"
@@ -37,7 +37,14 @@ class BlogRow extends React.Component {
 }
 
 BlogRow.propTypes = {
-  data: React.PropTypes.object.isRequired
+  data: React.PropTypes.shape({
+    author: React.PropTypes.object,
+    subjects: React.PropTypes.array,
+    title: React.PropTypes.string.isRequired,
+    body: React.PropTypes.object,
+    slug: React.PropTypes.string.isRequired,
+    series: React.PropTypes.array,
+  })
 };
 
 export default BlogRow;

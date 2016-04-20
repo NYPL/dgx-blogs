@@ -28,8 +28,9 @@ Import style rules from NYPL React module components
 Import components styling
 */
 @import "components/_BlogsWrapper";
-@import "components/_AuthorCard";
 @import "components/_BlogRow";
+@import "components/_BlogAuthor";
+@import "components/_BlogAuthorCard";
 @import "components/_BlogListing";
 @import "components/_BlogListingHero";
 @import "components/_BlogsLandingPage";
