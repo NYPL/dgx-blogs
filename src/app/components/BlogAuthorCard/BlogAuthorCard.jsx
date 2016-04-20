@@ -4,10 +4,24 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { LionLogoIcon } from 'dgx-svg-icons';
+import axios from 'axios';
 
 class BlogAuthorCard extends React.Component {
   constructor(props) {
     super(props);
+
+    this._fetchAuthor = this._fetchAuthor.bind(this);
+  }
+
+  _fetchAuthor(author) {
+    axios
+      .get(`/api?author=${author}`)
+      .then(response => {
+        Actions.updateBlogs(response.data);
+      })
+      .catch(error => {
+        console.log(`error making ajax call: ${error}`);
+      }); /* end Axios call */
   }
 
   _renderAuthorPicture() {
@@ -29,19 +43,29 @@ class BlogAuthorCard extends React.Component {
     );
   }
 
-  render() {
+  _renderAuthorFullname() {
+    if (this.props.data.fullName) {
+      return (
+        <p className="blogAuthorCard-name">{ this.props.data.fullName }</p>
+      );
+    }
 
+    return null;
+  }
+
+  render() {
     return (
       <div className="blogAuthorCard">
         <div className="blogAuthorCard-profilePicWrap">
           { this._renderAuthorPicture() }
         </div>
-        <h4 className="blogAuthorCard-name">{ this.props.data.fullName }</h4>
+        { this._renderAuthorFullname() }
         <p className="blogAuthorCard-title">{ this.props.data.profileText }</p>
         <Link
           to="author"
           params={{ author: this.props.data.slug }}
           className="authorLink"
+          onClick={this._fetchAuthor.bind(this, this.props.data.slug)}
         >
           <b>View all posts by</b> {this.props.data.fullName}
         </Link>

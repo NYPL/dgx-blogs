@@ -30,6 +30,7 @@
     @include grid-span(3, 2);
     margin-top: 27px;
     margin-bottom: 0px;
+    font-weight: bold;
   }
 
   &-title {
@@ -49,7 +50,7 @@
     margin-right: 0;
 
     &-profilePic {
-      @extend .authorCard-profilePic;
+      @extend .blogAuthorCard-profilePic;
       float: left;
       margin-right: 20px;
     }
