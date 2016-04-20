@@ -40,9 +40,14 @@
   }
 
   &-bodyText {
+    @include Kievit-Regular;
     padding: 0 20px;
     margin-top: 50px;
     word-wrap: break-word;
+
+    a {
+      color: $COOLGRAY_COLOR;
+    }
   }
 
   @include layout-at(9, $landscape) {
