@@ -8,15 +8,17 @@
     @extend %clearfix;
     max-width: 1312px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
   }
 
-  display: flex;
-  flex-direction: column;
   
   @include layout-at(9, $landscape) {
 
-    /* reset display */
-    display: block;
+    .content {
+      /* reset display */
+      display: block;
+    }
 
     @include grid-span(9);
     @include add-grid(9);
