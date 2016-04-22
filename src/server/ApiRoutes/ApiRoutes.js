@@ -14,7 +14,7 @@ import appConfig from '../../../appConfig.js';
 const { HeaderItemModel } = Model;
 const { api, headerApi, blogsApi } = appConfig;
 const router = express.Router();
-const appEnvironment = 'qa'; //process.env.APP_ENV || 'production';
+const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
 const headerOptions = createOptions(headerApi);
 const blogsOptions = createOptions(blogsApi);
@@ -83,7 +83,7 @@ function BlogsMainList(req, res, next) {
   blogsOptions.filters = {};
   const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
 
-  // console.log(blogsApiUrl);
+  console.log(blogsApiUrl);
   fetchData(blogsApiUrl, 'blogs', req, res, next);
 }
 

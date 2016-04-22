@@ -67,7 +67,7 @@ app.use('/', (req, res) => {
       favicon: appConfig.favIconPath,
       gaCode: analytics.google.code(isProduction),
       webpackPort: WEBPACK_DEV_PORT,
-      appEnv: process.env.APP_ENV,
+      appEnv: process.env.APP_ENV || 'No APP_ENV set',
       isProduction,
     });
   });
