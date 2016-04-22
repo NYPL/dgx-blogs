@@ -1,4 +1,5 @@
 import React from 'react';
+import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
 
 class BlogListing extends React.Component {
   constructor(props) {
@@ -35,7 +36,10 @@ class BlogListing extends React.Component {
           </a>
         </h2>
         {this._mainPicture(this.props.mainPicture)}
-        <p className={paragraphClass}>{this.props.body}</p>
+        <p className={paragraphClass}>
+          {this.props.body}
+          <ReadMoreButton slug={this.props.slug} />
+        </p>
       </div>
     );
   }
