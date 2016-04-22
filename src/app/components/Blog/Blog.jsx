@@ -23,7 +23,6 @@ class Blog extends React.Component {
           by <b>{this.props.author.fullName}</b>. {this.props.author.title}
         </div>
         <p className="blogContent-date">{this.props.date}</p>
-        <img className="blogContent-mainPicture" src={this.props.mainPicture} />
         <div
           className="blogContent-bodyText"
           dangerouslySetInnerHTML={unescapedBody}
