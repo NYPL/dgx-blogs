@@ -1,0 +1,26 @@
+.readMoreButton {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $SECONDARY_UI_COLOR;
+  border: 2px solid $SECONDARY_UI_COLOR;
+  border-radius: 18px;
+  font-size: 12px;
+  display: block;
+  width: 128px;
+  height: 34px;
+  position: relative;
+  margin-top: 20px;
+
+  & > span {
+    position: absolute;
+    top: 9px;
+    right: 18px;
+  }
+
+  .svgIcon {
+    fill: $SECONDARY_UI_COLOR;
+    position: absolute;
+    top: 4px;
+    left: 18px;
+  }
+}
