@@ -7,7 +7,7 @@ import Store from '../../stores/Store.js';
 import Hero from '../Hero/Hero';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
-import AuthorCard from '../AuthorCard/AuthorCard';
+import BlogAuthorCard from '../BlogAuthorCard/BlogAuthorCard';
 
 class BlogPage extends React.Component {
   constructor(props) {
@@ -15,34 +15,33 @@ class BlogPage extends React.Component {
 
     this.state = Store.getState();
   }
-
-  createMarkup(bodyText) { 
-    return {__html: bodyText}
-  };
   
   render() {
     const blog = this.state.blogPost[0];
-    const { author, subjects, title, date, coverPicture } = blog;
-    const body = this.createMarkup(blog.body.full);
+    const { author, subjects, title, date, mainPicture } = blog;
 
     return (
       <div className='blogPage'>
-        <Hero imageUrl={coverPicture} />
-        <Link 
-          className="backToLink" 
-          to="blogs">
-          back to blogs
-        </Link>
-        <BlogSubjects data={subjects} />
-        <Blog 
-          title={title} 
-          body={body} 
-          author={author}
-          coverPicture={coverPicture}
-          dangerouslySetInnerHTML={body}/>
-        <AuthorCard 
-          data={author} 
-          className="authorCardFooter"/>
+        <Hero coverUrl={mainPicture['full-uri']} />
+        <div className="content">
+          <Link 
+            className="backToLink" 
+            to="blogs"
+          >
+            back to blogs
+          </Link>
+          <BlogSubjects subjects={subjects} />
+          <Blog 
+            date={date}
+            title={title}  
+            author={author ? author : {}}
+            mainPicture={mainPicture['full-uri']}
+            body={blog.body.full ? blog.body.full : ''}
+          />
+          <BlogAuthorCard 
+            data={author} 
+          />
+        </div>
       </div>
     );
   }

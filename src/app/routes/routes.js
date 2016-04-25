@@ -14,18 +14,20 @@ import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
 const routes = {
   client: (
     <Route name="root" path="/" handler={Application}>
-      <Route name='blogs' path='/blogs/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='author' path='/blogs/author/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='series' path='/blogs/series/?' handler={BlogPage} ignoreScrollBehavior />
-      <Route name='blog' path='/blogs/**' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='blogs' path='/blog?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='author' path='/blog/author/:author?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='series' path='/blog/series/:series?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='subjects' path='/blog/subjects/:subject?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='blog' path='/blog/:year/:month/:day/:blogId' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
   server: (
     <Route name="root" path="/" handler={Application}>
-      <Route name='blogs' path='/blogs/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='author' path='/blogs/author/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='series' path='/blogs/series/?' handler={BlogPage} ignoreScrollBehavior />
-      <Route name='blog' path='/blogs/**' handler={BlogPage} ignoreScrollBehavior />
+      <Route name='blogs' path='/blog?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='author' path='/blog/author/:author?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='series' path='/blog/series/:series?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='subjects' path='/blog/subjects/:subject?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='blog' path='/blog/:year/:month/:day/:blogId' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
 };

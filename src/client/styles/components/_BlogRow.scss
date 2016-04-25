@@ -1,13 +1,13 @@
 .blogRow {
   @extend %clearfix;
-  @include add-grid(6);
+  @include add-grid(5);
   border-top: 2px solid $COOLGRAY_COLOR;
+  margin: 0 18px;
 
   &-leftSidebar {
-    @include grid-span(1);
-    margin-right: 0;
 
     & ul {
+      @include visuallyHidden;
       list-style: none;
       padding: 0;
 
@@ -18,14 +18,40 @@
   }
 
   &-date {
+    @include grid-span(1, 5);
     font-size: 13px;
     color: $COOLGRAY_COLOR;
+    margin-top: 23px;
+    line-height: 1.6;
   }
 
   .tagLink {
     text-transform: uppercase;
     text-decoration: none;
     color: $SECONDARY_UI_COLOR;
-    font-size: 13px;
+    font-size: 12px;
+
+      
+    .svgIcon {
+      fill: $SECONDARY_UI_COLOR;
+    }
+  }
+
+  @include layout-at(7, $landscape) {
+
+    &-leftSidebar {
+      @include displayVisuallyHidden;
+      @include grid-span(1);
+
+      & ul {
+        @include displayVisuallyHidden;
+      }
+    }
+
+    &-date {
+      margin-top: 17px;
+      float: none;
+      width: auto;
+    }
   }
 }

@@ -1,17 +1,30 @@
 .blogPage {
 
- /*
-  * @todo what about the mobile, portrait ..etc?
-  */
+  .backToLink {
+    @include visuallyHidden;
+  }
+
+  .content {
+    @extend %clearfix;
+    max-width: 1312px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
   
   @include layout-at(9, $landscape) {
+
+    .content {
+      /* reset display */
+      display: block;
+    }
 
     @include grid-span(9);
     @include add-grid(9);
 
-
     .backToLink {
-      
+      @include displayVisuallyHidden;
       @include grid-span(2, 2);     
       text-transform: uppercase;
       color: $COOLGRAY_COLOR;
@@ -19,6 +32,10 @@
       margin-top: 22px;
       text-decoration: none;
       text-align: right;
+    }
+
+    &-sidebar {
+      margin-top: 15px;
     }
   }
 }

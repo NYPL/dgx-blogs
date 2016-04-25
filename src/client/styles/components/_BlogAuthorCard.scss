@@ -1,0 +1,59 @@
+/*
+ * Used to render authorCard on single blog page 
+ */
+.blogAuthorCard {
+  @extend %clearfix;
+  @include add-grid(4);
+  margin: 60px 18px;
+  border: 2px solid $COOLGRAY_COLOR;
+  padding: 10px;
+  padding-bottom: 20px;
+
+  &-profilePicWrap {
+    @include grid-span(1);
+    text-align: center;
+
+    &-picture {
+      border-radius: 50%;
+      max-width: 100px;
+      margin-top: 24px;
+      height: 80px;
+      fill: $COOLGRAY_COLOR;
+    }
+
+    &-picture.svgIcon {
+      width: 100%;
+    }
+  }
+
+  &-name {
+    @include grid-span(3, 2);
+    margin-top: 27px;
+    margin-bottom: 0px;
+    font-weight: bold;
+  }
+
+  &-title {
+    @include grid-span(3, 2);
+    margin-top: 20px;
+  }
+
+  .authorLink {
+    @include grid-span(3, 2);
+    color: $COOLGRAY_COLOR;
+  }
+
+  @include layout-at(9, $landscape) {
+    @include grid-span(5.4, 3.4);
+
+    margin-top: 60px;
+    margin-right: 0;
+
+    &-profilePic {
+      @extend .blogAuthorCard-profilePic;
+      float: left;
+      margin-right: 20px;
+    }
+
+  }
+}

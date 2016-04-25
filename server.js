@@ -42,7 +42,7 @@ app.set('port', process.env.PORT || 3001);
 
 // * is used for Reverse Proxy at the moment but can be cleaned up:
 // For webpack
-app.use('*/dist', express.static(DIST_PATH));
+app.use(express.static(DIST_PATH));
 // For images
 app.use('*/src/client', express.static(INDEX_PATH));
 
@@ -67,7 +67,7 @@ app.use('/', (req, res) => {
       favicon: appConfig.favIconPath,
       gaCode: analytics.google.code(isProduction),
       webpackPort: WEBPACK_DEV_PORT,
-      appEnv: process.env.APP_ENV,
+      appEnv: process.env.APP_ENV || 'No APP_ENV set',
       isProduction,
     });
   });

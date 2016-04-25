@@ -2,10 +2,25 @@
   
   @include add-grid(3);
 
+  .content {
+    @extend %clearfix;
+    max-width: 1312px;
+    margin: auto;
+  }
+
+  .sidebar {
+    @include visuallyHidden;
+  }
+
+  .blogsList {
+    list-style: none;
+    padding: 0;
+  }
+
   @include layout-at(9, $landscape) {
 
     .sidebar {
-
+      @include displayVisuallyHidden;
       @include grid-span(1);
       border-top: 2px solid $CHARCOAL;
       margin-top: 16px;
@@ -26,8 +41,7 @@
 
     .blogsList {
 
-      @include grid-span(6, 2);
-      list-style: none;
+      @include grid-span(8, 2);
     }
   }
 }
