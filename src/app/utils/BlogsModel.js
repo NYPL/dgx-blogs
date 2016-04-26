@@ -57,27 +57,53 @@ class BlogsModel {
    * Uses ES6 Destructuring to extract author's headshot image.
    * @returns {object}
    */
-  getHeadshotImage(array) {
+  getHeadshotImage(obj) {
     let result;
-    if (!array || array.length === 0) {
+    if (!obj || _.isEmpty(obj)) {
       return null;
     }
 
     try {
-      const [
-        {
-          headshot: {
-            attributes: {
-              uri: {
-                ['full-uri']: profileImgUrl = '',
-              },
+      const {
+        headshot: {
+          attributes: {
+            uri: {
+              ['full-uri']: profileImgUrl = '',
             },
           },
         },
-        ...rest
-      ] = array;
+      } = obj;
 
       result = profileImgUrl;
+    } catch (e) {
+      result = undefined;
+    }
+
+    return result;
+  }
+
+  /**
+   * Uses ES6 Destructuring to extract author's headshot image.
+   * @returns {object}
+   */
+  getText(obj) {
+    let result;
+    if (!obj || _.isEmpty(obj)) {
+      return null;
+    }
+
+    try {
+      const {
+        attributes: {
+          ['profile-text']: {
+            en: {
+              text: profileText = ''
+            },
+          },
+        },
+      } = obj;
+
+      result = profileText;
     } catch (e) {
       result = undefined;
     }
@@ -95,32 +121,26 @@ class BlogsModel {
       return undefined;
     }
 
+    const blogAuthor = array[0];
+
     try {
-      const [
-        {
-          author: {
-            id: id = '',
-            attributes: {
-              ['display-name']: displayName = '',
-              location: location = '',
-              ['first-name']: firstName = '',
-              ['last-name']: lastName = '',
-              ['full-name']: fullName = '',
-              unit: unit = '',
-              title: title = '',
-            },
-          },
-          attributes: {
-            ['profile-slug']: slug = '',
-            ['profile-text']: {
-              en: {
-                text: profileText = ''
-              }
-            }
-          }
+      const {
+        id: id,
+        attributes: {
+          ['profile-slug']: slug = '',
         },
-        ...rest
-      ] = array;
+        author: {
+          attributes: {
+            ['display-name']: displayName = '',
+            location: location = '',
+            ['first-name']: firstName = '',
+            ['last-name']: lastName = '',
+            ['full-name']: fullName = '',
+            unit: unit = '',
+            title: title = '',
+          },
+        },
+      } = blogAuthor;
 
       result = {
         id,
@@ -131,12 +151,12 @@ class BlogsModel {
         fullName,
         unit,
         title,
-        profileImgUrl: this.getHeadshotImage(array),
+        profileImgUrl: this.getHeadshotImage(blogAuthor),
         slug,
-        profileText,
+        profileText: this.getText(blogAuthor),
       };
     } catch (e) {
-      //console.log(e);
+      console.log(e);
       // result = null;
       result = undefined;
     }
@@ -205,7 +225,6 @@ class BlogsModel {
 
   getSlug(uriObject) {
     const slug = uriObject['full-uri'].split('/blog/').pop();
-
     return slug;
   }
 
@@ -219,7 +238,6 @@ class BlogsModel {
   }
 
   modelBlog(b) {
-
     let newBlog = this.emptyBlog();
     newBlog.id = b.id;
     newBlog.title = b.attributes.title.en.text;

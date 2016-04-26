@@ -17,7 +17,7 @@ const routes = {
       <Route name='blogs' path='/blog?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='author' path='/blog/author/:author?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='series' path='/blog/series/:series?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='subjects' path='/blog/subjects/:subject?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='subjects' path='/blog/subjects/:subjects?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='blog' path='/blog/:year/:month/:day/:blogId' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
@@ -26,7 +26,7 @@ const routes = {
       <Route name='blogs' path='/blog?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='author' path='/blog/author/:author?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='series' path='/blog/series/:series?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='subjects' path='/blog/subjects/:subject?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='subjects' path='/blog/subjects/:subjects?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='blog' path='/blog/:year/:month/:day/:blogId' handler={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
