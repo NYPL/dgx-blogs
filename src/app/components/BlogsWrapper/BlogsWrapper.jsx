@@ -4,7 +4,7 @@ import { map as _map } from 'underscore';
 
 import Store from '../../stores/Store.js';
 
-import Hero from '../Hero/Hero';
+import HeroBlogSeries from '../HeroBlogSeries/HeroBlogSeries';
 import BlogRow from '../BlogRow/BlogRow';
 
 class BlogsWrapper extends React.Component {
@@ -38,7 +38,7 @@ class BlogsWrapper extends React.Component {
 
     return (
       <div className="blogsWrapper">
-        <Hero />
+        <HeroBlogSeries />
         <div className="content">
           <div className="sidebar">
             <h3 className="sidebar-title">Blog</h3>

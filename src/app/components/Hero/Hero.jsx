@@ -23,7 +23,7 @@ class Hero extends React.Component {
 
     return (
       <div className={heroClass}>
-        <h1 className="hero-title">Blogs</h1>
+        <h1 className="hero-title">Blogs <span className="nypl-icon-wedge-down"></span></h1>
         {this._renderCoverImage()}
       </div>
     );

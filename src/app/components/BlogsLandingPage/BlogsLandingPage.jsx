@@ -4,7 +4,7 @@ import Store from '../../stores/Store.js';
 /*
  * blog landing page components
  */
-import BlogListingHero from '../Hero/Hero';
+import BlogListingHero from '../HeroBlogSeries/HeroBlogSeries';
 import BlogRow from '../BlogRow/BlogRow';
 
 class BlogsLandingPage extends React.Component {
@@ -25,7 +25,7 @@ class BlogsLandingPage extends React.Component {
     
     return (
       <div className="blogsLandingPage">
-        <Hero className="blogsListingHero"/>
+        <HeroBlogSeries />
         <ul>
           {blogsList}
         </ul>

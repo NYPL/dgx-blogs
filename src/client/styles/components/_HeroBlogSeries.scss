@@ -1,0 +1,82 @@
+.heroBlogSeries {
+
+  @extend %clearfix;  
+  background: $BLOGS_DARK_COLOR;
+  height: 100px;
+
+  &-content {
+    width: 100%;
+    color: $WHITE_COLOR;
+
+    &-serie, &-picture, &-description {
+      @include visuallyHidden;
+    }
+
+    &-title {
+      @include Kievit-Regular;
+      margin-left: 18px;
+      text-transform: capitalize;
+      font-size: 28px;
+      margin-top: 35px;
+
+      .nypl-icon-wedge-down {
+        @include visuallyHidden;
+        font-weight: bold;
+      }
+    }
+  }
+
+  @include layout-at(9, $portrait) {
+
+    &-content {
+
+      &-title {
+        margin-left: 45px;
+      }
+    }
+  }
+  
+  @include layout-at(9, $landscape) {
+    height: auto;
+    @include aspect-ratio(42, 10);
+
+    @include grid-span(9);
+    max-height: 314px;
+    /* @todo determine background color or what should be shown when no image */
+    float: none;
+    overflow: hidden;
+
+    &-content {
+      @include add-grid(9);
+      @include add-gutter(1/2);
+      max-width: 1312px;
+      margin: auto;
+      margin-top: 29px;
+
+      &-serie {
+        @include displayVisuallyHidden;
+        @include grid-span(5, 4);
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      &-title {
+        @include grid-span(5, 4);
+        letter-spacing: 1px;
+        margin-top: 70px;
+      }
+
+      &-description {
+        @include displayVisuallyHidden;
+        @include grid-span(5, 4);
+        margin-top: 120px;
+      }
+
+      &-picture {
+        @include displayVisuallyHidden;
+        @include grid-span(2, 2);
+        border-radius: 50%;
+      }    
+    }
+  }
+}
