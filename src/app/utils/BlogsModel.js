@@ -156,8 +156,41 @@ class BlogsModel {
         profileText: this.getText(blogAuthor),
       };
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       // result = null;
+      result = undefined;
+    }
+
+    return result;
+  }
+
+  getSeriesImg(series) {
+    let result;
+    if (!series || _.isEmpty(series)) {
+      return null;
+    }
+
+    try {
+      const {
+        image: {
+          attributes: {
+            width: width = 0,
+            height: height = 0,
+            uri: {
+              'full-uri': url = '',
+              description: description = '',
+            },
+          },
+        },
+      } = series;
+
+      result = {
+        description,
+        width,
+        height,
+        url,
+      };
+    } catch (e) {
       result = undefined;
     }
 
@@ -178,21 +211,31 @@ class BlogsModel {
           attributes: {
             title: {
               en: {
-                text: text = '',
+                text: title = '',
               },
             },
             'rss-uri': {
               'full-uri': fullUri = '',
             },
+            body: {
+              en: {
+                'full-text': body = '',
+              },
+            },
+            audience: audience = '',
+            subjects: subjects = '',
           },
         } = series;
 
         obj = {
-          title: text,
+          image: this.getSeriesImg(series),
+          title,
+          body,
           fullUri,
           id,
         };
       } catch (e) {
+        console.log(e)
         obj = undefined;
       }
 
@@ -215,7 +258,6 @@ class BlogsModel {
           name: subject.attributes.name.en.text,
         };
       } catch (e) {
-        console.log(e);
         return undefined;
       }
     });
