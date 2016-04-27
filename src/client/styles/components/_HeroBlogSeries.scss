@@ -8,7 +8,7 @@
     width: 100%;
     color: $WHITE_COLOR;
 
-    &-serie, &-picture, &-description {
+    &-serie, &-picture, &-description, &-seriesCount {
       @include visuallyHidden;
     }
 
@@ -70,6 +70,13 @@
         @include displayVisuallyHidden;
         @include grid-span(5, 4);
         margin-top: 120px;
+      }
+
+      &-seriesCount {
+        @include displayVisuallyHidden;
+        @include grid-span(5, 4);
+        margin-top: 170px;
+        color: $COOLGRAY_COLOR;
       }
 
       &-picture {
