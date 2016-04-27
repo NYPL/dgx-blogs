@@ -34,7 +34,8 @@
   }
 
   &-title {
-    @include grid-span(3, 2);
+    @include grid-span(2.8, 2);
+    margin-right: 0;
     margin-top: 20px;
   }
 
@@ -43,17 +44,30 @@
     color: $COOLGRAY_COLOR;
   }
 
-  @include layout-at(9, $landscape) {
-    @include grid-span(5.4, 3.4);
+  @include layout-at(7, $portrait) {
+    @include grid-span(5, 2);
 
     margin-top: 60px;
     margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 
     &-profilePic {
       @extend .blogAuthorCard-profilePic;
       float: left;
       margin-right: 20px;
     }
+  }
 
+  @include layout-at(9, $landscape) {
+    
+    @include grid-span(5, 3);
+    margin-right: 0;
+  }
+
+  @include layout-at(9, $desktop) {
+
+    @include grid-span(5.4, 3.4);
+    margin-right: 0;
   }
 }

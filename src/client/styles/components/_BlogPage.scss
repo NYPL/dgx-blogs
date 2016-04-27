@@ -12,20 +12,17 @@
     flex-direction: column;
   }
 
-  
-  @include layout-at(9, $landscape) {
+  @include layout-at(7, $portrait) {
 
     .content {
       /* reset display */
       display: block;
+      margin: 0 20px;      
     }
-
-    @include grid-span(9);
-    @include add-grid(9);
 
     .backToLink {
       @include displayVisuallyHidden;
-      @include grid-span(2, 2);     
+      @include grid-span(1);     
       text-transform: uppercase;
       color: $COOLGRAY_COLOR;
       font-size: 14px;
@@ -33,9 +30,21 @@
       text-decoration: none;
       text-align: right;
     }
+  }
+  
+  @include layout-at(9, $landscape) {
+    @include grid-span(9);
 
-    &-sidebar {
-      margin-top: 15px;
+    .backToLink {   
+      @include grid-span(1, 2);
+    }
+  }
+
+  @include layout-at(9, $desktop) {
+    @include grid-span(9);
+
+    .backToLink {   
+      @include grid-span(2, 2);
     }
   }
 }
