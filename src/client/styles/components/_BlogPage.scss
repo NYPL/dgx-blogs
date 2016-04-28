@@ -1,11 +1,14 @@
 .blogPage {
-
+  @include add-grid(7);
+  @include add-gutter(0);
+  
   .backToLink {
     @include visuallyHidden;
   }
 
   .content {
     @extend %clearfix;
+
     max-width: 1312px;
     margin: auto;
     display: flex;
@@ -17,34 +20,49 @@
     .content {
       /* reset display */
       display: block;
-      margin: 0 20px;      
-    }
+      //margin: 0 20px;
+      @include add-grid(7);      
 
-    .backToLink {
-      @include displayVisuallyHidden;
-      @include grid-span(1);     
-      text-transform: uppercase;
-      color: $COOLGRAY_COLOR;
-      font-size: 14px;
-      margin-top: 22px;
-      text-decoration: none;
-      text-align: right;
+      .backToLink {
+        @include displayVisuallyHidden;
+        @include grid-span(1);     
+        text-transform: uppercase;
+        color: $COOLGRAY_COLOR; 
+        font-size: 14px;
+        margin-top: 24px;
+        text-decoration: none;
+        text-align: right;
+      }
+
+      .blogSubjects {
+        @include grid-span(1);
+      }
     }
   }
   
   @include layout-at(9, $landscape) {
-    @include grid-span(9);
 
-    .backToLink {   
-      @include grid-span(1, 2);
+    .content { 
+      .backToLink {   
+        @include grid-span(1, 2);
+      }
+
+      .blogSubjects {
+        @include grid-span(1, 2);
+      }
     }
   }
 
   @include layout-at(9, $desktop) {
-    @include grid-span(9);
 
-    .backToLink {   
-      @include grid-span(2, 2);
+    .content {
+      .backToLink {   
+        @include grid-span(2);
+      }
+
+      .blogSubjects {
+        @include grid-span(2);
+      }
     }
   }
 }

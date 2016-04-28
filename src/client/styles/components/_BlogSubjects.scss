@@ -30,8 +30,6 @@
   }
 
   @include layout-at(7, $portrait) {
-
-    @include grid-span(1);
     text-align: right;
 
     & li {
@@ -55,13 +53,11 @@
   }
 
   @include layout-at(9, $landscape) {
-
-    @include grid-span(1, 2);
     margin-top: 16px;
   }
 
   @include layout-at(9, $desktop) {
     
-    @include grid-span(2, 2); 
+    //@include grid-span(2, 2); 
   }
 }
