@@ -7,6 +7,12 @@ import Store from '../../stores/Store.js';
 import HeroBlogSeries from '../HeroBlogSeries/HeroBlogSeries';
 import BlogRow from '../BlogRow/BlogRow';
 
+import {
+  isEmpty as _isEmpty,
+  keys as _keys,
+  findWhere as _findWhere,
+} from 'underscore';
+
 class BlogsWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +41,33 @@ class BlogsWrapper extends React.Component {
   
   render() {
     const blogs = this._getList(this.state.blogs);
+
+    let pageType;
+    let param;
+    let series;
+    let subjects;
+    let author;
+    let hero;
+
+    if (!_isEmpty(this.props.params)) {
+      pageType = _keys(this.props.params)[0];
+      param = this.props.params[pageType];
+
+      if (pageType === 'author') {
+        author = this.state.blogs[0][pageType];
+        console.log(author);
+        // hero = <Hero author={author} />
+      } else if (pageType === 'series') {
+        series = _findWhere(this.state.blogs[0][pageType], {id: param});
+        console.log(series);
+        // hero = <Hero series={series} />
+      } else if (pageType === 'subjects') {
+        subjects = _findWhere(this.state.blogs[0][pageType], {id: param});
+        console.log(subjects);
+        // hero = <Hero subjects={subjects} />
+      }
+
+    }
 
     return (
       <div className="blogsWrapper">

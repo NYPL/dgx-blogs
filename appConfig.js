@@ -33,7 +33,7 @@ export default {
     bloggerEndpoint: '/blogs/blogger-profiles',
     seriesEndpoint: '/blogs/blog-series',
     subjectEndpoint: '/blogs/blog-subjects',
-    includes: ['blog-profiles.author.headshot', 'blog-series', 'blog-subjects'],
+    includes: ['blog-profiles.author', 'blog-profiles.headshot', 'blog-series.image', 'blog-subjects'],
     pageSize: '&page[size]=10',
     pageNumber: '&page[number]=1',
   },
