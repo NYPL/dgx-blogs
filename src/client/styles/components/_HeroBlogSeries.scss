@@ -47,42 +47,42 @@
     overflow: hidden;
 
     &-content {
-      @include add-grid(9);
-      @include add-gutter(1/2);
+      @include add-grid(27);
       max-width: 1312px;
       margin: auto;
-      margin-top: 29px;
+      margin-top: 18px;
 
       &-serie {
         @include displayVisuallyHidden;
-        @include grid-span(5, 4);
+        @include grid-span(15, 12);
         text-transform: uppercase;
         font-size: 14px;
         font-weight: bold;
       }
       &-title {
-        @include grid-span(5, 4);
+        @include grid-span(15, 12);
         letter-spacing: 1px;
         margin-top: 70px;
       }
 
       &-description {
         @include displayVisuallyHidden;
-        @include grid-span(5, 4);
+        @include grid-span(15, 12);
         margin-top: 120px;
       }
 
       &-seriesCount {
         @include displayVisuallyHidden;
-        @include grid-span(5, 4);
+        @include grid-span(15, 12);
         margin-top: 170px;
         color: $COOLGRAY_COLOR;
       }
 
       &-picture {
         @include displayVisuallyHidden;
-        @include grid-span(2, 2);
+        @include grid-span(6, 5);
         border-radius: 50%;
+        height: 94%;
       }    
     }
   }
