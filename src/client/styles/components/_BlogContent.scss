@@ -1,6 +1,6 @@
-/* @todo change className to match component name (Blog) */
-.blogContent {
-  @extend %clearfix;
+/* @todo rename this file */
+.blog {
+
   @include Milo-Regular;
   font-size: 18px;
   line-height: 26px;
@@ -50,11 +50,12 @@
     }
   }
 
-  @include layout-at(9, $landscape) {
-    @include grid-span(5, 4);
+  @include layout-at(7, $portrait) {
+    @extend %clearfix;
+    @include grid-span(5, 2);
     padding: 0;
     margin-right: 0;
-    margin-top: -100px;
+    margin-top: -40px;
     z-index: 10;
     background: white;
     min-height: 500px;
@@ -62,8 +63,8 @@
 
     &-date {
       margin: 0;
-      margin-bottom: 40px;
-      font-size: 16px;
+      margin-bottom: 30px;
+      font-size: 14px;
     
       &:nth-child(odd) {
         @include visuallyHidden;
@@ -74,13 +75,42 @@
       }
     }
 
-
     &-title {
-      margin: 40px 0 47px 0;
+      margin: 14px 0 27px 0;
+      font-size: 28px;
     }
 
     &-author {
       margin-bottom: 0;
+    }
+
+    &-bodyText {
+      margin-top: 10px;
+    }
+  }
+
+  @include layout-at(9, $landscape) { 
+    @include grid-span(5, 3);
+    margin-top: -60px;
+    margin-right: 0;
+
+    &-title {
+      font-size: 30px;
+    }
+  }
+
+  @include layout-at(9, $desktop) {
+    @include grid-span(5, 3);
+    margin-right: 0;  
+    margin-top: -100px;
+
+    &-date {
+      margin-bottom: 40px;
+      font-size: 16px;
+    }
+    
+    &-title {
+      margin: 20px 0 47px 0;
     }
   }
 }

@@ -20,7 +20,6 @@ class BlogRow extends React.Component {
         	<BlogAuthor data={author} />
           <BlogSubjects 
             className="blogPage-sidebar"
-            renderAs="blogRow-sidebar"
             subjects={subjects}
             maxSubjectsShown={3}
             />

@@ -17,18 +17,9 @@
     margin-top: 35px;
   }
 
-  @include layout-at(9, $portrait) {
-
-    &-title {
-      margin-left: 45px;
-    }
-  }
-  
-  @include layout-at(9, $landscape) {
+  @include layout-at(7, $portrait) {
     @extend %clearfix;
-    @include grid-span(9);
     height: 270px;
-    /* @todo determine background color or what should be shown when no image */
     background: grey;
     float: none;
     overflow: hidden;
@@ -40,6 +31,11 @@
     & > img {
       @include displayVisuallyHidden;
     }    
+  }
+  
+  @include layout-at(9, $landscape) {
+    @include grid-span(9);
+    float: none;
   }
 
   &NoImage {
