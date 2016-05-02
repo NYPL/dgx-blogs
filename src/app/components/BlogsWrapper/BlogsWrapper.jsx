@@ -57,7 +57,7 @@ class BlogsWrapper extends React.Component {
       if (pageType === 'author') {
         author = this.state.blogs[0][pageType];
         hero = (<Hero
-          serieType="author"
+          type="author"
           title={author.fullName}
           description={author.title}
           picture={author.profileImgUrl}
@@ -67,7 +67,7 @@ class BlogsWrapper extends React.Component {
         series = _findWhere(this.state.blogs[0][pageType], { id: param });
         /* @todo is it right to striptag the body? */
         hero = (<Hero
-          serieType="Blog Series"
+          type="Blog Series"
           title={series.title}
           description={series.body.replace(/(<([^>]+)>)/ig, '')}
           picture={series.image.url}
@@ -76,7 +76,7 @@ class BlogsWrapper extends React.Component {
       } else if (pageType === 'subjects') {
         subjects = _findWhere(this.state.blogs[0][pageType], { id: param });
         hero = (<Hero
-          serieType="Blog Subject"
+          type="Blog Subject"
           title={subjects.name}
           postCount={this.state.blogs.length}
         />);
