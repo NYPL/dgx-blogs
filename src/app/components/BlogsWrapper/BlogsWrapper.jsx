@@ -4,7 +4,8 @@ import { map as _map } from 'underscore';
 
 import Store from '../../stores/Store.js';
 
-import HeroBlogSeries from '../HeroBlogSeries/HeroBlogSeries';
+import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
+import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 
 import {
@@ -47,7 +48,7 @@ class BlogsWrapper extends React.Component {
     let series;
     let subjects;
     let author;
-    let hero = <HeroBlogSeries />;
+    let hero = <HeroSinglePost />;
 
     if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
@@ -55,7 +56,7 @@ class BlogsWrapper extends React.Component {
 
       if (pageType === 'author') {
         author = this.state.blogs[0][pageType];
-        hero = (<HeroBlogSeries
+        hero = (<Hero
           serieType="author"
           title={author.fullName}
           description={author.title}
@@ -65,7 +66,7 @@ class BlogsWrapper extends React.Component {
       } else if (pageType === 'series') {
         series = _findWhere(this.state.blogs[0][pageType], { id: param });
         /* @todo is it right to striptag the body? */
-        hero = (<HeroBlogSeries
+        hero = (<Hero
           serieType="Blog Series"
           title={series.title}
           description={series.body.replace(/(<([^>]+)>)/ig, '')}
@@ -74,7 +75,7 @@ class BlogsWrapper extends React.Component {
         />);
       } else if (pageType === 'subjects') {
         subjects = _findWhere(this.state.blogs[0][pageType], { id: param });
-        hero = (<HeroBlogSeries
+        hero = (<Hero
           serieType="Blog Subject"
           title={subjects.name}
           postCount={this.state.blogs.length}

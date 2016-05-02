@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import Store from '../../stores/Store.js';
 
 //blog components
-import Hero from '../Hero/Hero';
+import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
 import BlogAuthorCard from '../BlogAuthorCard/BlogAuthorCard';
@@ -22,7 +22,7 @@ class BlogPage extends React.Component {
 
     return (
       <div className='blogPage'>
-        <Hero coverUrl={mainPicture['full-uri']} />
+        <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div className="content">
           <Link 
             className="backToLink" 
