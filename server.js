@@ -75,6 +75,7 @@ app.use('/', (req, res) => {
       gaCode: analytics.google.code(isProduction),
       webpackPort: WEBPACK_DEV_PORT,
       appEnv: process.env.APP_ENV || 'No APP_ENV set',
+      path: req.path,
       isProduction,
     });
   });
