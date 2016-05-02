@@ -39,10 +39,10 @@ function getHeaderData() {
 
 function fetchData(url, storeValue, req, res, next) {
   axios
-    .all([getHeaderData(), fetchApiData(url)])
-    .then(axios.spread((headerData, blogsData) => {
-      const headerParsed = parser.parse(headerData.data, headerOptions);
-      const headerModelData = HeaderItemModel.build(headerParsed)
+    .all([fetchApiData(url)])
+    .then(axios.spread((blogsData) => {
+      // const headerParsed = parser.parse(headerData.data, headerOptions);
+      // const headerModelData = HeaderItemModel.build(headerParsed)
 
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
@@ -52,7 +52,7 @@ function fetchData(url, storeValue, req, res, next) {
           [storeValue]: blogsModelData,
         },
         HeaderStore: {
-          headerData: headerModelData,
+          headerData: [],
         },
       };
       next();
