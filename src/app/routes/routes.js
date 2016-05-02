@@ -14,7 +14,7 @@ import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
 const routes = {
   client: (
     <Route name="root" handler={Application}>
-      <Route name='blogs' path='/blogs?/?' handler={BlogsWrapper} ignoreScrollBehavior />
+      <Route name='blogs' path='/blogs/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='author' path='/blogs/author/:author?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='series' path='/blogs/series/:series?/?' handler={BlogsWrapper} ignoreScrollBehavior />
       <Route name='subjects' path='/blogs/subjects/:subjects?/?' handler={BlogsWrapper} ignoreScrollBehavior />
