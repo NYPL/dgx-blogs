@@ -16,15 +16,15 @@ class Blog extends React.Component {
     const unescapedBody = this.createMarkup(this.props.body);
 
     return (
-      <div className="blogContent">
-        <p className="blogContent-date">{ this.props.date }</p>
-        <h1 className="blogContent-title">{ this.props.title }</h1>
-        <div className="blogContent-author">
+      <div className="blog">
+        <p className="blog-date">{ this.props.date }</p>
+        <h1 className="blog-title">{ this.props.title }</h1>
+        <div className="blog-author">
           by <b>{this.props.author.fullName}</b>. {this.props.author.title}
         </div>
-        <p className="blogContent-date">{this.props.date}</p>
+        <p className="blog-date">{this.props.date}</p>
         <div
-          className="blogContent-bodyText"
+          className="blog-bodyText"
           dangerouslySetInnerHTML={unescapedBody}
         >
         </div>

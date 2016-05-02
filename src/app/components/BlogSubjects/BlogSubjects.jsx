@@ -83,7 +83,7 @@ BlogSubjects.propTypes = {
 
 BlogSubjects.defaultProps = {
   subjects: [],
-  className: 'blogTagsSidebar',
+  className: 'blogSubjects',
   maxSubjectsShown: 3,
 };
 
