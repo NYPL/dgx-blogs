@@ -1,0 +1,52 @@
+.heroSinglePost {
+  
+  background: $BLOGS_DARK_COLOR;
+  height: 100px;
+
+  & > img {
+    @include visuallyHidden;
+    width: 100%;
+  }
+
+  &-title {
+    @include Kievit-Regular;
+    margin-left: 18px;
+    color: $WHITE_COLOR;
+    text-transform: uppercase;
+    font-size: 28px;
+    margin-top: 35px;
+
+    .nypl-icon-wedge-down {
+      font-weight: bold;
+    }
+  }
+
+  @include layout-at(7, $portrait) {
+    @extend %clearfix;
+    height: 270px;
+    background: grey;
+    float: none;
+    overflow: hidden;
+
+    &-title {
+      @include visuallyHidden;
+    }
+
+    & > img {
+      @include displayVisuallyHidden;
+    }    
+  }
+  
+  @include layout-at(9, $landscape) {
+    @include grid-span(9);
+    float: none;
+  }
+
+  &NoImage {
+    @extend .heroSinglePost;
+
+    @include layout-at(9, $landscape) {
+      height: 170px;
+    }
+  }  
+}

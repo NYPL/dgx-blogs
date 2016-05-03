@@ -1,48 +1,92 @@
 .hero {
-  
+
+  @extend %clearfix;  
   background: $BLOGS_DARK_COLOR;
   height: 100px;
 
-  & > img {
-    @include visuallyHidden;
+  &-content {
     width: 100%;
-  }
-
-  &-title {
-    @include Kievit-Regular;
-    margin-left: 18px;
     color: $WHITE_COLOR;
-    text-transform: uppercase;
-    font-size: 28px;
-    margin-top: 35px;
-  }
 
-  @include layout-at(7, $portrait) {
-    @extend %clearfix;
-    height: 270px;
-    background: grey;
-    float: none;
-    overflow: hidden;
-
-    &-title {
+    &-serie, &-picture, &-description, &-seriesCount {
       @include visuallyHidden;
     }
 
-    & > img {
-      @include displayVisuallyHidden;
-    }    
+    &-title {
+      @include Kievit-Regular;
+      margin-left: 18px;
+      text-transform: capitalize;
+      font-size: 28px;
+      margin-top: 35px;
+
+      .nypl-icon-wedge-down {
+        @include visuallyHidden;
+        font-weight: bold;
+      }
+    }
+  }
+
+  @include layout-at(9, $portrait) {
+
+    &-content {
+
+      &-title {
+        margin-left: 45px;
+      }
+    }
   }
   
   @include layout-at(9, $landscape) {
+    height: auto;
+    @include aspect-ratio(42, 10);
+
     @include grid-span(9);
+    max-height: 314px;
+    /* @todo determine background color or what should be shown when no image */
     float: none;
-  }
+    overflow: hidden;
 
-  &NoImage {
-    @extend .hero;
+    &-content {
+      @include add-grid(27);
+      max-width: 1312px;
+      margin: auto;
+      margin-top: 18px;
 
-    @include layout-at(9, $landscape) {
-      height: 170px;
+      &-serie {
+        @include displayVisuallyHidden;
+        @include grid-span(15, 12);
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 4%;
+      }
+
+      &-title {
+        @include grid-span(15, 12);
+        letter-spacing: 1px;
+        margin-top: 9%;
+      }
+
+      &-description {
+        @include displayVisuallyHidden;
+        @include grid-span(15, 12);
+        margin-top: 13%;
+        line-height: 22px;
+      }
+
+      &-seriesCount {
+        @include displayVisuallyHidden;
+        @include grid-span(15, 12);
+        margin-top: 18%;
+        color: $COOLGRAY_COLOR;
+      }
+
+      &-picture {
+        @include displayVisuallyHidden;
+        @include grid-span(6, 5);
+        border-radius: 50%;
+        height: 94%;
+      }    
     }
-  }  
+  }
 }
