@@ -60,4 +60,22 @@
     
     //@include grid-span(2, 2); 
   }
+
+  &InList {
+    @include visuallyHidden;
+
+    &-list {
+      list-style: none;
+      padding: 0;
+
+      & > li {
+        padding: 5px 0;
+      }
+    }
+
+    @include layout-at(7, $portrait) {
+      @include displayVisuallyHidden;
+      margin-top: 20px;
+    }
+  }
 }

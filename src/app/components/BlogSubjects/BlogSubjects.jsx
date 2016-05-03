@@ -41,8 +41,7 @@ class BlogSubjects extends React.Component {
             to="subjects"
             params={{ subject: subject.id }}
             className="tagLink"
-            onClick={this._fetchSubject.bind(this, subject.id)}
-          >
+            onClick={this._fetchSubject.bind(this, subject.id)}>
             {this._tagIcon()}
             {subject.name}
           </Link>

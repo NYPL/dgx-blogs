@@ -6,23 +6,13 @@
 
   &-leftSidebar {
 
-    & ul {
-      @include visuallyHidden;
-      list-style: none;
-      padding: 0;
-
-      & > li {
-        padding: 5px 0;
-      }
+    &-date {
+      @include grid-span(1, 5);
+      font-size: 13px;
+      color: $COOLGRAY_COLOR;
+      margin-top: 23px;
+      line-height: 1.6;
     }
-  }
-
-  &-date {
-    @include grid-span(1, 5);
-    font-size: 13px;
-    color: $COOLGRAY_COLOR;
-    margin-top: 23px;
-    line-height: 1.6;
   }
 
   .tagLink {
@@ -37,6 +27,18 @@
     }
   }
 
+  @include layout-at(7, $portrait) { 
+
+    &-leftSidebar {
+      @include grid-span(1);
+      @include add-grid(1);
+      
+      &-date {
+        @include grid-span(1);
+      }
+    }
+  }
+
   @include layout-at(7, $landscape) {
 
     &-leftSidebar {
@@ -46,12 +48,16 @@
       & ul {
         @include displayVisuallyHidden;
       }
-    }
 
-    &-date {
-      margin-top: 17px;
-      float: none;
-      width: auto;
+      &-date {
+        margin-top: 17px;
+        float: none;
+        width: auto;
+      }
     }
+  }
+
+  @include layout-at(7, $desktop) { 
+
   }
 }

@@ -18,9 +18,11 @@
     }
   }
 
-
   &-name {
     @include grid-span(3, 2);
+    /* override left margin because author profile picture fixed width */
+    margin-left: 74px;
+
     font-size: 18px;
     font-weight: bold;
 
@@ -32,12 +34,35 @@
 
   &-title {
     @include grid-span(3, 2);
-    font-size: 18px;
+    /* override left margin because author profile picture fixed width */
+    margin-left: 74px;
+    font-size: 16px;
     margin-top: 45px;
   } 
 
-  @include layout-at(1, $landscape) {
+  @include layout-at(1, $portrait) {
+    @include grid-span(1);
 
+    &-profilePicWrap {
+      @include grid-span(1);
+
+      &-picture {
+        width: auto;
+      }
+    }
+
+    &-name {
+      @include grid-span(1);
+      margin-right: 0;
+      font-weight: normal;
+    }
+
+    &-title {
+      @include visuallyHidden;
+    }
+  }
+
+  @include layout-at(1, $landscape) {
 
     &-name {
       @include grid-span(1);
@@ -63,4 +88,8 @@
       width: 80px;
     }  
   } 
+
+  @include layout-at(1, $desktop) {
+
+  }  
 }
