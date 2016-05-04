@@ -77,5 +77,46 @@
       @include displayVisuallyHidden;
       margin-top: 20px;
     }
+
+    @include layout-at(7, $landscape) {
+      @include visuallyHidden;
+    }
   }
+
+  &InPostSidebar {
+    @extend .blogSubjects;
+    @include visuallyHidden;
+
+    &-list {
+      padding: 0;
+    }
+    
+    @include layout-at(7, $landscape) {
+      @include displayVisuallyHidden;
+      text-align: left;
+      margin: 0;
+
+      &-list {
+        margin-top: 10px;
+
+        & li {
+          padding-left: 17px;
+        }
+
+        .tagLink {
+          text-decoration: none;
+
+          .svgIcon {
+            @include displayVisuallyHidden;
+            left: 0;
+            width: 17px;
+            height: 17px;
+            margin-left: -21px;
+            top: 2px;
+          }
+        }
+      }
+    }
+  }
+
 }
