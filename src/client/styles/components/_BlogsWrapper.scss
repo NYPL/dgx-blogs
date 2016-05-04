@@ -6,11 +6,12 @@
     @extend %clearfix;
     max-width: 1312px;
     margin: auto;
+
+    .sidebar {
+      @include visuallyHidden;
+    }
   }
 
-  .sidebar {
-    @include visuallyHidden;
-  }
 
   .blogsList {
     list-style: none;
@@ -19,29 +20,41 @@
 
   @include layout-at(9, $landscape) {
 
-    .sidebar {
-      @include displayVisuallyHidden;
-      @include grid-span(1);
-      border-top: 2px solid $CHARCOAL;
-      margin-top: 16px;
-      color: $CHARCOAL;
+    .content {
+      @include grid-span(7, 2);
+      @include add-grid(7);
 
-      &-title {
-        text-align: right;
+      .blogsList {
+
+        @include grid-span(7);
+        @include add-grid(6);
       }
 
-      &-link {
-        display: block;
-        text-align: right;
-        color: $CHARCOAL;
-        text-decoration: none;
-        padding: 5px 0;
-      }
+        &-title {
+          text-align: right;
+        }
+
+        &-link {
+          display: block;
+          text-align: right;
+          color: $CHARCOAL;
+          text-decoration: none;
+          padding: 5px 0;
+        }
     }
+  }
 
-    .blogsList {
+  @include layout-at(9, $desktop) {
+    
+    .content {
 
-      @include grid-span(8, 2);
+      .sidebar {
+        @include displayVisuallyHidden;
+        @include grid-span(1);
+        border-top: 2px solid $CHARCOAL;
+        margin-top: 16px;
+        color: $CHARCOAL;
+      }
     }
   }
 }
