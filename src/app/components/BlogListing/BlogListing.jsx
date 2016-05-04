@@ -35,15 +35,16 @@ class BlogListing extends React.Component {
   render() {
 
     /* place the image on the left or right side randomly */
-    const rightOrLeft = (Math.round(Math.random())) ? 'Right' : '';
+    const rightOrLeft = (this.props.title.length % 2) ? 'Right' : '';
 
-    /* apply a different class to the text paragraph when there's no image to show */
-    const paragraphClass = this.props.mainPicture && this.props.mainPicture['full-uri'] ?
-      `blogListing-paragraph${rightOrLeft}` : 'blogListing-fullWidthParagraph';
+    let paragraphClass = 'blogListing-fullWidthParagraph';
+    let titleClass = 'blogListing-fullWidthTitle';
 
-    /* same for title */
-    const titleClass = this.props.mainPicture && this.props.mainPicture['full-uri'] ?
-      'blogListing-title' : 'blogListing-fullWidthTitle';
+    /* apply a different class to the text paragraph if there's an image */
+    if (this.props.mainPicture && this.props.mainPicture['full-uri']) {
+      paragraphClass = `blogListing-paragraph${rightOrLeft}`;
+      titleClass = 'blogListing-title';
+    }
 
     return (
       <div className="blogListing">
