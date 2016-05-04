@@ -76,6 +76,18 @@
     @include layout-at(7, $portrait) {
       @include displayVisuallyHidden;
       margin-top: 20px;
+
+      &-list {
+        @include add-grid(3);
+
+        & > li {
+          @include float-span(1);
+
+          &:nth-child(3) {
+            @include float-span(1, last);
+          }
+        }
+      }
     }
   }
 }
