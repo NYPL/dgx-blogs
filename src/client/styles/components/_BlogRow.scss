@@ -20,10 +20,11 @@
     text-decoration: none;
     color: $SECONDARY_UI_COLOR;
     font-size: 12px;
-
       
     .svgIcon {
       fill: $SECONDARY_UI_COLOR;
+      position: relative;
+      top: 4px;
     }
   }
 
