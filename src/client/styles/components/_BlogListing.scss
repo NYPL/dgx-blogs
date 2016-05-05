@@ -17,17 +17,13 @@
     }
   }
 
-  &-image {
+  &-image, &-imageRight {
     @include grid-span(2);
     float: none;
   }
 
-  &-paragraph {
+  &-paragraph, &-paragraphRight {
     @include visuallyHidden;
-  }
-
-  &-fullWidthParagraph {
-    @extend .blogListing-paragraph;
   }
 
   &-series {
@@ -37,6 +33,61 @@
     font-size: 13px;
     margin-bottom: 10px;
     margin-top: 0;
+  }
+
+  &-fullWidthTitle {
+    @extend .blogListing-title;
+    @include grid-span(5);
+  }
+
+  &-fullWidthParagraph {
+    @extend .blogListing-paragraph;
+  }
+
+  &-fullWidthSeries {
+    @extend .blogListing-series;
+    @include grid-span(5);
+  }
+
+
+  @include layout-at(6, $portrait) {
+    @include grid-span(5, 2);
+
+    &-series {
+      @include visuallyHidden;
+    }
+
+    &-title {
+      @include grid-span(6);
+    }
+
+    &-image {
+      @include grid-span(3);
+      margin-right: 0;
+    }
+
+    &-paragraph {
+      @include displayVisuallyHidden;
+      @include grid-span(3, 4);
+      margin-top: 5px;
+    }
+
+    &-fullWidthParagraph {
+      @extend .blogListing-fullWidthParagraph;
+      @include grid-span(6);
+    }
+
+    /*  image and paragraph can switch places depending on the design
+        that's why we need to alternative classes */
+    &-imageRight {
+      @include grid-span(3, 4);
+    }
+
+    &-paragraphRight {
+      @include displayVisuallyHidden;
+      @include grid-span(3);
+      margin-top: 5px;
+    }
   }
 
   @include layout-at(6, $landscape) {
@@ -67,5 +118,9 @@
       @include grid-span(2);
       clear: both;
     }
+  }
+
+  @include layout-at(6, $desktop) {
+
   }
 }

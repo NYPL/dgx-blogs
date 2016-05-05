@@ -3,7 +3,7 @@ import React from 'react';
 //blog row inner components
 import BlogAuthor from '../BlogAuthor/BlogAuthor';
 import BlogListing from '../BlogListing/BlogListing';
-import BlogSubjects from '../BlogSubjects/BlogSubjects';
+//import BlogSubjects from '../BlogSubjects/BlogSubjects';
 
 class BlogRow extends React.Component {
   constructor(props) {
@@ -16,20 +16,17 @@ class BlogRow extends React.Component {
     return (
       <li className='blogRow'>
         <div className="blogRow-leftSidebar">
-          <p className="blogRow-date">{date}</p>
+          <p className="blogRow-leftSidebar-date">{date}</p>
         	<BlogAuthor data={author} />
-          <BlogSubjects 
-            className="blogPage-sidebar"
-            subjects={subjects}
-            maxSubjectsShown={3}
-            />
         </div>
-      	<BlogListing 
+        <BlogListing 
           series={series}
           title={title} 
           body={body.short} 
           mainPicture={mainPicture}
-          slug={slug}/>
+          slug={slug}
+          subjects={subjects}
+        />
       </li>
     );
   }
