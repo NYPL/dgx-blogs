@@ -15,8 +15,11 @@
     flex-direction: column;
   }
 
-  .svgIcon {
-    @include visuallyHidden;
+  .tagLing {
+    
+    .svgIcon {
+      @include visuallyHidden;
+    }
   }
 
   @include layout-at(7, $portrait) {

@@ -37,6 +37,9 @@
   @include layout-at(9, $desktop) {
     
     .content {
+      float: none;
+      margin: auto;
+      width: auto;
 
       .sidebar {
         @include displayVisuallyHidden;
