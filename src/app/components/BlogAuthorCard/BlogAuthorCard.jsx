@@ -54,6 +54,12 @@ class BlogAuthorCard extends React.Component {
   }
 
   render() {
+
+    /* if there is not author data nothing should be shown */
+    if(! this.props.data) {
+      return null;
+    }
+
     return (
       <div className="blogAuthorCard">
         <div className="blogAuthorCard-profilePicWrap">
@@ -73,22 +79,5 @@ class BlogAuthorCard extends React.Component {
     );
   }
 }
-
-BlogAuthorCard.propTypes = {
-  data: React.PropTypes.shape({
-    fullName: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
-    slug: React.PropTypes.string.isRequired,
-  }),
-  className: React.PropTypes.string,
-};
-
-BlogAuthorCard.defaultProps = {
-  data: {
-    title: '',
-    fullName: '',
-    slug: '',
-  }
-};
 
 export default BlogAuthorCard;
