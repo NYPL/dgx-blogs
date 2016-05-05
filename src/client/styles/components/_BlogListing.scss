@@ -78,7 +78,7 @@
     }
 
     /*  image and paragraph can switch places depending on the design
-        that's why we need to alternative classes */
+        that's why we need alternative classes */
     &-imageRight {
       @include grid-span(3, 4);
     }
@@ -95,6 +95,7 @@
     padding-bottom: 80px;  
 
     &-series {
+      @include displayVisuallyHidden;
       @include grid-span(6);
     }
 

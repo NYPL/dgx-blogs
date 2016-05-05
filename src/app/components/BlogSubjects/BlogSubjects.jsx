@@ -36,7 +36,7 @@ class BlogSubjects extends React.Component {
     
     return subjectsList.map((subject, index) => {
       return (
-        <li key={index}>
+        <li className="tagItem" key={index}>
           <Link
             to="subjects"
             params={{ subject: subject.id }}
