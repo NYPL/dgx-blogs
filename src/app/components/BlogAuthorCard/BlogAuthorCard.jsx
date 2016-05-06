@@ -80,4 +80,13 @@ class BlogAuthorCard extends React.Component {
   }
 }
 
+BlogAuthorCard.propTypes = {
+  data: React.PropTypes.shape({
+    fullName: React.PropTypes.string,
+    title: React.PropTypes.string,
+    slug: React.PropTypes.string,
+  }),
+  className: React.PropTypes.string,
+};
+
 export default BlogAuthorCard;
