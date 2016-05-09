@@ -33,7 +33,6 @@ class BlogListing extends React.Component {
   }
 
   render() {
-
     /* place the image on the left or right side randomly */
     const rightOrLeft = (this.props.title.length % 2) ? 'Right' : '';
 
