@@ -7,12 +7,12 @@ class BlogListing extends React.Component {
     super(props);
   }
 
-  _mainPicture(pictureObject, rightOrLeft) {
-    if (pictureObject && pictureObject['full-uri']) {
+  _mainPicture() {
+    if (this.props.mainPicture) {
       return (
         <img
-          className={`blogListing-image${rightOrLeft}`}
-          src={pictureObject['full-uri']}
+          className={`blogListing-image image-${this.props.side}`}
+          src={this.props.mainPicture['full-uri']}
         />
       );
     }
@@ -22,11 +22,7 @@ class BlogListing extends React.Component {
 
   _seriesTitle() {
     if (this.props.series !== null && this.props.series[0] !== null) {
-      if (this.props.mainPicture && this.props.mainPicture['full-uri']) {
-        return (<p className="blogListing-series">{this.props.series[0].title}</p>);
-      } else {
-        return (<p className="blogListing-fullWidthSeries">{this.props.series[0].title}</p>);
-      }
+      return (<p className={`blogListing-series ${this.props.width}`}>{this.props.series[0].title}</p>);
     } else { 
       return null;
     }
@@ -34,28 +30,16 @@ class BlogListing extends React.Component {
 
   render() {
 
-    /* place the image on the left or right side randomly */
-    const rightOrLeft = (this.props.title.length % 2) ? 'Right' : '';
-
-    let paragraphClass = 'blogListing-fullWidthParagraph';
-    let titleClass = 'blogListing-fullWidthTitle';
-
-    /* apply a different class to the text paragraph if there's an image */
-    if (this.props.mainPicture && this.props.mainPicture['full-uri']) {
-      paragraphClass = `blogListing-paragraph${rightOrLeft}`;
-      titleClass = 'blogListing-title';
-    }
-
     return (
       <div className="blogListing">
         {this._seriesTitle()}
-        <h2 className={titleClass}>
+        <h2 className={`blogListing-title ${this.props.width}`}>
           <a href={`/blog/${this.props.slug}`}>
             {this.props.title}
           </a>
         </h2>
-        {this._mainPicture(this.props.mainPicture, rightOrLeft)}
-        <div className={paragraphClass}>
+        {this._mainPicture()}
+        <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
           {this.props.body}
           <ReadMoreButton slug={this.props.slug} />
           <BlogSubjects 

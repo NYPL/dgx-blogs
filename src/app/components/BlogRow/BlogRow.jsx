@@ -12,6 +12,10 @@ class BlogRow extends React.Component {
   
   render() {
     const { author, subjects, title, body, date, mainPicture, slug, series } = this.props.data;
+    const width = (! mainPicture || ! mainPicture['full-uri']) ? 'fullWidth' : '';
+
+    /* place the image on the left or right side randomly */
+    const side = (title.length % 2) ? 'rightSide' : 'leftSide';
 
     return (
       <li className='blogRow'>
@@ -31,6 +35,8 @@ class BlogRow extends React.Component {
           mainPicture={mainPicture}
           slug={slug}
           subjects={subjects}
+          width={width}
+          side={side}
         />
       </li>
     );
