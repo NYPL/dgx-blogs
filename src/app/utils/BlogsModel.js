@@ -198,23 +198,20 @@ class BlogsModel {
   }
 
   getRssFullUri(series) {
-      let result;
-      try {
-        const {
-          attributes: {
-              'rss-uri': {
-              'full-uri': fullUri = '',
-            },
+    try {
+      const {
+        attributes: {
+            'rss-uri': {
+            'full-uri': fullUri = '',
           },
-        } = series;
+        },
+      } = series;
 
-        result = fullUri;
-      } catch (e) {
-        //console.log(e)
-        result = undefined;
-      }
-
-    return result;
+    } catch (e) {
+      //console.log(e)
+      return undefined;
+    }
+    return fullUri;
   }  
 
   getSeries(array) {
@@ -234,9 +231,6 @@ class BlogsModel {
                 text: title = '',
               },
             },
-/*            'rss-uri': {
-              'full-uri': fullUri = '',
-            },*/
             body: {
               en: {
                 'full-text': body = '',
