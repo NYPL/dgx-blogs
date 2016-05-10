@@ -17,12 +17,12 @@
     }
   }
 
-  &-image, &-imageRight {
+  &-image {
     @include grid-span(2);
     float: none;
   }
 
-  &-paragraph, &-paragraphRight {
+  &-paragraph {
     @include visuallyHidden;
   }
 
@@ -35,20 +35,9 @@
     margin-top: 0;
   }
 
-  &-fullWidthTitle {
-    @extend .blogListing-title;
+  .fullWidth {
     @include grid-span(5);
   }
-
-  &-fullWidthParagraph {
-    @extend .blogListing-paragraph;
-  }
-
-  &-fullWidthSeries {
-    @extend .blogListing-series;
-    @include grid-span(5);
-  }
-
 
   @include layout-at(6, $portrait) {
     @include grid-span(5, 2);
@@ -72,21 +61,17 @@
       margin-top: 5px;
     }
 
-    &-fullWidthParagraph {
-      @extend .blogListing-fullWidthParagraph;
-      @include grid-span(6);
-    }
-
-    /*  image and paragraph can switch places depending on the design
-        that's why we need alternative classes */
-    &-imageRight {
+    .image-rightSide {
       @include grid-span(3, 4);
     }
 
-    &-paragraphRight {
+    .rightSide {
       @include displayVisuallyHidden;
       @include grid-span(3);
-      margin-top: 5px;
+    }
+
+    .fullWidth {
+      @include grid-span(6);
     }
   }
 
@@ -101,7 +86,6 @@
 
     &-title {
       @include grid-span(6);
-
     }
 
     &-paragraph {
@@ -109,10 +93,6 @@
       @include grid-span(4, 3);
       line-height: 1.5;
       clear: right;
-    }
-
-    &-fullWidthParagraph {
-      @include grid-span(6);
     }
 
     &-image {

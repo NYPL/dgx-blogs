@@ -207,11 +207,11 @@ class BlogsModel {
         },
       } = series;
 
+      return fullUri;
     } catch (e) {
       //console.log(e)
       return undefined;
     }
-    return fullUri;
   }  
 
   getSeries(array) {
