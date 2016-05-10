@@ -75,7 +75,7 @@ class BlogSubjects extends React.Component {
 }
 
 BlogSubjects.propTypes = {
-  data: React.PropTypes.array.isRequired,
+  subjects: React.PropTypes.array.isRequired,
   className: React.PropTypes.string.isRequired,
   maxSubjectsShown: React.PropTypes.number,
 };

@@ -61,10 +61,6 @@
       margin-top: 5px;
     }
 
-    .fullWidth {
-      @include grid-span(6);
-    }
-
     .image-rightSide {
       @include grid-span(3, 4);
     }
@@ -72,6 +68,10 @@
     .rightSide {
       @include displayVisuallyHidden;
       @include grid-span(3);
+    }
+
+    .fullWidth {
+      @include grid-span(6);
     }
   }
 

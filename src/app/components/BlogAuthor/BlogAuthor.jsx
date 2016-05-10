@@ -96,6 +96,7 @@ BlogAuthor.defaultProps = {
   data: {
     title: '',
     slug: '',
+    fullName: '',
   },
 };
 
