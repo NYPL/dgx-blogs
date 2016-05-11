@@ -20,7 +20,6 @@ var commonSettings = {
   entry: [
     path.resolve(ROOT_PATH, 'src/client/App.jsx')
   ],
-  debug: true,
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
