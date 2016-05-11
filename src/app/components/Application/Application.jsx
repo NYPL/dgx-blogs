@@ -14,12 +14,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-wrapper">
-       <Header />
+        <Header />
         {this.props.children}
+        <Footer />
       </div>
     );
   }
 }
-       // <Footer />
 
 export default App;
