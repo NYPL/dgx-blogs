@@ -12,18 +12,14 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('app props', this.props.children);
     return (
       <div className="app-wrapper">
-        hello
-
+       <Header />
+        {this.props.children}
       </div>
     );
   }
 }
-        //{this.props.children}
-/* @todo header and footer throw error because they're created with a different version of react */
-//        <Header />
-//        <Footer />
+       // <Footer />
 
 export default App;

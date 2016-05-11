@@ -11,10 +11,8 @@ import './styles/main.scss';
 import routes from '../app/routes/routes.js';
 
 window.onload = () => {
-  // Render Isomorphically
-  Iso.bootstrap((state, meta, container) => { console.log('container', container);
 
-    console.log('Application rendered Isomorphically.');
+  Iso.bootstrap((state, container) => {
 
     alt.bootstrap(state);
 

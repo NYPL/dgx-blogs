@@ -4,10 +4,8 @@ import compress from 'compression';
 import colors from 'colors';
 
 import React from 'react';
-import { Router, match, RoutingContext } from 'react-router';
+import { match, RoutingContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
-import { createMemoryHistory } from 'history';
-import DocMeta from 'react-doc-meta';
 
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
@@ -52,20 +50,18 @@ app.use('/', apiRoutes);
 
 app.use('/', (req, res) => {
   let iso;
-  const history = createMemoryHistory();
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
 
   iso = new Iso();
 
   const routes = appRoutes.server;
-console.log('routes', routes);
+
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    console.log('error', error); console.log('redirectLocation', redirectLocation); console.log('renderProps', renderProps);
     if (error) {
-      res.status(500).send(error.message)
+      res.status(500).send(error.message);
     } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RoutingContext {...renderProps} />);
       iso.add(html, alt.flush());
@@ -81,9 +77,9 @@ console.log('routes', routes);
           isProduction,
         });
     } else {
-      res.status(404).send('Not found')
+      res.status(404).send('Not found');
     }
-  })
+  });
 });
 
 const server = app.listen(app.get('port'), (error, result) => {

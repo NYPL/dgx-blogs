@@ -15,18 +15,18 @@ const routes = {
   client: (
     <Route path="/" component={Application}>
       <Route path='blog' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/author/:author?/?' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/series/:series?/?' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/subjects/:subjects?/?' component={BlogsWrapper} ignoreScrollBehavior />
+      <Route path='blog/author/:author' component={BlogsWrapper} ignoreScrollBehavior />
+      <Route path='blog/series/:series' component={BlogsWrapper} ignoreScrollBehavior />
+      <Route path='blog/subjects/:subjects' component={BlogsWrapper} ignoreScrollBehavior />
       <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
   server: (
     <Route path="/" component={Application}>
       <Route path='blog' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/author/:author?/?' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/series/:series?/?' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/subjects/:subjects?/?' component={BlogsWrapper} ignoreScrollBehavior />
+      <Route path='blog/author/:author' component={BlogsWrapper} ignoreScrollBehavior />
+      <Route path='blog/series/:series' component={BlogsWrapper} ignoreScrollBehavior />
+      <Route path='blog/subjects/:subjects' component={BlogsWrapper} ignoreScrollBehavior />
       <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} ignoreScrollBehavior />
     </Route>
   ),
