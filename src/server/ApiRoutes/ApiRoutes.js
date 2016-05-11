@@ -157,6 +157,14 @@ router
   .get(BlogQuery);
 
 router
+  .route('/')
+  .get(BlogsMainList);
+
+router
+  .route(/([^]+)\/?/)
+  .get(BlogQuery);
+
+router
   .route('/api')
   .get(fetchThroughAjax);
 
