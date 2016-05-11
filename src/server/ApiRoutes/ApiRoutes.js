@@ -54,7 +54,7 @@ function fetchData(url, storeValue, req, res, next) {
         HeaderStore: {
           headerData: headerModelData,
         },
-      };
+      }; console.log(next);
       next();
     }))
     .catch(error => {
