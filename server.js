@@ -4,7 +4,7 @@ import compress from 'compression';
 import colors from 'colors';
 
 import React from 'react';
-import { match, RoutingContext } from 'react-router';
+import { Router, match, RouterContext } from 'react-router';
 import ReactDOMServer from 'react-dom/server';
 
 import Iso from 'iso';
@@ -63,7 +63,7 @@ app.use('/', (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const html = ReactDOMServer.renderToString(<RoutingContext {...renderProps} />);
+      const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
       iso.add(html, alt.flush());
       res
         .status(200)
