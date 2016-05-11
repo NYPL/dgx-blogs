@@ -149,11 +149,11 @@ function fetchThroughAjax(req, res, next) {
 }
 
 router
-  .route('/blogs')
+  .route('/blog')
   .get(BlogsMainList);
 
 router
-  .route(/\/blogs\/([^]+)\/?/)
+  .route(/\/blog\/([^]+)\/?/)
   .get(BlogQuery);
 
 router
