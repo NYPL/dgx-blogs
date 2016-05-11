@@ -20,7 +20,8 @@
   .tagLink {
     text-transform: uppercase;
     color: $SECONDARY_UI_COLOR;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 15px;
     text-decoration: none;
     margin-left: 4px;
 
@@ -38,14 +39,6 @@
       margin: 0;
     }
 
-    .tagLink {
-      text-decoration: underline;
-
-      .svgIcon {
-        @include visuallyHidden;
-      }
-    }
-
     &-list {
       text-align: right;
       margin-top: 120px;
@@ -54,10 +47,87 @@
 
   @include layout-at(9, $landscape) {
     margin-top: 16px;
+
+    .tagItem {
+      padding-left: 17px;
+  
+      .tagLink {
+        text-decoration: none;
+
+        .svgIcon {
+          @extend %tagSvgIcon;
+        }
+      }
+    }
   }
 
   @include layout-at(9, $desktop) {
     
     //@include grid-span(2, 2); 
   }
+
+  &InList {
+    @include visuallyHidden;
+
+    &-list {
+      list-style: none;
+      padding: 0;
+
+      & > li {
+        padding: 5px 0;
+      }
+    }
+
+    @include layout-at(7, $portrait) {
+      @include displayVisuallyHidden;
+      margin-top: 20px;
+
+      &-list {
+        @include add-grid(3);
+        padding-left: 17px;
+
+        .tagItem {
+          @include float-span(1);
+          
+          &:nth-child(3) {
+            @include float-span(1, last);
+          }
+
+          .tagLink {
+            line-height: 15px;
+
+            .svgIcon {
+              @extend %tagSvgIcon;
+              margin-left: -17px;
+            }
+          }
+        }
+      }
+    }
+
+    @include layout-at(7, $landscape) {
+      @include visuallyHidden;
+    }
+  }
+
+  &InPostSidebar {
+    @extend .blogSubjects;
+    @include visuallyHidden;
+
+    &-list {
+      padding: 0;
+    }
+    
+    @include layout-at(7, $landscape) {
+      @include displayVisuallyHidden;
+      text-align: left;
+      margin: 0;
+
+      &-list {
+        margin-top: 10px;
+        font-size: 12px;
+      }
+    }
+  }
+
 }

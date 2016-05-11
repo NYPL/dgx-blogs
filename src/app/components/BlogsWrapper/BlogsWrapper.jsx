@@ -4,6 +4,7 @@ import { map as _map } from 'underscore';
 
 import Store from '../../stores/Store.js';
 
+import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 
@@ -35,10 +36,10 @@ class BlogsWrapper extends React.Component {
 
   _getList(blogsList) {
     return _map(blogsList, (blogRow, index) => {
-      return <BlogRow data={blogRow} key={index}/>;
+      return <BlogRow data={blogRow} key={index} />;
     });
   }
-  
+
   render() {
     const blogs = this._getList(this.state.blogs);
 
@@ -47,31 +48,44 @@ class BlogsWrapper extends React.Component {
     let series;
     let subjects;
     let author;
-    let hero;
+    let hero = <HeroSinglePost />;
 
-    if (!_isEmpty(this.props.params)) {
+    if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
       param = this.props.params[pageType];
 
       if (pageType === 'author') {
         author = this.state.blogs[0][pageType];
-        console.log(author);
-        // hero = <Hero author={author} />
+        hero = (<Hero
+          type="author"
+          title={author.fullName}
+          description={author.title}
+          picture={author.profileImgUrl}
+          postCount={this.state.blogs.length}
+        />);
       } else if (pageType === 'series') {
-        series = _findWhere(this.state.blogs[0][pageType], {id: param});
-        console.log(series);
-        // hero = <Hero series={series} />
+        series = _findWhere(this.state.blogs[0][pageType], { id: param });
+        /* @todo is it right to striptag the body? */
+        hero = (<Hero
+          type="Blog Series"
+          title={series.title}
+          description={series.body.replace(/(<([^>]+)>)/ig, '')}
+          picture={series.image.url}
+          postCount={this.state.blogs.length}
+        />);
       } else if (pageType === 'subjects') {
-        subjects = _findWhere(this.state.blogs[0][pageType], {id: param});
-        console.log(subjects);
-        // hero = <Hero subjects={subjects} />
+        subjects = _findWhere(this.state.blogs[0][pageType], { id: param });
+        hero = (<Hero
+          type="Blog Subject"
+          title={subjects.name}
+          postCount={this.state.blogs.length}
+        />);
       }
-
     }
 
     return (
       <div className="blogsWrapper">
-        <Hero />
+        {hero}
         <div className="content">
           <div className="sidebar">
             <h3 className="sidebar-title">Blog</h3>

@@ -26,10 +26,6 @@
     @include visuallyHidden;
   }
 
-  &-fullWidthParagraph {
-    @extend .blogListing-paragraph;
-  }
-
   &-series {
     @include grid-span(3, 3);
     text-transform: uppercase;
@@ -39,17 +35,57 @@
     margin-top: 0;
   }
 
+  .fullWidth {
+    @include grid-span(5);
+  }
+
+  @include layout-at(6, $portrait) {
+    @include grid-span(5, 2);
+
+    &-series {
+      @include visuallyHidden;
+    }
+
+    &-title {
+      @include grid-span(6);
+    }
+
+    &-image {
+      @include grid-span(3);
+      margin-right: 0;
+    }
+
+    &-paragraph {
+      @include displayVisuallyHidden;
+      @include grid-span(3, 4);
+      margin-top: 5px;
+    }
+
+    .image-rightSide {
+      @include grid-span(3, 4);
+    }
+
+    .rightSide {
+      @include displayVisuallyHidden;
+      @include grid-span(3);
+    }
+
+    .fullWidth {
+      @include grid-span(6);
+    }
+  }
+
   @include layout-at(6, $landscape) {
     @include grid-span(5, 2);
     padding-bottom: 80px;  
 
     &-series {
+      @include displayVisuallyHidden;
       @include grid-span(6);
     }
 
     &-title {
       @include grid-span(6);
-
     }
 
     &-paragraph {
@@ -59,13 +95,13 @@
       clear: right;
     }
 
-    &-fullWidthParagraph {
-      @include grid-span(6);
-    }
-
     &-image {
       @include grid-span(2);
       clear: both;
     }
+  }
+
+  @include layout-at(6, $desktop) {
+
   }
 }

@@ -15,6 +15,12 @@
     flex-direction: column;
   }
 
+  .tagLink {
+    .svgIcon {
+      @include visuallyHidden;
+    }
+  }
+
   @include layout-at(7, $portrait) {
 
     .content {
@@ -41,6 +47,26 @@
   }
   
   @include layout-at(9, $landscape) {
+
+    @include grid-span(9);
+    @include add-grid(9);
+
+    .backToLink {
+      @include displayVisuallyHidden;
+      @include grid-span(2, 2);     
+      text-transform: uppercase;
+      color: $COOLGRAY_COLOR;
+      font-size: 14px;
+      margin-top: 22px;
+      text-decoration: none;
+      text-align: right;
+
+      .nypl-icon-arrow-up {
+        font-size: 22px;
+        position: relative;
+        top: 4px;
+      }
+    }
 
     .content { 
       .backToLink {   

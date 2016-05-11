@@ -36,13 +36,12 @@ class BlogSubjects extends React.Component {
     
     return subjectsList.map((subject, index) => {
       return (
-        <li key={index}>
+        <li className="tagItem" key={index}>
           <Link
             to="subjects"
             params={{ subject: subject.id }}
             className="tagLink"
-            onClick={this._fetchSubject.bind(this, subject.id)}
-          >
+            onClick={this._fetchSubject.bind(this, subject.id)}>
             {this._tagIcon()}
             {subject.name}
           </Link>
@@ -76,7 +75,7 @@ class BlogSubjects extends React.Component {
 }
 
 BlogSubjects.propTypes = {
-  data: React.PropTypes.array.isRequired,
+  subjects: React.PropTypes.array.isRequired,
   className: React.PropTypes.string.isRequired,
   maxSubjectsShown: React.PropTypes.number,
 };

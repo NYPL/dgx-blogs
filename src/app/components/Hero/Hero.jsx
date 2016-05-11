@@ -5,11 +5,10 @@ class Hero extends React.Component {
     super(props);
   }
 
-  _renderCoverImage() {
-
-    if(this.props.coverUrl) { 
+  _renderPicture() {
+    if(this.props.picture) { 
       return (
-          <img src={this.props.coverUrl} />
+          <img className="hero-content-picture" src={this.props.picture} />
         );
     }
 
@@ -17,17 +16,27 @@ class Hero extends React.Component {
   }
   
   render() {
-
-    /*Change hero class depending if it has image*/
-    const heroClass = this.props.coverUrl ? 'hero' : 'heroNoImage';
-
     return (
-      <div className={heroClass}>
-        <h1 className="hero-title">Blogs</h1>
-        {this._renderCoverImage()}
+      <div className="hero">
+        <div className="hero-content">
+          {this._renderPicture()}
+          <p className="hero-content-serie">{this.props.type}</p>
+          <h1 className="hero-content-title">{this.props.title} <span className="nypl-icon-wedge-down"></span></h1>
+          <p className="hero-content-description">{this.props.description}</p>
+          <p className="hero-content-seriesCount">{this.props.postCount} Post</p>
+        </div>
       </div>
     );
   }
+}
+
+Hero.defaultProps = {
+
+  picture: 'http://placehold.it/350?text=sampleImage',
+  type: '',
+  title: '',
+  description: '',
+  postCount: 0,
 }
 
 export default Hero;
