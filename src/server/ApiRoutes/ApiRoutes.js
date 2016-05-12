@@ -90,7 +90,7 @@ function BlogsMainList(req, res, next) {
 function BlogQuery(req, res, next) {
   const param = req.params[0];
   const paramArray = param.split('/');
-console.log(paramArray)
+
   let blogType = paramArray[2];
   let queryValue = paramArray[3];
   let storeValue = 'blogs';
@@ -124,7 +124,6 @@ console.log(paramArray)
     }
   } else {
     // Single blog post, query by blog post alias:
-    console.log(req.params[0])
     const blogPostUrl = req.params[0].indexOf('blog') !== -1 ?
       req.params[0].substring(1) : `blog/${req.params[0].substring(1)}`;
     blogsOptions.filters = { alias: blogPostUrl };
