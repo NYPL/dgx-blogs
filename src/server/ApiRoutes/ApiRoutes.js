@@ -78,11 +78,9 @@ function fetchData(url, storeValue, req, res, next) {
 
 // For the main /blog route
 function BlogsMainList(req, res, next) {
-  // Needs to be called before `parser.getCompleteApi()`
   blogsOptions.filters = {};
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions);
 
-  console.log('MAIN!');
   fetchData(blogsApiUrl, 'blogs', req, res, next);
 }
 
@@ -91,33 +89,36 @@ function BlogsMainList(req, res, next) {
 function BlogQuery(req, res, next) {
   const param = req.params[0];
   const paramArray = param.split('/');
-  let type = paramArray[0];
-  let value = paramArray[1];
+  let blogType = paramArray[0];
+  let queryValue = paramArray[1];
+  let storeValue = 'blogs';
 
   blogsOptions.filters = {};
 
-  let storeValue = 'blogs';
-console.log(req.params[0]);
+  // For the reverse proxy, the main path `/` is read here.
   if (!paramArray[0] && !paramArray[1]) {
     return BlogsMainList(req, res, next);
   }
 
+  // This is for the reverse proxy since the reverse proxy site reads the
+  // server path without `/blog`.
+  // Example: /blog/author/karen-gisonny is read as /author/karen-gisonny
   if (paramArray[1] !== '' &&  paramArray[1] !== 'blog') {
-    type = paramArray[1];
-    value = paramArray[2];
+    blogType = paramArray[1];
+    queryValue = paramArray[2];
   }
 
-  if (type === 'author') {
-    if (value !== '') {
-      blogsOptions.filters = { relationships: { 'blog-profiles': value } };
+  if (blogType === 'author') {
+    if (queryValue !== '') {
+      blogsOptions.filters = { relationships: { 'blog-profiles': queryValue } };
     }
-  } else if (type === 'series') {
-    if (value !== '') {
-      blogsOptions.filters = { relationships: { 'blog-series': value } };
+  } else if (blogType === 'series') {
+    if (queryValue !== '') {
+      blogsOptions.filters = { relationships: { 'blog-series': queryValue } };
     }
-  } else if (type === 'subjects') {
-    if (value !== '') {
-      blogsOptions.filters = { relationships: { 'blog-subjects': value } };
+  } else if (blogType === 'subjects') {
+    if (queryValue !== '') {
+      blogsOptions.filters = { relationships: { 'blog-subjects': queryValue } };
     }
   } else {
     // Single blog post, query by blog post alias:
@@ -125,8 +126,7 @@ console.log(req.params[0]);
     storeValue = 'blogPost';
   }
 
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-  console.log("blogsApiUrl");
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions);
 
   fetchData(blogsApiUrl, storeValue, req, res, next);
 }
@@ -134,9 +134,18 @@ console.log(req.params[0]);
 function fetchThroughAjax(req, res, next) {
   const query = req.query;
   const subject = query.subject || '';
+  const series = query.series || '';
+  const author = query.author || '';
+  const post = query.post || '';
 
   if (subject !== '') {
     blogsOptions.filters = { relationships: { 'blog-subjects': subject } };
+  } else if (series !== '') {
+    blogsOptions.filters = { relationships: { 'blog-series': series } };
+  } else if (author !== '') {
+    blogsOptions.filters = { relationships: { 'blog-profiles': author } };
+  } else {
+    blogsOptions.filters = { alias: `blog/${post}`};
   }
 
   const apiUrl = parser.getCompleteApi(blogsOptions);
@@ -158,11 +167,6 @@ function fetchThroughAjax(req, res, next) {
       });
     }); /* end axios call */
 }
-
-
-// router
-//   .route(/\//)
-//   .get(BlogsMainList);
 
 router
   .route(/([^]+)?/)
