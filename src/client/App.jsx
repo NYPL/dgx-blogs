@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import { Router, useRouterHistory } from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import alt from 'dgx-alt-center';
 import Iso from 'iso';
@@ -16,10 +17,10 @@ window.onload = () => {
 
     alt.bootstrap(state);
 
-    let history = createBrowserHistory();
+    const appHistory = useScroll(useRouterHistory(createBrowserHistory))();
 
     ReactDOM.render(
-      <Router history={history}>{routes.client}</Router>,
+      <Router history={appHistory}>{routes.client}</Router>,
       container
       );
   });
