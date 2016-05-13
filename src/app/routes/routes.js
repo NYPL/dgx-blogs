@@ -23,7 +23,7 @@ const routes = {
   ),
   server: (
     <Route path="/" component={Application}>
-      <Route path='' component={BlogsWrapper} />
+      <Route path='/' component={BlogsWrapper} />
       <Route path='/author/:author' component={BlogsWrapper} />
       <Route path='/series/:series' component={BlogsWrapper} />
       <Route path='/subjects/:subjects' component={BlogsWrapper} />
