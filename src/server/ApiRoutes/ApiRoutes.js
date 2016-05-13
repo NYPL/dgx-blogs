@@ -144,18 +144,9 @@ function BlogQuery(req, res, next) {
 function fetchThroughAjax(req, res, next) {
   const query = req.query;
   const subject = query.subject || '';
-  const series = query.series || '';
-  const author = query.author || '';
-  const post = query.post || '';
 
   if (subject !== '') {
     blogsOptions.filters = { relationships: { 'blog-subjects': subject } };
-  } else if (series !== '') {
-    blogsOptions.filters = { relationships: { 'blog-series': series } };
-  } else if (author !== '') {
-    blogsOptions.filters = { relationships: { 'blog-profiles': author } };
-  } else {
-    blogsOptions.filters = { alias: `blog/${post}`};
   }
 
   const apiUrl = parser.getCompleteApi(blogsOptions);
