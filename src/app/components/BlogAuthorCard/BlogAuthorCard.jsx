@@ -4,24 +4,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { LionLogoIcon } from 'dgx-svg-icons';
-import axios from 'axios';
+
+import BlogAuthorName from '../BlogAuthorName/BlogAuthorName';
+import BlogAuthorViewMoreLink from '../BlogAuthorViewMoreLink/BlogAuthorViewMoreLink';
+
+import {isEmpty as _isEmpty} from 'underscore';
 
 class BlogAuthorCard extends React.Component {
   constructor(props) {
     super(props);
-
-    this._fetchAuthor = this._fetchAuthor.bind(this);
-  }
-
-  _fetchAuthor(author) {
-    axios
-      .get(`/api?author=${author}`)
-      .then(response => {
-        Actions.updateBlogs(response.data);
-      })
-      .catch(error => {
-        console.log(`error making ajax call: ${error}`);
-      }); /* end Axios call */
   }
 
   _renderAuthorPicture() {
@@ -56,7 +47,7 @@ class BlogAuthorCard extends React.Component {
   render() {
 
     /* if there is not author data nothing should be shown */
-    if(! this.props.data) {
+    if(! this.props.data || _isEmpty(this.props.data.fullName)) {
       return null;
     }
 
@@ -65,16 +56,15 @@ class BlogAuthorCard extends React.Component {
         <div className="blogAuthorCard-profilePicWrap">
           { this._renderAuthorPicture() }
         </div>
-        { this._renderAuthorFullname() }
+        <BlogAuthorName 
+          fullName={this.props.data.fullName}
+          slug={this.props.data.slug}
+        />
         <p className="blogAuthorCard-title">{ this.props.data.profileText }</p>
-        <Link
-          to="author"
-          params={{ author: this.props.data.slug }}
-          className="authorLink"
-          onClick={this._fetchAuthor.bind(this, this.props.data.slug)}
-        >
-          <b>View all posts by</b> {this.props.data.fullName}
-        </Link>
+        <BlogAuthorViewMoreLink
+          fullName={this.props.data.fullName}
+          slug={this.props.data.slug} 
+        />
       </div>
     );
   }
@@ -87,6 +77,14 @@ BlogAuthorCard.propTypes = {
     slug: React.PropTypes.string,
   }),
   className: React.PropTypes.string,
+};
+
+BlogAuthorCard.defaultProps = {
+  data: {
+    title: '',
+    slug: '',
+    fullName: '',
+  },
 };
 
 export default BlogAuthorCard;

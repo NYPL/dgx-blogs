@@ -8,6 +8,7 @@ import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
 import BlogAuthorCard from '../BlogAuthorCard/BlogAuthorCard';
+import BackToBlogs from '../BackToBlogs/BackToBlogs';
 
 class BlogPage extends React.Component {
   constructor(props) {
@@ -24,12 +25,7 @@ class BlogPage extends React.Component {
       <div className='blogPage'>
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div className="content">
-          <Link 
-            className="backToLink" 
-            to="blogs"
-          >
-            <span className="nypl-icon-arrow-up"></span> back to blogs
-          </Link>
+          <BackToBlogs />
           <BlogSubjects subjects={subjects} />
           <Blog 
             date={date}

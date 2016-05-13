@@ -1,6 +1,7 @@
 import React from 'react';
 import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
+import { Link } from 'react-router';
 
 class BlogListing extends React.Component {
   constructor(props) {
@@ -36,9 +37,10 @@ class BlogListing extends React.Component {
       <div className="blogListing">
         {this.seriesTitle()}
         <h2 className={`blogListing-title ${this.props.width}`}>
-          <a href={`/blog/${this.props.slug}`}>
+          <Link 
+            to={`/blog/${this.props.slug}`}>
             {this.props.title}
-          </a>
+          </Link>
         </h2>
         {this.mainPicture()}
         <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>

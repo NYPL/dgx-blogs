@@ -23,13 +23,7 @@ class ReadMoreButton extends React.Component {
     return (
       <Link 
         className="readMoreButton" 
-        to="blog"
-        params={{
-          year: params[0],
-          month: params[1],
-          day: params[2],
-          blogId: params[3], 
-        }}
+        to={`/blog/${params[0]}/${params[1]}/${params[2]}/${params[3]}`}
       >
         {this._svgDots()}
         <span>Read More</span>
@@ -39,7 +33,7 @@ class ReadMoreButton extends React.Component {
 }
 
 ReadMoreButton.propTypes = {
-  slug: React.PropTypes.string,
+  slug: React.PropTypes.string.isRequired,
 };
 
 export default ReadMoreButton;

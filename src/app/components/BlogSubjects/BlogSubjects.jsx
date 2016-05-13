@@ -38,8 +38,7 @@ class BlogSubjects extends React.Component {
       return (
         <li className="tagItem" key={index}>
           <Link
-            to="subjects"
-            params={{ subject: subject.id }}
+            to={`/blog/subjects/${subject.id}`}
             className="tagLink"
             onClick={this._fetchSubject.bind(this, subject.id)}>
             {this._tagIcon()}
