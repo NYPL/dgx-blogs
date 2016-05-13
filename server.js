@@ -58,13 +58,11 @@ app.use('/', (req, res, next) => {
 app.use('/', apiRoutes);
 
 app.use('/', (req, res) => {
-  let iso;
+  const iso = new Iso();
+  const blogAppUrl = (req.url).indexOf('blog') !== -1;
+  const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-
-  iso = new Iso();
-
-  const routes = appRoutes.server;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -83,6 +81,7 @@ app.use('/', (req, res) => {
           gaCode: analytics.google.code(isProduction),
           webpackPort: WEBPACK_DEV_PORT,
           appEnv: process.env.APP_ENV,
+          path: req.url,
           isProduction,
         });
     } else {

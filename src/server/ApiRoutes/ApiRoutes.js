@@ -91,8 +91,8 @@ function BlogQuery(req, res, next) {
   const param = req.params[0];
   const paramArray = param.split('/');
 
-  let blogType = paramArray[2];
-  let queryValue = paramArray[3];
+  let blogType = paramArray[0];
+  let queryValue = paramArray[1];
   let storeValue = 'blogs';
 
   blogsOptions.filters = {};
@@ -102,12 +102,14 @@ function BlogQuery(req, res, next) {
     return BlogsMainList(req, res, next);
   }
 
-  // This is for the reverse proxy since the reverse proxy site reads the
-  // server path without `/blog`.
-  // Example: /blog/author/karen-gisonny is read as /author/karen-gisonny
-  if (paramArray[1] !== '' &&  paramArray[1] !== 'blog') {
+  if (paramArray[0] === '') {
     blogType = paramArray[1];
     queryValue = paramArray[2];
+
+    if (paramArray[1] === 'blog') {
+      blogType = paramArray[2];
+      queryValue = paramArray[3];
+    }
   }
 
   if (blogType === 'author') {
@@ -124,8 +126,12 @@ function BlogQuery(req, res, next) {
     }
   } else {
     // Single blog post, query by blog post alias:
-    const blogPostUrl = req.params[0].indexOf('blog') !== -1 ?
-      req.params[0].substring(1) : `blog/${req.params[0].substring(1)}`;
+    let blogPost = req.params[0];
+    if (blogPost[0] === '/') {
+      blogPost = blogPost.substring(1);
+    }
+
+    const blogPostUrl = req.params[0].indexOf('blog') !== -1 ? blogPost : `blog/${blogPost}`;
     blogsOptions.filters = { alias: blogPostUrl };
     storeValue = 'blogPost';
   }
@@ -173,15 +179,15 @@ function fetchThroughAjax(req, res, next) {
 }
 
 router
+  .route(/([^]+)?/)
+  .get(BlogQuery);
+
+router
   .route('/blog')
   .get(BlogsMainList);
 
 router
   .route(/\/blog\/([^]+)\/?/)
-  .get(BlogQuery);
-
-router
-  .route(/([^]+)?/)
   .get(BlogQuery);
 
 router
