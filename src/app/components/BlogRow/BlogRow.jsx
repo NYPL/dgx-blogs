@@ -21,6 +21,7 @@ class BlogRow extends React.Component {
         <div className="blogRow-leftSidebar">
           <p className="blogRow-leftSidebar-date">{date}</p>
           <BlogAuthor data={author} />
+
           <BlogSubjects
             className="blogSubjectsInPostSidebar"
             subjects={subjects}
@@ -41,6 +42,7 @@ class BlogRow extends React.Component {
     );
   }
 }
+
 
 BlogRow.propTypes = {
   data: React.PropTypes.shape({
