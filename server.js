@@ -4,7 +4,9 @@ import compress from 'compression';
 import colors from 'colors';
 
 import React from 'react';
-import { match, RouterContext } from 'react-router';
+
+import { Router, match, RouterContext } from 'react-router';
+
 import ReactDOMServer from 'react-dom/server';
 
 import Iso from 'iso';
