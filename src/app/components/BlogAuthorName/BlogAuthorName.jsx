@@ -16,23 +16,28 @@ class BlogAuthorName extends React.Component {
       .then(response => {
         Actions.updateBlogs(response.data);
       })
+      .then(response => {
+        this.routeHandler();
+      })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
       }); /* end Axios call */
+  }
+
+  routeHandler(){
+    this.context.router.push(`/blog/author/${this.props.slug}`);
   }
 
   render() {
     if (this.props.fullName) {
       return (
         <p className="blogAuthor-name">
-          <Link
-          	{...this.props}
-            to={`/blog/author/${this.props.slug}`}
+          <span
             className="blogAuthor-name-link"
             onClick={this._fetchAuthor.bind(this, this.props.slug)}
           >
             {this.props.fullName}
-          </Link>
+          </span>
         </p>
       );
     }
@@ -48,6 +53,16 @@ BlogAuthorName.propTypes = {
 
 BlogAuthorName.defaultProps = {
   fullName: undefined,
+};
+
+/*
+ * @see http://stackoverflow.com/questions/32033247/react-router-transitionto-is-not-a-function
+ */
+
+BlogAuthorName.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  }
 };
 
 export default BlogAuthorName;

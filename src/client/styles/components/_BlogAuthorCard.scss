@@ -32,6 +32,7 @@
     margin-bottom: 0px;
     font-weight: bold;
     margin-right: 0;
+    cursor: pointer;
   }
 
   &-title {
@@ -45,6 +46,7 @@
     @include grid-span(9, 4);
     color: $COOLGRAY_COLOR;
     margin-right: 0;
+    cursor: pointer;
   }
 
   @include layout-at(7, $portrait) {

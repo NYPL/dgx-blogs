@@ -8,6 +8,9 @@
     @include grid-span(3, 3);
   	@include Milo-Light;
     margin-top: 0;
+    font-size: 32px;
+    font-weight: 400;
+    cursor: pointer;
 
     & > a {
       font-weight: 400;

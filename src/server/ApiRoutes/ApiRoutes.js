@@ -115,7 +115,6 @@ function BlogQuery(req, res, next) {
   }
 
   const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-  console.log(blogsApiUrl);
 
   fetchData(blogsApiUrl, storeValue, req, res, next);
 }
@@ -123,19 +122,35 @@ function BlogQuery(req, res, next) {
 function fetchThroughAjax(req, res, next) {
   const query = req.query;
   const subject = query.subject || '';
+  const author = query.author || '';
+  const serie = query.serie || '';
+  const blog = query.blog || '';
 
   if (subject !== '') {
     blogsOptions.filters = { relationships: { 'blog-subjects': subject } };
   }
 
-  const apiUrl = parser.getCompleteApi(blogsOptions);
+  if (author !== '') {
+    blogsOptions.filters = { relationships: { 'blog-profiles': author } };
+  }
 
+  if (serie !== '') {
+    blogsOptions.filters = { relationships: { 'blog-series': serie } };
+  }
+
+  if (blog !== '') {
+    blogsOptions.filters = { alias: `blog/${blog}` };
+  } 
+
+  const apiUrl = parser.getCompleteApi(blogsOptions);
   axios
     .get(apiUrl)
     .then(response => {
+      console.log('ajax apiUrl called:', apiUrl);
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
+      console.log('ajax call to ', apiUrl);
       res.json(blogsModelData);
     })
     .catch(error => {
