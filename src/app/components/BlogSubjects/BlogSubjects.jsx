@@ -20,15 +20,26 @@ class BlogSubjects extends React.Component {
     );
   }
 
-  _fetchSubject(subject) {
+  _fetchSubject(subject, subjectId, e) {
+    e.preventDefault();
+
     axios
       .get(`/api?subject=${subject}`)
       .then(response => {
         Actions.updateBlogs(response.data);
       })
+      .then(response => {
+        this.routeHandler(subject);
+      })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
       }); /* end Axios call */
+  }
+
+  routeHandler(subject){
+    console.log('router transition to: ', `/blog/subject/${subject}`);
+    this.context.router.push(`/blog/subjects/${subject}`);
+    console.log('after transition');
   }
 
   _getList(subjects) {
@@ -40,7 +51,7 @@ class BlogSubjects extends React.Component {
           <Link
             to={`/blog/subjects/${subject.id}`}
             className="tagLink"
-            onClick={this._fetchSubject.bind(this, subject.id)}>
+            onClick={this._fetchSubject.bind(subject, subject.id, this)}>
             {this._tagIcon()}
             {subject.name}
           </Link>
@@ -83,6 +94,12 @@ BlogSubjects.defaultProps = {
   subjects: [],
   className: 'blogSubjects',
   maxSubjectsShown: 3,
+};
+
+BlogSubjects.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  }
 };
 
 export default BlogSubjects;

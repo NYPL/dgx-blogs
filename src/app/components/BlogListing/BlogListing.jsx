@@ -12,9 +12,11 @@ class BlogListing extends React.Component {
     this._fetchSingleBlog = this._fetchSingleBlog.bind(this);
   }
 
-  _fetchSingleBlog(slug) {
+  _fetchSingleBlog(e) {
+    e.preventDefault();
+
     axios
-      .get(`/api?blog=${slug}`)
+      .get(`/api?blog=${this.props.slug}`)
       .then(response => {
         console.log('fetching single blog post response:', response);
         Actions.updateBlogPost(response.data);
@@ -60,10 +62,11 @@ class BlogListing extends React.Component {
       <div className="blogListing">
         {this.seriesTitle()}
         <h2 className={`blogListing-title ${this.props.width}`}>
-          <span 
-            onClick={this._fetchSingleBlog.bind(this, this.props.slug)}>
+          <Link
+            to={`/blog/${this.props.slug}`}
+            onClick={this._fetchSingleBlog}>
             {this.props.title}
-          </span>
+          </Link>
         </h2>
         {this.mainPicture()}
         <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>

@@ -10,10 +10,13 @@ class BlogAuthorName extends React.Component {
     this._fetchAuthor = this._fetchAuthor.bind(this);
   }
 
-  _fetchAuthor(author) {
+  _fetchAuthor(e) {
+    e.preventDefault();
+
     axios
-      .get(`/api?author=${author}`)
+      .get(`/api?author=${this.props.slug}`)
       .then(response => {
+        console.log(response);
         Actions.updateBlogs(response.data);
       })
       .then(response => {
@@ -25,19 +28,22 @@ class BlogAuthorName extends React.Component {
   }
 
   routeHandler(){
+    console.log('router transition to: ', `/blog/author/${this.props.slug}`);
     this.context.router.push(`/blog/author/${this.props.slug}`);
+    console.log('after transition');
   }
 
   render() {
     if (this.props.fullName) {
       return (
         <p className="blogAuthor-name">
-          <span
+          <Link
+            to={`/blog/author/${this.props.slug}`}
             className="blogAuthor-name-link"
-            onClick={this._fetchAuthor.bind(this, this.props.slug)}
+            onClick={this._fetchAuthor}
           >
             {this.props.fullName}
-          </span>
+          </Link>
         </p>
       );
     }

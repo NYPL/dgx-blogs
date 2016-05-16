@@ -140,7 +140,13 @@ function fetchThroughAjax(req, res, next) {
 
   if (blog !== '') {
     blogsOptions.filters = { alias: `blog/${blog}` };
-  } 
+
+    if(blog === 'all') {
+      blogsOptions.filters = {};
+    }
+  }
+
+
 
   const apiUrl = parser.getCompleteApi(blogsOptions);
   axios

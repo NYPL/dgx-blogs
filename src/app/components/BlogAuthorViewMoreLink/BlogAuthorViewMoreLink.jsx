@@ -10,9 +10,11 @@ class BlogAuthorViewMoreLink extends React.Component {
     this._fetchAuthor = this._fetchAuthor.bind(this);
   }
 
-  _fetchAuthor(author) {
+  _fetchAuthor(e) {
+    e.preventDefault();
+
     axios
-      .get(`/api?author=${author}`)
+      .get(`/api?author=${this.props.slug}`)
       .then(response => {
         console.log('view more for author response', response);
         Actions.updateBlogs(response.data);
@@ -33,12 +35,13 @@ class BlogAuthorViewMoreLink extends React.Component {
 
   render() {
     return(
-      <p
+      <Link
         className="authorLink"
-        onClick={this._fetchAuthor.bind(this, this.props.slug)}
+        to={`/blog/author/${this.props.slug}`}
+        onClick={this._fetchAuthor}
       >
         <b>View all posts by</b> {this.props.fullName}
-      </p>    
+      </Link>    
       );
   }
 }

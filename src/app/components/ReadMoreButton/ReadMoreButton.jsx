@@ -10,9 +10,11 @@ class ReadMoreButton extends React.Component {
     this._fetchSingleBlog = this._fetchSingleBlog.bind(this);
   }
 
-  _fetchSingleBlog(slug) {
+  _fetchSingleBlog(e) {
+    e.preventDefault();
+
     axios
-      .get(`/api?blog=${slug}`)
+      .get(`/api?blog=${this.props.slug}`)
       .then(response => {
         console.log('fetching single blog post response:', response);
         Actions.updateBlogPost(response.data);
@@ -42,13 +44,14 @@ class ReadMoreButton extends React.Component {
   
   render() {
     return (
-      <span 
-        className="readMoreButton" 
-        onClick={this._fetchSingleBlog.bind(this, this.props.slug)}
+      <Link 
+        className="readMoreButton"
+        to={`/blog/${this.props.slug}`}
+        onClick={this._fetchSingleBlog}
       >
         {this._svgDots()}
         <span>Read More</span>
-      </span>
+      </Link>
     );
   }
 }
