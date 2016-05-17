@@ -20,14 +20,13 @@
     @include Milo-Light;
     font-weight: 400;
     font-size: 42px;
-    margin: 20px 0 30px 0;
+    margin: 20px 0 10px 0;
     line-height: 1.3;
     padding: 0 20px;
   }
 
   &-author {
     @include Kievit-Regular;
-    margin-bottom: 60px;
     padding: 0 20px;
     
     & > b {
@@ -42,7 +41,7 @@
   &-bodyText {
     @include Kievit-Regular;
     padding: 0 20px;
-    margin-top: 50px;
+    margin-top: 0;
     word-wrap: break-word;
 
     a {
@@ -82,10 +81,6 @@
 
     &-author {
       margin-bottom: 0;
-    }
-
-    &-bodyText {
-      margin-top: 10px;
     }
   }
 
