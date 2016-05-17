@@ -28,7 +28,7 @@ class BlogPage extends React.Component {
             className="backToLink" 
             to="blogs"
           >
-            <span className="nypl-icon-arrow-up"></span> back to blogs
+            <span className="nypl-icon-wedge-left"></span> back to blogs
           </Link>
           <BlogSubjects subjects={subjects} />
           <Blog 
