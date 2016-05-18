@@ -28,7 +28,6 @@ function createOptions(api) {
 }
 
 function fetchApiData(url) {
-  console.log(url);
   return axios.get(url);
 }
 
@@ -79,11 +78,9 @@ function fetchData(url, storeValue, req, res, next) {
 
 // For the main /blog route
 function BlogsMainList(req, res, next) {
-  // Needs to be called before `parser.getCompleteApi()`
   blogsOptions.filters = {};
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions);
 
-  console.log(blogsApiUrl);
   fetchData(blogsApiUrl, 'blogs', req, res, next);
 }
 
@@ -92,30 +89,53 @@ function BlogsMainList(req, res, next) {
 function BlogQuery(req, res, next) {
   const param = req.params[0];
   const paramArray = param.split('/');
-  blogsOptions.filters = {};
 
+  let blogType = paramArray[0];
+  let queryValue = paramArray[1];
   let storeValue = 'blogs';
 
-  if (paramArray[0] === 'author') {
-    if (paramArray[1] !== '') {
-      blogsOptions.filters = { relationships: { 'blog-profiles': paramArray[1] } };
+  blogsOptions.filters = {};
+
+  // For the reverse proxy, the main path `/` is read here.
+  if (!paramArray[0] && !paramArray[1] || (paramArray[1] == 'blog' && !paramArray[2])) {
+    return BlogsMainList(req, res, next);
+  }
+
+  if (paramArray[0] === '') {
+    blogType = paramArray[1];
+    queryValue = paramArray[2];
+
+    if (paramArray[1] === 'blog') {
+      blogType = paramArray[2];
+      queryValue = paramArray[3];
     }
-  } else if (paramArray[0] === 'series') {
-    if (paramArray[1] !== '') {
-      blogsOptions.filters = { relationships: { 'blog-series': paramArray[1] } };
+  }
+
+  if (blogType === 'author') {
+    if (queryValue !== '') {
+      blogsOptions.filters = { relationships: { 'blog-profiles': queryValue } };
     }
-  } else if (paramArray[0] === 'subjects') {
-    if (paramArray[1] !== '') {
-      blogsOptions.filters = { relationships: { 'blog-subjects': paramArray[1] } };
+  } else if (blogType === 'series') {
+    if (queryValue !== '') {
+      blogsOptions.filters = { relationships: { 'blog-series': queryValue } };
+    }
+  } else if (blogType === 'subjects') {
+    if (queryValue !== '') {
+      blogsOptions.filters = { relationships: { 'blog-subjects': queryValue } };
     }
   } else {
     // Single blog post, query by blog post alias:
-    blogsOptions.filters = { alias: `blog/${req.params[0]}`};
+    let blogPost = req.params[0];
+    if (blogPost[0] === '/') {
+      blogPost = blogPost.substring(1);
+    }
+
+    const blogPostUrl = req.params[0].indexOf('blog') !== -1 ? blogPost : `blog/${blogPost}`;
+    blogsOptions.filters = { alias: blogPostUrl };
     storeValue = 'blogPost';
   }
 
-  const blogsApiUrl = parser.getCompleteApi(blogsOptions); // + blogsApi.pageSize;
-  console.log(blogsApiUrl);
+  const blogsApiUrl = parser.getCompleteApi(blogsOptions);
 
   fetchData(blogsApiUrl, storeValue, req, res, next);
 }
@@ -147,6 +167,10 @@ function fetchThroughAjax(req, res, next) {
       });
     }); /* end axios call */
 }
+
+router
+  .route(/([^]+)?/)
+  .get(BlogQuery);
 
 router
   .route('/blog')
