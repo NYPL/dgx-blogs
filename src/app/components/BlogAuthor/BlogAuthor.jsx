@@ -2,7 +2,6 @@
  * BlogAuthor
  */
 import React from 'react';
-import { Link } from 'react-router';
 import { LionLogoIcon } from 'dgx-svg-icons';
 import BlogAuthorName from '../BlogAuthorName/BlogAuthorName';
 
@@ -13,12 +12,12 @@ class BlogAuthor extends React.Component {
 
   _renderAuthorPicture() {
     // if (this.props.data.profileImgUrl) {
-      return (
-        <img
-          className="blogAuthor-profilePicWrap-picture"
-          src={this.props.data.profileImgUrl}
-        />
-      );
+    return (
+      <img
+        className="blogAuthor-profilePicWrap-picture"
+        src={this.props.data.profileImgUrl}
+      />
+    );
     // }
 
     // return (
@@ -32,7 +31,7 @@ class BlogAuthor extends React.Component {
   _renderAuthorTitle() {
     if (this.props.data.title) {
       return (
-        <p className="blogAuthor-title">{ this.props.data.title }</p>
+        <p className="blogAuthor-title">{this.props.data.title}</p>
       );
     }
 
@@ -43,13 +42,13 @@ class BlogAuthor extends React.Component {
     return (
       <div className="blogAuthor">
         <div className="blogAuthor-profilePicWrap">
-          { this._renderAuthorPicture() }
+          {this._renderAuthorPicture()}
         </div>
-        <BlogAuthorName 
+        <BlogAuthorName
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
         />
-        { this._renderAuthorTitle() }
+        {this._renderAuthorTitle()}
       </div>
     );
   }

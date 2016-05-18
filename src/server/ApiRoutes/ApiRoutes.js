@@ -16,8 +16,6 @@ const { api, headerApi, blogsApi } = appConfig;
 const router = express.Router();
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
-const headerOptions = createOptions(headerApi);
-const blogsOptions = createOptions(blogsApi);
 
 function createOptions(api) {
   return {
@@ -26,6 +24,9 @@ function createOptions(api) {
     filters: api.filters,
   };
 }
+
+const headerOptions = createOptions(headerApi);
+const blogsOptions = createOptions(blogsApi);
 
 function fetchApiData(url) {
   console.log(url);
@@ -42,7 +43,7 @@ function fetchData(url, storeValue, req, res, next) {
     .all([getHeaderData(), fetchApiData(url)])
     .then(axios.spread((headerData, blogsData) => {
       const headerParsed = parser.parse(headerData.data, headerOptions);
-      const headerModelData = HeaderItemModel.build(headerParsed)
+      const headerModelData = HeaderItemModel.build(headerParsed);
 
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
@@ -63,7 +64,7 @@ function fetchData(url, storeValue, req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          [storeValue]: []
+          [storeValue]: [],
         },
         HeaderStore: {
           headerData: [],
@@ -110,7 +111,7 @@ function BlogQuery(req, res, next) {
     }
   } else {
     // Single blog post, query by blog post alias:
-    blogsOptions.filters = { alias: `blog/${req.params[0]}`};
+    blogsOptions.filters = { alias: `blog/${req.params[0]}` };
     storeValue = 'blogPost';
   }
 
@@ -123,7 +124,7 @@ function fetchThroughAjax(req, res, next) {
   const query = req.query;
   const subject = query.subject || '';
   const author = query.author || '';
-  const serie = query.serie || '';
+  const series = query.series || '';
   const blog = query.blog || '';
 
   if (subject !== '') {
@@ -134,29 +135,25 @@ function fetchThroughAjax(req, res, next) {
     blogsOptions.filters = { relationships: { 'blog-profiles': author } };
   }
 
-  if (serie !== '') {
-    blogsOptions.filters = { relationships: { 'blog-series': serie } };
+  if (series !== '') {
+    blogsOptions.filters = { relationships: { 'blog-series': series } };
   }
 
   if (blog !== '') {
     blogsOptions.filters = { alias: `blog/${blog}` };
 
-    if(blog === 'all') {
+    if (blog === 'all') {
       blogsOptions.filters = {};
     }
   }
-
-
 
   const apiUrl = parser.getCompleteApi(blogsOptions);
   axios
     .get(apiUrl)
     .then(response => {
-      console.log('ajax apiUrl called:', apiUrl);
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      console.log('ajax call to ', apiUrl);
       res.json(blogsModelData);
     })
     .catch(error => {

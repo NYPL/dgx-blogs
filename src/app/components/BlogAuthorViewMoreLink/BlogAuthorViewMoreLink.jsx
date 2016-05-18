@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigation } from 'react-router';
+import { Link } from 'react-router';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
 
@@ -16,11 +16,9 @@ class BlogAuthorViewMoreLink extends React.Component {
     axios
       .get(`/api?author=${this.props.slug}`)
       .then(response => {
-        console.log('view more for author response', response);
         Actions.updateBlogs(response.data);
       })
       .then(response => {
-        console.log('transition done.')
         this.routeHandler();
       })
       .catch(error => {
@@ -28,26 +26,26 @@ class BlogAuthorViewMoreLink extends React.Component {
       }); /* end Axios call */
   }
 
-  routeHandler(){
-    console.log('routeHandler executed');
+  routeHandler() {
     this.context.router.push(`/blog/author/${this.props.slug}`);
   }
 
   render() {
-    return(
+    return (
       <Link
         className="authorLink"
         to={`/blog/author/${this.props.slug}`}
         onClick={this._fetchAuthor}
       >
         <b>View all posts by</b> {this.props.fullName}
-      </Link>    
+      </Link>
       );
   }
 }
 
 BlogAuthorViewMoreLink.propTypes = {
   slug: React.PropTypes.string,
+  fullName: React.PropTypes.string,
 };
 
 BlogAuthorViewMoreLink.defaultProps = {
@@ -61,7 +59,7 @@ BlogAuthorViewMoreLink.defaultProps = {
 BlogAuthorViewMoreLink.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
-  }
+  },
 };
 
 export default BlogAuthorViewMoreLink;

@@ -6,13 +6,15 @@ import Actions from '../../actions/Actions';
 class BackToBlogs extends React.Component {
   constructor(props) {
     super(props);
+
+    this._fetchBlogList = this._fetchBlogList.bind(this);
   }
 
- _fetchBlogList(e) {
+  _fetchBlogList(e) {
     e.preventDefault();
 
     axios
-      .get(`/api?blog=all`)
+      .get('/api?blog=all')
       .then(response => {
         console.log('response', response.data);
         Actions.updateBlogs(response.data);
@@ -25,15 +27,15 @@ class BackToBlogs extends React.Component {
       }); /* end Axios call */
   }
 
-  routeHandler(){
+  routeHandler() {
     this.context.router.push('/blog');
   }
 
   render() {
-    return(
+    return (
       <Link
-        className="backToLink" 
-        to={`/blog`}
+        className="backToLink"
+        to={'/blog'}
         onClick={this._fetchBlogList}
       >
         <span className="nypl-icon-arrow-up"></span> back to blogs
@@ -45,7 +47,7 @@ class BackToBlogs extends React.Component {
 BackToBlogs.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
-  }
+  },
 };
 
 export default BackToBlogs;

@@ -7,7 +7,7 @@ class Actions {
   }
 
   updateBlogPost(data) {
-  	this.dispatch(data);
+    this.dispatch(data);
   }
 }
 

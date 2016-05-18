@@ -27,7 +27,7 @@ class BlogAuthorName extends React.Component {
       }); /* end Axios call */
   }
 
-  routeHandler(){
+  routeHandler() {
     console.log('router transition to: ', `/blog/author/${this.props.slug}`);
     this.context.router.push(`/blog/author/${this.props.slug}`);
     console.log('after transition');
@@ -68,7 +68,7 @@ BlogAuthorName.defaultProps = {
 BlogAuthorName.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
-  }
+  },
 };
 
 export default BlogAuthorName;

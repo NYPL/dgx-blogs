@@ -29,7 +29,7 @@ class BlogListing extends React.Component {
       }); /* end Axios call */
   }
 
-  routeHandler(){
+  routeHandler() {
     this.context.router.push(`/blog/${this.props.slug}`);
   }
 
@@ -107,7 +107,7 @@ BlogListing.defaultProps = {
 BlogListing.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
-  }
+  },
 };
 
 export default BlogListing;
