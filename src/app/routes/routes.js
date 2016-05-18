@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { DefaultRoute, Route, Router } from 'react-router';
+import { IndexRoute, DefaultRoute, Route, Router } from 'react-router';
 
 /*
  * Components
@@ -14,20 +14,20 @@ import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
 const routes = {
   client: (
     <Route path="/" component={Application}>
-      <Route path='blog' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/author/:author' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/series/:series' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/subjects/:subjects' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} ignoreScrollBehavior />
+      <Route path='blog' component={BlogsWrapper} />
+      <Route path='blog/author/:author' component={BlogsWrapper} />
+      <Route path='blog/series/:series' component={BlogsWrapper} />
+      <Route path='blog/subjects/:subjects' component={BlogsWrapper} />
+      <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} />
     </Route>
   ),
   server: (
     <Route path="/" component={Application}>
-      <Route path='blog' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/author/:author' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/series/:series' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/subjects/:subjects' component={BlogsWrapper} ignoreScrollBehavior />
-      <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} ignoreScrollBehavior />
+      <IndexRoute component={BlogsWrapper}/>
+      <Route path='author/:author' component={BlogsWrapper} />
+      <Route path='series/:series' component={BlogsWrapper} />
+      <Route path='subjects/:subjects' component={BlogsWrapper} />
+      <Route path=':year/:month/:day/:blogId' component={BlogPage} />
     </Route>
   ),
 };
