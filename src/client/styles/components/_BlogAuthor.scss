@@ -24,7 +24,7 @@
     font-weight: 400;
     /* override left margin because author profile picture fixed width */
     margin-left: 74px;
-    font-size:20px;
+    font-size: 20px;
     letter-spacing: .03em;
 
     &-link {
@@ -88,9 +88,5 @@
     &-profilePicWrap-picture {
       width: 80px;
     }  
-  } 
-
-  @include layout-at(1, $desktop) {
-
-  }  
+  }   
 }
