@@ -16,7 +16,6 @@ class BackToBlogs extends React.Component {
     axios
       .get('/api?blog=all')
       .then(response => {
-        console.log('response', response.data);
         Actions.updateBlogs(response.data);
       })
       .then(response => {
@@ -38,7 +37,7 @@ class BackToBlogs extends React.Component {
         to={'/blog'}
         onClick={this._fetchBlogList}
       >
-        <span className="nypl-icon-arrow-up"></span> back to blogs
+        <span className="nypl-icon-wedge-left"></span> back to blogs
       </Link>
     );
   }
