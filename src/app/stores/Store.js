@@ -5,6 +5,7 @@ class BlogStore {
   constructor() {
     this.bindListeners({
       handleBlogs: Actions.UPDATE_BLOGS,
+      handleBlogPost: Actions.UPDATE_BLOG_POST,
     });
 
     this.on('init', () => {
@@ -15,6 +16,10 @@ class BlogStore {
 
   handleBlogs(blogs) {
     this.blogs = blogs;
+  }
+
+  handleBlogPost(blogPost) {
+    this.blogPost = blogPost;
   }
 }
 
