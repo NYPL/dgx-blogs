@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { DefaultRoute, Route, Router } from 'react-router';
+import { IndexRoute, DefaultRoute, Route, Router } from 'react-router';
 
 /*
  * Components
@@ -23,11 +23,11 @@ const routes = {
   ),
   server: (
     <Route path="/" component={Application}>
-      <Route path='blog' component={BlogsWrapper} />
-      <Route path='blog/author/:author' component={BlogsWrapper} />
-      <Route path='blog/series/:series' component={BlogsWrapper} />
-      <Route path='blog/subjects/:subjects' component={BlogsWrapper} />
-      <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} />
+      <IndexRoute component={BlogsWrapper}/>
+      <Route path='author/:author' component={BlogsWrapper} />
+      <Route path='series/:series' component={BlogsWrapper} />
+      <Route path='subjects/:subjects' component={BlogsWrapper} />
+      <Route path=':year/:month/:day/:blogId' component={BlogPage} />
     </Route>
   ),
 };

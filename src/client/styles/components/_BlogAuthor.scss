@@ -20,11 +20,13 @@
 
   &-name {
     @include grid-span(3, 2);
+    @include Kievit-Medium;
+    font-weight: 400;
     /* override left margin because author profile picture fixed width */
     margin-left: 74px;
-
     font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
 
     &-link {
       color: black;

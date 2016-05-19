@@ -4,14 +4,11 @@
 
   .content {
     @extend %clearfix;
-    max-width: 1312px;
-    margin: auto;
 
     .sidebar {
       @include visuallyHidden;
     }
   }
-
 
   .blogsList {
     list-style: none;
@@ -21,35 +18,20 @@
   @include layout-at(9, $landscape) {
 
     .content {
-      @include grid-span(7, 2);
-      @include add-grid(7);
-
-      .blogsList {
-
-        @include grid-span(7);
-        @include add-grid(6);
-      }
-
-
-    }
-  }
-
-  @include layout-at(9, $desktop) {
-    
-    .content {
-      float: none;
-      margin: auto;
-      width: auto;
+      @include grid-span(9);
+      @include add-grid(9);
 
       .sidebar {
         @include displayVisuallyHidden;
         @include grid-span(1);
         border-top: 2px solid $CHARCOAL;
         margin-top: 16px;
+        margin-left: 20px;
         color: $CHARCOAL;
 
         &-title {
           text-align: right;
+          margin-top: 17px;
         }
         
         &-link {
@@ -60,6 +42,21 @@
           padding: 5px 0;
         }
       }
+
+      .blogsList {
+
+        @include grid-span(7, 2);
+      }
+    }
+  }
+
+  @include layout-at(9, $desktop) {
+    
+    .content {
+      max-width: 1312px;
+      margin: auto;
+      float: none;
+      width: auto;
 
       .blogsList {
 
