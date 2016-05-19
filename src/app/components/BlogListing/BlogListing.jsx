@@ -1,10 +1,36 @@
 import React from 'react';
 import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
+import { Link } from 'react-router';
+import axios from 'axios';
+import Actions from '../../actions/Actions';
 
 class BlogListing extends React.Component {
   constructor(props) {
     super(props);
+
+    this._fetchSingleBlog = this._fetchSingleBlog.bind(this);
+  }
+
+  _fetchSingleBlog(e) {
+    e.preventDefault();
+
+    axios
+      .get(`/api?blog=${this.props.slug}`)
+      .then(response => {
+        console.log('fetching single blog post response:', response);
+        Actions.updateBlogPost(response.data);
+      })
+      .then(response => {
+        this.routeHandler();
+      })
+      .catch(error => {
+        console.log(`error making ajax call: ${error}`);
+      }); /* end Axios call */
+  }
+
+  routeHandler() {
+    this.context.router.push(`/blog/${this.props.slug}`);
   }
 
   mainPicture() {
@@ -36,9 +62,11 @@ class BlogListing extends React.Component {
       <div className="blogListing">
         {this.seriesTitle()}
         <h2 className={`blogListing-title ${this.props.width}`}>
-          <a href={`/blog/${this.props.slug}`}>
+          <Link
+            to={`/blog/${this.props.slug}`}
+            onClick={this._fetchSingleBlog}>
             {this.props.title}
-          </a>
+          </Link>
         </h2>
         {this.mainPicture()}
         <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
@@ -71,6 +99,15 @@ BlogListing.propTypes = {
 
 BlogListing.defaultProps = {
   seriesTitle: '',
+};
+
+/*
+ * @see http://stackoverflow.com/questions/32033247/react-router-transitionto-is-not-a-function
+ */
+BlogListing.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
 };
 
 export default BlogListing;
