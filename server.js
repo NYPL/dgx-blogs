@@ -4,7 +4,9 @@ import compress from 'compression';
 import colors from 'colors';
 
 import React from 'react';
+
 import { Router, match, RouterContext } from 'react-router';
+
 import ReactDOMServer from 'react-dom/server';
 
 import Iso from 'iso';
@@ -42,20 +44,25 @@ app.set('port', process.env.PORT || 3001);
 
 // * is used for Reverse Proxy at the moment but can be cleaned up:
 // For webpack
-app.use(express.static(DIST_PATH));
+app.use('*/dist', express.static(DIST_PATH));
 // For images
 app.use('*/src/client', express.static(INDEX_PATH));
+
+app.use('/', (req, res, next) => {
+  if (req.path === '/blog') {
+    return res.redirect('/blog/');
+  }
+  next();
+});
 
 app.use('/', apiRoutes);
 
 app.use('/', (req, res) => {
-  let iso;
+  const iso = new Iso();
+  const blogAppUrl = (req.url).indexOf('blog') !== -1;
+  const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
-
-  iso = new Iso();
-
-  const routes = appRoutes.server;
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -74,11 +81,13 @@ app.use('/', (req, res) => {
           gaCode: analytics.google.code(isProduction),
           webpackPort: WEBPACK_DEV_PORT,
           appEnv: process.env.APP_ENV,
+          path: req.url,
           isProduction,
         });
     } else {
       res.status(404).send('Not found');
     }
+
   });
 });
 

@@ -20,10 +20,9 @@
   .tagLink {
     text-transform: uppercase;
     color: $SECONDARY_UI_COLOR;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 15px;
-    text-decoration: none;
-    margin-left: 4px;
+    text-decoration: underline;
 
     .svgIcon {
       fill: $SECONDARY_UI_COLOR;
@@ -52,18 +51,12 @@
       padding-left: 17px;
   
       .tagLink {
-        text-decoration: none;
 
         .svgIcon {
           @extend %tagSvgIcon;
         }
       }
     }
-  }
-
-  @include layout-at(9, $desktop) {
-    
-    //@include grid-span(2, 2); 
   }
 
   &InList {
@@ -113,11 +106,17 @@
   &InPostSidebar {
     @extend .blogSubjects;
     @include visuallyHidden;
+    font-size: 12px;
 
     &-list {
       padding: 0;
     }
-    
+    @include layout-at(7, $portrait) {
+      .tagLink {
+        text-decoration: none;
+      }
+    }
+
     @include layout-at(7, $landscape) {
       @include displayVisuallyHidden;
       text-align: left;
@@ -125,9 +124,7 @@
 
       &-list {
         margin-top: 10px;
-        font-size: 12px;
       }
     }
   }
-
 }
