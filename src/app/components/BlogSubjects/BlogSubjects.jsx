@@ -30,7 +30,7 @@ class BlogSubjects extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/api?subject=${subject}`)
+      .get(`/blog/api?subject=${subject}`)
       .then(response => {
         Actions.updateBlogs(response.data);
       })

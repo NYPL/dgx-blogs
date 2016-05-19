@@ -14,7 +14,7 @@ class BlogAuthorViewMoreLink extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/api?author=${this.props.slug}`)
+      .get(`/blog/api?author=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogs(response.data);
       })
