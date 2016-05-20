@@ -24,9 +24,8 @@
     /* override left margin because author profile picture fixed width */
     margin-left: 65px;
     margin-top: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: .03em;
 
     &-link {
       color: black;
@@ -91,5 +90,5 @@
       height: 80px;
       width: 80px;
     }  
-  } 
+  }   
 }
