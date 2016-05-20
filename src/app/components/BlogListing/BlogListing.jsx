@@ -9,11 +9,11 @@ class BlogListing extends React.Component {
   constructor(props) {
     super(props);
 
-    this._fetchSingleBlog = this._fetchSingleBlog.bind(this);
-    this._fetchSeries = this._fetchSeries.bind(this);
+    this.fetchSingleBlog = this.fetchSingleBlog.bind(this);
+    this.fetchSeries = this.fetchSeries.bind(this);
   }
 
-  _fetchSingleBlog(e) {
+  fetchSingleBlog(e) {
     e.preventDefault();
 
     axios
@@ -30,7 +30,7 @@ class BlogListing extends React.Component {
       }); /* end Axios call */
   }
 
-  _fetchSeries(e) {
+  fetchSeries(e) {
     e.preventDefault();
 
     axios
@@ -70,7 +70,7 @@ class BlogListing extends React.Component {
         <Link
           className={`blogListing-series ${this.props.width}`}
           to={`/blog/series/${this.props.series[0].id}`}
-          onClick={this._fetchSeries}
+          onClick={this.fetchSeries}
         >
           {this.props.series[0].title}
         </Link>
@@ -86,7 +86,7 @@ class BlogListing extends React.Component {
         <h2 className={`blogListing-title ${this.props.width}`}>
           <Link
             to={`/blog/${this.props.slug}`}
-            onClick={this._fetchSingleBlog}
+            onClick={this.fetchSingleBlog}
           >
             {this.props.title}
           </Link>
