@@ -16,7 +16,6 @@ class BlogPage extends React.Component {
   }
 
   render() {
-    console.log('blogPost', this.state.blogPost);
     const blog = this.state.blogPost[0];
     const { author, subjects, title, date, mainPicture } = blog;
 

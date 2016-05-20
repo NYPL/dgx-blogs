@@ -15,21 +15,21 @@ class BlogAuthorCard extends React.Component {
   }
 
   _renderAuthorPicture() {
-    // if (this.props.data.profileImgUrl) {
+    if (this.props.data.profileImgUrl) {
+      return (
+        <img
+          className="blogAuthorCard-profilePicWrap-picture"
+          src={this.props.data.profileImgUrl}
+        />
+      );
+    }
+
     return (
-      <img
+      <LionLogoIcon
         className="blogAuthorCard-profilePicWrap-picture"
-        src={this.props.data.profileImgUrl}
+        fill="transparent"
       />
     );
-    // }
-
-    // return (
-    //   <LionLogoIcon
-    //     className="blogAuthorCard-profilePicWrap-picture"
-    //     fill="transparent"
-    //   />
-    // );
   }
 
   _renderAuthorFullname() {
