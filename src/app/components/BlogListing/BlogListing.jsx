@@ -10,6 +10,7 @@ class BlogListing extends React.Component {
     super(props);
 
     this._fetchSingleBlog = this._fetchSingleBlog.bind(this);
+    this._fetchSeries = this._fetchSeries.bind(this);
   }
 
   _fetchSingleBlog(e) {
@@ -22,15 +23,32 @@ class BlogListing extends React.Component {
         Actions.updateBlogPost(response.data);
       })
       .then(response => {
-        this.routeHandler();
+        this.routeHandler(`/blog/${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`/blog/${this.props.slug}`);
+  _fetchSeries(e) {
+    e.preventDefault();
+
+    axios
+      .get(`/api?series=${this.props.series[0].id}`)
+      .then(response => {
+        console.log('fetching single blog post response:', response);
+        Actions.updateBlogs(response.data);
+      })
+      .then(response => {
+        this.routeHandler(`/blog/series/${this.props.series[0].id}`);
+      })
+      .catch(error => {
+        console.log(`error making ajax call: ${error}`);
+      }); /* end Axios call */
+  }
+
+  routeHandler(url) {
+    this.context.router.push(url);
   }
 
   mainPicture() {
@@ -49,9 +67,13 @@ class BlogListing extends React.Component {
   seriesTitle() {
     if (this.props.series !== null && this.props.series[0] !== null) {
       return (
-        <p className={`blogListing-series ${this.props.width}`}>
+        <Link
+          className={`blogListing-series ${this.props.width}`}
+          to={`/blog/series/${this.props.series[0].id}`}
+          onClick={this._fetchSeries}
+        >
           {this.props.series[0].title}
-        </p>
+        </Link>
       );
     }
     return null;
@@ -64,7 +86,8 @@ class BlogListing extends React.Component {
         <h2 className={`blogListing-title ${this.props.width}`}>
           <Link
             to={`/blog/${this.props.slug}`}
-            onClick={this._fetchSingleBlog}>
+            onClick={this._fetchSingleBlog}
+          >
             {this.props.title}
           </Link>
         </h2>
