@@ -54,6 +54,7 @@ class BlogAuthorCard extends React.Component {
           {this._renderAuthorPicture()}
         </div>
         <BlogAuthorName
+          className="blogAuthorCard-name"
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
         />

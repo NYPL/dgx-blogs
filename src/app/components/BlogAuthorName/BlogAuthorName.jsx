@@ -36,7 +36,7 @@ class BlogAuthorName extends React.Component {
   render() {
     if (this.props.fullName) {
       return (
-        <p className="blogAuthor-name">
+        <p className={this.props.className}>
           <Link
             to={`/blog/author/${this.props.slug}`}
             className="blogAuthor-name-link"
@@ -55,10 +55,12 @@ class BlogAuthorName extends React.Component {
 BlogAuthorName.propTypes = {
   fullName: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string,
+  className: React.PropTypes.string,
 };
 
 BlogAuthorName.defaultProps = {
   fullName: undefined,
+  className: "blogAuthor-name",
 };
 
 /*
