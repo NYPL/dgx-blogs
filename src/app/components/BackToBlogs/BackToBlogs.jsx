@@ -14,7 +14,7 @@ class BackToBlogs extends React.Component {
     e.preventDefault();
 
     axios
-      .get('/api?blog=all')
+      .get('/blog/api?blog=all')
       .then(response => {
         Actions.updateBlogs(response.data);
       })

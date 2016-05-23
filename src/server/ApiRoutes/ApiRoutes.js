@@ -203,4 +203,8 @@ router
   .route('/api')
   .get(fetchThroughAjax);
 
+router
+  .route('/blog/api')
+  .get(fetchThroughAjax);
+
 export default router;

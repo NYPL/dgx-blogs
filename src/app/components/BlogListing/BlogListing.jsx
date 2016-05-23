@@ -17,7 +17,7 @@ class BlogListing extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/api?blog=${this.props.slug}`)
+      .get(`/blog/api?blog=${this.props.slug}`)
       .then(response => {
         console.log('fetching single blog post response:', response);
         Actions.updateBlogPost(response.data);
