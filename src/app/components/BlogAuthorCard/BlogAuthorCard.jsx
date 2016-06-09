@@ -14,6 +14,10 @@ class BlogAuthorCard extends React.Component {
     super(props);
   }
 
+  createMarkup(bodyText) {
+    return { __html: bodyText };
+  }
+
   _renderAuthorPicture() {
     if (this.props.data.profileImgUrl) {
       return (
@@ -43,6 +47,8 @@ class BlogAuthorCard extends React.Component {
   }
 
   render() {
+    const unescapedBio = this.createMarkup(this.props.data.profileText);
+
     /* if there is not author data nothing should be shown */
     if (! this.props.data || _isEmpty(this.props.data.fullName)) {
       return null;
@@ -58,7 +64,10 @@ class BlogAuthorCard extends React.Component {
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
         />
-        <p className="blogAuthorCard-title">{this.props.data.profileText}</p>
+        <p 
+          className="blogAuthorCard-title"
+          dangerouslySetInnerHTML={unescapedBio}
+          ></p>
         <BlogAuthorViewMoreLink
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
