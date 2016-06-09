@@ -46,6 +46,21 @@
     a {
       color: $COOLGRAY_COLOR;
     }
+
+    /* replicating clases to make the blog post looking as in the admin panel */
+    .inline-right {
+      float: right;
+      margin: 24px;
+    }
+
+    .inline-left {
+      float: left;
+      margin: 24px;
+    }
+
+    & > h2 {
+      clear: left;
+    }
   }
 
   @include layout-at(7, $portrait) {
