@@ -69,6 +69,7 @@
     &-name {
       @include grid-span(1);
       clear: both;
+      font-size: 17px;
       
       &-name {
         margin-bottom: 10px;
@@ -90,5 +91,12 @@
       height: 80px;
       width: 80px;
     }  
-  }   
+  }
+
+  @include layout-at(1, $desktop) {
+
+    &-name {
+      font-size: 18px;
+    }
+  }
 }
