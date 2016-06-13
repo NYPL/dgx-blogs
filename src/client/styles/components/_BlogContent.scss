@@ -61,6 +61,14 @@
     & > h2 {
       clear: left;
     }
+
+    figure.caption {
+      text-align: center;
+
+      figcaption {
+        font-style: italic;
+      }
+    }
   }
 
   @include layout-at(7, $portrait) {
