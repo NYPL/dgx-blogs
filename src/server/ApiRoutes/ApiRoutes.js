@@ -34,7 +34,6 @@ function fetchApiData(url) {
 
 function getHeaderData() {
   const headerApiUrl = parser.getCompleteApi(headerOptions);
-  console.log(headerApiUrl)
   return fetchApiData(headerApiUrl);
 }
 
