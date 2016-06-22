@@ -12,6 +12,8 @@ import ReactDOMServer from 'react-dom/server';
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
 
+import FeatureFlags from 'dgx-feature-flags';
+
 import appConfig from './appConfig.js';
 import analytics from './analytics.js';
 import webpack from 'webpack';
@@ -71,6 +73,7 @@ app.use('/', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
+
       iso.add(html, alt.flush());
       res
         .status(200)
