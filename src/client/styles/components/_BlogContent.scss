@@ -147,7 +147,6 @@
     }
   }
 
-
   @include layout-at(7, $portrait) {
     @extend %clearfix;
     @include grid-span(5, 2);
