@@ -20,7 +20,7 @@ class BlogPage extends React.Component {
     const blog = this.state.blogPost[0];
 
     /* check if the blog really exists, if not do not render */
-    if(blog === undefined) {
+    if (blog === undefined) {
       return (
         <NotFoundAlert />
         );
@@ -47,7 +47,6 @@ class BlogPage extends React.Component {
         </div>
       );
     }
-
   }
 }
 
