@@ -44,18 +44,52 @@
     word-wrap: break-word;
 
     a {
-      color: $COOLGRAY_COLOR;
+      color: $SECONDARY_UI_COLOR;
     }
 
-    /* replicating clases to make the blog post looking as in the admin panel */
+    /* replicating clases to make the blog post looking as in the admin panel
+     * these classes are added by the wysiwyg editor in drupal dashboard
+     */
+
+    .inline {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+
     .inline-right {
       float: right;
-      margin: 24px;
+      margin: 0 0 24px 24px;
+      max-width: 200px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
 
     .inline-left {
       float: left;
       margin: 24px;
+      max-width: 200px;
+
+      & > img {
+        width: 100%;
+      }
+    }
+
+    .align-left {
+      float: left;
+      margin: 0 15px 0 0;
+    }
+
+    .align-right {
+      float: right;
+      margin: 0 0 0 15px;
+    }
+
+    .align-center {
+      text-align: center;
     }
 
     & > h2 {
@@ -64,10 +98,52 @@
 
     figure.caption {
       text-align: center;
+      display: inline-table !important;
 
       figcaption {
         font-style: italic;
+        display: table-caption;
+        caption-side: bottom;
+        text-align: center;
       }
+
+    }
+
+    .catalog-image.caption.inline {
+      img {
+        padding: 0;
+      }
+    }
+
+    p > a img {
+      margin: 10px;
+    }
+
+    span.inline-center, span.inline-middle {
+      float: none;
+      text-align: center;
+      margin: 1em auto;
+      padding: 0;
+      display: block;
+    }
+
+    span.inline .caption {
+      display: block;
+      font-size: .9em;
+      font-style: italic;
+      padding: .25em;
+      text-align: center;
+      color: #36322d;
+    }
+
+    tbody td, tbody th {
+      padding: .5em .3em;
+      border-bottom: 1px solid #CBC8C1;
+      text-align: left;
+    }
+
+    img.media-element, figcaption {
+      padding: 1px 10px;
     }
   }
 
