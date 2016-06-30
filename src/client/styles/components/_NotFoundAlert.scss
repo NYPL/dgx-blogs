@@ -1,0 +1,44 @@
+.notFoundAlert {
+  min-height: 100px;
+
+  &-message {
+    @include Milo-Light;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1em;
+    margin: 50px 30px;
+    padding: 25px;
+    border: 1px solid $BLOGS_DARK_COLOR;
+
+    & > a {
+      display: block;
+      padding-top: 15px;
+      text-decoration: none;
+    }
+  }
+
+  @include layout-at(7, $portrait) {
+    min-height: 400px;
+  }
+
+  @include layout-at(7, $landscape) {
+
+    &-message {
+      @include grid-span(5, 2);
+      text-align: center;
+
+      & > a {
+        display: inline;
+        padding-top: 0;
+        padding-left: 5px;
+      }
+    }
+  }
+
+  @include layout-at(9, $desktop) {
+
+    &-message {
+      @include grid-span(5, 3);
+    }
+  }
+}
