@@ -3,6 +3,7 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
 import Model from 'dgx-model-data';
+import Immutable from 'immutable';
 
 /*
  * @todo check how to make this work as in homepage 
@@ -49,13 +50,14 @@ function fetchData(url, storeValue, req, res, next) {
       const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
-        BlogStore: {
-          [storeValue]: blogsModelData,
-        },
-        HeaderStore: {
-          headerData: headerModelData,
-        },
+        BlogStore: Immutable.Map({
+          [storeValue]: Immutable.List(blogsModelData),
+        }),
+          HeaderStore: Immutable.Map({
+          headerData: Immutable.List(headerModelData),
+        }),
       };
+      console.log(res.locals.data);
       next();
     }))
     .catch(error => {

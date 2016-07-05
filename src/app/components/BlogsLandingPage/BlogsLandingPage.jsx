@@ -12,6 +12,7 @@ class BlogsLandingPage extends React.Component {
     super(props);
 
     this.state = Store.getState();
+    console.log('BlogsLandingPage state', this.state);
     this._getList = this._getList.bind(this);
   }
 
@@ -22,7 +23,7 @@ class BlogsLandingPage extends React.Component {
   }
   
   render() {
-    
+  console.log('BlogsLandingPage state', this.state);  
     return (
       <div className="blogsLandingPage">
         <Hero />

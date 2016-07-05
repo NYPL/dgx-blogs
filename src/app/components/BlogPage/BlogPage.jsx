@@ -17,7 +17,8 @@ class BlogPage extends React.Component {
   }
 
   render() {
-    const blog = this.state.blogPost[0];
+    console.log('blogpage state', this.state.get('blogPost').first());
+    const blog = this.state.get('blogPost').first()
 
     /* check if the blog really exists, if not do not render */
     if (blog === undefined) {
