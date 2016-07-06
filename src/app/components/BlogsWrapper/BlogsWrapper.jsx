@@ -31,7 +31,7 @@ class BlogsWrapper extends React.Component {
   }
 
   _onChange() {
-    this.setState(Store.getState());
+    this.state = Store.getState();
   }
 
   _getList(blogsList) {
@@ -41,7 +41,7 @@ class BlogsWrapper extends React.Component {
   }
 
   render() {
-    const blogs = this._getList(this.state.blogs);
+    const blogs = this._getList(this.state.get('blogs').toJS());
 
     let pageType;
     let param;

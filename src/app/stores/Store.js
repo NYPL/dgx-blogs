@@ -17,17 +17,11 @@ class BlogStore {
   }
 
   handleBlogs(blogs) {
-    const id = String(Math.random());
-    this.setState(this.state.setIn(['blogs', id], blogs));
+    this.setState(this.state.setIn(['blogs'], Immutable.List(blogs)));
   }
 
   handleBlogPost(blogPost) {
-    const id = String(Math.random());
-    this.setState(this.state.setIn(['blogPost', id], blogPost));
-  }
-
-  getImmutState() {
-    return Immutable.fromJS(this.getState());
+    this.setState(this.state.setIn(['blogPost'], Immutable.List(blogPost)));
   }
 }
 

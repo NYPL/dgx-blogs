@@ -57,7 +57,6 @@ function fetchData(url, storeValue, req, res, next) {
           headerData: Immutable.List(headerModelData),
         }),
       };
-      console.log(res.locals.data);
       next();
     }))
     .catch(error => {
@@ -66,7 +65,7 @@ function fetchData(url, storeValue, req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          [storeValue]: [],
+          [storeValue]: Immutable.List([]),
         },
         HeaderStore: {
           headerData: [],
