@@ -16,12 +16,13 @@ class BlogStore {
     });
   }
 
-  handleBlogs(blogs) {
+  handleBlogs(blogs) { console.log('updating blogs in store', blogs);
     this.setState(this.state.setIn(['blogs'], Immutable.List(blogs)));
+    console.log('blogs in state after update', this.state.get('blogs'));
   }
 
   handleBlogPost(blogPost) {
-    this.setState(this.state.setIn(['blogPost'], Immutable.List(blogPost)));
+    this.setState(this.state.setIn(['blogPost'], Immutable.List( Immutable.Map(blogPost))));
   }
 }
 

@@ -41,6 +41,7 @@ class BlogsWrapper extends React.Component {
   }
 
   render() {
+    console.log('blogs got from the store', this.state.get('blogs'));
     const blogs = this._getList(this.state.get('blogs').toJS());
 
     let pageType;
