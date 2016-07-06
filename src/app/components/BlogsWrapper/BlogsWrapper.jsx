@@ -54,8 +54,7 @@ class BlogsWrapper extends React.Component {
     if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
       param = this.props.params[pageType];
-console.log('pageType', pageType);
-console.log('state in blogswrapper', this.state.get('blogs').first().toJS()[pageType]);
+      
       if (pageType === 'author') {
         author = this.state.get('blogs').first().toJS()[pageType];
         hero = (<Hero
