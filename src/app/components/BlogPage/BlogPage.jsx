@@ -24,7 +24,7 @@ class BlogPage extends React.Component {
       return (
         <NotFoundAlert />
         );
-    } else {    
+    } else {
       const { author, subjects, title, date, mainPicture } = blog;
 
       return (

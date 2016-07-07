@@ -21,7 +21,7 @@ class BlogStore {
   }
 
   handleBlogPost(blogPost) {
-    this.setState(this.state.setIn(['blogPost'], Immutable.List( Immutable.fromJS(blogPost))));
+    this.setState(this.state.setIn(['blogPost'], Immutable.List(Immutable.fromJS(blogPost))));
   }
 }
 
