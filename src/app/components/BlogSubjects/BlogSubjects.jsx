@@ -72,7 +72,7 @@ class BlogSubjects extends React.Component {
 
     /* if there are subjects*/
     let subjects = this.props.subjects ? this.getList(this.props.subjects) : null;
-    subjects = this.props.maxSubjectsShown ? subjects : subjects;
+    subjects = this.props.maxSubjectsShown ? subjects.slice(0, this.props.maxSubjectsShown) : subjects;
 
     return (
       <div className={this.props.className}>

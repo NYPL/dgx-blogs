@@ -24,29 +24,29 @@ class BlogPage extends React.Component {
       return (
         <NotFoundAlert />
         );
-    } else {
-      const { author, subjects, title, date, mainPicture } = blog;
-
-      return (
-        <div className="blogPage">
-          <HeroSinglePost coverUrl={mainPicture['full-uri']} />
-          <div className="content">
-            <BackToBlogs />
-            <BlogSubjects subjects={subjects} />
-            <Blog
-              date={date}
-              title={title}
-              author={author ? author : {}}
-              mainPicture={mainPicture['full-uri']}
-              body={blog.body.full ? blog.body.full : ''}
-            />
-            <BlogAuthorCard
-              data={author}
-            />
-          </div>
-        </div>
-      );
     }
+
+    const { author, subjects, title, date, mainPicture } = blog;
+
+    return (
+      <div className="blogPage">
+        <HeroSinglePost coverUrl={mainPicture['full-uri']} />
+        <div className="content">
+          <BackToBlogs />
+          <BlogSubjects subjects={subjects} />
+          <Blog
+            date={date}
+            title={title}
+            author={author ? author : {}}
+            mainPicture={mainPicture['full-uri']}
+            body={blog.body.full ? blog.body.full : ''}
+          />
+          <BlogAuthorCard
+            data={author}
+          />
+        </div>
+      </div>
+    );
   }
 }
 
