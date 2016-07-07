@@ -41,7 +41,6 @@ class BlogsWrapper extends React.Component {
   }
 
   render() {
-    console.log('blogs got from the store', this.state.get('blogs'));
     const blogs = this._getList(this.state.get('blogs').toJS());
 
     let pageType;
@@ -54,7 +53,7 @@ class BlogsWrapper extends React.Component {
     if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
       param = this.props.params[pageType];
-      
+
       if (pageType === 'author') {
         author = this.state.get('blogs').first().toJS()[pageType];
         hero = (<Hero

@@ -16,10 +16,6 @@ class BlogPage extends React.Component {
     this.state = Store.getState();
   }
 
-  componentWillMount() {
-    this.state = Store.getState();
-  }
-
   render() {
     const blog = this.state.get('blogPost').first().toJS();
 
