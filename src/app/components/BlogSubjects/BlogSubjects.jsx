@@ -43,9 +43,7 @@ class BlogSubjects extends React.Component {
   }
 
   routeHandler(subject) {
-    console.log('router transition to: ', `/blog/subject/${subject}`);
     this.context.router.push(`/blog/subjects/${subject}`);
-    console.log('after transition');
   }
 
   _getList(subjects) {
