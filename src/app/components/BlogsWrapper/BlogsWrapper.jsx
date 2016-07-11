@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { map as _map } from 'underscore';
-
 import Store from '../../stores/Store.js';
 
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
+import NotFoundAlert from '../NotFoundAlert/NotFoundAlert';
 
 import {
+  map as _map,
   isEmpty as _isEmpty,
   keys as _keys,
   findWhere as _findWhere,
@@ -53,6 +53,14 @@ class BlogsWrapper extends React.Component {
     if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
       param = this.props.params[pageType];
+
+      /* Check if state has any content for blog before proceed to render */
+      if (this.state.get('blogs').isEmpty()) {
+        return (
+          <NotFoundAlert message="Ooops! Something went wrong." />
+          );
+      }
+      console.log('blogswrapper state isempty', this.state.get('blogs').isEmpty());
 
       if (pageType === 'author') {
         author = this.state.get('blogs').first().toJS()[pageType];
