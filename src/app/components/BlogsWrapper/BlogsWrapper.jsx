@@ -60,7 +60,6 @@ class BlogsWrapper extends React.Component {
           <NotFoundAlert message="Ooops! Something went wrong." />
           );
       }
-      console.log('blogswrapper state isempty', this.state.get('blogs').isEmpty());
 
       if (pageType === 'author') {
         author = this.state.get('blogs').first().toJS()[pageType];
