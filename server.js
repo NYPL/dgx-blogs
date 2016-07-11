@@ -4,11 +4,15 @@ import compress from 'compression';
 import colors from 'colors';
 
 import React from 'react';
-import Router from 'react-router';
-import DocMeta from 'react-doc-meta';
+
+import { Router, match, RouterContext } from 'react-router';
+
+import ReactDOMServer from 'react-dom/server';
 
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
+
+import FeatureFlags from 'dgx-feature-flags';
 
 import appConfig from './appConfig.js';
 import analytics from './analytics.js';
@@ -16,7 +20,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
 
-import routes from './src/app/routes/routes.js';
+import appRoutes from './src/app/routes/routes.js';
 import apiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
 const ROOT_PATH = __dirname;
@@ -42,34 +46,51 @@ app.set('port', process.env.PORT || 3001);
 
 // * is used for Reverse Proxy at the moment but can be cleaned up:
 // For webpack
-app.use(express.static(DIST_PATH));
+app.use('*/dist', express.static(DIST_PATH));
 // For images
 app.use('*/src/client', express.static(INDEX_PATH));
 
+app.use('/', (req, res, next) => {
+  if (req.path === '/blog') {
+    return res.redirect('/blog/');
+  }
+  next();
+});
 
 app.use('/', apiRoutes);
 
 app.use('/', (req, res) => {
-  let iso;
+  const iso = new Iso();
+  const blogAppUrl = (req.url).indexOf('blog') !== -1;
+  const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
 
-  iso = new Iso();
+  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+    } else if (renderProps) {
+      const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
 
-  Router.run(routes.server, req.path, (Root, state) => {
-    const html = React.renderToString(<Root route={req.path} />);
-    iso.add(html, alt.flush());
+      iso.add(html, alt.flush());
+      res
+        .status(200)
+        .render('index', {
+          app: iso.render(),
+          appTitle: appConfig.appTitle,
+          favicon: appConfig.favIconPath,
+          gaCode: analytics.google.code(isProduction),
+          webpackPort: WEBPACK_DEV_PORT,
+          appEnv: process.env.APP_ENV,
+          path: req.url,
+          isProduction,
+        });
+    } else {
+      res.status(404).send('Not found');
+    }
 
-    // First parameter references the ejs filename
-    res.render('index', {
-      app: iso.render(),
-      appTitle: appConfig.appTitle,
-      favicon: appConfig.favIconPath,
-      gaCode: analytics.google.code(isProduction),
-      webpackPort: WEBPACK_DEV_PORT,
-      appEnv: process.env.APP_ENV || 'No APP_ENV set',
-      isProduction,
-    });
   });
 });
 

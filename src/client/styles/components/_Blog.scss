@@ -1,0 +1,204 @@
+.blog {
+
+  @include Milo-Regular;
+  font-size: 18px;
+  line-height: 26px;
+
+  &-date {
+    @include Kievit-Regular;
+    text-transform: uppercase;
+    margin-top: 30px;
+    padding: 0 20px;   
+
+    &:nth-child(even) {
+      @include visuallyHidden;
+    }
+  }
+
+  &-title {
+    @include Milo-Light;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 20px 0 10px 0;
+    line-height: 1em;
+    padding: 0 20px;
+  }
+
+  &-author {
+    @include Kievit-Regular;
+    padding: 0 20px;
+    
+    & > b {
+      font-weight: 600;
+    }
+  }
+
+  &-mainPicture {
+    width: 100%;
+  }
+
+  &-bodyText {
+    padding: 0 20px;
+    margin-top: 0;
+    word-wrap: break-word;
+
+    a {
+      color: $SECONDARY_UI_COLOR;
+    }
+
+    /* replicating clases to make the blog post looking as in the admin panel
+     * these classes are added by the wysiwyg editor in drupal dashboard
+     */
+
+    .inline {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+
+    .inline-right {
+      float: right;
+      margin: 0 0 24px 24px;
+      max-width: 200px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .inline-left {
+      float: left;
+      margin: 24px;
+      max-width: 200px;
+
+      & > img {
+        width: 100%;
+      }
+    }
+
+    .align-left {
+      float: left;
+      margin: 0 15px 0 0;
+    }
+
+    .align-right {
+      float: right;
+      margin: 0 0 0 15px;
+    }
+
+    .align-center {
+      text-align: center;
+    }
+
+    & > h2 {
+      clear: left;
+    }
+
+    figure.caption {
+      text-align: center;
+      display: inline-table !important;
+
+      figcaption {
+        font-style: italic;
+        display: table-caption;
+        caption-side: bottom;
+        text-align: center;
+      }
+
+    }
+
+    .catalog-image.caption.inline {
+      img {
+        padding: 0;
+      }
+    }
+
+    p > a img {
+      margin: 10px;
+    }
+
+    span.inline-center, span.inline-middle {
+      float: none;
+      text-align: center;
+      margin: 1em auto;
+      padding: 0;
+      display: block;
+    }
+
+    span.inline .caption {
+      display: block;
+      font-size: .9em;
+      font-style: italic;
+      padding: .25em;
+      text-align: center;
+      color: #36322d;
+    }
+
+    tbody td, tbody th {
+      padding: .5em .3em;
+      border-bottom: 1px solid #CBC8C1;
+      text-align: left;
+    }
+
+    img.media-element, figcaption {
+      padding: 1px 10px;
+    }
+  }
+
+  @include layout-at(7, $portrait) {
+    @extend %clearfix;
+    @include grid-span(5, 2);
+    padding: 0;
+    margin-right: 0;
+    margin-top: -40px;
+    z-index: 10;
+    background: white;
+    min-height: 500px;
+    position: relative;
+
+    &-date {
+      margin: 0;
+      margin-bottom: 30px;
+      font-size: 14px;
+    
+      &:nth-child(odd) {
+        @include visuallyHidden;
+      }
+
+      &:nth-child(even) {
+        @include displayVisuallyHidden;
+      }
+    }
+
+    &-title {
+      margin: 14px 0 27px 0;
+    }
+
+    &-author {
+      margin-bottom: 0;
+    }
+  }
+
+  @include layout-at(9, $landscape) { 
+    @include grid-span(5, 3);
+    margin-top: -60px;
+    margin-right: 0;
+  }
+
+  @include layout-at(9, $desktop) {
+    @include grid-span(5, 3);
+    margin-right: 0;  
+    margin-top: -100px;
+
+    &-date {
+      margin-bottom: 40px;
+      font-size: 16px;
+    }
+    
+    &-title {
+      margin: 20px 0 47px 0;
+      font-size: 48px;
+    }
+  }
+}

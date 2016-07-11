@@ -1,24 +1,59 @@
 .blogPage {
-
+  @include add-grid(7);
+  @include add-gutter(0);
+  
   .backToLink {
     @include visuallyHidden;
   }
 
   .content {
     @extend %clearfix;
+
     max-width: 1312px;
     margin: auto;
     display: flex;
     flex-direction: column;
   }
 
-  
-  @include layout-at(9, $landscape) {
+  .tagLink {
+    .svgIcon {
+      @include visuallyHidden;
+    }
+  }
+
+  @include layout-at(7, $portrait) {
 
     .content {
       /* reset display */
       display: block;
+      //margin: 0 20px;
+      @include add-grid(7);      
+
+      .backToLink {
+        @include displayVisuallyHidden;
+        @include grid-span(1);     
+        text-transform: uppercase;
+        color: $COOLGRAY_COLOR; 
+        font-size: 14px;
+        margin-top: 24px;
+        text-decoration: none;
+        text-align: right;
+        
+        .nypl-icon-wedge-left {
+          font-size: 22px;
+          position: relative;
+          top: 5px;
+        }
+      }
+
+      .blogSubjects {
+        @include grid-span(1);
+      }
+      
     }
+  }
+  
+  @include layout-at(9, $landscape) {
 
     @include grid-span(9);
     @include add-grid(9);
@@ -32,10 +67,30 @@
       margin-top: 22px;
       text-decoration: none;
       text-align: right;
+
     }
 
-    &-sidebar {
-      margin-top: 15px;
+    .content { 
+      .backToLink {   
+        @include grid-span(1, 2);
+      }
+
+      .blogSubjects {
+        @include grid-span(1, 2);
+      }
+    }
+  }
+
+  @include layout-at(9, $desktop) {
+
+    .content {
+      .backToLink {   
+        @include grid-span(2);
+      }
+
+      .blogSubjects {
+        @include grid-span(2);
+      }
     }
   }
 }

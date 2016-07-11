@@ -1,17 +1,62 @@
 import React from 'react';
 import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
+import BlogSubjects from '../BlogSubjects/BlogSubjects';
+import { Link } from 'react-router';
+import axios from 'axios';
+import Actions from '../../actions/Actions';
 
 class BlogListing extends React.Component {
   constructor(props) {
     super(props);
+
+    this.fetchSingleBlog = this.fetchSingleBlog.bind(this);
+    this.fetchSeries = this.fetchSeries.bind(this);
   }
 
-  _mainPicture(pictureObject) {
-    if (pictureObject && pictureObject['full-uri']) {
+  fetchSingleBlog(e) {
+    e.preventDefault();
+
+    axios
+      .get(`/blog/api?blog=${this.props.slug}`)
+      .then(response => {
+        console.log('fetching single blog post response:', response);
+        Actions.updateBlogPost(response.data);
+      })
+      .then(response => {
+        this.routeHandler(`/blog/${this.props.slug}`);
+      })
+      .catch(error => {
+        console.log(`error making ajax call: ${error}`);
+      }); /* end Axios call */
+  }
+
+  fetchSeries(e) {
+    e.preventDefault();
+
+    axios
+      .get(`/api?series=${this.props.series[0].id}`)
+      .then(response => {
+        console.log('fetching single blog post response:', response);
+        Actions.updateBlogs(response.data);
+      })
+      .then(response => {
+        this.routeHandler(`/blog/series/${this.props.series[0].id}`);
+      })
+      .catch(error => {
+        console.log(`error making ajax call: ${error}`);
+      }); /* end Axios call */
+  }
+
+  routeHandler(url) {
+    this.context.router.push(url);
+  }
+
+  mainPicture() {
+    if (this.props.mainPicture && this.props.mainPicture['full-uri']) {
       return (
         <img
-          className="blogListing-image"
-          src={pictureObject['full-uri']}
+          className={`blogListing-image image-${this.props.side}`}
+          src={this.props.mainPicture['full-uri']}
         />
       );
     }
@@ -19,27 +64,43 @@ class BlogListing extends React.Component {
     return null;
   }
 
+  seriesTitle() {
+    if (this.props.series !== null && this.props.series[0] !== null) {
+      return (
+        <Link
+          className={`blogListing-series ${this.props.width}`}
+          to={`/blog/series/${this.props.series[0].id}`}
+          onClick={this.fetchSeries}
+        >
+          {this.props.series[0].title}
+        </Link>
+      );
+    }
+    return null;
+  }
+
   render() {
-    const seriesTitle = (this.props.series !== null && this.props.series[0] !== null) ?
-      <p className="blogListing-series">{this.props.series[0].title}</p> : null;
-
-    /* apply a different class to the text paragraph when there's no image to show */
-    const paragraphClass = this.props.mainPicture && this.props.mainPicture['full-uri'] ?
-      'blogListing-paragraph' : 'blogListing-fullWidthParagraph';
-
     return (
       <div className="blogListing">
-        {seriesTitle}
-        <h2 className="blogListing-title">
-          <a href={`/blog/${this.props.slug}`}>
+        {this.seriesTitle()}
+        <h2 className={`blogListing-title ${this.props.width}`}>
+          <Link
+            to={`/blog/${this.props.slug}`}
+            onClick={this.fetchSingleBlog}
+          >
             {this.props.title}
-          </a>
+          </Link>
         </h2>
-        {this._mainPicture(this.props.mainPicture)}
-        <p className={paragraphClass}>
+        {this.mainPicture()}
+        <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
           {this.props.body}
           <ReadMoreButton slug={this.props.slug} />
-        </p>
+          <BlogSubjects
+            className="blogSubjectsInList"
+            subjects={this.props.subjects}
+            maxSubjectsShown={3}
+          />
+        </div>
       </div>
     );
   }
@@ -50,6 +111,9 @@ BlogListing.propTypes = {
   body: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string.isRequired,
   series: React.PropTypes.array,
+  side: React.PropTypes.string,
+  width: React.PropTypes.string,
+  subjects: React.PropTypes.array,
   mainPicture: React.PropTypes.shape(
     {
       'full-uri': React.PropTypes.string,
@@ -58,6 +122,15 @@ BlogListing.propTypes = {
 
 BlogListing.defaultProps = {
   seriesTitle: '',
+};
+
+/*
+ * @see http://stackoverflow.com/questions/32033247/react-router-transitionto-is-not-a-function
+ */
+BlogListing.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
 };
 
 export default BlogListing;

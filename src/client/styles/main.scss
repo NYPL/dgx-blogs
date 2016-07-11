@@ -36,9 +36,11 @@ Import components styling
 @import "components/_BlogsLandingPage";
 @import "components/_BlogSubjects";
 @import "components/_BlogPage";
-@import "components/_BlogContent";
+@import "components/_Blog";
+@import "components/_HeroSinglePost";
 @import "components/_Hero";
 @import "components/_ReadMoreButton";
+@import "components/_NotFoundAlert";
 
 #app {
   margin: 0;

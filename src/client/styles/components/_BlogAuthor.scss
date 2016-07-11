@@ -10,19 +10,22 @@
     
     &-picture {
       border-radius: 50%;
-      height: 60px;
-      width: 18%;
-      max-width: 60px;
+      height: 48px;
+      width: 48px;
       margin-top: 10px;
       fill: $COOLGRAY_COLOR;
     }
   }
 
-
   &-name {
     @include grid-span(3, 2);
+    @include Kievit-Medium;
+    font-weight: 400;
+    /* override left margin because author profile picture fixed width */
+    margin-left: 65px;
+    margin-top: 12px;
     font-size: 18px;
-    font-weight: bold;
+    letter-spacing: .03em;
 
     &-link {
       color: black;
@@ -32,16 +35,41 @@
 
   &-title {
     @include grid-span(3, 2);
-    font-size: 18px;
-    margin-top: 45px;
+    /* override left margin because author profile picture fixed width */
+    margin-left: 65px;
+    margin-top: 35px;
+    font-size: 16px;
   } 
 
-  @include layout-at(1, $landscape) {
+  @include layout-at(1, $portrait) {
+    @include grid-span(1);
 
+    &-profilePicWrap {
+      @include grid-span(1);
+
+      &-picture {
+        height: 60px;
+        width: 60px;
+      }
+    }
+
+    &-name {
+      @include grid-span(1);
+      margin-right: 0;
+      font-weight: normal;
+    }
+
+    &-title {
+      @include visuallyHidden;
+    }
+  }
+
+  @include layout-at(1, $landscape) {
 
     &-name {
       @include grid-span(1);
       clear: both;
+      font-size: 17px;
       
       &-name {
         margin-bottom: 10px;
@@ -60,7 +88,15 @@
     } 
 
     &-profilePicWrap-picture {
+      height: 80px;
       width: 80px;
     }  
-  } 
+  }
+
+  @include layout-at(1, $desktop) {
+
+    &-name {
+      font-size: 18px;
+    }
+  }
 }

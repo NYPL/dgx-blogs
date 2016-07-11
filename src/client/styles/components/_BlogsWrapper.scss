@@ -4,12 +4,10 @@
 
   .content {
     @extend %clearfix;
-    max-width: 1312px;
-    margin: auto;
-  }
 
-  .sidebar {
-    @include visuallyHidden;
+    .sidebar {
+      @include visuallyHidden;
+    }
   }
 
   .blogsList {
@@ -19,29 +17,52 @@
 
   @include layout-at(9, $landscape) {
 
-    .sidebar {
-      @include displayVisuallyHidden;
-      @include grid-span(1);
-      border-top: 2px solid $CHARCOAL;
-      margin-top: 16px;
-      color: $CHARCOAL;
+    .content {
+      @include grid-span(9);
+      @include add-grid(9);
 
-      &-title {
-        text-align: right;
+      .sidebar {
+        @include displayVisuallyHidden;
+        @include grid-span(1);
+        border-top: 2px solid $CHARCOAL;
+        margin-top: 16px;
+        margin-left: 20px;
+        color: $CHARCOAL;
+
+        &-title {
+          text-align: right;
+          margin-top: 17px;
+        }
+        
+        &-link {
+          display: block;
+          text-align: right;
+          color: $CHARCOAL;
+          text-decoration: none;
+          padding: 5px 0;
+        }
       }
 
-      &-link {
-        display: block;
-        text-align: right;
-        color: $CHARCOAL;
-        text-decoration: none;
-        padding: 5px 0;
+      .blogsList {
+
+        @include grid-span(7, 2);
       }
     }
+  }
 
-    .blogsList {
+  @include layout-at(9, $desktop) {
+    
+    .content {
+      max-width: 1312px;
+      margin: auto;
+      float: none;
+      width: auto;
 
-      @include grid-span(8, 2);
+      .blogsList {
+
+        @include grid-span(8,2);
+        @include add-grid(8);
+      }
     }
   }
 }

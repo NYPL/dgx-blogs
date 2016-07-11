@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { DefaultRoute, NotFoundRoute, Route } from 'react-router';
+import { IndexRoute, DefaultRoute, Route, Router } from 'react-router';
 
 /*
  * Components
@@ -13,21 +13,21 @@ import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
 
 const routes = {
   client: (
-    <Route name="root" path="/" handler={Application}>
-      <Route name='blogs' path='/blog?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='author' path='/blog/author/:author?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='series' path='/blog/series/:series?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='subjects' path='/blog/subjects/:subject?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='blog' path='/blog/:year/:month/:day/:blogId' handler={BlogPage} ignoreScrollBehavior />
+    <Route path="/" component={Application}>
+      <Route path='blog' component={BlogsWrapper} />
+      <Route path='blog/author/:author' component={BlogsWrapper} />
+      <Route path='blog/series/:series' component={BlogsWrapper} />
+      <Route path='blog/subjects/:subjects' component={BlogsWrapper} />
+      <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} />
     </Route>
   ),
   server: (
-    <Route name="root" path="/" handler={Application}>
-      <Route name='blogs' path='/blog?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='author' path='/blog/author/:author?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='series' path='/blog/series/:series?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='subjects' path='/blog/subjects/:subject?/?' handler={BlogsWrapper} ignoreScrollBehavior />
-      <Route name='blog' path='/blog/:year/:month/:day/:blogId' handler={BlogPage} ignoreScrollBehavior />
+    <Route path="/" component={Application}>
+      <IndexRoute component={BlogsWrapper}/>
+      <Route path='author/:author' component={BlogsWrapper} />
+      <Route path='series/:series' component={BlogsWrapper} />
+      <Route path='subjects/:subjects' component={BlogsWrapper} />
+      <Route path=':year/:month/:day/:blogId' component={BlogPage} />
     </Route>
   ),
 };
