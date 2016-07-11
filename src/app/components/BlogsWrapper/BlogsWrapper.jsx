@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactRedirect from 'react-redirect';
 
 import Store from '../../stores/Store.js';
 
@@ -57,8 +58,9 @@ class BlogsWrapper extends React.Component {
       /* Check if state has any content for blog before proceed to render */
       if (this.state.get('blogs').isEmpty()) {
         return (
-          <NotFoundAlert message="Ooops! Something went wrong." />
-          );
+          <ReactRedirect location='/blog/not-found'>
+          </ReactRedirect>
+        );
       }
 
       if (pageType === 'author') {
