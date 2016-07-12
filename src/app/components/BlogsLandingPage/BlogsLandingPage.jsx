@@ -22,7 +22,7 @@ class BlogsLandingPage extends React.Component {
   }
   
   render() {
-    
+  console.log('BlogsLandingPage state', this.state);  
     return (
       <div className="blogsLandingPage">
         <Hero />

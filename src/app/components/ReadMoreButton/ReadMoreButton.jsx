@@ -7,16 +7,15 @@ class ReadMoreButton extends React.Component {
   constructor(props) {
     super(props);
 
-    this._fetchSingleBlog = this._fetchSingleBlog.bind(this);
+    this.fetchSingleBlog = this.fetchSingleBlog.bind(this);
   }
 
-  _fetchSingleBlog(e) {
+  fetchSingleBlog(e) {
     e.preventDefault();
 
     axios
       .get(`/blog/api?blog=${this.props.slug}`)
       .then(response => {
-        console.log('fetching single blog post response:', response);
         Actions.updateBlogPost(response.data);
       })
       .then(response => {
@@ -31,7 +30,7 @@ class ReadMoreButton extends React.Component {
     this.context.router.push(`/blog/${this.props.slug}`);
   }
 
-  _svgDots() {
+  svgDots() {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" className="svgIcon blue">
         <title>circle.more.icon.v1</title>
@@ -47,9 +46,9 @@ class ReadMoreButton extends React.Component {
       <Link
         className="readMoreButton"
         to={`/blog/${this.props.slug}`}
-        onClick={this._fetchSingleBlog}
+        onClick={this.fetchSingleBlog}
       >
-        {this._svgDots()}
+        {this.svgDots()}
         <span>Read More</span>
       </Link>
     );
