@@ -57,10 +57,7 @@ class BlogsWrapper extends React.Component {
 
       /* Check if state has any content for blog before proceed to render */
       if (this.state.get('blogs').isEmpty()) {
-        return (
-          <ReactRedirect location='/blog/not-found'>
-          </ReactRedirect>
-        );
+        this.context.router.push('/blog/not-found');
       }
 
       if (pageType === 'author') {
@@ -109,5 +106,11 @@ class BlogsWrapper extends React.Component {
     );
   }
 }
+
+BlogsWrapper.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
+};
 
 export default BlogsWrapper;
