@@ -2,7 +2,7 @@ import React from 'react';
 
 import Store from '../../stores/Store.js';
 
-import Header from 'dgx-header-component';
+import { Header } from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 
 class App extends React.Component {
