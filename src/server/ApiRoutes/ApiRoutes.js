@@ -5,6 +5,8 @@ import parser from 'jsonapi-parserinator';
 import Model from 'dgx-model-data';
 import Immutable from 'immutable';
 
+import { navConfig } from 'dgx-header-component';
+
 /*
  * @todo check how to make this work as in homepage 
  */
@@ -55,8 +57,8 @@ function fetchData(url, storeValue, req, res, next) {
         BlogStore: Immutable.Map({
           [storeValue]: Immutable.List(blogsModelData),
         }),
-        HeaderStore: Immutable.Map({
-          headerData: Immutable.List(headerModelData),
+          HeaderStore: Immutable.Map({
+          headerData: Immutable.List(navConfig.current),
         }),
       };
       next();
@@ -70,7 +72,7 @@ function fetchData(url, storeValue, req, res, next) {
           [storeValue]: Immutable.List([]),
         }),
         HeaderStore: {
-          headerData: [],
+          headerData: navConfig.current,
         },
       };
 
