@@ -1,5 +1,7 @@
 import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
+import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
+import Immutable from 'immutable';
 
 class BlogStore {
   constructor() {
@@ -8,19 +10,21 @@ class BlogStore {
       handleBlogPost: Actions.UPDATE_BLOG_POST,
     });
 
-    this.on('init', () => {
-      this.blogs = [];
-      this.blogPost = [];
+    this.state = Immutable.Map({
+      blogs: Immutable.List([]),
+      blogPost: Immutable.List([]),
     });
   }
 
   handleBlogs(blogs) {
-    this.blogs = blogs;
+    this.setState(this.state.setIn(['blogs'], Immutable.fromJS(blogs)));
   }
 
   handleBlogPost(blogPost) {
-    this.blogPost = blogPost;
+    this.setState(this.state.setIn(['blogPost'], Immutable.List(Immutable.fromJS(blogPost))));
   }
 }
 
-export default alt.createStore(BlogStore, 'BlogStore');
+BlogStore.displayName = 'BlogStore';
+
+export default alt.createStore(ImmutableUtil(BlogStore));

@@ -19,7 +19,6 @@ class BlogListing extends React.Component {
     axios
       .get(`/blog/api?blog=${this.props.slug}`)
       .then(response => {
-        console.log('fetching single blog post response:', response);
         Actions.updateBlogPost(response.data);
       })
       .then(response => {
@@ -36,7 +35,6 @@ class BlogListing extends React.Component {
     axios
       .get(`/api?series=${this.props.series[0].id}`)
       .then(response => {
-        console.log('fetching single blog post response:', response);
         Actions.updateBlogs(response.data);
       })
       .then(response => {

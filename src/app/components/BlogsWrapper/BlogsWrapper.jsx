@@ -31,7 +31,7 @@ class BlogsWrapper extends React.Component {
   }
 
   _onChange() {
-    this.setState(Store.getState());
+    this.state = Store.getState();
   }
 
   _getList(blogsList) {
@@ -41,7 +41,7 @@ class BlogsWrapper extends React.Component {
   }
 
   render() {
-    const blogs = this._getList(this.state.blogs);
+    const blogs = this._getList(this.state.get('blogs').toJS());
 
     let pageType;
     let param;
@@ -55,30 +55,30 @@ class BlogsWrapper extends React.Component {
       param = this.props.params[pageType];
 
       if (pageType === 'author') {
-        author = this.state.blogs[0][pageType];
+        author = this.state.get('blogs').first().toJS()[pageType];
         hero = (<Hero
           type="author"
           title={author.fullName}
           description={author.title}
           picture={author.profileImgUrl}
-          postCount={this.state.blogs.length}
+          postCount={this.state.get('blogs').size}
         />);
       } else if (pageType === 'series') {
-        series = _findWhere(this.state.blogs[0][pageType], { id: param });
+        series = _findWhere(this.state.get('blogs').first().toJS()[pageType], { id: param });
         /* @todo is it right to striptag the body? */
         hero = (<Hero
           type="Blog Series"
           title={series.title}
           description={series.body.replace(/(<([^>]+)>)/ig, '')}
           picture={series.image.url}
-          postCount={this.state.blogs.length}
+          postCount={this.state.get('blogs').size}
         />);
       } else if (pageType === 'subjects') {
-        subjects = _findWhere(this.state.blogs[0][pageType], { id: param });
+        subjects = _findWhere(this.state.get('blogs').first().toJS()[pageType], { id: param });
         hero = (<Hero
           type="Blog Subject"
           title={subjects.name}
-          postCount={this.state.blogs.length}
+          postCount={this.state.get('blogs').size}
         />);
       }
     }

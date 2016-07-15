@@ -3,6 +3,9 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
 import Model from 'dgx-model-data';
+import Immutable from 'immutable';
+
+import { navConfig } from 'dgx-header-component';
 
 /*
  * @todo check how to make this work as in homepage 
@@ -49,12 +52,12 @@ function fetchData(url, storeValue, req, res, next) {
       const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
-        BlogStore: {
-          [storeValue]: blogsModelData,
-        },
-        HeaderStore: {
-          headerData: headerModelData,
-        },
+        BlogStore: Immutable.Map({
+          [storeValue]: Immutable.List(blogsModelData),
+        }),
+          HeaderStore: Immutable.Map({
+          headerData: Immutable.List(navConfig.current),
+        }),
       };
       next();
     }))
@@ -64,10 +67,10 @@ function fetchData(url, storeValue, req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          [storeValue]: [],
+          [storeValue]: Immutable.List([]),
         },
         HeaderStore: {
-          headerData: [],
+          headerData: navConfig.current,
         },
       };
 

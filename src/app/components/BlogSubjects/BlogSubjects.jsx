@@ -8,25 +8,10 @@ class BlogSubjects extends React.Component {
   constructor(props) {
     super(props);
 
-    this._fetchSubject = this._fetchSubject.bind(this);
+    this.fetchSubject = this.fetchSubject.bind(this);
   }
 
-  _tagIcon() {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 32 32"
-        className="svgIcon"
-      >
-        <title>tag.icon</title>
-        <path d="M26.45536,26.45536H16.80078L4.92843,14.58216l9.65373-9.65373,11.8732,11.87235v9.65458ZM17.87606,23.859h5.983v-5.983L14.58216,8.5992l-5.983,5.983Z"/>
-      </svg>
-    );
-  }
-
-  _fetchSubject(subject, subjectId, e) {
+  fetchSubject(subject, subjectId, e) {
     e.preventDefault();
 
     axios
@@ -43,12 +28,10 @@ class BlogSubjects extends React.Component {
   }
 
   routeHandler(subject) {
-    console.log('router transition to: ', `/blog/subject/${subject}`);
     this.context.router.push(`/blog/subjects/${subject}`);
-    console.log('after transition');
   }
 
-  _getList(subjects) {
+  getList(subjects) {
     const subjectsList = subjects.slice(0, this.props.maxSubjectsShown);
 
     return subjectsList.map((subject, index) => {
@@ -57,8 +40,8 @@ class BlogSubjects extends React.Component {
           <Link
             to={`/blog/subjects/${subject.id}`}
             className="tagLink"
-            onClick={this._fetchSubject.bind(subject, subject.id, this)}>
-            {this._tagIcon()}
+            onClick={this.fetchSubject.bind(subject, subject.id, this)}>
+            {this.tagIcon()}
             {subject.name}
           </Link>
         </li>
@@ -66,15 +49,30 @@ class BlogSubjects extends React.Component {
     });
   }
 
-  _renderContent() {
+  tagIcon() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 32 32"
+        className="svgIcon"
+      >
+        <title>tag.icon</title>
+        <path d="M26.45536,26.45536H16.80078L4.92843,14.58216l9.65373-9.65373,11.8732,11.87235v9.65458ZM17.87606,23.859h5.983v-5.983L14.58216,8.5992l-5.983,5.983Z" />
+      </svg>
+    );
+  }
+
+  renderContent() {
     /* if there is not any subject this component musnt generate any html */
     if (! this.props.subjects || this.props.subjects.length === 0){
       return null;
     }
 
     /* if there are subjects*/
-    let subjects = this.props.subjects ? this._getList(this.props.subjects) : null;
-    subjects = this.props.maxSubjectsShown ? subjects : subjects;
+    let subjects = this.props.subjects ? this.getList(this.props.subjects) : null;
+    subjects = this.props.maxSubjectsShown ? subjects.slice(0, this.props.maxSubjectsShown) : subjects;
 
     return (
       <div className={this.props.className}>
@@ -86,7 +84,7 @@ class BlogSubjects extends React.Component {
   }
 
   render() {
-    return this._renderContent();
+    return this.renderContent();
   }
 }
 
