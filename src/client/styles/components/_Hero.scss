@@ -8,7 +8,7 @@
     width: 100%;
     color: $WHITE_COLOR;
 
-    &-serie, &-picture, &-description, &-seriesCount {
+    &-serie, &-description, &-seriesCount {
       @include visuallyHidden;
     }
 
@@ -37,56 +37,75 @@
   }
   
   @include layout-at(9, $landscape) {
+    @include aspect-ratio(16, 3);
     height: auto;
-    @include aspect-ratio(42, 10);
 
     @include grid-span(9);
     max-height: 314px;
-    /* @todo determine background color or what should be shown when no image */
     float: none;
     overflow: hidden;
 
     &-content {
-      @include add-grid(27);
+      @include grid-span(7, 2);
       max-width: 1312px;
       margin: auto;
-      margin-top: 18px;
+      margin-top: 20px;
 
       &-serie {
         @include displayVisuallyHidden;
-        @include grid-span(15, 12);
         text-transform: uppercase;
         font-size: 14px;
         font-weight: bold;
-        margin-top: 4%;
+        margin-top: 3%;
+        margin-left: 20px;
       }
 
       &-title {
-        @include grid-span(15, 12);
         letter-spacing: 1px;
-        margin-top: 9%;
+        margin-left: 20px;
+        margin-top: 0;
       }
 
       &-description {
         @include displayVisuallyHidden;
-        @include grid-span(15, 12);
-        margin-top: 13%;
         line-height: 22px;
+        margin-left: 20px;
+        margin-top: 0;
       }
 
       &-seriesCount {
         @include displayVisuallyHidden;
-        @include grid-span(15, 12);
-        margin-top: 18%;
         color: $COOLGRAY_COLOR;
+        margin-left: 20px;
+        margin-top: 0;
+      }   
+    }
+  }
+
+  @include layout-at(45, $desktop) {
+
+    &-content {
+      width: auto;
+
+      &-serie {
+        @include grid-span(26, 7);
+        margin-top: 3%;
       }
 
-      &-picture {
-        @include displayVisuallyHidden;
-        @include grid-span(6, 5);
-        border-radius: 50%;
-        height: 94%;
-      }    
+      &-title {
+        @include grid-span(26, 7);
+        margin-top: 5%;
+      }
+
+      &-description {
+        @include grid-span(26, 7);
+        margin-top: 8%;
+      }
+
+      &-seriesCount {
+       @include grid-span(26, 7); 
+        margin-top: 11%;
+      }
     }
   }
 }
