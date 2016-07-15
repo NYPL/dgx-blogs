@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactRedirect from 'react-redirect';
 
 import Store from '../../stores/Store.js';
 
