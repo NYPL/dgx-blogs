@@ -8,32 +8,33 @@
     width: 100%;
     color: $WHITE_COLOR;
 
-    &-serie, &-description, &-seriesCount {
+    &-picture {
       @include visuallyHidden;
     }
 
-    &-title {
-      @include Kievit-Regular;
-      margin-left: 18px;
-      text-transform: capitalize;
-      font-size: 28px;
-      margin-top: 35px;
+    &-texts {
+      padding-left: 20px;
 
-      .nypl-icon-wedge-down {
+      &-serie, &-description, &-seriesCount {
         @include visuallyHidden;
-        font-weight: bold;
+      }
+
+      &-title {
+        @include Kievit-Regular;
+        text-transform: capitalize;
+        font-size: 28px;
+        margin-top: 35px;
+
+        .nypl-icon-wedge-down {
+          @include visuallyHidden;
+          font-weight: bold;
+        }
       }
     }
   }
 
   @include layout-at(9, $portrait) {
 
-    &-content {
-
-      &-title {
-        margin-left: 45px;
-      }
-    }
   }
   
   @include layout-at(9, $landscape) {
@@ -47,64 +48,69 @@
 
     &-content {
       @include grid-span(7, 2);
+      @include add-grid(18);
       max-width: 1312px;
       margin: auto;
       margin-top: 20px;
 
-      &-serie {
-        @include displayVisuallyHidden;
-        text-transform: uppercase;
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 3%;
-        margin-left: 20px;
+      &-texts {
+        @include grid-span(10, 6);
+
+        &-serie {
+          @include displayVisuallyHidden;
+          text-transform: uppercase;
+          font-size: 14px;
+          font-weight: bold;
+          margin-top: 3%;
+        }
+
+        &-title {
+          letter-spacing: 1px;
+          margin-top: 0;
+        }
+
+        &-description {
+          @include displayVisuallyHidden;
+          line-height: 22px;
+          margin-top: 0;
+        }
+
+        &-seriesCount {
+          @include displayVisuallyHidden;
+          color: $COOLGRAY_COLOR;
+          margin-top: 0;
+        }   
       }
 
-      &-title {
-        letter-spacing: 1px;
-        margin-left: 20px;
-        margin-top: 0;
-      }
+      &-texts.no-picture {
+        @include grid-span(10);
+      } 
 
-      &-description {
+      &-picture {
         @include displayVisuallyHidden;
-        line-height: 22px;
-        margin-left: 20px;
-        margin-top: 0;
+        @include grid-span(4);
+        padding-left: 20px;
+        border-radius: 50%;
+        height: 92%;
       }
-
-      &-seriesCount {
-        @include displayVisuallyHidden;
-        color: $COOLGRAY_COLOR;
-        margin-left: 20px;
-        margin-top: 0;
-      }   
     }
   }
 
-  @include layout-at(45, $desktop) {
+  @include layout-at(18, $desktop) {
 
     &-content {
       width: auto;
 
-      &-serie {
-        @include grid-span(26, 7);
-        margin-top: 3%;
+      &-texts {
+        @include grid-span(11, 8);
       }
 
-      &-title {
-        @include grid-span(26, 7);
-        margin-top: 5%;
+      &-texts.no-picture {
+        @include grid-span(11, 3);
       }
 
-      &-description {
-        @include grid-span(26, 7);
-        margin-top: 8%;
-      }
-
-      &-seriesCount {
-       @include grid-span(26, 7); 
-        margin-top: 11%;
+      &-picture {
+        @include grid-span(4, 3);
       }
     }
   }
