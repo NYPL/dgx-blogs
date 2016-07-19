@@ -18,6 +18,9 @@ class Hero extends React.Component {
   render() {
     const alignClass = (this.props.picture) ? '' : 'no-picture';
 
+    /* @todo something more sophisticated and hacky for this? */
+    let descriptionText = (this.props.description.length < 120) ? this.props.description : this.props.description.substring(0, 120) + " ...";
+
     return (
       <div className="hero">
         <div className="hero-content">
@@ -25,7 +28,7 @@ class Hero extends React.Component {
           <div className={`hero-content-texts ${alignClass}`}>
             <p className="hero-content-texts-serie">{this.props.type}</p>
             <h1 className="hero-content-texts-title">{this.props.title} <span className="nypl-icon-wedge-down"></span></h1>
-            <p className="hero-content-texts-description">{this.props.description}</p>
+            <p className="hero-content-texts-description">{descriptionText}</p>
             <p className="hero-content-texts-seriesCount">{this.props.postCount} Post</p>
           </div>
         </div>
