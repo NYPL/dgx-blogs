@@ -51,7 +51,7 @@
       @include add-grid(18);
       max-width: 1312px;
       margin: auto;
-      margin-top: 20px;
+      margin-top: 6px;
 
       &-texts {
         @include grid-span(10, 6);
@@ -88,10 +88,10 @@
 
       &-picture {
         @include displayVisuallyHidden;
-        @include grid-span(4);
+        width: auto;
         padding-left: 20px;
         border-radius: 50%;
-        height: 92%;
+        height: 98%;
       }
     }
   }
@@ -111,6 +111,8 @@
 
       &-picture {
         @include grid-span(4, 3);
+        /* reset the width to avoid ratio deformation */
+        width: auto;
       }
     }
   }
