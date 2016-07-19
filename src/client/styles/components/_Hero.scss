@@ -88,10 +88,10 @@
 
       &-picture {
         @include displayVisuallyHidden;
-        width: auto;
+        @include grid-span(4);
         padding-left: 20px;
         border-radius: 50%;
-        height: 98%;
+        height: 96%;
       }
     }
   }
@@ -111,8 +111,6 @@
 
       &-picture {
         @include grid-span(4, 3);
-        /* reset the width to avoid ratio deformation */
-        width: auto;
       }
     }
   }
