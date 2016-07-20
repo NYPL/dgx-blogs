@@ -8,85 +8,110 @@
     width: 100%;
     color: $WHITE_COLOR;
 
-    &-serie, &-picture, &-description, &-seriesCount {
+    &-picture {
       @include visuallyHidden;
     }
 
-    &-title {
-      @include Kievit-Regular;
-      margin-left: 18px;
-      text-transform: capitalize;
-      font-size: 28px;
-      margin-top: 35px;
+    &-texts {
+      padding-left: 20px;
 
-      .nypl-icon-wedge-down {
+      &-serie, &-description, &-seriesCount {
         @include visuallyHidden;
-        font-weight: bold;
+      }
+
+      &-title {
+        @include Kievit-Regular;
+        text-transform: capitalize;
+        font-size: 28px;
+        margin-top: 35px;
+
+        .nypl-icon-wedge-down {
+          @include visuallyHidden;
+          font-weight: bold;
+        }
       }
     }
   }
 
   @include layout-at(9, $portrait) {
 
-    &-content {
-
-      &-title {
-        margin-left: 45px;
-      }
-    }
   }
   
   @include layout-at(9, $landscape) {
+    @include aspect-ratio(16, 3);
     height: auto;
-    @include aspect-ratio(42, 10);
 
     @include grid-span(9);
     max-height: 314px;
-    /* @todo determine background color or what should be shown when no image */
     float: none;
     overflow: hidden;
 
     &-content {
-      @include add-grid(27);
+      @include grid-span(7, 2);
+      @include add-grid(18);
       max-width: 1312px;
       margin: auto;
-      margin-top: 18px;
+      margin-top: 6px;
 
-      &-serie {
-        @include displayVisuallyHidden;
-        @include grid-span(15, 12);
-        text-transform: uppercase;
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 4%;
+      &-texts {
+        @include grid-span(10, 6);
+
+        &-serie {
+          @include displayVisuallyHidden;
+          text-transform: uppercase;
+          font-size: 14px;
+          font-weight: bold;
+          margin-top: 3%;
+        }
+
+        &-title {
+          letter-spacing: 1px;
+          margin-top: 0;
+        }
+
+        &-description {
+          @include displayVisuallyHidden;
+          line-height: 22px;
+          margin-top: 0;
+        }
+
+        &-seriesCount {
+          @include displayVisuallyHidden;
+          color: $COOLGRAY_COLOR;
+          margin-top: 0;
+        }   
       }
 
-      &-title {
-        @include grid-span(15, 12);
-        letter-spacing: 1px;
-        margin-top: 9%;
-      }
-
-      &-description {
-        @include displayVisuallyHidden;
-        @include grid-span(15, 12);
-        margin-top: 13%;
-        line-height: 22px;
-      }
-
-      &-seriesCount {
-        @include displayVisuallyHidden;
-        @include grid-span(15, 12);
-        margin-top: 18%;
-        color: $COOLGRAY_COLOR;
-      }
+      &-texts.no-picture {
+        @include grid-span(10);
+      } 
 
       &-picture {
         @include displayVisuallyHidden;
-        @include grid-span(6, 5);
+        @include grid-span(4);
+        padding-left: 20px;
         border-radius: 50%;
-        height: 94%;
-      }    
+        height: 96%;
+      }
+    }
+  }
+
+  @include layout-at(18, $desktop) {
+
+    &-content {
+      width: auto;
+
+      &-texts {
+        @include grid-span(11, 8);
+      }
+
+      &-texts.no-picture {
+        @include grid-span(11, 3);
+      }
+
+      &-picture {
+        @include grid-span(4, 3);
+      }
     }
   }
 }
