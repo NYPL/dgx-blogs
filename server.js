@@ -74,6 +74,9 @@ app.use('/', (req, res) => {
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
 
+      // Fire off the Feature Flag prior to render
+      FeatureFlags.utils.activateFeature('shop-link');
+
       iso.add(html, alt.flush());
       res
         .status(200)
