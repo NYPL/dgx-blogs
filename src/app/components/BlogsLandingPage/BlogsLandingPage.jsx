@@ -21,8 +21,7 @@ class BlogsLandingPage extends React.Component {
     });
   }
   
-  render() {
-  console.log('BlogsLandingPage state', this.state);  
+  render() { 
     return (
       <div className="blogsLandingPage">
         <Hero />

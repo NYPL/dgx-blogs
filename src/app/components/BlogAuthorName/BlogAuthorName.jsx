@@ -28,9 +28,7 @@ class BlogAuthorName extends React.Component {
   }
 
   routeHandler() {
-    console.log('router transition to: ', `/blog/author/${this.props.slug}`);
     this.context.router.push(`/blog/author/${this.props.slug}`);
-    console.log('after transition');
   }
 
   render() {

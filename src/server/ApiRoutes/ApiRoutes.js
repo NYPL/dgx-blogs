@@ -42,6 +42,8 @@ function getHeaderData() {
 
 function fetchData(url, storeValue, req, res, next) {
 
+  console.log('fetchData calling url ', url);
+
   axios
     .all([getHeaderData(), fetchApiData(url)])
     .then(axios.spread((headerData, blogsData) => {
@@ -66,9 +68,9 @@ function fetchData(url, storeValue, req, res, next) {
       console.log(`Attempted to call : ${url}`);
 
       res.locals.data = {
-        BlogStore: {
+        BlogStore: Immutable.Map({
           [storeValue]: Immutable.List([]),
-        },
+        }),
         HeaderStore: {
           headerData: navConfig.current,
         },
