@@ -7,7 +7,6 @@ import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
 import BlogAuthorCard from '../BlogAuthorCard/BlogAuthorCard';
 import BackToBlogs from '../BackToBlogs/BackToBlogs';
-import NotFoundAlert from '../NotFoundAlert/NotFoundAlert';
 
 class BlogPage extends React.Component {
   constructor(props) {
@@ -16,16 +15,19 @@ class BlogPage extends React.Component {
     this.state = Store.getState();
   }
 
-  render() {
-    const blog = this.state.get('blogPost').first().toJS();
+  componentDidMount() {
+    if (this.state.get('blogPost').isEmpty()) {
+      this.context.router.push('/blog/not-found');
+      return;
+    }
+  }
 
-    /* check if the blog really exists, if not do not render */
-    if (blog === undefined) {
-      return (
-        <NotFoundAlert />
-        );
+  render() {
+    if (this.state.get('blogPost').isEmpty()) {
+      return null;
     }
 
+    const blog = this.state.get('blogPost').first().toJS();
     const { author, subjects, title, date, mainPicture } = blog;
 
     return (
@@ -49,5 +51,11 @@ class BlogPage extends React.Component {
     );
   }
 }
+
+BlogPage.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
+};
 
 export default BlogPage;

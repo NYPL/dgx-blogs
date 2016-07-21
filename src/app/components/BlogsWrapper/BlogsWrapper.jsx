@@ -5,7 +5,6 @@ import Store from '../../stores/Store.js';
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
-import NotFoundAlert from '../NotFoundAlert/NotFoundAlert';
 
 import {
   map as _map,
@@ -24,6 +23,11 @@ class BlogsWrapper extends React.Component {
 
   componentDidMount() {
     Store.listen(this._onChange);
+
+    if (this.state.get('blogs').isEmpty()) {
+      this.context.router.push('/blog/not-found');
+      return;
+    }
   }
 
   componentWillUnmount() {
@@ -41,14 +45,10 @@ class BlogsWrapper extends React.Component {
   }
 
   render() {
-
     /* Check if state has any content for blog before proceed to render */
     if (this.state.get('blogs').isEmpty()) {
-      this.context.router.push('/blog/not-found');
-
       return null;
     } else {
-
       const blogs = this._getList(this.state.get('blogs').toJS());
 
       let pageType;
@@ -108,7 +108,6 @@ class BlogsWrapper extends React.Component {
         </div>
       );
     }
-    
   }
 }
 
