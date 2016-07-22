@@ -16,7 +16,6 @@ class BlogAuthorName extends React.Component {
     axios
       .get(`/blog/api?author=${this.props.slug}`)
       .then(response => {
-        console.log(response);
         Actions.updateBlogs(response.data);
       })
       .then(response => {
@@ -28,9 +27,7 @@ class BlogAuthorName extends React.Component {
   }
 
   routeHandler() {
-    console.log('router transition to: ', `/blog/author/${this.props.slug}`);
     this.context.router.push(`/blog/author/${this.props.slug}`);
-    console.log('after transition');
   }
 
   render() {
