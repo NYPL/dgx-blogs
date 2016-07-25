@@ -15,7 +15,7 @@ class BlogSubjects extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/blog/api?subject=${subject}`)
+      .get(`/blog/beta/api?subject=${subject}`)
       .then(response => {
         Actions.updateBlogs(response.data);
       })
@@ -28,7 +28,7 @@ class BlogSubjects extends React.Component {
   }
 
   routeHandler(subject) {
-    this.context.router.push(`/blog/subjects/${subject}`);
+    this.context.router.push(`/blog/beta/subjects/${subject}`);
   }
 
   getList(subjects) {
@@ -38,7 +38,7 @@ class BlogSubjects extends React.Component {
       return (
         <li className="tagItem" key={index}>
           <Link
-            to={`/blog/subjects/${subject.id}`}
+            to={`/blog/beta/subjects/${subject.id}`}
             className="tagLink"
             onClick={this.fetchSubject.bind(subject, subject.id, this)}>
             {this.tagIcon()}

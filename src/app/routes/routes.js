@@ -15,12 +15,12 @@ import NotFoundAlert from '../components/NotFoundAlert/NotFoundAlert';
 const routes = {
   client: (
     <Route path="/" component={Application}>
-      <Route path='blog' component={BlogsWrapper} />
-      <Route path='blog/author/:author' component={BlogsWrapper} />
-      <Route path='blog/series/:series' component={BlogsWrapper} />
-      <Route path='blog/subjects/:subjects' component={BlogsWrapper} />
-      <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} />
-      <Route path='blog/not-found' component={NotFoundAlert} />
+      <Route path='blog/beta' component={BlogsWrapper} />
+      <Route path='blog/beta/author/:author' component={BlogsWrapper} />
+      <Route path='blog/beta/series/:series' component={BlogsWrapper} />
+      <Route path='blog/beta/subjects/:subjects' component={BlogsWrapper} />
+      <Route path='blog/beta/:year/:month/:day/:blogId' component={BlogPage} />
+      <Route path='blog/beta/not-found' component={NotFoundAlert} />
     </Route>
   ),
   server: (
