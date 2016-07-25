@@ -25,7 +25,7 @@ class BlogsWrapper extends React.Component {
     Store.listen(this._onChange);
 
     if (this.state.get('blogs').isEmpty()) {
-      this.context.router.push('/blog/not-found');
+      this.context.router.push('/blog/beta/not-found');
       return;
     }
   }

@@ -30,6 +30,7 @@ const routes = {
       <Route path='series/:series' component={BlogsWrapper} />
       <Route path='subjects/:subjects' component={BlogsWrapper} />
       <Route path=':year/:month/:day/:blogId' component={BlogPage} />
+      <Route path='not-found' component={NotFoundAlert} />
     </Route>
   ),
 };
