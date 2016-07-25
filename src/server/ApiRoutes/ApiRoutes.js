@@ -42,8 +42,6 @@ function getHeaderData() {
 
 function fetchData(url, storeValue, req, res, next) {
 
-  console.log('fetchData calling url ', url);
-
   axios
     .all([getHeaderData(), fetchApiData(url)])
     .then(axios.spread((headerData, blogsData) => {
@@ -153,6 +151,7 @@ function fetchThroughAjax(req, res, next) {
   const author = query.author || '';
   const series = query.series || '';
   const blog = query.blog || '';
+  const page = query.page || 1;
 
   if (subject !== '') {
     blogsOptions.filters = { relationships: { 'blog-subjects': subject } };
@@ -173,11 +172,14 @@ function fetchThroughAjax(req, res, next) {
       blogsOptions.filters = {};
     }
   }
+  /* is there a better way to do this using the parser */
+  const pageSuffix = `&page[number]=${page}`;
 
   const apiUrl = parser.getCompleteApi(blogsOptions);
   axios
-    .get(apiUrl)
+    .get(apiUrl + pageSuffix)
     .then(response => {
+      console.log('ajax call to:' , apiUrl + pageSuffix);
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 

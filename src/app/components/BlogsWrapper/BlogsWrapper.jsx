@@ -5,6 +5,7 @@ import Store from '../../stores/Store.js';
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
+import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 
 import {
   map as _map,
@@ -103,6 +104,7 @@ class BlogsWrapper extends React.Component {
             </div>
             <ul className="blogsList">
               {blogs}
+              <LoadMoreButton />
             </ul>
           </div>
         </div>
