@@ -27,9 +27,11 @@ class BlogStore {
 
   addMoreBlogs(blogs) {
     /* add blogs to the store state here */
-    this.setState(this.state.setIn(['blogs'], Immutable.fromJS(blogs)));
-    this.setState(this.state.get(['blogs']).push(blogs));
-    console.log('state', this.state);
+    const jsStore = this.state.toJS();
+    console.log('jsStore', jsStore);
+    jsStore.blogs = jsStore.blogs.concat(blogs);
+    this.setState(Immutable.fromJS(jsStore));
+    console.log('state after adding blogs', this.state);
   }
 }
 
