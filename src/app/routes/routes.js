@@ -10,6 +10,7 @@ import Application from '../components/Application/Application';
 import BlogPage from '../components/BlogPage/BlogPage';
 import BlogsLandingPage from '../components/BlogsLandingPage/BlogsLandingPage';
 import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
+import NotFoundAlert from '../components/NotFoundAlert/NotFoundAlert';
 
 const routes = {
   client: (
@@ -19,6 +20,7 @@ const routes = {
       <Route path='blog/series/:series' component={BlogsWrapper} />
       <Route path='blog/subjects/:subjects' component={BlogsWrapper} />
       <Route path='blog/:year/:month/:day/:blogId' component={BlogPage} />
+      <Route path='blog/not-found' component={NotFoundAlert} />
     </Route>
   ),
   server: (

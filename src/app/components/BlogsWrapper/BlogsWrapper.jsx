@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { map as _map } from 'underscore';
-
 import Store from '../../stores/Store.js';
 
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
@@ -9,6 +7,7 @@ import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 
 import {
+  map as _map,
   isEmpty as _isEmpty,
   keys as _keys,
   findWhere as _findWhere,
@@ -24,6 +23,11 @@ class BlogsWrapper extends React.Component {
 
   componentDidMount() {
     Store.listen(this._onChange);
+
+    if (this.state.get('blogs').isEmpty()) {
+      this.context.router.push('/blog/not-found');
+      return;
+    }
   }
 
   componentWillUnmount() {
@@ -51,7 +55,6 @@ class BlogsWrapper extends React.Component {
     let subjects;
     let author;
     let hero = <HeroSinglePost />;
-    let postCount = null;
 
     if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
@@ -105,5 +108,11 @@ class BlogsWrapper extends React.Component {
     );
   }
 }
+
+BlogsWrapper.contextTypes = {
+  router: function contextType() {
+    return React.PropTypes.func.isRequired;
+  },
+};
 
 export default BlogsWrapper;

@@ -42,6 +42,8 @@ function getHeaderData() {
 
 function fetchData(url, storeValue, req, res, next) {
 
+  console.log('fetchData calling url ', url);
+
   axios
     .all([getHeaderData(), fetchApiData(url)])
     .then(axios.spread((headerData, blogsData) => {
