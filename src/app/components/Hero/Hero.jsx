@@ -19,7 +19,7 @@ class Hero extends React.Component {
     const alignClass = (this.props.picture) ? '' : 'no-picture';
 
     /* @todo something more sophisticated and hacky for this? */
-    let descriptionText = (this.props.description.length < 120) ? this.props.description : this.props.description.substring(0, 120) + " ...";
+    let descriptionText = (this.props.description.length < 150) ? this.props.description : this.props.description.substring(0, 150) + " ...";
 
     return (
       <div className="hero">
