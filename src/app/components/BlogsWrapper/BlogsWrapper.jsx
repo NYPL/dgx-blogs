@@ -104,7 +104,7 @@ class BlogsWrapper extends React.Component {
           </div>
           <ul className="blogsList">
             {blogs}
-            <LoadMoreButton />
+            <LoadMoreButton postsLeft={currentState.meta.count - currentState.blogList.length}/>
           </ul>
         </div>
       </div>
