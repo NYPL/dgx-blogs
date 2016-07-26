@@ -45,7 +45,7 @@
 
       .blogsList {
 
-        @include grid-span(7, 2);
+        @include grid-span(6, 2);
       }
     }
   }
@@ -60,7 +60,7 @@
 
       .blogsList {
 
-        @include grid-span(8,2);
+        @include grid-span(6,2);
         @include add-grid(8);
       }
     }
