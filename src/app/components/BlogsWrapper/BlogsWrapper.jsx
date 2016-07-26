@@ -47,7 +47,6 @@ class BlogsWrapper extends React.Component {
   render() {
     const currentState = this.state.get('blogs').toJS();
     const blogs = this._getList(currentState.blogList);
-    console.log('blogswrapper currentState', currentState);
 
     let pageType;
     let param;
