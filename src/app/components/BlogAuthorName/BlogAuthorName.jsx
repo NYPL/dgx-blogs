@@ -16,7 +16,6 @@ class BlogAuthorName extends React.Component {
     axios
       .get(`/blog/beta/api?author=${this.props.slug}`)
       .then(response => {
-        console.log(response);
         Actions.updateBlogs(response.data);
       })
       .then(response => {

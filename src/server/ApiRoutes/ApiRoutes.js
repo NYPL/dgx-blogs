@@ -55,9 +55,9 @@ function fetchData(url, storeValue, req, res, next) {
 
       res.locals.data = {
         BlogStore: Immutable.Map({
-          [storeValue]: Immutable.List(blogsModelData),
+          [storeValue]: { meta: { count: blogsData.data.meta.count }, blogList: blogsModelData },
         }),
-          HeaderStore: Immutable.Map({
+        HeaderStore: Immutable.Map({
           headerData: Immutable.List(navConfig.current),
         }),
       };
@@ -68,9 +68,9 @@ function fetchData(url, storeValue, req, res, next) {
       console.log(`Attempted to call : ${url}`);
 
       res.locals.data = {
-        BlogStore: Immutable.Map({
-          [storeValue]: Immutable.List([]),
-        }),
+        BlogStore: {
+          [storeValue]: Immutable.Map([]),
+        },
         HeaderStore: {
           headerData: navConfig.current,
         },
@@ -181,7 +181,7 @@ function fetchThroughAjax(req, res, next) {
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      res.json(blogsModelData);
+      res.json({ blogList: blogsModelData, meta: { count: response.data.meta.count } });
     })
     .catch(error => {
       console.log(`Error calling API : ${error}`);
