@@ -18,17 +18,19 @@ class BlogsWrapper extends React.Component {
   constructor(props) {
     super(props);
 
+    //this.state = Store.getState().toJS();
     this.state = Store.getState();
+    console.log('BLOGSWRAPPER: state gotten in constructor:', this.state);
     this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
     Store.listen(this._onChange);
 
-    if (this.state.get('blogs').isEmpty()) {
-      this.context.router.push('/blog/not-found');
-      return;
-    }
+    // if (this.state.get('blogs').isEmpty()) {
+    //   this.context.router.push('/blog/not-found');
+    //   return;
+    // }
   }
 
   componentWillUnmount() {
@@ -36,7 +38,8 @@ class BlogsWrapper extends React.Component {
   }
 
   _onChange() {
-    this.state = Store.getState();
+    //this.setState(Store.getState().toJS());
+    this.setState(Store.getState());
   }
 
   _getList(blogsList) {
@@ -45,10 +48,28 @@ class BlogsWrapper extends React.Component {
     });
   }
 
+  renderLoadMoreButton(currentState, filter) {
+    const postsLeft = currentState.meta.count - currentState.blogList.length;
+
+    if (postsLeft <= 0) {
+      return null;
+    } else {
+
+      return (
+        <LoadMoreButton
+          postsLeft={postsLeft}
+          filter={filter}
+        />
+      );
+    }
+
+  }
+
   render() {
-    const currentState = this.state.get('blogs').toJS();
+    console.log('BLOGSWRAPPER: blogs state before render', this.state);
+    const currentState = this.state.blogs;
     const blogs = this._getList(currentState.blogList);
-    console.log('blogswrapper currentState', currentState);
+    console.log('BLOGSWRAPPER: currentState meta', currentState.meta);
 
     let pageType;
     let param;
@@ -56,6 +77,9 @@ class BlogsWrapper extends React.Component {
     let subjects;
     let author;
     let hero = <HeroSinglePost />;
+
+    /* default filter to get the content through ajax */
+    let filter = 'blog=all';
 
     if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
@@ -72,6 +96,11 @@ class BlogsWrapper extends React.Component {
           picture={author.profileImgUrl}
           postCount={currentState.meta.count}
         />);
+        console.log('BLOGSWRAPPER: author data', author);
+
+        /* set filter to get ajax content only for an author */
+        filter = `author=${author.id}`;
+
       } else if (pageType === 'series') {
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
         /* @todo is it right to striptag the body? */
@@ -82,13 +111,21 @@ class BlogsWrapper extends React.Component {
           picture={series.image.url}
           postCount={currentState.meta.count}
         />);
+
+        /* set filter to get ajax content only for a series */
+        filter = `series=${series.id}`;
+
       } else if (pageType === 'subjects') {
+
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
         hero = (<Hero
           type="Blog Subject"
           title={subjects.name}
           postCount={currentState.meta.count}
         />);
+
+        /* set filter to get ajax content only for a subject */
+        filter = `subject=${subjects.id}`;
       }
 
     }
@@ -104,7 +141,7 @@ class BlogsWrapper extends React.Component {
           </div>
           <ul className="blogsList">
             {blogs}
-            <LoadMoreButton postsLeft={currentState.meta.count - currentState.blogList.length}/>
+            {this.renderLoadMoreButton(currentState, filter)}
           </ul>
         </div>
       </div>

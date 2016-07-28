@@ -19,7 +19,7 @@ class BlogListing extends React.Component {
     axios
       .get(`/blog/api?blog=${this.props.slug}`)
       .then(response => {
-        Actions.updateBlogPost(response.data);
+        Actions.updateBlogPost({ blogs: response.data });
       })
       .then(response => {
         this.routeHandler(`/blog/${this.props.slug}`);
@@ -35,7 +35,7 @@ class BlogListing extends React.Component {
     axios
       .get(`/api?series=${this.props.series[0].id}`)
       .then(response => {
-        Actions.updateBlogs(response.data);
+        Actions.updateBlogs({ blogs: response.data });
       })
       .then(response => {
         this.routeHandler(`/blog/series/${this.props.series[0].id}`);

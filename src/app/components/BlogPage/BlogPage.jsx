@@ -16,18 +16,21 @@ class BlogPage extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.get('blogPost').isEmpty()) {
+    //if (this.state.get('blogPost').isEmpty()) {
+      console.log('BLOGPAGE: component state', this.state.blogPost.blogList);
+      if (this.state.blogPost.blogList[0] === undefined) {
       this.context.router.push('/blog/not-found');
       return;
     }
   }
 
   render() {
-    if (this.state.get('blogPost').isEmpty()) {
+    if (this.state.blogPost.blogList[0] === undefined) {
       return null;
     }
 
-    const blog = this.state.get('blogPost').first().toJS();
+    //const blog = this.state.get('blogPost').first().toJS();
+    const blog = this.state.blogPost.blogList[0];
     const { author, subjects, title, date, mainPicture } = blog;
 
     return (

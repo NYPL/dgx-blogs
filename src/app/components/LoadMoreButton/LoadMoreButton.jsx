@@ -6,7 +6,7 @@ class LoadMoreButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1
+      currentPage: 2
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -21,7 +21,7 @@ class LoadMoreButton extends React.Component {
     });
 
     /* build the url */
-    let url = `/blog/api?page=${this.state.currentPage}&${this.props.filter}`;
+    let url = `/blog/api?page=${this.state.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
 
     axios
       .get(url)
@@ -65,7 +65,8 @@ class LoadMoreButton extends React.Component {
 
 LoadMoreButton.defaultProps = {
   postsLeft: 'more',
-  filter: 'blog=all'
+  filter: 'blog=all',
+  pageSize: 25,
 };
 
 export default LoadMoreButton;

@@ -51,14 +51,22 @@ function fetchData(url, storeValue, req, res, next) {
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
+      // res.locals.data = {
+      //   BlogStore: Immutable.Map({
+      //     [storeValue]: { meta: { count: blogsData.data.meta.count }, blogList: blogsModelData },
+      //   }),
+      //   HeaderStore: Immutable.Map({
+      //     headerData: Immutable.List(navConfig.current),
+      //   }),
+      // };
       res.locals.data = {
-        BlogStore: Immutable.Map({
+        BlogStore: {
           [storeValue]: { meta: { count: blogsData.data.meta.count }, blogList: blogsModelData },
-        }),
-        HeaderStore: Immutable.Map({
-          headerData: Immutable.List(navConfig.current),
-        }),
-      };
+        },
+        HeaderStore: {
+          headerData: navConfig.current,
+        },
+      };      
       next();
     }))
     .catch(error => {
@@ -152,6 +160,7 @@ function fetchThroughAjax(req, res, next) {
   const series = query.series || '';
   const blog = query.blog || '';
   const page = query.page || 1;
+  const pageSize = query.pageSize || 25;
 
   if (subject !== '') {
     blogsOptions.filters = { relationships: { 'blog-subjects': subject } };
@@ -173,7 +182,7 @@ function fetchThroughAjax(req, res, next) {
     }
   }
   /* is there a better way to do this using the parser */
-  const pageSuffix = `&page[number]=${page}`;
+  const pageSuffix = `&page[number]=${page}&page[size]=${pageSize}`;
 
   const apiUrl = parser.getCompleteApi(blogsOptions);
   axios
