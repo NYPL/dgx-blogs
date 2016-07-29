@@ -24,6 +24,7 @@ class BlogStore {
         meta: {
           count: 0,
         },
+        currentPage: 1,
       },
       blogPost: []
     };
@@ -39,6 +40,7 @@ class BlogStore {
         meta: {
           count: blogs.blogs.meta.count
         },
+        currentPage: 1,
       },
       blogPost: this.state.blogPost
     }
@@ -66,11 +68,13 @@ class BlogStore {
     console.log('we have to add this to the store', blogs);
 
     const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
+    const currentPage = this.state.blogs.currentPage + 1;
 
     this.setState({
         blogs: {
           blogList: newBlogList,
           meta: this.state.blogs.meta,
+          currentPage: currentPage,
         },
         blogPost: this.state.blogPost,
       });

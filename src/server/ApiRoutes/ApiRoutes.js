@@ -61,7 +61,13 @@ function fetchData(url, storeValue, req, res, next) {
       // };
       res.locals.data = {
         BlogStore: {
-          [storeValue]: { meta: { count: blogsData.data.meta.count }, blogList: blogsModelData },
+          [storeValue]: {
+            meta: { 
+              count: blogsData.data.meta.count
+            },
+            blogList: blogsModelData,
+            currentPage: 1,
+          },
         },
         HeaderStore: {
           headerData: navConfig.current,

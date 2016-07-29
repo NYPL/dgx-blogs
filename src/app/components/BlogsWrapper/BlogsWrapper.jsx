@@ -35,6 +35,8 @@ class BlogsWrapper extends React.Component {
 
   componentWillUnmount() {
     Store.unlisten(this._onChange);
+
+    console.log('BLOGSWRAPPER: resetting page counter');
   }
 
   _onChange() {
@@ -59,10 +61,10 @@ class BlogsWrapper extends React.Component {
         <LoadMoreButton
           postsLeft={postsLeft}
           filter={filter}
+          currentPage={currentState.currentPage}
         />
       );
     }
-
   }
 
   render() {
@@ -86,6 +88,7 @@ class BlogsWrapper extends React.Component {
       param = this.props.params[pageType];
 
       if (pageType === 'author') {
+        console.log('BLOGSWRAPPER: pageType author state', currentState);
 
         author = currentState.blogList[0][pageType];
 
@@ -102,6 +105,8 @@ class BlogsWrapper extends React.Component {
         filter = `author=${author.id}`;
 
       } else if (pageType === 'series') {
+        console.log('BLOGSWRAPPER: pageType author series', currentState);
+
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
         /* @todo is it right to striptag the body? */
         hero = (<Hero
@@ -116,6 +121,7 @@ class BlogsWrapper extends React.Component {
         filter = `series=${series.id}`;
 
       } else if (pageType === 'subjects') {
+        console.log('BLOGSWRAPPER: pageType author subjects', currentState);
 
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
         hero = (<Hero

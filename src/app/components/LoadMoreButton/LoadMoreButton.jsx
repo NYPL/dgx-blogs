@@ -5,28 +5,21 @@ import Actions from '../../actions/Actions';
 class LoadMoreButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentPage: 2
-    };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
     e.preventDefault();
 
-    const newCount = this.state.currentPage + 1;
-
-    this.setState({
-      currentPage: newCount
-    });
+    console.log('LOADMOREBUTTON: going to page', this.props.currentPage);
 
     /* build the url */
-    let url = `/blog/api?page=${this.state.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
+    let url = `/blog/api?page=${this.props.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
 
     axios
       .get(url)
       .then(response => {
-        console.log('LoadMoreButton calling to ', `/blog/api?page=${this.state.currentPage}&${this.props.filter}`);
+        console.log('LoadMoreButton calling to ', `/blog/api?page=${this.props.currentPage}&${this.props.filter}`);
         Actions.addMoreBlogs(response.data);
       })
       .then(response => {
@@ -67,6 +60,7 @@ LoadMoreButton.defaultProps = {
   postsLeft: 'more',
   filter: 'blog=all',
   pageSize: 25,
+  currentPage: 1
 };
 
 export default LoadMoreButton;

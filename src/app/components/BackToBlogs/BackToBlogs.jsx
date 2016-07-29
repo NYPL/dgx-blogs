@@ -16,7 +16,7 @@ class BackToBlogs extends React.Component {
     axios
       .get('/blog/api?blog=all')
       .then(response => {
-        Actions.updateBlogs(response.data);
+        Actions.updateBlogs({ blogs: response.data });
       })
       .then(response => {
         this.routeHandler();
