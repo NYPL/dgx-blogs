@@ -14,7 +14,7 @@ class BlogAuthorName extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/blog/api?author=${this.props.slug}`)
+      .get(`/blog/beta/api?author=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogs(response.data);
       })
@@ -27,7 +27,7 @@ class BlogAuthorName extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`/blog/author/${this.props.slug}`);
+    this.context.router.push(`/blog/beta/author/${this.props.slug}`);
   }
 
   render() {
@@ -35,7 +35,7 @@ class BlogAuthorName extends React.Component {
       return (
         <p className={this.props.className}>
           <Link
-            to={`/blog/author/${this.props.slug}`}
+            to={`/blog/beta/author/${this.props.slug}`}
             className="blogAuthor-name-link"
             onClick={this._fetchAuthor}
           >

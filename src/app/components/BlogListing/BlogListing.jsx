@@ -17,12 +17,12 @@ class BlogListing extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/blog/api?blog=${this.props.slug}`)
+      .get(`/blog/beta/api?blog=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogPost(response.data);
       })
       .then(response => {
-        this.routeHandler(`/blog/${this.props.slug}`);
+        this.routeHandler(`/blog/beta/${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
@@ -38,7 +38,7 @@ class BlogListing extends React.Component {
         Actions.updateBlogs(response.data);
       })
       .then(response => {
-        this.routeHandler(`/blog/series/${this.props.series[0].id}`);
+        this.routeHandler(`/blog/beta/series/${this.props.series[0].id}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
@@ -67,7 +67,7 @@ class BlogListing extends React.Component {
       return (
         <Link
           className={`blogListing-series ${this.props.width}`}
-          to={`/blog/series/${this.props.series[0].id}`}
+          to={`/blog/beta/series/${this.props.series[0].id}`}
           onClick={this.fetchSeries}
         >
           {this.props.series[0].title}
@@ -83,7 +83,7 @@ class BlogListing extends React.Component {
         {this.seriesTitle()}
         <h2 className={`blogListing-title ${this.props.width}`}>
           <Link
-            to={`/blog/${this.props.slug}`}
+            to={`/blog/beta/${this.props.slug}`}
             onClick={this.fetchSingleBlog}
           >
             {this.props.title}

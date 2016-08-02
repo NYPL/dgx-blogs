@@ -14,7 +14,7 @@ class BlogAuthorViewMoreLink extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/blog/api?author=${this.props.slug}`)
+      .get(`/blog/beta/api?author=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogs(response.data);
       })
@@ -27,14 +27,14 @@ class BlogAuthorViewMoreLink extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`/blog/author/${this.props.slug}`);
+    this.context.router.push(`/blog/beta/author/${this.props.slug}`);
   }
 
   render() {
     return (
       <Link
         className="authorLink"
-        to={`/blog/author/${this.props.slug}`}
+        to={`/blog/beta/author/${this.props.slug}`}
         onClick={this._fetchAuthor}
       >
         <b>View all posts by</b> {this.props.fullName}
