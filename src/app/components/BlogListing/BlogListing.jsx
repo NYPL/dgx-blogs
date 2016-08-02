@@ -19,7 +19,7 @@ class BlogListing extends React.Component {
     axios
       .get(`/blog/api?blog=${this.props.slug}`)
       .then(response => {
-        Actions.updateBlogPost({ blogs: response.data });
+        Actions.updateBlogPost(response.data);
       })
       .then(response => {
         this.routeHandler(`/blog/${this.props.slug}`);
