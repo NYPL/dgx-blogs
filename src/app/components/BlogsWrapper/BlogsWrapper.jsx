@@ -25,8 +25,8 @@ class BlogsWrapper extends React.Component {
   componentDidMount() {
     Store.listen(this._onChange);
 
-    // if (this.state.get('blogs').isEmpty()) {
-    //   this.context.router.push('/blog/not-found');
+    // if (this.state.blogs[0] === undefined) {
+    //   this.context.router.push('/blog/beta/not-found');
     //   return;
     // }
   }
@@ -122,7 +122,6 @@ class BlogsWrapper extends React.Component {
         /* set filter to get ajax content only for a subject */
         filter = `subject=${subjects.id}`;
       }
-
     }
 
     return (

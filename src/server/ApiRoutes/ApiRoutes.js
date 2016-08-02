@@ -207,11 +207,11 @@ router
   .get(BlogQuery);
 
 router
-  .route('/blog')
+  .route('/blog/beta')
   .get(BlogsMainList);
 
 router
-  .route(/\/blog\/([^]+)\/?/)
+  .route(/\/blog\/beta\/([^]+)\/?/)
   .get(BlogQuery);
 
 router
@@ -219,7 +219,7 @@ router
   .get(fetchThroughAjax);
 
 router
-  .route('/blog/api')
+  .route('/blog/beta/api')
   .get(fetchThroughAjax);
 
 export default router;

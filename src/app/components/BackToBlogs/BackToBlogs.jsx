@@ -14,7 +14,7 @@ class BackToBlogs extends React.Component {
     e.preventDefault();
 
     axios
-      .get('/blog/api?blog=all')
+      .get('/blog/beta/api?blog=all')
       .then(response => {
         Actions.updateBlogs({ blogs: response.data });
       })
@@ -27,14 +27,14 @@ class BackToBlogs extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push('/blog');
+    this.context.router.push('/blog/beta');
   }
 
   render() {
     return (
       <Link
         className="backToLink"
-        to={'/blog'}
+        to={'/blog/beta'}
         onClick={this._fetchBlogList}
       >
         <span className="nypl-icon-wedge-left"></span> back to blogs
