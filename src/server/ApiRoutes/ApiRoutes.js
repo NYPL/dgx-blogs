@@ -51,14 +51,6 @@ function fetchData(url, storeValue, req, res, next) {
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      // res.locals.data = {
-      //   BlogStore: Immutable.Map({
-      //     [storeValue]: { meta: { count: blogsData.data.meta.count }, blogList: blogsModelData },
-      //   }),
-      //   HeaderStore: Immutable.Map({
-      //     headerData: Immutable.List(navConfig.current),
-      //   }),
-      // };
       res.locals.data = {
         BlogStore: {
           [storeValue]: {

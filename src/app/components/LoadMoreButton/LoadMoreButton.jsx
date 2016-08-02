@@ -19,7 +19,6 @@ class LoadMoreButton extends React.Component {
     axios
       .get(url)
       .then(response => {
-        console.log('LoadMoreButton calling to ', `/blog/api?page=${this.props.currentPage}&${this.props.filter}`);
         Actions.addMoreBlogs(response.data);
       })
       .then(response => {

@@ -16,7 +16,6 @@ class BlogPage extends React.Component {
   }
 
   componentDidMount() {
-    //if (this.state.get('blogPost').isEmpty()) {
       console.log('BLOGPAGE: component state', this.state.blogPost.blogList);
       if (this.state.blogPost.blogList[0] === undefined) {
       this.context.router.push('/blog/not-found');

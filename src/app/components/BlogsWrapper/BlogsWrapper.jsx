@@ -18,9 +18,7 @@ class BlogsWrapper extends React.Component {
   constructor(props) {
     super(props);
 
-    //this.state = Store.getState().toJS();
     this.state = Store.getState();
-    console.log('BLOGSWRAPPER: state gotten in constructor:', this.state);
     this._onChange = this._onChange.bind(this);
   }
 
@@ -35,12 +33,9 @@ class BlogsWrapper extends React.Component {
 
   componentWillUnmount() {
     Store.unlisten(this._onChange);
-
-    console.log('BLOGSWRAPPER: resetting page counter');
   }
 
   _onChange() {
-    //this.setState(Store.getState().toJS());
     this.setState(Store.getState());
   }
 
@@ -68,10 +63,8 @@ class BlogsWrapper extends React.Component {
   }
 
   render() {
-    console.log('BLOGSWRAPPER: blogs state before render', this.state);
     const currentState = this.state.blogs;
     const blogs = this._getList(currentState.blogList);
-    console.log('BLOGSWRAPPER: currentState meta', currentState.meta);
 
     let pageType;
     let param;
@@ -88,7 +81,6 @@ class BlogsWrapper extends React.Component {
       param = this.props.params[pageType];
 
       if (pageType === 'author') {
-        console.log('BLOGSWRAPPER: pageType author state', currentState);
 
         author = currentState.blogList[0][pageType];
 
@@ -99,16 +91,14 @@ class BlogsWrapper extends React.Component {
           picture={author.profileImgUrl}
           postCount={currentState.meta.count}
         />);
-        console.log('BLOGSWRAPPER: author data', author);
 
         /* set filter to get ajax content only for an author */
         filter = `author=${author.id}`;
 
       } else if (pageType === 'series') {
-        console.log('BLOGSWRAPPER: pageType author series', currentState);
 
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
-        /* @todo is it right to striptag the body? */
+
         hero = (<Hero
           type="Blog Series"
           title={series.title}
@@ -121,7 +111,6 @@ class BlogsWrapper extends React.Component {
         filter = `series=${series.id}`;
 
       } else if (pageType === 'subjects') {
-        console.log('BLOGSWRAPPER: pageType author subjects', currentState);
 
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
         hero = (<Hero
