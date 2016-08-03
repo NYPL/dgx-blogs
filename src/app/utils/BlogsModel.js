@@ -1,5 +1,4 @@
 import _ from 'underscore';
-import HtmlHelper from './HtmlHelper';
 
 class BlogsModel {
 
@@ -299,7 +298,7 @@ class BlogsModel {
     newBlog.id = b.id;
     newBlog.title = b.attributes.title.en.text;
 
-    newBlog.body.short = HtmlHelper.decode(b.attributes.body.en['short-text']);
+    newBlog.body.short = b.attributes.body.en['short-text'];
     newBlog.body.full = b.attributes.body.en['full-text'];
 
     newBlog.author = this.getAuthor(b['blog-profiles']);
