@@ -5,6 +5,7 @@ import Store from '../../stores/Store.js';
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
+import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 
 import {
   map as _map,
@@ -24,10 +25,10 @@ class BlogsWrapper extends React.Component {
   componentDidMount() {
     Store.listen(this._onChange);
 
-    if (this.state.get('blogs').isEmpty()) {
-      this.context.router.push('/blog/beta/not-found');
-      return;
-    }
+    // if (this.state.blogs[0] === undefined) {
+    //   this.context.router.push('/blog/beta/not-found');
+    //   return;
+    // }
   }
 
   componentWillUnmount() {
@@ -35,7 +36,7 @@ class BlogsWrapper extends React.Component {
   }
 
   _onChange() {
-    this.state = Store.getState();
+    this.setState(Store.getState());
   }
 
   _getList(blogsList) {
@@ -44,8 +45,25 @@ class BlogsWrapper extends React.Component {
     });
   }
 
+  renderLoadMoreButton(currentState, filter) {
+    const postsLeft = currentState.meta.count - currentState.blogList.length;
+
+    if (postsLeft <= 0) {
+      return null;
+    } else {
+
+      return (
+        <LoadMoreButton
+          postsLeft={postsLeft}
+          filter={filter}
+          currentPage={currentState.currentPage}
+        />
+      );
+    }
+  }
+
   render() {
-    const currentState = this.state.get('blogs').toJS();
+    const currentState = this.state.blogs;
     const blogs = this._getList(currentState.blogList);
 
     let pageType;
@@ -54,6 +72,9 @@ class BlogsWrapper extends React.Component {
     let subjects;
     let author;
     let hero = <HeroSinglePost />;
+
+    /* default filter to get the content through ajax */
+    let filter = 'blog=all';
 
     if (! _isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
@@ -70,9 +91,14 @@ class BlogsWrapper extends React.Component {
           picture={author.profileImgUrl}
           postCount={currentState.meta.count}
         />);
+
+        /* set filter to get ajax content only for an author */
+        filter = `author=${author.id}`;
+
       } else if (pageType === 'series') {
+
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
-        /* @todo is it right to striptag the body? */
+
         hero = (<Hero
           type="Blog Series"
           title={series.title}
@@ -80,13 +106,21 @@ class BlogsWrapper extends React.Component {
           picture={series.image.url}
           postCount={currentState.meta.count}
         />);
+
+        /* set filter to get ajax content only for a series */
+        filter = `series=${series.id}`;
+
       } else if (pageType === 'subjects') {
+
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
         hero = (<Hero
           type="Blog Subject"
           title={subjects.name}
           postCount={currentState.meta.count}
         />);
+
+        /* set filter to get ajax content only for a subject */
+        filter = `subject=${subjects.id}`;
       }
     }
 
@@ -101,6 +135,7 @@ class BlogsWrapper extends React.Component {
           </div>
           <ul className="blogsList">
             {blogs}
+            {this.renderLoadMoreButton(currentState, filter)}
           </ul>
         </div>
       </div>

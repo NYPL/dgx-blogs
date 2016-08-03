@@ -3,7 +3,7 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
 import Model from 'dgx-model-data';
-import Immutable from 'immutable';
+// import Immutable from 'immutable';
 
 import { navConfig } from 'dgx-header-component';
 
@@ -42,7 +42,8 @@ function getHeaderData() {
 
 function fetchData(url, storeValue, req, res, next) {
 
-  console.log('fetchData calling url ', url);
+  url = `${url}&page[number]=1&page[size]=25`;
+  console.log('API-ROUTES: first api call:', url);
 
   axios
     .all([getHeaderData(), fetchApiData(url)])
@@ -54,13 +55,19 @@ function fetchData(url, storeValue, req, res, next) {
       const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
-        BlogStore: Immutable.Map({
-          [storeValue]: { meta: { count: blogsData.data.meta.count }, blogList: blogsModelData },
-        }),
-        HeaderStore: Immutable.Map({
-          headerData: Immutable.List(navConfig.current),
-        }),
-      };
+        BlogStore: {
+          [storeValue]: {
+            meta: { 
+              count: blogsData.data.meta.count
+            },
+            blogList: blogsModelData,
+            currentPage: 2,
+          },
+        },
+        HeaderStore: {
+          headerData: navConfig.current,
+        },
+      };    
       next();
     }))
     .catch(error => {
@@ -69,7 +76,7 @@ function fetchData(url, storeValue, req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          [storeValue]: Immutable.Map([]),
+          [storeValue]: [],
         },
         HeaderStore: {
           headerData: navConfig.current,
@@ -153,6 +160,8 @@ function fetchThroughAjax(req, res, next) {
   const author = query.author || '';
   const series = query.series || '';
   const blog = query.blog || '';
+  const page = query.page || 1;
+  const pageSize = query.pageSize || 25;
 
   if (subject !== '') {
     blogsOptions.filters = { relationships: { 'blog-subjects': subject } };
@@ -173,11 +182,14 @@ function fetchThroughAjax(req, res, next) {
       blogsOptions.filters = {};
     }
   }
+  /* is there a better way to do this using the parser */
+  const pageSuffix = `&page[number]=${page}&page[size]=${pageSize}`;
 
   const apiUrl = parser.getCompleteApi(blogsOptions);
   axios
-    .get(apiUrl)
+    .get(apiUrl + pageSuffix)
     .then(response => {
+      console.log('ajax call to:' , apiUrl + pageSuffix);
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 

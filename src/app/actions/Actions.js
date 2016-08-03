@@ -6,6 +6,10 @@ class Actions {
     this.dispatch(data);
   }
 
+  addMoreBlogs(data) {
+	this.dispatch(data);
+  }
+
   updateBlogPost(data) {
     this.dispatch(data);
   }
