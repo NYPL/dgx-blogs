@@ -1,7 +1,7 @@
 import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
-//import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
-//import Immutable from 'immutable';
+// import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
+// import Immutable from 'immutable';
 
 class BlogStore {
   constructor() {
@@ -66,4 +66,4 @@ BlogStore.displayName = 'BlogStore';
 
 export default alt.createStore(BlogStore);
 
-//export default alt.createStore(ImmutableUtil(BlogStore));
+// export default alt.createStore(ImmutableUtil(BlogStore));
