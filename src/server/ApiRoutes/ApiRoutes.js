@@ -3,7 +3,7 @@ import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
 import Model from 'dgx-model-data';
-import Immutable from 'immutable';
+//import Immutable from 'immutable';
 
 import { navConfig } from 'dgx-header-component';
 
@@ -42,6 +42,9 @@ function getHeaderData() {
 
 function fetchData(url, storeValue, req, res, next) {
 
+  url = `${url}&page[number]=1&page[size]=25`;
+  console.log('API-ROUTES: first api call:', url);
+
   axios
     .all([getHeaderData(), fetchApiData(url)])
     .then(axios.spread((headerData, blogsData) => {
@@ -58,13 +61,13 @@ function fetchData(url, storeValue, req, res, next) {
               count: blogsData.data.meta.count
             },
             blogList: blogsModelData,
-            currentPage: 1,
+            currentPage: 2,
           },
         },
         HeaderStore: {
           headerData: navConfig.current,
         },
-      };      
+      };    
       next();
     }))
     .catch(error => {
@@ -73,7 +76,7 @@ function fetchData(url, storeValue, req, res, next) {
 
       res.locals.data = {
         BlogStore: {
-          [storeValue]: Immutable.Map([]),
+          [storeValue]: [],
         },
         HeaderStore: {
           headerData: navConfig.current,

@@ -1,7 +1,7 @@
 import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
-import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
-import Immutable from 'immutable';
+//import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
+//import Immutable from 'immutable';
 
 class BlogStore {
   constructor() {
@@ -17,9 +17,9 @@ class BlogStore {
         meta: {
           count: 0,
         },
-        currentPage: 1,
+        currentPage: 2,
       },
-      blogPost: []
+      blogPost: [],
     };
   }
 
@@ -31,7 +31,7 @@ class BlogStore {
         meta: {
           count: blogs.blogs.meta.count,
         },
-        currentPage: 1,
+        currentPage: 2,
       },
       blogPost: this.state.blogPost,
     }
