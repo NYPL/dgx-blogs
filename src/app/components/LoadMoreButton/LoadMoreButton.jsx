@@ -14,7 +14,7 @@ class LoadMoreButton extends React.Component {
     console.log('LOADMOREBUTTON: going to page', this.props.currentPage);
 
     /* build the url */
-    let url = `/api?page=${this.props.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
+    let url = `/blog/beta/api?page=${this.props.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
 
     axios
       .get(url)
