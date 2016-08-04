@@ -16,7 +16,10 @@ class BlogAuthorName extends React.Component {
     axios
       .get(`/blog/beta/api?author=${this.props.slug}`)
       .then(response => {
-        Actions.updateBlogs({ blogs: response.data });
+        Actions.updateBlogs({
+          blogs: response.data,
+          goingToUrl: `/blog/beta/author/${this.props.slug}`,
+        });
       })
       .then(response => {
         this.routeHandler();

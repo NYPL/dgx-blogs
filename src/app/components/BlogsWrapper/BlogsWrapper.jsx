@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Store from '../../stores/Store.js';
+import Actions from '../../actions/Actions';
 
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
@@ -43,6 +44,22 @@ class BlogsWrapper extends React.Component {
     return _map(blogsList, (blogRow, index) => {
       return <BlogRow data={blogRow} key={index} />;
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    /* comparing new url with the url for the data we have */
+    if (this.state.lastUrl) {
+
+      /* if data is different we try to get the right one from cache */
+      if (nextProps.location.pathname !== this.state.lastUrl) {
+
+        if (this.state.cache[nextProps.location.pathname]) {
+          
+          Actions.fromCache(nextProps.location.pathname);
+        }
+      }
+    }
   }
 
   renderLoadMoreButton(currentState, filter) {

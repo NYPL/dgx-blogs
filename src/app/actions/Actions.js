@@ -13,6 +13,10 @@ class Actions {
   updateBlogPost(data) {
     this.dispatch(data);
   }
+
+  fromCache(cacheKey) {
+  	this.dispatch(cacheKey);
+  }
 }
 
 export default alt.createActions(Actions);

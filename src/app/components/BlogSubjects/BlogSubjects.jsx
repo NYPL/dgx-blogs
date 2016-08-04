@@ -17,7 +17,10 @@ class BlogSubjects extends React.Component {
     axios
       .get(`/blog/beta/api?subject=${subject}`)
       .then(response => {
-        Actions.updateBlogs({ blogs: response.data });
+        Actions.updateBlogs({
+          blogs: response.data,
+          goingToUrl: `/blog/beta/subjects/${subject}`,
+        });
       })
       .then(response => {
         this.routeHandler(subject);
