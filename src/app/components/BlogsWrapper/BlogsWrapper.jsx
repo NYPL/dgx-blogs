@@ -54,11 +54,17 @@ class BlogsWrapper extends React.Component {
       /* if data is different we try to get the right one from cache */
       if (nextProps.location.pathname !== this.state.lastUrl) {
 
+        console.log('BLOGSWRAPPER: state when comparing', this.state);
+
+        console.log('BLOGSWRAPPER: key', nextProps.location.pathname);
+        console.log('BLOGSWRAPPER: we should use this data', this.state.cache[nextProps.location.pathname]);
         if (this.state.cache[nextProps.location.pathname]) {
           
           Actions.fromCache(nextProps.location.pathname);
         }
       }
+      console.log('newUrl', nextProps.location.pathname);
+      console.log('we have data for', this.state.lastUrl);
     }
   }
 

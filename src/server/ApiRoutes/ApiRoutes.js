@@ -203,9 +203,6 @@ function fetchThroughAjax(req, res, next) {
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      /* store in cache */
-      appCache[completeUrl] = response.data;
-
       res.json({ 
         blogList: blogsModelData,
         meta: {

@@ -65,10 +65,15 @@ class BlogStore {
 
   addMoreBlogs(blogs) {
 
-    const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
-    const currentPage = this.state.blogs.currentPage + 1;
+    console.log('STORE: adding blogs', blogs);
+    console.log('STORE: adding blogs to:', this.state);
 
-    this.setState({
+    if (! blogs.error) {
+
+      const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
+      const currentPage = this.state.blogs.currentPage + 1;
+
+      this.setState({
         blogs: {
           blogList: newBlogList,
           meta: this.state.blogs.meta,
@@ -77,6 +82,11 @@ class BlogStore {
         blogPost: this.state.blogPost,
         cache: this.state.cache,
       });
+    } else {
+
+      console.log('STORE: error on api response');
+    }
+
   }
 
   fromCache(cacheKey) {
