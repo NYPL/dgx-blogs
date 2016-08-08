@@ -46,6 +46,7 @@ class BlogAuthor extends React.Component {
         <BlogAuthorName
           fullName={this.props.data.fullName}
           slug={this.props.data.id}
+          appBaseUrl={this.props.appBaseUrl}
         />
         {this._renderAuthorTitle()}
       </div>

@@ -15,7 +15,7 @@ import BlogsModel from '../../app/utils/BlogsModel';
 import appConfig from '../../../appConfig.js';
 
 const { HeaderItemModel } = Model;
-const { api, headerApi, blogsApi } = appConfig;
+const { api, headerApi, blogsApi, appBaseUrl } = appConfig;
 const router = express.Router();
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
@@ -64,7 +64,7 @@ function fetchData(url, storeValue, req, res, next) {
             currentPage: 2,
           },
           cache: {
-            '/blog/beta/': {
+            [appBaseUrl]: {
               meta: { 
                 count: blogsData.data.meta.count,
               },
@@ -224,7 +224,7 @@ router
   .get(BlogQuery);
 
 router
-  .route('/blog/beta')
+  .route(appBaseUrl)
   .get(BlogsMainList);
 
 router
@@ -236,7 +236,7 @@ router
   .get(fetchThroughAjax);
 
 router
-  .route('/blog/beta/api')
+  .route(`${appBaseUrl}api`)
   .get(fetchThroughAjax);
 
 export default router;

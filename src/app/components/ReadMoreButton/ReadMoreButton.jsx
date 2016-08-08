@@ -14,7 +14,7 @@ class ReadMoreButton extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/blog/beta/api?blog=${this.props.slug}`)
+      .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogPost(response.data);
       })
@@ -27,7 +27,7 @@ class ReadMoreButton extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`/blog/beta/${this.props.slug}`);
+    this.context.router.push(`${this.props.appBaseUrl}${this.props.slug}`);
   }
 
   svgDots() {
@@ -45,7 +45,7 @@ class ReadMoreButton extends React.Component {
     return (
       <Link
         className="readMoreButton"
-        to={`/blog/beta/${this.props.slug}`}
+        to={`${this.props.appBaseUrl}${this.props.slug}`}
         onClick={this.fetchSingleBlog}
       >
         {this.svgDots()}

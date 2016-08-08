@@ -1,27 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router';
 import axios from 'axios';
+import { Link } from 'react-router';
 import Actions from '../../actions/Actions';
 
 class BlogAuthorName extends React.Component {
   constructor(props) {
     super(props);
 
-    this._fetchAuthor = this._fetchAuthor.bind(this);
+    this.fetchAuthor = this.fetchAuthor.bind(this);
   }
 
-  _fetchAuthor(e) {
+  fetchAuthor(e) {
     e.preventDefault();
 
     axios
-      .get(`/blog/beta/api?author=${this.props.slug}`)
+      .get(`${this.props.appBaseUrl}api?author=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogs({
           blogs: response.data,
-          goingToUrl: `/blog/beta/author/${this.props.slug}`,
+          goingToUrl: `${this.props.appBaseUrl}author/${this.props.slug}`,
         });
       })
-      .then(response => {
+      .then(() => {
         this.routeHandler();
       })
       .catch(error => {
@@ -30,7 +30,7 @@ class BlogAuthorName extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`/blog/beta/author/${this.props.slug}`);
+    this.context.router.push(`${this.props.appBaseUrl}author/${this.props.slug}`);
   }
 
   render() {
@@ -38,9 +38,9 @@ class BlogAuthorName extends React.Component {
       return (
         <p className={this.props.className}>
           <Link
-            to={`/blog/beta/author/${this.props.slug}`}
+            to={`${this.props.appBaseUrl}author/${this.props.slug}`}
             className="blogAuthor-name-link"
-            onClick={this._fetchAuthor}
+            onClick={this.fetchAuthor}
           >
             {this.props.fullName}
           </Link>
@@ -60,7 +60,7 @@ BlogAuthorName.propTypes = {
 
 BlogAuthorName.defaultProps = {
   fullName: undefined,
-  className: "blogAuthor-name",
+  className: 'blogAuthor-name',
 };
 
 /*

@@ -65,9 +65,6 @@ class BlogStore {
 
   addMoreBlogs(blogs) {
 
-    console.log('STORE: adding blogs', blogs);
-    console.log('STORE: adding blogs to:', this.state);
-
     if (! blogs.error) {
 
       const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
@@ -91,8 +88,6 @@ class BlogStore {
 
   fromCache(cacheKey) {
 
-    console.log('STORE: restoring from cache', cacheKey);
-
     if (this.state.cache[cacheKey]) {
 
       this.setState({
@@ -101,7 +96,7 @@ class BlogStore {
         cache: this.state.cache,
       });    
     } else {
-      console.log('STORE: value is not on cache do something else');
+      console.log('STORE: value is not on cache');
     }
   }
 }

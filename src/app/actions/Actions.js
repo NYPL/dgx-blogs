@@ -7,7 +7,7 @@ class Actions {
   }
 
   addMoreBlogs(data) {
-	this.dispatch(data);
+    this.dispatch(data);
   }
 
   updateBlogPost(data) {
@@ -15,7 +15,7 @@ class Actions {
   }
 
   fromCache(cacheKey) {
-  	this.dispatch(cacheKey);
+    this.dispatch(cacheKey);
   }
 }
 
