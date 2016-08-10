@@ -27,6 +27,11 @@
 
   &-paragraph {
     @include visuallyHidden;
+
+    & a {
+      color: $SECONDARY_UI_COLOR;
+      text-decoration: none;
+    }
   }
 
   &-series {

@@ -13,6 +13,10 @@ class BlogListing extends React.Component {
     this.fetchSeries = this.fetchSeries.bind(this);
   }
 
+  createMarkup(bodyText) {
+    return { __html: bodyText };
+  }
+
   fetchSingleBlog(e) {
     e.preventDefault();
 
@@ -84,6 +88,8 @@ class BlogListing extends React.Component {
   }
 
   render() {
+    const unescapedBody = this.createMarkup(this.props.body);
+
     return (
       <div className="blogListing">
         {this.seriesTitle()}
@@ -97,7 +103,7 @@ class BlogListing extends React.Component {
         </h2>
         {this.mainPicture()}
         <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
-          {this.props.body}
+          <span dangerouslySetInnerHTML={unescapedBody}></span>
           <ReadMoreButton
             slug={this.props.slug}
             appBaseUrl={this.props.appBaseUrl}
