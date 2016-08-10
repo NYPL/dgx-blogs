@@ -4,6 +4,7 @@ export default {
   favIconPath: '//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico',
   port: 3001,
   webpackDevServerPort: 3000,
+  appBaseUrl: '/blog/beta/',
   api: {
     root: {
       development: 'https://dev-refinery.nypl.org',

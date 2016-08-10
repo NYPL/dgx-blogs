@@ -9,6 +9,7 @@ class BlogStore {
       handleBlogs: Actions.UPDATE_BLOGS,
       handleBlogPost: Actions.UPDATE_BLOG_POST,
       addMoreBlogs: Actions.ADD_MORE_BLOGS,
+      fromCache: Actions.FROM_CACHE,
     });
 
     this.state = {
@@ -20,6 +21,7 @@ class BlogStore {
         currentPage: 2,
       },
       blogPost: [],
+      cache: {},
     };
   }
 
@@ -34,7 +36,21 @@ class BlogStore {
         currentPage: 2,
       },
       blogPost: this.state.blogPost,
+      cache: this.state.cache,
+    };
+
+    /* store now knows the last url so components know if they have the right data */
+    if (blogs.goingToUrl) {
+      newState.lastUrl = blogs.goingToUrl;
+      console.log('STORE: storing new ulr in the store', newState.lastUrl);
     }
+
+    /* cache the last value just in case the user press back or returns in some other way */
+    if (this.state.lastUrl) {
+      this.state.cache[this.state.lastUrl] = this.state.blogs;
+      console.log('STORE: new value added to cache:', this.state.cache);
+    }
+
     this.setState(newState);
   }
 
@@ -43,22 +59,45 @@ class BlogStore {
     this.setState({
       blogs: this.state.blogs,
       blogPost: blogPost,
+      cache: this.state.cache,
     });
   }
 
   addMoreBlogs(blogs) {
 
-    const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
-    const currentPage = this.state.blogs.currentPage + 1;
+    if (! blogs.error) {
 
-    this.setState({
+      const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
+      const currentPage = this.state.blogs.currentPage + 1;
+
+      this.setState({
         blogs: {
           blogList: newBlogList,
           meta: this.state.blogs.meta,
           currentPage: currentPage,
         },
         blogPost: this.state.blogPost,
+        cache: this.state.cache,
       });
+    } else {
+
+      console.log('STORE: error on api response');
+    }
+
+  }
+
+  fromCache(cacheKey) {
+
+    if (this.state.cache[cacheKey]) {
+
+      this.setState({
+        blogs: this.state.cache[cacheKey],
+        blogPost: this.state.blogPost,
+        cache: this.state.cache,
+      });    
+    } else {
+      console.log('STORE: value is not on cache');
+    }
   }
 }
 

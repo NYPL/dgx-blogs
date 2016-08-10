@@ -15,7 +15,7 @@ import BlogsModel from '../../app/utils/BlogsModel';
 import appConfig from '../../../appConfig.js';
 
 const { HeaderItemModel } = Model;
-const { api, headerApi, blogsApi } = appConfig;
+const { api, headerApi, blogsApi, appBaseUrl } = appConfig;
 const router = express.Router();
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
@@ -58,10 +58,19 @@ function fetchData(url, storeValue, req, res, next) {
         BlogStore: {
           [storeValue]: {
             meta: { 
-              count: blogsData.data.meta.count
+              count: blogsData.data.meta.count,
             },
             blogList: blogsModelData,
             currentPage: 2,
+          },
+          cache: {
+            [appBaseUrl]: {
+              meta: { 
+                count: blogsData.data.meta.count,
+              },
+              blogList: blogsModelData,
+              currentPage: 2,
+            }
           },
         },
         HeaderStore: {
@@ -184,16 +193,21 @@ function fetchThroughAjax(req, res, next) {
   }
   /* is there a better way to do this using the parser */
   const pageSuffix = `&page[number]=${page}&page[size]=${pageSize}`;
-
   const apiUrl = parser.getCompleteApi(blogsOptions);
+  const completeUrl = apiUrl + pageSuffix;
+
   axios
     .get(apiUrl + pageSuffix)
     .then(response => {
-      console.log('ajax call to:' , apiUrl + pageSuffix);
+      console.log('ajax call to:', completeUrl);
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      res.json({ blogList: blogsModelData, meta: { count: response.data.meta.count } });
+      res.json({ 
+        blogList: blogsModelData,
+        meta: {
+          count: response.data.meta.count },
+      });
     })
     .catch(error => {
       console.log(`Error calling API : ${error}`);
@@ -210,7 +224,7 @@ router
   .get(BlogQuery);
 
 router
-  .route('/blog/beta')
+  .route(appBaseUrl)
   .get(BlogsMainList);
 
 router
@@ -222,7 +236,7 @@ router
   .get(fetchThroughAjax);
 
 router
-  .route('/blog/beta/api')
+  .route(`${appBaseUrl}api`)
   .get(fetchThroughAjax);
 
 export default router;

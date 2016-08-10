@@ -63,6 +63,7 @@ class BlogAuthorCard extends React.Component {
           className="blogAuthorCard-name"
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
+          appBaseUrl={this.props.appBaseUrl}
         />
         <p 
           className="blogAuthorCard-title"
@@ -71,6 +72,7 @@ class BlogAuthorCard extends React.Component {
         <BlogAuthorViewMoreLink
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
+          appBaseUrl={this.props.appBaseUrl}
         />
       </div>
     );

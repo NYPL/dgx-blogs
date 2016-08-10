@@ -1,11 +1,15 @@
 import React from 'react';
 
 import Store from '../../stores/Store.js';
+import Actions from '../../actions/Actions';
 
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
+
+import appConfig from '../../../../appConfig.js';
+const appBaseUrl = appConfig.appBaseUrl;
 
 import {
   map as _map,
@@ -17,13 +21,13 @@ import {
 class BlogsWrapper extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('BLOGSWRAPPER: baseUrl', appBaseUrl);
     this.state = Store.getState();
-    this._onChange = this._onChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    Store.listen(this._onChange);
+    Store.listen(this.onChange);
 
     // if (this.state.blogs[0] === undefined) {
     //   this.context.router.push('/blog/beta/not-found');
@@ -32,17 +36,38 @@ class BlogsWrapper extends React.Component {
   }
 
   componentWillUnmount() {
-    Store.unlisten(this._onChange);
+    Store.unlisten(this.onChange);
   }
 
-  _onChange() {
+  onChange() {
     this.setState(Store.getState());
   }
 
-  _getList(blogsList) {
+  getList(blogsList) {
     return _map(blogsList, (blogRow, index) => {
-      return <BlogRow data={blogRow} key={index} />;
+      return ( 
+        <BlogRow 
+          data={blogRow} 
+          key={index}
+          appBaseUrl={appBaseUrl}
+        /> );
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    /* comparing new url with the url for the data we have */
+    if (this.state.lastUrl) {
+
+      /* if data is different we try to get the right one from cache */
+      if (nextProps.location.pathname !== this.state.lastUrl) {
+
+        if (this.state.cache[nextProps.location.pathname]) {
+          
+          Actions.fromCache(nextProps.location.pathname);
+        }
+      }
+    }
   }
 
   renderLoadMoreButton(currentState, filter) {
@@ -50,21 +75,21 @@ class BlogsWrapper extends React.Component {
 
     if (postsLeft <= 0) {
       return null;
-    } else {
-
-      return (
-        <LoadMoreButton
-          postsLeft={postsLeft}
-          filter={filter}
-          currentPage={currentState.currentPage}
-        />
-      );
     }
+
+    return (
+      <LoadMoreButton
+        postsLeft={postsLeft}
+        filter={filter}
+        currentPage={currentState.currentPage}
+        appBaseUrl={appBaseUrl}
+      />
+    );
   }
 
   render() {
     const currentState = this.state.blogs;
-    const blogs = this._getList(currentState.blogList);
+    const blogs = this.getList(currentState.blogList);
 
     let pageType;
     let param;

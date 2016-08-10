@@ -23,6 +23,8 @@ import webpackConfig from './webpack.config.js';
 import appRoutes from './src/app/routes/routes.js';
 import apiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
+const { appBaseUrl } = appConfig;
+
 const ROOT_PATH = __dirname;
 const INDEX_PATH = path.resolve(ROOT_PATH, 'src/client');
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
@@ -51,8 +53,8 @@ app.use('*/dist', express.static(DIST_PATH));
 app.use('*/src/client', express.static(INDEX_PATH));
 
 app.use('/', (req, res, next) => {
-  if (req.path === '/blog/beta') {
-    return res.redirect('/blog/beta/');
+  if (req.path === appBaseUrl.slice(0, -1)) {
+    return res.redirect(appBaseUrl);
   }
   next();
 });

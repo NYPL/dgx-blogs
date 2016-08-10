@@ -20,12 +20,15 @@ class BlogRow extends React.Component {
       <li className="blogRow">
         <div className="blogRow-leftSidebar">
           <p className="blogRow-leftSidebar-date">{date}</p>
-          <BlogAuthor data={author} />
-
+          <BlogAuthor
+            data={author}
+            appBaseUrl={this.props.appBaseUrl}
+          />
           <BlogSubjects
             className="blogSubjectsInPostSidebar"
             subjects={subjects}
             maxSubjectsShown={3}
+            appBaseUrl={this.props.appBaseUrl}
           />
         </div>
         <BlogListing
@@ -37,6 +40,7 @@ class BlogRow extends React.Component {
           subjects={subjects}
           width={width}
           side={side}
+          appBaseUrl={this.props.appBaseUrl}
         />
       </li>
     );
@@ -54,6 +58,7 @@ BlogRow.propTypes = {
     mainPicture: React.PropTypes.object,
     slug: React.PropTypes.string.isRequired,
     series: React.PropTypes.array,
+    appBaseUrl: React.PropTypes.string,
   }),
 };
 

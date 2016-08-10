@@ -8,6 +8,9 @@ import Blog from '../Blog/Blog';
 import BlogAuthorCard from '../BlogAuthorCard/BlogAuthorCard';
 import BackToBlogs from '../BackToBlogs/BackToBlogs';
 
+import appConfig from '../../../../appConfig.js';
+const appBaseUrl = appConfig.appBaseUrl;
+
 class BlogPage extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +21,7 @@ class BlogPage extends React.Component {
   componentDidMount() {
       console.log('BLOGPAGE: component state', this.state.blogPost.blogList);
       if (this.state.blogPost.blogList[0] === undefined) {
-      this.context.router.push('/blog/not-found');
+      this.context.router.push('${appBaseUrl}not-found');
       return;
     }
   }
@@ -36,8 +39,13 @@ class BlogPage extends React.Component {
       <div className="blogPage">
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div className="content">
-          <BackToBlogs />
-          <BlogSubjects subjects={subjects} />
+          <BackToBlogs 
+            appBaseUrl={appBaseUrl}
+          />
+          <BlogSubjects
+            subjects={subjects} 
+            appBaseUrl={appBaseUrl}
+            />
           <Blog
             date={date}
             title={title}
