@@ -38,7 +38,9 @@ class Hero extends React.Component {
             <p className="hero-content-texts-serie">{this.props.type}</p>
             <h1 className="hero-content-texts-title">{this.props.title} <span className="nypl-icon-wedge-down"></span></h1>
             <p className="hero-content-texts-description">{this.renderDescriptionText()}</p>
-            <p className="hero-content-texts-seriesCount">{this.props.postCount} Post</p>
+            <p className="hero-content-texts-seriesCount">
+              {this.props.postCount} {(this.props.postCount > 1) ? 'Posts' : 'Post'}
+            </p>
           </div>
         </div>
       </div>
