@@ -65,6 +65,7 @@ class BlogListing extends React.Component {
         <img
           className={`blogListing-image image-${this.props.side}`}
           src={this.props.mainPicture['full-uri']}
+          alt=""
         />
       );
     }
