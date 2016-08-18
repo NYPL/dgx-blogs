@@ -1,24 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router';
 import axios from 'axios';
+import { Link } from 'react-router';
 import Actions from '../../actions/Actions';
 
 class BackToBlogs extends React.Component {
   constructor(props) {
     super(props);
 
-    this._fetchBlogList = this._fetchBlogList.bind(this);
+    this.fetchBlogList = this.fetchBlogList.bind(this);
   }
 
-  _fetchBlogList(e) {
+  fetchBlogList(e) {
     e.preventDefault();
 
     axios
-      .get('/blog/api?blog=all')
+      .get(`${this.props.appBaseUrl}api?blog=all`)
       .then(response => {
-        Actions.updateBlogs(response.data);
+        Actions.updateBlogs({
+          blogs: response.data,
+          goingToUrl: this.props.appBaseUrl,
+        });
       })
-      .then(response => {
+      .then(() => {
         this.routeHandler();
       })
       .catch(error => {
@@ -27,15 +30,15 @@ class BackToBlogs extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push('/blog');
+    this.context.router.push(this.props.appBaseUrl);
   }
 
   render() {
     return (
       <Link
         className="backToLink"
-        to={'/blog'}
-        onClick={this._fetchBlogList}
+        to={this.props.appBaseUrl}
+        onClick={this.fetchBlogList}
       >
         <span className="nypl-icon-wedge-left"></span> back to blogs
       </Link>

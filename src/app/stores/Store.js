@@ -1,30 +1,108 @@
 import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
-import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
-import Immutable from 'immutable';
+// import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
+// import Immutable from 'immutable';
 
 class BlogStore {
   constructor() {
     this.bindListeners({
       handleBlogs: Actions.UPDATE_BLOGS,
       handleBlogPost: Actions.UPDATE_BLOG_POST,
+      addMoreBlogs: Actions.ADD_MORE_BLOGS,
+      fromCache: Actions.FROM_CACHE,
     });
 
-    this.state = Immutable.Map({
-      blogs: Immutable.List([]),
-      blogPost: Immutable.List([]),
-    });
+    this.state = {
+      blogs: {
+        blogList: [],
+        meta: {
+          count: 0,
+        },
+        currentPage: 2,
+      },
+      blogPost: [],
+      cache: {},
+    };
   }
 
   handleBlogs(blogs) {
-    this.setState(this.state.setIn(['blogs'], Immutable.fromJS(blogs)));
+
+    const newState = {
+      blogs: {
+        blogList: blogs.blogs.blogList,
+        meta: {
+          count: blogs.blogs.meta.count,
+        },
+        currentPage: 2,
+      },
+      blogPost: this.state.blogPost,
+      cache: this.state.cache,
+    };
+
+    /* store now knows the last url so components know if they have the right data */
+    if (blogs.goingToUrl) {
+      newState.lastUrl = blogs.goingToUrl;
+      console.log('STORE: storing new ulr in the store', newState.lastUrl);
+    }
+
+    /* cache the last value just in case the user press back or returns in some other way */
+    if (this.state.lastUrl) {
+      this.state.cache[this.state.lastUrl] = this.state.blogs;
+      console.log('STORE: new value added to cache:', this.state.cache);
+    }
+
+    this.setState(newState);
   }
 
   handleBlogPost(blogPost) {
-    this.setState(this.state.setIn(['blogPost'], Immutable.List(Immutable.fromJS(blogPost))));
+
+    this.setState({
+      blogs: this.state.blogs,
+      blogPost: blogPost,
+      cache: this.state.cache,
+    });
+  }
+
+  addMoreBlogs(blogs) {
+
+    if (! blogs.error) {
+
+      const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
+      const currentPage = this.state.blogs.currentPage + 1;
+
+      this.setState({
+        blogs: {
+          blogList: newBlogList,
+          meta: this.state.blogs.meta,
+          currentPage: currentPage,
+        },
+        blogPost: this.state.blogPost,
+        cache: this.state.cache,
+      });
+    } else {
+
+      console.log('STORE: error on api response');
+    }
+
+  }
+
+  fromCache(cacheKey) {
+
+    if (this.state.cache[cacheKey]) {
+
+      this.setState({
+        blogs: this.state.cache[cacheKey],
+        blogPost: this.state.blogPost,
+        cache: this.state.cache,
+      });    
+    } else {
+      console.log('STORE: value is not on cache');
+    }
   }
 }
 
 BlogStore.displayName = 'BlogStore';
 
-export default alt.createStore(ImmutableUtil(BlogStore));
+export default alt.createStore(BlogStore);
+
+// export default alt.createStore(ImmutableUtil(BlogStore));

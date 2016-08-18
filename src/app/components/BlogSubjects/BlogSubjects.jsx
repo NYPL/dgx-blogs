@@ -15,11 +15,14 @@ class BlogSubjects extends React.Component {
     e.preventDefault();
 
     axios
-      .get(`/blog/api?subject=${subject}`)
+      .get(`${this.props.appBaseUrl}api?subject=${subject}`)
       .then(response => {
-        Actions.updateBlogs(response.data);
+        Actions.updateBlogs({
+          blogs: response.data,
+          goingToUrl: `${this.props.appBaseUrl}subjects/${subject}`,
+        });
       })
-      .then(response => {
+      .then(() => {
         this.routeHandler(subject);
       })
       .catch(error => {
@@ -28,7 +31,7 @@ class BlogSubjects extends React.Component {
   }
 
   routeHandler(subject) {
-    this.context.router.push(`/blog/subjects/${subject}`);
+    this.context.router.push(`${this.props.appBaseUrl}subjects/${subject}`);
   }
 
   getList(subjects) {
@@ -38,7 +41,7 @@ class BlogSubjects extends React.Component {
       return (
         <li className="tagItem" key={index}>
           <Link
-            to={`/blog/subjects/${subject.id}`}
+            to={`${this.props.appBaseUrl}subjects/${subject.id}`}
             className="tagLink"
             onClick={this.fetchSubject.bind(subject, subject.id, this)}>
             {this.tagIcon()}
@@ -66,7 +69,7 @@ class BlogSubjects extends React.Component {
 
   renderContent() {
     /* if there is not any subject this component musnt generate any html */
-    if (! this.props.subjects || this.props.subjects.length === 0){
+    if (! this.props.subjects || this.props.subjects.length === 0) {
       return null;
     }
 

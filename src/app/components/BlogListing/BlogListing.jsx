@@ -1,8 +1,8 @@
 import React from 'react';
+import axios from 'axios';
+import { Link } from 'react-router';
 import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
-import { Link } from 'react-router';
-import axios from 'axios';
 import Actions from '../../actions/Actions';
 
 class BlogListing extends React.Component {
@@ -13,16 +13,23 @@ class BlogListing extends React.Component {
     this.fetchSeries = this.fetchSeries.bind(this);
   }
 
+  createMarkup(bodyText) {
+    return { __html: bodyText };
+  }
+
   fetchSingleBlog(e) {
     e.preventDefault();
 
+    console.log('BLOGLISTING: calling: ', `${this.props.appBaseUrl}api?blog=${this.props.slug}`);
+
     axios
-      .get(`/blog/api?blog=${this.props.slug}`)
+      .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
       .then(response => {
+        console.log('BLOGLISTING: result', response.data);
         Actions.updateBlogPost(response.data);
       })
-      .then(response => {
-        this.routeHandler(`/blog/${this.props.slug}`);
+      .then(() => {
+        this.routeHandler(`${this.props.appBaseUrl}${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
@@ -35,10 +42,13 @@ class BlogListing extends React.Component {
     axios
       .get(`/api?series=${this.props.series[0].id}`)
       .then(response => {
-        Actions.updateBlogs(response.data);
+        Actions.updateBlogs({
+          blogs: response.data,
+          goingToUrl: `${this.props.appBaseUrl}series/${this.props.series[0].id}`,
+        });
       })
-      .then(response => {
-        this.routeHandler(`/blog/series/${this.props.series[0].id}`);
+      .then(() => {
+        this.routeHandler(`${this.props.appBaseUrl}series/${this.props.series[0].id}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
@@ -67,7 +77,7 @@ class BlogListing extends React.Component {
       return (
         <Link
           className={`blogListing-series ${this.props.width}`}
-          to={`/blog/series/${this.props.series[0].id}`}
+          to={`${this.props.appBaseUrl}series/${this.props.series[0].id}`}
           onClick={this.fetchSeries}
         >
           {this.props.series[0].title}
@@ -78,12 +88,14 @@ class BlogListing extends React.Component {
   }
 
   render() {
+    const unescapedBody = this.createMarkup(this.props.body);
+
     return (
       <div className="blogListing">
         {this.seriesTitle()}
         <h2 className={`blogListing-title ${this.props.width}`}>
           <Link
-            to={`/blog/${this.props.slug}`}
+            to={`${this.props.appBaseUrl}${this.props.slug}`}
             onClick={this.fetchSingleBlog}
           >
             {this.props.title}
@@ -91,12 +103,16 @@ class BlogListing extends React.Component {
         </h2>
         {this.mainPicture()}
         <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
-          {this.props.body}
-          <ReadMoreButton slug={this.props.slug} />
+          <span dangerouslySetInnerHTML={unescapedBody}></span>
+          <ReadMoreButton
+            slug={this.props.slug}
+            appBaseUrl={this.props.appBaseUrl}
+          />
           <BlogSubjects
             className="blogSubjectsInList"
             subjects={this.props.subjects}
             maxSubjectsShown={3}
+            appBaseUrl={this.props.appBaseUrl}
           />
         </div>
       </div>

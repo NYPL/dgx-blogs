@@ -5,7 +5,7 @@ class Hero extends React.Component {
     super(props);
   }
 
-  _renderPicture() {
+  renderPicture() {
     if(this.props.picture) { 
       return (
           <img className="hero-content-picture" src={this.props.picture} />
@@ -14,6 +14,18 @@ class Hero extends React.Component {
 
     return null;
   }
+
+  renderDescriptionText() {
+    let descriptionText = this.props.description;
+    if (this.props.description.length > 150) {
+      descriptionText = this.props.description.substring(0, 150);
+      /* trim again if we are in the middle of a word */
+      descriptionText = descriptionText.substr(0, Math.min(descriptionText.length, descriptionText.lastIndexOf(" ")));
+      descriptionText += ' ...';
+    }
+
+    return descriptionText;    
+  }
   
   render() {
     const alignClass = (this.props.picture) ? '' : 'no-picture';
@@ -21,12 +33,14 @@ class Hero extends React.Component {
     return (
       <div className="hero">
         <div className="hero-content">
-          {this._renderPicture()}
+          {this.renderPicture()}
           <div className={`hero-content-texts ${alignClass}`}>
             <p className="hero-content-texts-serie">{this.props.type}</p>
             <h1 className="hero-content-texts-title">{this.props.title} <span className="nypl-icon-wedge-down"></span></h1>
-            <p className="hero-content-texts-description">{this.props.description}</p>
-            <p className="hero-content-texts-seriesCount">{this.props.postCount} Post</p>
+            <p className="hero-content-texts-description">{this.renderDescriptionText()}</p>
+            <p className="hero-content-texts-seriesCount">
+              {this.props.postCount} {(this.props.postCount > 1) ? 'Posts' : 'Post'}
+            </p>
           </div>
         </div>
       </div>
