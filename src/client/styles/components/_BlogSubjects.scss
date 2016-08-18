@@ -60,7 +60,7 @@
   }
 
   &InList {
-    @include visuallyHidden;
+    display: none;
 
     &-list {
       list-style: none;
@@ -72,12 +72,14 @@
     }
 
     @include layout-at(7, $portrait) {
-      @include displayVisuallyHidden;
+      display: inline;
+
       margin-top: 20px;
 
       &-list {
         @include add-grid(3);
         padding-left: 17px;
+        margin-top: 15px;
 
         .tagItem {
           @include float-span(1);
@@ -99,13 +101,13 @@
     }
 
     @include layout-at(7, $landscape) {
-      @include visuallyHidden;
+      display: none;
     }
   }
 
   &InPostSidebar {
     @extend .blogSubjects;
-    @include visuallyHidden;
+    display: none;
     font-size: 12px;
 
     &-list {
@@ -118,7 +120,7 @@
     }
 
     @include layout-at(7, $landscape) {
-      @include displayVisuallyHidden;
+      display: inline-block;
       text-align: left;
       margin: 0;
 
