@@ -23,6 +23,7 @@ class BlogAuthor extends React.Component {
       <LionLogoIcon
         className="blogAuthor-profilePicWrap-picture"
         fill="transparent"
+        ariaHidden
       />
     );
   }

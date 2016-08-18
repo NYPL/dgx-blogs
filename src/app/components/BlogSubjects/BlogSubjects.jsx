@@ -60,6 +60,7 @@ class BlogSubjects extends React.Component {
         height="20"
         viewBox="0 0 32 32"
         className="svgIcon"
+        aria-hidden="true"
       >
         <title>tag.icon</title>
         <path d="M26.45536,26.45536H16.80078L4.92843,14.58216l9.65373-9.65373,11.8732,11.87235v9.65458ZM17.87606,23.859h5.983v-5.983L14.58216,8.5992l-5.983,5.983Z" />
