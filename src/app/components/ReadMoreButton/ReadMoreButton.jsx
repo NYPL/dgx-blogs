@@ -40,7 +40,7 @@ class ReadMoreButton extends React.Component {
         to={`${this.props.appBaseUrl}${this.props.slug}`}
         onClick={this.fetchSingleBlog}
       >
-        <DotsIcon />
+        <DotsIcon ariaHidden />
         <span>Read More</span>
       </Link>
     );

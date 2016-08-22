@@ -39,7 +39,7 @@ class LoadMoreButton extends React.Component {
           className="loadMoreButton-btn"
           onClick={this.handleClick}
         >
-          <DotsIcon />
+          <DotsIcon ariaHidden />
           <span>{this.props.postsLeft}</span>
         </button>
       </div>
