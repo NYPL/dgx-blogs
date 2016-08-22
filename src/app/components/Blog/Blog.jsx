@@ -18,7 +18,7 @@ class Blog extends React.Component {
     return (
       <div
         className="blog"
-        >
+      >
         <p className="blog-date">{ this.props.date }</p>
         <h1 className="blog-title">{ this.props.title }</h1>
         <div className="blog-author">
