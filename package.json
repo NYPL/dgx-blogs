@@ -49,6 +49,7 @@
     "alt": "^0.18.2",
     "alt-utils": "^1.0.0",
     "axios": "^0.9.1",
+    "brace-expansion": "^1.1.6",
     "breakpoint-sass": "^2.6.1",
     "clean-webpack-plugin": "^0.1.8",
     "colors": "^1.1.2",
