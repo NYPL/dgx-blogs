@@ -23,7 +23,7 @@ class HeroSinglePost extends React.Component {
 
     return (
       <div className={heroSinglePostClass}>
-        <h1 className="heroSinglePost-title">Blogs <span className="nypl-icon-wedge-down"></span></h1>
+        <h2 className="heroSinglePost-title">Blogs <span className="nypl-icon-wedge-down"></span></h2>
         {this._renderCoverImage()}
       </div>
     );
