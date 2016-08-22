@@ -9,8 +9,8 @@ class HeroSinglePost extends React.Component {
 
     if(this.props.coverUrl) { 
       return (
-          <img src={this.props.coverUrl} />
-        );
+        <img src={this.props.coverUrl} alt="" />
+      );
     }
 
     return null;
