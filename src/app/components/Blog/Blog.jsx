@@ -18,7 +18,6 @@ class Blog extends React.Component {
     return (
       <div
         className="blog"
-        id="mainContent"
         >
         <p className="blog-date">{ this.props.date }</p>
         <h1 className="blog-title">{ this.props.title }</h1>

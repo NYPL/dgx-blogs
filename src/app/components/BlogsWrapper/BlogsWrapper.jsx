@@ -152,13 +152,13 @@ class BlogsWrapper extends React.Component {
     return (
       <div className="blogsWrapper">
         {hero}
-        <div className="content">
+        <div className="content" id="mainContent">
           <div className="sidebar">
             <h3 className="sidebar-title">Blog</h3>
             <a href="#" className="sidebar-link">Blogger Profiles</a>
             <a href="#" className="sidebar-link">Blog Topics</a>
           </div>
-          <ul className="blogsList" id="mainContent">
+          <ul className="blogsList">
             {blogs}
             {this.renderLoadMoreButton(currentState, filter)}
           </ul>

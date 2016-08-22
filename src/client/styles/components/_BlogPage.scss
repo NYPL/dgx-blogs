@@ -26,7 +26,8 @@
     .content {
       /* reset display */
       display: block;
-      //margin: 0 20px;
+      margin-top: -105px;
+      padding-top: 105px;
       @include add-grid(7);      
 
       .backToLink {
@@ -70,7 +71,10 @@
 
     }
 
-    .content { 
+    .content {
+      margin-top: -135px;
+      padding-top: 135px;
+
       .backToLink {   
         @include grid-span(1, 2);
       }
@@ -84,6 +88,9 @@
   @include layout-at(9, $desktop) {
 
     .content {
+      margin-top: -198px;
+      padding-top: 198px;
+
       .backToLink {   
         @include grid-span(2);
       }
