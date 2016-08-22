@@ -88,7 +88,7 @@
 
   @include layout-at(6, $landscape) {
     @include grid-span(5, 2);
-    padding-bottom: 80px;  
+    padding-bottom: 80px;
 
     &-series {
       @include displayVisuallyHidden;
@@ -102,6 +102,7 @@
     &-paragraph {
       @include displayVisuallyHidden;
       @include grid-span(4, 3);
+      font-size: 18px;
       line-height: 1.5;
       clear: right;
     }
