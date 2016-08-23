@@ -16,7 +16,9 @@ class Blog extends React.Component {
     const unescapedBody = this.createMarkup(this.props.body);
 
     return (
-      <div className="blog">
+      <div
+        className="blog"
+      >
         <p className="blog-date">{ this.props.date }</p>
         <h1 className="blog-title">{ this.props.title }</h1>
         <div className="blog-author">
