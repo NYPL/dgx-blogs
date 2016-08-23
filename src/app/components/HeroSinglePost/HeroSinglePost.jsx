@@ -22,10 +22,10 @@ class HeroSinglePost extends React.Component {
     const heroSinglePostClass = this.props.coverUrl ? 'heroSinglePost' : 'heroSinglePostNoImage';
 
     return (
-      <div className={heroSinglePostClass}>
+      <header className={heroSinglePostClass}>
         <h1 className="heroSinglePost-title">Blogs <span className="nypl-icon-wedge-down"></span></h1>
         {this._renderCoverImage()}
-      </div>
+      </header>
     );
   }
 }

@@ -36,7 +36,7 @@ class BlogPage extends React.Component {
     const { author, subjects, title, date, mainPicture } = blog;
 
     return (
-      <div className="blogPage">
+      <section className="blogPage">
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div className="content">
           <BackToBlogs 
@@ -57,7 +57,7 @@ class BlogPage extends React.Component {
             data={author}
           />
         </div>
-      </div>
+      </section>
     );
   }
 }
