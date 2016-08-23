@@ -21,7 +21,7 @@ import {
 class BlogsWrapper extends React.Component {
   constructor(props) {
     super(props);
-    console.log('BLOGSWRAPPER: baseUrl', appBaseUrl);
+
     this.state = Store.getState();
     this.onChange = this.onChange.bind(this);
   }
@@ -152,7 +152,7 @@ class BlogsWrapper extends React.Component {
     return (
       <div className="blogsWrapper">
         {hero}
-        <section className="content">
+        <section className="content" id="mainContent">
           <nav className="sidebar">
             <h3 className="sidebar-title">Blog</h3>
             <a href="#" className="sidebar-link">Blogger Profiles</a>

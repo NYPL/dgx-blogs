@@ -38,14 +38,17 @@ class BlogPage extends React.Component {
     return (
       <section className="blogPage">
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
-        <div className="content">
+        <div
+          className="content"
+          id="mainContent"
+        >
           <BackToBlogs 
             appBaseUrl={appBaseUrl}
           />
           <BlogSubjects
             subjects={subjects} 
             appBaseUrl={appBaseUrl}
-            />
+          />
           <Blog
             date={date}
             title={title}

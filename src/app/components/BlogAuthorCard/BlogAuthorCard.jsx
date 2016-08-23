@@ -32,6 +32,7 @@ class BlogAuthorCard extends React.Component {
       <LionLogoIcon
         className="blogAuthorCard-profilePicWrap-picture"
         fill="transparent"
+        ariaHidden
       />
     );
   }

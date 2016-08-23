@@ -16,6 +16,13 @@
     margin-top: 16px;
   }
 
+  @include layout-at(9, $portrait) {
+    .content {
+      margin-top: -65px;
+      padding-top: 65px;
+    }
+  }
+
   @include layout-at(9, $landscape) {
 
     .content {
@@ -56,6 +63,7 @@
     .content {
       max-width: 1312px;
       margin: auto;
+      margin-top: -65px;
       float: none;
       width: auto;
 

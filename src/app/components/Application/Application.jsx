@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-wrapper">
-        <Header />
+        <Header skipNav={{ target: 'mainContent' }} />
         {this.props.children}
         <Footer id="footer" className="footer" />
       </div>
