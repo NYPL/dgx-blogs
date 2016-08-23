@@ -67,7 +67,7 @@
     "immutable": "^3.8.1",
     "iso": "^5.1.0",
     "jsonapi-parserinator": "0.4.8",
-    "kind-of": "^3.0.2",
+    "kind-of": "3.0.4",
     "radium": "^0.13.5",
     "react": "^0.14.8",
     "react-doc-meta": "^0.2.0",
