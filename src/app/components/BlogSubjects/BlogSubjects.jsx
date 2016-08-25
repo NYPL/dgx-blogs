@@ -17,6 +17,8 @@ class BlogSubjects extends React.Component {
   fetchSubject(subject, subjectId, e) {
     e.preventDefault();
 
+    Actions.turnToLoadingState();
+
     axios
       .get(`${this.props.appBaseUrl}api?subject=${subject}`)
       .then(response => {

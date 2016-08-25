@@ -17,6 +17,11 @@ class Actions {
   fromCache(cacheKey) {
     this.dispatch(cacheKey);
   }
+
+  turnToLoadingState() {
+    console.log('ACTIONS: turnToLoadingState action called.');
+    this.dispatch();
+  }
 }
 
 export default alt.createActions(Actions);

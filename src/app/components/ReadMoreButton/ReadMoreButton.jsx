@@ -16,6 +16,8 @@ class ReadMoreButton extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
+    Actions.turnToLoadingState();
+
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
       .then(response => {

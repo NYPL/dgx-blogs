@@ -10,6 +10,7 @@ class BlogStore {
       handleBlogPost: Actions.UPDATE_BLOG_POST,
       addMoreBlogs: Actions.ADD_MORE_BLOGS,
       fromCache: Actions.FROM_CACHE,
+      turnToLoadingState: Actions.TURN_TO_LOADING_STATE,
     });
 
     this.state = {
@@ -22,6 +23,7 @@ class BlogStore {
       },
       blogPost: [],
       cache: {},
+      appStatus: 'ready',
     };
   }
 
@@ -37,6 +39,7 @@ class BlogStore {
       },
       blogPost: this.state.blogPost,
       cache: this.state.cache,
+      appStatus: 'ready',
     };
 
     /* store now knows the last url so components know if they have the right data */
@@ -60,6 +63,7 @@ class BlogStore {
       blogs: this.state.blogs,
       blogPost: blogPost,
       cache: this.state.cache,
+      appStatus: 'ready',
     });
   }
 
@@ -78,6 +82,7 @@ class BlogStore {
         },
         blogPost: this.state.blogPost,
         cache: this.state.cache,
+        appStatus: 'ready',
       });
     } else {
 
@@ -94,15 +99,23 @@ class BlogStore {
         blogs: this.state.cache[cacheKey],
         blogPost: this.state.blogPost,
         cache: this.state.cache,
+        appStatus: 'ready',
       });    
     } else {
       console.log('STORE: value is not on cache');
     }
+  }
+
+  turnToLoadingState() {
+    this.setState({
+      blogs: this.state.blogs,
+      blogPost: this.state.blogPost,
+      cache: this.state.cache,
+      appStatus: 'loading',
+    });
   }
 }
 
 BlogStore.displayName = 'BlogStore';
 
 export default alt.createStore(BlogStore);
-
-// export default alt.createStore(ImmutableUtil(BlogStore));

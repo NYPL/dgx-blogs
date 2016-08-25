@@ -20,7 +20,7 @@ class BlogListing extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
-    console.log('BLOGLISTING: calling: ', `${this.props.appBaseUrl}api?blog=${this.props.slug}`);
+    Actions.turnToLoadingState();
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
@@ -38,6 +38,8 @@ class BlogListing extends React.Component {
 
   fetchSeries(e) {
     e.preventDefault();
+
+    Actions.turnToLoadingState();
 
     axios
       .get(`/api?series=${this.props.series[0].id}`)
