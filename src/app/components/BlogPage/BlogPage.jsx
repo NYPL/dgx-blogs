@@ -11,6 +11,9 @@ import BackToBlogs from '../BackToBlogs/BackToBlogs';
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
 
+/* metatags */
+import DocMeta from 'react-doc-meta';
+
 class BlogPage extends React.Component {
   constructor(props) {
     super(props);
@@ -35,8 +38,19 @@ class BlogPage extends React.Component {
     const blog = this.state.blogPost.blogList[0];
     const { author, subjects, title, date, mainPicture } = blog;
 
+    const singleBlogMetas = [
+        { property: 'og:title', content: title + ' | The New York Public Library' },
+        { property: 'og:image', content: mainPicture['full-uri'] },
+        { property: 'og:description', content: 'description'},
+        { property: 'og:url', content: 'url'},
+        { name: 'twitter:title', content: title + ' | The New York Public Library' },
+        { name: 'twitter:description', content: 'description' },
+        { name: 'twitter:image', content: mainPicture['full-uri'] }
+      ];
+
     return (
       <div className="blogPage">
+        <DocMeta tags={singleBlogMetas} />
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div
           className="content"

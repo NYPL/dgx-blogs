@@ -11,6 +11,9 @@ import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
 
+/* metatags */
+import DocMeta from 'react-doc-meta';
+
 import {
   map as _map,
   isEmpty as _isEmpty,
@@ -91,6 +94,16 @@ class BlogsWrapper extends React.Component {
     const currentState = this.state.blogs;
     const blogs = this.getList(currentState.blogList);
 
+    const homeMetas = [
+        { property: 'og:title', content: 'Blogs | The New York Public Library' },
+        { property: 'og:image', content: '' },
+        { property: 'og:description', content: 'description'},
+        { property: 'og:url', content: 'url'},
+        { name: 'twitter:title', content: 'Blogs | The New York Public Library' },
+        { name: 'twitter:description', content: 'description' },
+        { name: 'twitter:image', content: '' }
+      ];
+
     let pageType;
     let param;
     let series;
@@ -151,6 +164,7 @@ class BlogsWrapper extends React.Component {
 
     return (
       <div className="blogsWrapper">
+        <DocMeta tags={homeMetas} />
         {hero}
         <div className="content" id="mainContent">
           <div className="sidebar">
