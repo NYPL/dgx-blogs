@@ -48,7 +48,10 @@ class BlogPage extends React.Component {
 
     return (
       <div className="blogPage">
-        <LoadingLayer status={this.state.appStatus} />
+        <LoadingLayer
+          status={this.state.appLoading}
+          title={this.state.loadingTitle}
+          />
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div
           className="content"

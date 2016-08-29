@@ -13,7 +13,9 @@ class BackToBlogs extends React.Component {
   fetchBlogList(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState();
+    Actions.turnToLoadingState({
+      loadingTitle: 'Blogs Home | NYPL',
+    });
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=all`)

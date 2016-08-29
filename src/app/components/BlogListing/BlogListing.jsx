@@ -20,7 +20,9 @@ class BlogListing extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState();
+    Actions.turnToLoadingState({
+      loadingTitle: this.props.title,
+    });
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
@@ -39,7 +41,9 @@ class BlogListing extends React.Component {
   fetchSeries(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState();
+    Actions.turnToLoadingState({
+      loadingTitle: this.props.series[0].title,
+    });
 
     axios
       .get(`/api?series=${this.props.series[0].id}`)
@@ -110,6 +114,8 @@ class BlogListing extends React.Component {
           <ReadMoreButton
             slug={this.props.slug}
             appBaseUrl={this.props.appBaseUrl}
+            blogTitle={this.props.title}
+            blogSeries={(this.props.series !== null && this.props.series[0] !== null) ? this.props.series[0].title : ''}
           />
           <BlogSubjects
             className="blogSubjectsInList"

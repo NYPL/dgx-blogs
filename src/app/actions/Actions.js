@@ -18,9 +18,8 @@ class Actions {
     this.dispatch(cacheKey);
   }
 
-  turnToLoadingState() {
-    console.log('ACTIONS: turnToLoadingState action called.');
-    this.dispatch();
+  turnToLoadingState(data) {
+    this.dispatch(data);
   }
 }
 

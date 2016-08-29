@@ -14,10 +14,12 @@ class BlogSubjects extends React.Component {
     this.fetchSubject = this.fetchSubject.bind(this);
   }
 
-  fetchSubject(subject, subjectId, e) {
+  fetchSubject(subject, clickedSubject, e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState();
+    Actions.turnToLoadingState({
+      loadingTitle: clickedSubject.props.subjects[0].name,
+    });
 
     axios
       .get(`${this.props.appBaseUrl}api?subject=${subject}`)

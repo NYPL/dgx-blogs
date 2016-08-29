@@ -23,7 +23,8 @@ class BlogStore {
       },
       blogPost: [],
       cache: {},
-      appStatus: 'ready',
+      appLoading: 'ready',
+      loadingTitle: '',
     };
   }
 
@@ -39,7 +40,8 @@ class BlogStore {
       },
       blogPost: this.state.blogPost,
       cache: this.state.cache,
-      appStatus: 'ready',
+      appLoading: 'ready',
+      loadingTitle: '',
     };
 
     /* store now knows the last url so components know if they have the right data */
@@ -63,7 +65,8 @@ class BlogStore {
       blogs: this.state.blogs,
       blogPost: blogPost,
       cache: this.state.cache,
-      appStatus: 'ready',
+      appLoading: 'ready',
+      loadingTitle: '',
     });
   }
 
@@ -82,7 +85,8 @@ class BlogStore {
         },
         blogPost: this.state.blogPost,
         cache: this.state.cache,
-        appStatus: 'ready',
+        appLoading: 'ready',
+        loadingTitle: '',
       });
     } else {
 
@@ -99,19 +103,28 @@ class BlogStore {
         blogs: this.state.cache[cacheKey],
         blogPost: this.state.blogPost,
         cache: this.state.cache,
-        appStatus: 'ready',
+        appLoading: 'ready',
+        loadingTitle: '',
       });    
     } else {
       console.log('STORE: value is not on cache');
     }
   }
 
-  turnToLoadingState() {
+  turnToLoadingState(data) {
+
+    if (! data) {
+      data = {
+        loadingTitle: '',
+      };
+    }
+
     this.setState({
       blogs: this.state.blogs,
       blogPost: this.state.blogPost,
       cache: this.state.cache,
-      appStatus: 'loading',
+      appLoading: 'loading',
+      loadingTitle: data.loadingTitle,
     });
   }
 }

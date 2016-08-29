@@ -152,7 +152,10 @@ class BlogsWrapper extends React.Component {
 
     return (
       <div className="blogsWrapper">
-        <LoadingLayer status={this.state.appStatus} />
+        <LoadingLayer
+          status={this.state.appLoading} 
+          title={this.state.loadingTitle}
+        />
         {hero}
         <div className="content" id="mainContent">
           <div className="sidebar">
