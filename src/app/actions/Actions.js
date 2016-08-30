@@ -17,6 +17,10 @@ class Actions {
   fromCache(cacheKey) {
     this.dispatch(cacheKey);
   }
+
+  turnToLoadingState(data) {
+    this.dispatch(data);
+  }
 }
 
 export default alt.createActions(Actions);

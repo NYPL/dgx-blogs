@@ -7,6 +7,7 @@ import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Blog from '../Blog/Blog';
 import BlogAuthorCard from '../BlogAuthorCard/BlogAuthorCard';
 import BackToBlogs from '../BackToBlogs/BackToBlogs';
+import LoadingLayer from '../LoadingLayer/LoadingLayer';
 
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
@@ -16,27 +17,41 @@ class BlogPage extends React.Component {
     super(props);
 
     this.state = Store.getState();
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-      console.log('BLOGPAGE: component state', this.state.blogPost.blogList);
-      if (this.state.blogPost.blogList[0] === undefined) {
+    
+    Store.listen(this.onChange);
+      
+    if (this.state.blogPost.blogList[0] === undefined) {
       this.context.router.push('${appBaseUrl}not-found');
       return;
     }
   }
 
+  componentWillUnmount() {
+    Store.unlisten(this.onChange);
+  }
+
+  onChange() {
+    this.setState(Store.getState());
+  }
+  
   render() {
     if (this.state.blogPost.blogList[0] === undefined) {
       return null;
     }
 
-    //const blog = this.state.get('blogPost').first().toJS();
     const blog = this.state.blogPost.blogList[0];
     const { author, subjects, title, date, mainPicture } = blog;
 
     return (
       <div className="blogPage">
+        <LoadingLayer
+          status={this.state.appLoading}
+          title={this.state.loadingTitle}
+          />
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div
           className="content"

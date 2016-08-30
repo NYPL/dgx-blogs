@@ -16,6 +16,10 @@ class ReadMoreButton extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
+    Actions.turnToLoadingState({
+      loadingTitle: this.props.blogTitle, 
+    });
+
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
       .then(response => {
@@ -49,6 +53,13 @@ class ReadMoreButton extends React.Component {
 
 ReadMoreButton.propTypes = {
   slug: React.PropTypes.string.isRequired,
+  blogTitle: React.PropTypes.string,
+  blogSeries: React.PropTypes.string,
+};
+
+ReadMoreButton.defaultProps = {
+  blogTitle: '',
+  blogSeries: '',
 };
 
 ReadMoreButton.contextTypes = {

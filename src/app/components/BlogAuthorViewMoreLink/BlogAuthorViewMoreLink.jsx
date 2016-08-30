@@ -13,6 +13,8 @@ class BlogAuthorViewMoreLink extends React.Component {
   _fetchAuthor(e) {
     e.preventDefault();
 
+    Actions.turnToLoadingState();
+
     axios
       .get(`/blog/beta/api?author=${this.props.slug}`)
       .then(response => {
