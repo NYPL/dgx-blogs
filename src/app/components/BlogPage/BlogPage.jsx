@@ -22,7 +22,7 @@ class BlogPage extends React.Component {
   }
 
   componentDidMount() {
-      console.log('BLOGPAGE: component state', this.state.blogPost.blogList);
+
       if (this.state.blogPost.blogList[0] === undefined) {
       this.context.router.push('${appBaseUrl}not-found');
       return;
@@ -39,13 +39,14 @@ class BlogPage extends React.Component {
     const { author, subjects, title, date, mainPicture } = blog;
 
     const singleBlogMetas = [
-        { property: 'og:title', content: title + ' | The New York Public Library' },
-        { property: 'og:image', content: mainPicture['full-uri'] },
-        { property: 'og:description', content: 'description'},
-        { property: 'og:url', content: 'url'},
-        { name: 'twitter:title', content: title + ' | The New York Public Library' },
-        { name: 'twitter:description', content: 'description' },
-        { name: 'twitter:image', content: mainPicture['full-uri'] }
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: title + ' | The New York Public Library' },
+      { property: 'og:image', content: mainPicture['full-uri'] },
+      { property: 'og:description', content: blog.body.short },
+      //{ property: 'og:url', content: 'url'},
+      { name: 'twitter:title', content: title + ' | The New York Public Library' },
+      { name: 'twitter:description', content: blog.body.short },
+      { name: 'twitter:image', content: mainPicture['full-uri'] }
       ];
 
     return (
