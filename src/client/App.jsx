@@ -14,10 +14,6 @@ import './styles/main.scss';
 import routes from '../app/routes/routes.js';
 
 window.onload = () => {
-
-  // Fire off the Feature Flag prior to render
-  FeatureFlags.utils.activateFeature('shop-link');
-
   Iso.bootstrap((state, container) => {
 
     alt.bootstrap(state);
