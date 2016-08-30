@@ -7,6 +7,7 @@ import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
+import LoadingLayer from '../LoadingLayer/LoadingLayer';
 
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
@@ -151,6 +152,10 @@ class BlogsWrapper extends React.Component {
 
     return (
       <div className="blogsWrapper">
+        <LoadingLayer
+          status={this.state.appLoading} 
+          title={this.state.loadingTitle}
+        />
         {hero}
         <section className="content" id="mainContent">
           <nav className="sidebar">

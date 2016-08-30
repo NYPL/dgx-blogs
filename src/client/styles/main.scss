@@ -43,8 +43,15 @@ Import components styling
 @import "components/_ReadMoreButton";
 @import "components/_LoadMoreButton";
 @import "components/_NotFoundAlert";
+@import "components/_LoadingLayer";
+@import "components/_LoadingDots";
 
 #app {
   margin: 0;
   @include Kievit-Regular;
+
+  #nyplHeader {
+  	position: relative;
+  	z-index: 1005;
+  }
 }
