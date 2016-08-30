@@ -47,7 +47,7 @@ class BlogPage extends React.Component {
     const { author, subjects, title, date, mainPicture } = blog;
 
     return (
-      <div className="blogPage">
+      <section className="blogPage">
         <LoadingLayer
           status={this.state.appLoading}
           title={this.state.loadingTitle}
@@ -75,7 +75,7 @@ class BlogPage extends React.Component {
             data={author}
           />
         </div>
-      </div>
+      </section>
     );
   }
 }

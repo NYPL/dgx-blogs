@@ -100,14 +100,14 @@ class BlogListing extends React.Component {
     return (
       <div className="blogListing">
         {this.seriesTitle()}
-        <h2 className={`blogListing-title ${this.props.width}`}>
+        <h1 className={`blogListing-title ${this.props.width}`}>
           <Link
             to={`${this.props.appBaseUrl}${this.props.slug}`}
             onClick={this.fetchSingleBlog}
           >
             {this.props.title}
           </Link>
-        </h2>
+        </h1>
         {this.mainPicture()}
         <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
           <span dangerouslySetInnerHTML={unescapedBody}></span>

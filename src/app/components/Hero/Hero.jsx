@@ -31,7 +31,7 @@ class Hero extends React.Component {
     const alignClass = (this.props.picture) ? '' : 'no-picture';
 
     return (
-      <div className="hero">
+      <header className="hero">
         <div className="hero-content">
           {this.renderPicture()}
           <div className={`hero-content-texts ${alignClass}`}>
@@ -43,7 +43,7 @@ class Hero extends React.Component {
             </p>
           </div>
         </div>
-      </div>
+      </header>
     );
   }
 }
