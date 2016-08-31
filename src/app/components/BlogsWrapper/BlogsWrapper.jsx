@@ -7,6 +7,7 @@ import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
+import LoadingLayer from '../LoadingLayer/LoadingLayer';
 
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
@@ -203,18 +204,22 @@ class BlogsWrapper extends React.Component {
     return (
       <div className="blogsWrapper">
         <DocMeta tags={homeMetas} />
+        <LoadingLayer
+          status={this.state.appLoading} 
+          title={this.state.loadingTitle}
+        />
         {hero}
-        <div className="content" id="mainContent">
-          <div className="sidebar">
+        <section className="content" id="mainContent">
+          <nav className="sidebar">
             <h3 className="sidebar-title">Blog</h3>
             <a href="#" className="sidebar-link">Blogger Profiles</a>
             <a href="#" className="sidebar-link">Blog Topics</a>
-          </div>
-          <ul className="blogsList">
+          </nav>
+          <main className="blogsList">
             {blogs}
             {this.renderLoadMoreButton(currentState, filter)}
-          </ul>
-        </div>
+          </main>
+        </section>
       </div>
     );
   }

@@ -13,6 +13,7 @@
   .blogsList {
     list-style: none;
     padding: 0;
+    margin-top: 16px;
   }
 
   @include layout-at(9, $portrait) {

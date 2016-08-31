@@ -56,7 +56,7 @@ class BlogAuthorCard extends React.Component {
     }
 
     return (
-      <div className="blogAuthorCard">
+      <address className="blogAuthorCard">
         <div className="blogAuthorCard-profilePicWrap">
           {this._renderAuthorPicture()}
         </div>
@@ -75,7 +75,7 @@ class BlogAuthorCard extends React.Component {
           slug={this.props.data.slug}
           appBaseUrl={this.props.appBaseUrl}
         />
-      </div>
+      </address>
     );
   }
 }

@@ -20,7 +20,9 @@ class BlogListing extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
-    console.log('BLOGLISTING: calling: ', `${this.props.appBaseUrl}api?blog=${this.props.slug}`);
+    Actions.turnToLoadingState({
+      loadingTitle: this.props.title,
+    });
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
@@ -38,6 +40,10 @@ class BlogListing extends React.Component {
 
   fetchSeries(e) {
     e.preventDefault();
+
+    Actions.turnToLoadingState({
+      loadingTitle: this.props.series[0].title,
+    });
 
     axios
       .get(`/api?series=${this.props.series[0].id}`)
@@ -94,20 +100,22 @@ class BlogListing extends React.Component {
     return (
       <div className="blogListing">
         {this.seriesTitle()}
-        <h2 className={`blogListing-title ${this.props.width}`}>
+        <h1 className={`blogListing-title ${this.props.width}`}>
           <Link
             to={`${this.props.appBaseUrl}${this.props.slug}`}
             onClick={this.fetchSingleBlog}
           >
             {this.props.title}
           </Link>
-        </h2>
+        </h1>
         {this.mainPicture()}
         <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
           <span dangerouslySetInnerHTML={unescapedBody}></span>
           <ReadMoreButton
             slug={this.props.slug}
             appBaseUrl={this.props.appBaseUrl}
+            blogTitle={this.props.title}
+            blogSeries={(this.props.series !== null && this.props.series[0] !== null) ? this.props.series[0].title : ''}
           />
           <BlogSubjects
             className="blogSubjectsInList"
