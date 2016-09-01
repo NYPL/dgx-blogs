@@ -60,7 +60,7 @@ class BlogPage extends React.Component {
       { name: 'twitter:title', content: `${title} | The New York Public Library` },
       { name: 'twitter:description', content: blog.body.short },
       { name: 'twitter:image', content: (mainPicture && mainPicture['full-uri']) ? mainPicture['full-uri'] : fallbackImage }
-      ];
+    ];
 
     return (
 
