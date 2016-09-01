@@ -49,15 +49,17 @@ class BlogPage extends React.Component {
     const blog = this.state.blogPost.blogList[0];
     const { author, subjects, title, date, mainPicture } = blog;
 
+    const fallbackImage = 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
+
     const singleBlogMetas = [
       { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: title + ' | The New York Public Library' },
-      { property: 'og:image', content: mainPicture['full-uri'] },
+      { property: 'og:title', content: `${title} | The New York Public Library` },
+      { property: 'og:image', content: (mainPicture && mainPicture['full-uri']) ? mainPicture['full-uri'] : fallbackImage },
       { property: 'og:description', content: blog.body.short },
       //{ property: 'og:url', content: 'url'},
-      { name: 'twitter:title', content: title + ' | The New York Public Library' },
+      { name: 'twitter:title', content: `${title} | The New York Public Library` },
       { name: 'twitter:description', content: blog.body.short },
-      { name: 'twitter:image', content: mainPicture['full-uri'] }
+      { name: 'twitter:image', content: (mainPicture && mainPicture['full-uri']) ? mainPicture['full-uri'] : fallbackImage }
       ];
 
     return (

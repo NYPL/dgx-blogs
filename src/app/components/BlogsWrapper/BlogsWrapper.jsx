@@ -91,23 +91,32 @@ class BlogsWrapper extends React.Component {
     );
   }
 
+  imageMeta(imageField) {
+
+    if (imageField && imageField.length !== 0) {
+      return imageField;
+    }
+
+    return 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
+  }
+
   render() {
     const currentState = this.state.blogs;
     const blogs = this.getList(currentState.blogList);
+
+    /* this image will be used in case of missing images */
+    const imageFallback = 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
 
     let homeMetas = [
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Library Voices | The New York Public Library' },
       { property: 'og:description', content: 'From great literature or children\'s books to job search help and New York City history, our librarians, curators, and staff offer valuable insight. See what\'s on their minds.' },
-      { property: 'og:image', content: 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg' },
+      { property: 'og:image', content: this.imageMeta(null) },
       //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
       { name: 'twitter:title', content: 'Library Voices | The New York Public Library' },
       { name: 'twitter:description', content: 'From great literature or children\'s books to job search help and New York City history, our librarians, curators, and staff offer valuable insight. See what\'s on their minds.' },
-      { name: 'twitter:image', content: 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg' }
+      { name: 'twitter:image', content: this.imageMeta(null) }
     ];
-
-    /* this image will be used in case of missing images */
-    const imageFallback = 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
 
     let pageType;
     let param;
@@ -140,11 +149,11 @@ class BlogsWrapper extends React.Component {
           { property: 'og:type', content: 'website' },
           { property: 'og:title', content: `${author.fullName } | The New York Public Library` },
           { property: 'og:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
-          { property: 'og:image', content: (author.profileImgUrl && author.profileImgUrl.length !== 0) ? author.profileImgUrl : imageFallback },
+          { property: 'og:image', content: this.imageMeta(author.profileImgUrl) },
           //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
           { name: 'twitter:title', content: `${author.fullName} | The New York Public Library` },
           { name: 'twitter:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
-          { name: 'twitter:image', content: (author.profileImgUrl && author.profileImgUrl.length !== 0) ? author.profileImgUrl : imageFallback }
+          { name: 'twitter:image', content: this.imageMeta(author.profileImgUrl) }
         ];
 
         /* set filter to get ajax content only for an author */
@@ -165,16 +174,16 @@ class BlogsWrapper extends React.Component {
         /* set filter to get ajax content only for a series */
         filter = `series=${series.id}`;
 
-        /* override the metas according to an author page */
+        /* override the metas according to a series page */
         homeMetas = [
           { property: 'og:type', content: 'website' },
           { property: 'og:title', content: `${series.title} | The New York Public Library` },
           { property: 'og:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
-          { property: 'og:image', content: (series.image.url && series.image.url.length !== 0) ? series.image.url : imageFallback },
+          { property: 'og:image', content: this.imageMeta(series.image.url) },
           //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
           { name: 'twitter:title', content: `${series.title} | The New York Public Library` },
           { name: 'twitter:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
-          { name: 'twitter:image', content: (series.image.url && series.image.url.length !== 0) ? series.image.url : imageFallback }
+          { name: 'twitter:image', content: this.imageMeta(series.image.url) }
         ];
 
       } else if (pageType === 'subjects') {
@@ -189,14 +198,14 @@ class BlogsWrapper extends React.Component {
         /* set filter to get ajax content only for a subject */
         filter = `subject=${subjects.id}`;
 
-        /* override the metas according to an author page */
+        /* override the metas according to a subject page */
         homeMetas = [
           { property: 'og:type', content: 'website' },
           { property: 'og:title', content: `${subjects.name} | The New York Public Library` },
-          { property: 'og:image', content: imageFallback },
+          { property: 'og:image', content: this.imageMeta(null) },
           //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
           { name: 'twitter:title', content: `${subjects.name} | The New York Public Library` },
-          { name: 'twitter:image', content: imageFallback }
+          { name: 'twitter:image', content: this.imageMeta(null) }
         ];
       }
     }

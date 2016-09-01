@@ -12,8 +12,6 @@ import ReactDOMServer from 'react-dom/server';
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
 
-import FeatureFlags from 'dgx-feature-flags';
-
 import appConfig from './appConfig.js';
 import analytics from './analytics.js';
 import webpack from 'webpack';
@@ -82,9 +80,6 @@ app.use('/', (req, res) => {
       const renderedTags = metaTags.map((tag, index) =>
         ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
       );
-
-      // Fire off the Feature Flag prior to render
-      FeatureFlags.utils.activateFeature('shop-link');
 
       iso.add(html, alt.flush());
       res
