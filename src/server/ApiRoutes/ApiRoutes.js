@@ -2,20 +2,15 @@ import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
-import Model from 'dgx-model-data';
 // import Immutable from 'immutable';
-
-import { navConfig } from 'dgx-header-component';
 
 /*
  * @todo check how to make this work as in homepage 
  */
 import BlogsModel from '../../app/utils/BlogsModel';
-
 import appConfig from '../../../appConfig.js';
 
-const { HeaderItemModel } = Model;
-const { api, headerApi, blogsApi, appBaseUrl } = appConfig;
+const { api, blogsApi, appBaseUrl } = appConfig;
 const router = express.Router();
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
@@ -28,16 +23,10 @@ function createOptions(api) {
   };
 }
 
-const headerOptions = createOptions(headerApi);
 const blogsOptions = createOptions(blogsApi);
 
 function fetchApiData(url) {
   return axios.get(url);
-}
-
-function getHeaderData() {
-  const headerApiUrl = parser.getCompleteApi(headerOptions);
-  return fetchApiData(headerApiUrl);
 }
 
 function fetchData(url, storeValue, req, res, next) {
@@ -45,12 +34,8 @@ function fetchData(url, storeValue, req, res, next) {
   url = `${url}&page[number]=1&page[size]=25`;
   console.log('API-ROUTES: first api call:', url);
 
-  axios
-    .all([getHeaderData(), fetchApiData(url)])
-    .then(axios.spread((headerData, blogsData) => {
-      const headerParsed = parser.parse(headerData.data, headerOptions);
-      const headerModelData = HeaderItemModel.build(headerParsed);
-
+  fetchApiData(url)
+    .then(blogsData => {
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
@@ -73,12 +58,9 @@ function fetchData(url, storeValue, req, res, next) {
             }
           },
         },
-        HeaderStore: {
-          headerData: navConfig.current,
-        },
       };    
       next();
-    }))
+    })
     .catch(error => {
       console.log(`error calling API : ${error}`);
       console.log(`Attempted to call : ${url}`);
@@ -86,9 +68,6 @@ function fetchData(url, storeValue, req, res, next) {
       res.locals.data = {
         BlogStore: {
           [storeValue]: [],
-        },
-        HeaderStore: {
-          headerData: navConfig.current,
         },
       };
 
