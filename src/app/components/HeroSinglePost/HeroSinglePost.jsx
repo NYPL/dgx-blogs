@@ -8,6 +8,7 @@ class HeroSinglePost extends React.Component {
   }
 
   componentDidMount() {
+    // Thanks to http://stackoverflow.com/questions/3688460/stopping-gif-animation-programmatically
     const i = this.refs.img;
     const c = document.createElement('canvas');
     const w = c.width = i.width;
