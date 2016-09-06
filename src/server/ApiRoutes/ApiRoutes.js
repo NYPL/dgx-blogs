@@ -5,7 +5,7 @@ import parser from 'jsonapi-parserinator';
 // import Immutable from 'immutable';
 
 /*
- * @todo check how to make this work as in homepage 
+ * @todo check how to make this work as in homepage
  */
 import BlogsModel from '../../app/utils/BlogsModel';
 import appConfig from '../../../appConfig.js';
@@ -30,11 +30,10 @@ function fetchApiData(url) {
 }
 
 function fetchData(url, storeValue, req, res, next) {
+  const updatedUrl = `${url}&page[number]=1&page[size]=25`;
+  console.log('API-ROUTES: first api call:', updatedUrl);
 
-  url = `${url}&page[number]=1&page[size]=25`;
-  console.log('API-ROUTES: first api call:', url);
-
-  fetchApiData(url)
+  fetchApiData(updatedUrl)
     .then(blogsData => {
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
@@ -42,7 +41,7 @@ function fetchData(url, storeValue, req, res, next) {
       res.locals.data = {
         BlogStore: {
           [storeValue]: {
-            meta: { 
+            meta: {
               count: blogsData.data.meta.count,
             },
             blogList: blogsModelData,
@@ -50,7 +49,7 @@ function fetchData(url, storeValue, req, res, next) {
           },
           cache: {
             [appBaseUrl]: {
-              meta: { 
+              meta: {
                 count: blogsData.data.meta.count,
               },
               blogList: blogsModelData,
@@ -63,7 +62,7 @@ function fetchData(url, storeValue, req, res, next) {
     })
     .catch(error => {
       console.log(`error calling API : ${error}`);
-      console.log(`Attempted to call : ${url}`);
+      console.log(`Attempted to call : ${updatedUrl}`);
 
       res.locals.data = {
         BlogStore: {
@@ -182,7 +181,7 @@ function fetchThroughAjax(req, res, next) {
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      res.json({ 
+      res.json({
         blogList: blogsModelData,
         meta: {
           count: response.data.meta.count },
@@ -193,7 +192,7 @@ function fetchThroughAjax(req, res, next) {
       console.log(`Attempted to call : ${apiUrl}`);
 
       res.json({
-        error
+        error,
       });
     }); /* end axios call */
 }
