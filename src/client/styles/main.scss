@@ -28,23 +28,28 @@ Import style rules from NYPL React module components
 /*
 Import components styling
 */
-@import "components/_BlogsWrapper";
-@import "components/_BlogRow";
+@import "components/_AuthorPicture";
+@import "components/_Blog";
 @import "components/_BlogAuthor";
 @import "components/_BlogAuthorCard";
+@import "components/_BlogsWrapper";
+@import "components/_BlogRow";
+@import "components/_BlogsLandingPage";
 @import "components/_BlogListing";
 @import "components/_BlogListingHero";
-@import "components/_BlogsLandingPage";
-@import "components/_BlogSubjects";
 @import "components/_BlogPage";
-@import "components/_Blog";
-@import "components/_HeroSinglePost";
+@import "components/_BlogSubjects";
 @import "components/_Hero";
-@import "components/_ReadMoreButton";
+@import "components/_HeroSinglePost";
+@import "components/_LoadingDots";
+@import "components/_LoadingLayer";
 @import "components/_LoadMoreButton";
 @import "components/_NotFoundAlert";
-@import "components/_LoadingLayer";
-@import "components/_LoadingDots";
+@import "components/_ProfilesAuthor";
+@import "components/_ProfilesListLetter";
+@import "components/_ProfilesListLetterTitle";
+@import "components/_ProfilesWrapper";
+@import "components/_ReadMoreButton";
 
 #app {
   margin: 0;

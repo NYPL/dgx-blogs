@@ -7,10 +7,11 @@ import Model from 'dgx-model-data';
 
 import { navConfig } from 'dgx-header-component';
 
-/*
- * @todo check how to make this work as in homepage 
- */
 import BlogsModel from '../../app/utils/BlogsModel';
+import ProfileModel from '../../app/utils/ProfileModel';
+
+/* profiles refinery response to speed up response on dev time */
+import profilesMock from '../../app/utils/ProfilesMock';
 
 import appConfig from '../../../appConfig.js';
 
@@ -19,6 +20,12 @@ const { api, headerApi, blogsApi, appBaseUrl } = appConfig;
 const router = express.Router();
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
+
+/**
+ * cache variable for profiles long response from the refinery.
+ * @todo a better way of caching?
+ */
+let profilesCache = null;
 
 function createOptions(api) {
   return {
@@ -43,7 +50,6 @@ function getHeaderData() {
 function fetchData(url, storeValue, req, res, next) {
 
   url = `${url}&page[number]=1&page[size]=25`;
-  console.log('API-ROUTES: first api call:', url);
 
   axios
     .all([getHeaderData(), fetchApiData(url)])
@@ -199,7 +205,6 @@ function fetchThroughAjax(req, res, next) {
   axios
     .get(apiUrl + pageSuffix)
     .then(response => {
-      console.log('ajax call to:', completeUrl);
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
@@ -219,6 +224,50 @@ function fetchThroughAjax(req, res, next) {
     }); /* end axios call */
 }
 
+function fetchProfiles(req, res) {
+
+  /* @todo check for using parser */
+  const blogsApiUrl = 'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,blog-posts';
+
+  /* harcoded response for dev time */
+  //profilesCache = ProfileModel.build(profilesMock.data);
+
+  if (profilesCache) {
+
+    res.json({ 
+      profiles: profilesCache,
+      meta: {},
+    });
+  } else {
+
+    axios
+      .get(blogsApiUrl)
+      .then(response => {
+
+        //console.log('API-ROUTES: response', response);
+
+        profilesCache = ProfileModel.build(response.data.data, function(formatedProfiles) {
+
+          profilesCache = formatedProfiles;
+
+          res.json({ 
+            profiles: formatedProfiles,
+            meta: {},
+          });
+        });
+
+      })
+      .catch(error => {
+        console.log(`Error calling API : ${error}`);
+        console.log(`Attempted to call : ${apiUrl}`);
+
+        res.json({
+          error
+        });
+      }); /* end axios call */
+  }
+}
+
 router
   .route(/([^]+)?/)
   .get(BlogQuery);
@@ -227,6 +276,7 @@ router
   .route(appBaseUrl)
   .get(BlogsMainList);
 
+/* @todo HARCODED BLOG BETA HERE!! */
 router
   .route(/\/blog\/beta\/([^]+)\/?/)
   .get(BlogQuery);
@@ -238,5 +288,9 @@ router
 router
   .route(`${appBaseUrl}api`)
   .get(fetchThroughAjax);
+
+router
+  .route('/api/blogger-profiles')
+  .get(fetchProfiles);
 
 export default router;

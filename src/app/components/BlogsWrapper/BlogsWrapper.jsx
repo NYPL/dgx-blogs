@@ -3,6 +3,8 @@ import React from 'react';
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions';
 
+import { Link } from 'react-router';
+
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
@@ -221,7 +223,7 @@ class BlogsWrapper extends React.Component {
         <section className="content" id="mainContent">
           <nav className="sidebar">
             <h3 className="sidebar-title">Blog</h3>
-            <a href="#" className="sidebar-link">Blogger Profiles</a>
+            <Link to={`${appBaseUrl}blogger-profiles`} className="sidebar-link">Blogger Profiles</Link>
             <a href="#" className="sidebar-link">Blog Topics</a>
           </nav>
           <main className="blogsList">

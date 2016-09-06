@@ -13,12 +13,14 @@ import Application from '../components/Application/Application';
 import BlogPage from '../components/BlogPage/BlogPage';
 import BlogsLandingPage from '../components/BlogsLandingPage/BlogsLandingPage';
 import BlogsWrapper from '../components/BlogsWrapper/BlogsWrapper';
+import ProfilesWrapper from '../components/ProfilesWrapper/ProfilesWrapper';
 import NotFoundAlert from '../components/NotFoundAlert/NotFoundAlert';
 
 const routes = {
   client: (
     <Route path="/" component={Application}>
       <Route path={appBaseUrl} component={BlogsWrapper} />
+      <Route path={`${appBaseUrl}blogger-profiles`} component={ProfilesWrapper} />
       <Route path={`${appBaseUrl}author/:author`} component={BlogsWrapper} />
       <Route path={`${appBaseUrl}series/:series`} component={BlogsWrapper} />
       <Route path={`${appBaseUrl}subjects/:subjects`} component={BlogsWrapper} />
@@ -29,6 +31,7 @@ const routes = {
   server: (
     <Route path="/" component={Application}>
       <IndexRoute component={BlogsWrapper}/>
+      <Route path='blogger-profiles' component={ProfilesWrapper} />
       <Route path='author/:author' component={BlogsWrapper} />
       <Route path='series/:series' component={BlogsWrapper} />
       <Route path='subjects/:subjects' component={BlogsWrapper} />
