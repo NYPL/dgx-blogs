@@ -63,7 +63,7 @@ BlogAuthorName.propTypes = {
 };
 
 BlogAuthorName.defaultProps = {
-  fullName: undefined,
+  fullName: '',
   className: 'blogAuthor-name',
 };
 

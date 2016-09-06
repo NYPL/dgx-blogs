@@ -21,6 +21,8 @@ import webpackConfig from './webpack.config.js';
 import appRoutes from './src/app/routes/routes.js';
 import apiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
 
+import DocMeta from 'react-doc-meta';
+
 const { appBaseUrl } = appConfig;
 
 const ROOT_PATH = __dirname;
@@ -74,6 +76,11 @@ app.use('/', (req, res) => {
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
 
+      const metaTags = DocMeta.rewind();
+      const renderedTags = metaTags.map((tag, index) =>
+        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
+      );
+
       iso.add(html, alt.flush());
       res
         .status(200)
@@ -85,6 +92,7 @@ app.use('/', (req, res) => {
           webpackPort: WEBPACK_DEV_PORT,
           appEnv: process.env.APP_ENV,
           path: req.url,
+          metatags: renderedTags,
           isProduction,
         });
     } else {

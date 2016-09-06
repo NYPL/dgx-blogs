@@ -12,6 +12,9 @@ import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
 
+/* metatags */
+import DocMeta from 'react-doc-meta';
+
 import {
   map as _map,
   isEmpty as _isEmpty,
@@ -88,9 +91,32 @@ class BlogsWrapper extends React.Component {
     );
   }
 
+  imageMeta(imageField) {
+
+    if (imageField && imageField.length !== 0) {
+      return imageField;
+    }
+
+    return 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
+  }
+
   render() {
     const currentState = this.state.blogs;
     const blogs = this.getList(currentState.blogList);
+
+    /* this image will be used in case of missing images */
+    const imageFallback = 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
+
+    let homeMetas = [
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'Library Voices | The New York Public Library' },
+      { property: 'og:description', content: 'From great literature or children\'s books to job search help and New York City history, our librarians, curators, and staff offer valuable insight. See what\'s on their minds.' },
+      { property: 'og:image', content: this.imageMeta(null) },
+      //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+      { name: 'twitter:title', content: 'Library Voices | The New York Public Library' },
+      { name: 'twitter:description', content: 'From great literature or children\'s books to job search help and New York City history, our librarians, curators, and staff offer valuable insight. See what\'s on their minds.' },
+      { name: 'twitter:image', content: this.imageMeta(null) }
+    ];
 
     let pageType;
     let param;
@@ -118,6 +144,18 @@ class BlogsWrapper extends React.Component {
           postCount={currentState.meta.count}
         />);
 
+        /* override the metas according to an author page */
+        homeMetas = [
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: `${author.fullName } | The New York Public Library` },
+          { property: 'og:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
+          { property: 'og:image', content: this.imageMeta(author.profileImgUrl) },
+          //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+          { name: 'twitter:title', content: `${author.fullName} | The New York Public Library` },
+          { name: 'twitter:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
+          { name: 'twitter:image', content: this.imageMeta(author.profileImgUrl) }
+        ];
+
         /* set filter to get ajax content only for an author */
         filter = `author=${author.id}`;
 
@@ -136,6 +174,18 @@ class BlogsWrapper extends React.Component {
         /* set filter to get ajax content only for a series */
         filter = `series=${series.id}`;
 
+        /* override the metas according to a series page */
+        homeMetas = [
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: `${series.title} | The New York Public Library` },
+          { property: 'og:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
+          { property: 'og:image', content: this.imageMeta(series.image.url) },
+          //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+          { name: 'twitter:title', content: `${series.title} | The New York Public Library` },
+          { name: 'twitter:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
+          { name: 'twitter:image', content: this.imageMeta(series.image.url) }
+        ];
+
       } else if (pageType === 'subjects') {
 
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
@@ -147,11 +197,22 @@ class BlogsWrapper extends React.Component {
 
         /* set filter to get ajax content only for a subject */
         filter = `subject=${subjects.id}`;
+
+        /* override the metas according to a subject page */
+        homeMetas = [
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: `${subjects.name} | The New York Public Library` },
+          { property: 'og:image', content: this.imageMeta(null) },
+          //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+          { name: 'twitter:title', content: `${subjects.name} | The New York Public Library` },
+          { name: 'twitter:image', content: this.imageMeta(null) }
+        ];
       }
     }
 
     return (
       <div className="blogsWrapper">
+        <DocMeta tags={homeMetas} />
         <LoadingLayer
           status={this.state.appLoading} 
           title={this.state.loadingTitle}
