@@ -9,6 +9,8 @@ import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 import LoadingLayer from '../LoadingLayer/LoadingLayer';
 
+import { LeftWedgeIcon } from 'dgx-svg-icons';
+
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
 
@@ -220,7 +222,11 @@ class BlogsWrapper extends React.Component {
         {hero}
         <section className="content" id="mainContent">
           <nav className="sidebar">
-            <h3 className="sidebar-title">Blog</h3>
+            <div className="sidebar-breadCrumb">
+              <LeftWedgeIcon ariahidden />
+              <a href="https://www.nypl.org">Home</a>
+            </div>
+            <h3 className="sidebar-title">Blogs</h3>
             <a href="#" className="sidebar-link">Blogger Profiles</a>
             <a href="#" className="sidebar-link">Blog Topics</a>
           </nav>
