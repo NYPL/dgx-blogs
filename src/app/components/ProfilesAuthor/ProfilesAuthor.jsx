@@ -53,7 +53,7 @@ class ProfilesAuthor extends React.Component {
               className="blogAuthor-name-link"
               onClick={this.fetchAuthor}
             >
-              {this.props.name}
+              {this.props.firstName} {this.props.lastName}
             </Link>
           </h2>
           <p className="profilesAuthor-title">{this.props.title}</p>

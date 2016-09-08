@@ -9,6 +9,7 @@ const appBaseUrl = appConfig.appBaseUrl;
 /* metatags */
 import DocMeta from 'react-doc-meta';
 
+import GenericHero from '../GenericHero/GenericHero';
 import ProfilesList from '../ProfilesList/ProfilesList';
 
 class ProfilesWrapper extends React.Component {
@@ -60,6 +61,7 @@ class ProfilesWrapper extends React.Component {
     return (
       <section className="profilesWrapper">
         <DocMeta tags={homeMetas} />
+        <GenericHero title="NYPL Bloggers" />
         <ProfilesList profiles={this.state.profiles.profiles} /> 
       </section>
     );

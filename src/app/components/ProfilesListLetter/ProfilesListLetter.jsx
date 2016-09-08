@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import AuthorSeeAll from '../AuthorSeeAll/AuthorSeeAll';
 import ProfilesAuthor from '../ProfilesAuthor/ProfilesAuthor';
+import ProfilesTopPosts from '../ProfilesTopPosts/ProfilesTopPosts';
 
-class ProfilesList extends React.Component {
+class ProfilesListLetter extends React.Component {
 
   constructor(props) {
     super(props);
@@ -29,14 +31,21 @@ class ProfilesList extends React.Component {
           <ProfilesAuthor
             id={profile.id}
             name={profile.name}
+            firstName={profile.authorData.attributes['first-name']}
+            lastName={profile.authorData.attributes['last-name']}
             picture={profile.picture}
-            title={profile.title}
+            title={profile.authorData.attributes.title}
           />
           <div
             className="profilesListLetter-bio"
             dangerouslySetInnerHTML={unescapedBio}
           >
           </div>
+          <ProfilesTopPosts maxPostsShown={3} posts={profile.postsData}/>
+          <AuthorSeeAll
+            id={profile.id}
+            firstName={profile.authorData.attributes['first-name']}
+          />
         </article>
       );
     });
@@ -52,8 +61,8 @@ class ProfilesList extends React.Component {
   }
 };
 
-ProfilesList.defaultProps = {
+ProfilesListLetter.defaultProps = {
   profiles: []
 };
 
-export default ProfilesList;
+export default ProfilesListLetter;

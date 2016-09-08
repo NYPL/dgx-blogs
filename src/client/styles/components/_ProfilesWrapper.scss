@@ -1,4 +1,4 @@
 .profilesWrapper {
   @include add-grid(3);
-  margin: 18px;
+  min-height: 400px;
 }

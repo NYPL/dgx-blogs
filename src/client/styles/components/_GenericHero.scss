@@ -1,0 +1,29 @@
+.genericHero {
+
+  height: 100px;
+
+  & > img {
+    @include visuallyHidden;
+    width: 100%;
+  }
+
+  &-title {
+    @include Kievit-Regular;
+    margin-left: 25px;
+    color: $WHITE_COLOR;
+    text-transform: uppercase;
+
+    margin-top: 0;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    line-height: 96px;
+
+    .nypl-icon-wedge-down {
+      font-weight: bold;
+    }
+  }
+
+  &-default {
+  	background: $COOLGRAY_COLOR;
+  }
+}

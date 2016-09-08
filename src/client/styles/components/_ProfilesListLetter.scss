@@ -1,10 +1,24 @@
 .profilesListLetter {
-	
-	&-item {
-		margin-top: 20px;
-	}
+  
+  &-item {
+    margin-top: 30px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid $COOLGRAY_COLOR;
 
-	&-bio {
-		margin-bottom: 20px;
-	}
+    &:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+
+  &-bio {
+    margin-bottom: 20px;
+    line-height: 20px;
+
+    & > a {
+      text-decoration: none;
+      color: $SECONDARY_UI_COLOR;
+    }
+  }
 }

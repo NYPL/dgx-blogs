@@ -227,7 +227,9 @@ function fetchThroughAjax(req, res, next) {
 function fetchProfiles(req, res) {
 
   /* @todo check for using parser */
-  const blogsApiUrl = 'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,blog-posts';
+  //const blogsApiUrl = 'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,blog-posts';
+  const blogsApiUrl = 
+    'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
 
   /* harcoded response for dev time */
   //profilesCache = ProfileModel.build(profilesMock.data);
@@ -246,14 +248,17 @@ function fetchProfiles(req, res) {
 
         //console.log('API-ROUTES: response', response);
 
-        profilesCache = ProfileModel.build(response.data.data, function(formatedProfiles) {
+        profilesCache = ProfileModel.build(
+          response.data.data, 
+          response.data.included, 
+          function(formatedProfiles) {
 
-          profilesCache = formatedProfiles;
+            profilesCache = formatedProfiles;
 
-          res.json({ 
-            profiles: formatedProfiles,
-            meta: {},
-          });
+            res.json({ 
+              profiles: formatedProfiles,
+              meta: {},
+            });
         });
 
       })

@@ -29,6 +29,7 @@ Import style rules from NYPL React module components
 Import components styling
 */
 @import "components/_AuthorPicture";
+@import "components/_AuthorSeeAll";
 @import "components/_Blog";
 @import "components/_BlogAuthor";
 @import "components/_BlogAuthorCard";
@@ -39,6 +40,7 @@ Import components styling
 @import "components/_BlogListingHero";
 @import "components/_BlogPage";
 @import "components/_BlogSubjects";
+@import "components/_GenericHero";
 @import "components/_Hero";
 @import "components/_HeroSinglePost";
 @import "components/_LoadingDots";
@@ -46,8 +48,10 @@ Import components styling
 @import "components/_LoadMoreButton";
 @import "components/_NotFoundAlert";
 @import "components/_ProfilesAuthor";
+@import "components/_ProfilesList";
 @import "components/_ProfilesListLetter";
 @import "components/_ProfilesListLetterTitle";
+@import "components/_ProfilesTopPosts";
 @import "components/_ProfilesWrapper";
 @import "components/_ReadMoreButton";
 

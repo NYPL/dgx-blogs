@@ -1,0 +1,22 @@
+.profilesTopPosts {
+
+  list-style: none;
+  padding: 0;
+
+  &-item {
+
+    &-date {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    &-title {
+
+      @include Milo-Regular;
+      font-size: 20px;
+      font-weight: normal;
+      margin-top: 2px;
+    }
+  }
+}
