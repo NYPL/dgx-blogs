@@ -62,7 +62,9 @@ class ProfilesWrapper extends React.Component {
       <section className="profilesWrapper">
         <DocMeta tags={homeMetas} />
         <GenericHero title="NYPL Bloggers" />
-        <ProfilesList profiles={this.state.profiles.profiles} /> 
+        <div className="content">
+          <ProfilesList profiles={this.state.profiles.profiles} /> 
+        </div>
       </section>
     );
   }

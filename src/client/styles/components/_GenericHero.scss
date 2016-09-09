@@ -2,28 +2,51 @@
 
   height: 100px;
 
-  & > img {
-    @include visuallyHidden;
-    width: 100%;
-  }
+  &-content {
 
-  &-title {
-    @include Kievit-Regular;
-    margin-left: 25px;
-    color: $WHITE_COLOR;
-    text-transform: uppercase;
+    &-title {
+      @include Kievit-Regular;
+      margin-left: 25px;
+      color: $WHITE_COLOR;
+      text-transform: uppercase;
 
-    margin-top: 0;
-    font-size: 22px;
-    letter-spacing: 0.04em;
-    line-height: 96px;
+      margin-top: 0;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      line-height: 96px;
 
-    .nypl-icon-wedge-down {
-      font-weight: bold;
+      .nypl-icon-wedge-down {
+        font-weight: bold;
+      }
     }
   }
 
   &-default {
-  	background: $COOLGRAY_COLOR;
+    background: $COOLGRAY_COLOR;
+  }
+
+  @include layout-at(9, $landscape) {
+    height: auto;
+
+    @include grid-span(9);
+    max-height: 314px;
+    float: none;
+    overflow: hidden;
+
+    &-content {
+
+      @include grid-span(7, 2);
+      @include add-grid(18);
+      max-width: 1312px;
+      margin: auto;
+      float: none;
+    }
+  }
+
+  @include layout-at(18, $desktop) {
+
+    &-content {
+      width: auto;
+    }
   }
 }

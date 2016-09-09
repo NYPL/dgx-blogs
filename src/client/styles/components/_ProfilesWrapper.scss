@@ -1,4 +1,30 @@
 .profilesWrapper {
   @include add-grid(3);
   min-height: 400px;
+
+   @include layout-at(9, $portrait) {
+    .content {
+      margin-top: -65px;
+      padding-top: 65px;
+    }
+  }
+
+  @include layout-at(9, $landscape) {
+
+    .content {
+      @include grid-span(9);
+      @include add-grid(9);
+    }
+  }
+
+  @include layout-at(9, $desktop) {
+    
+    .content {
+      max-width: 1312px;
+      margin: auto;
+      margin-top: -65px;
+      float: none;
+      width: auto;
+    }
+  }
 }

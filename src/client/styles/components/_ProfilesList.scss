@@ -1,6 +1,17 @@
 .profilesList {
 
-	&-item {
-		margin: 25px;
-	}
+  &-item {
+    margin: 25px;
+  }
+
+  @include layout-at(9, $landscape) {
+
+    @include grid-span(6, 2);
+  }
+
+  @include layout-at(9, $desktop) {
+
+    @include grid-span(6,2);
+    @include add-grid(8);
+  }
 }
