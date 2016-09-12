@@ -1,5 +1,8 @@
 import { each as _each, isArray as _isArray, map as _map } from 'underscore';
 
+import appConfig from '../../../appConfig.js';
+const appBaseUrl = appConfig.appBaseUrl;
+
 class ProfileModel {
 
   emptyProfile() {
@@ -39,27 +42,25 @@ class ProfileModel {
       });
 
       let listByAlphabet = {};
-      _each(completeList, function(modeledProfile) {
+      _each(completeList, (modeledProfile) => {
 
         if (! _isArray(listByAlphabet[modeledProfile.authorData.attributes['last-name'].charAt(0)])) {
           listByAlphabet[modeledProfile.authorData.attributes['last-name'].charAt(0)] = [];
         }
-
-        console.log('PROFILE-MODEL: modeled profile when ordering', modeledProfile);
 
         listByAlphabet[modeledProfile.authorData.attributes['last-name'].charAt(0)].push(modeledProfile);
       });
 
       /* authors separated by letter, converting to array for sorting */
       let orderedArray = [];
-      _each(listByAlphabet, function(arrayByLetter, index) {
+      _each(listByAlphabet, (arrayByLetter, index) => {
         orderedArray.push({
           letter: index,
           authors: arrayByLetter,
         });
 
         /* sort arrays by letter by alphabet to show them in the right order */
-        orderedArray.sort(function(a,b){ 
+        orderedArray.sort( (a,b) => { 
           let x = a.letter < b.letter ? -1:1; 
           return x; 
         });
@@ -96,8 +97,6 @@ class ProfileModel {
       newProfile.postsData.push(parsedIncludedFields.blogs[postMeta.id]);
     });
 
-    console.log('PROFILE-MODEL: modeling profile', newProfile);
-
     return newProfile;
   }
 
@@ -109,21 +108,25 @@ class ProfileModel {
 
     try {
       const {
-        id: id = '',
         attributes: {
           title: {
             en: {
               text: title = '',
             },
           },
-          ['date-created']: date = ''
+          ['date-created']: date = '',
+          alias: url = ''
         },
       } = blog;
 
       result = {
+        url,
         title,
         date,
       };
+
+      /* remove the /blog/ part on the alias because it fails when /blog/beta is used */
+      result.url = result.url.replace('blog/', '');
     } catch (e) {
       console.log('PROFILE-MODEL: error destructuring blog', e)
       result = undefined;

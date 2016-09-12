@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
+
+import appConfig from '../../../../appConfig.js';
+const appBaseUrl = appConfig.appBaseUrl;
 
 class ProfilesTopPosts extends React.Component {
   constructor(props) {
@@ -17,7 +21,9 @@ class ProfilesTopPosts extends React.Component {
             {this.props.posts[i].date}
           </span>
           <h3 className="profilesTopPosts-item-title">
-            {this.props.posts[i].title}
+            <Link to={`${appBaseUrl}${this.props.posts[i].url}`}>
+              {this.props.posts[i].title}
+            </Link>
           </h3>
         </li>
       ));

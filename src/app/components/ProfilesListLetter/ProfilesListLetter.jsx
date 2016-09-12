@@ -9,6 +9,8 @@ class ProfilesListLetter extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.createMarkup = this.createMarkup.bind(this);
   }
 
   createMarkup(bioText) {
@@ -17,11 +19,9 @@ class ProfilesListLetter extends React.Component {
 
   renderProfiles() {
 
-    const _this = this;
+    return this.props.profiles.map((profile) => {
 
-    return this.props.profiles.map( function(profile) {
-
-      const unescapedBio = _this.createMarkup(profile.bio);
+      const unescapedBio = this.createMarkup(profile.bio);
 
       return (
         <article

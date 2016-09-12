@@ -13,15 +13,6 @@ class ProfilesList extends React.Component {
     super(props);
   }
 
-  renderProfiles(profiles) {
-
-    return profiles.map( function(profile) {
-      return (
-        <li key={profile.id}>{profile.id} -- {profile.name}</li>
-      );
-    });
-  }
-
   renderAlphabet() {
 
     if (this.props.profiles.length <= 0) {

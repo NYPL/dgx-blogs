@@ -7,6 +7,10 @@
   @include layout-at(9, $landscape) {
 
     @include grid-span(6, 2);
+
+    &-item {
+      margin: 25px 50px;
+    }
   }
 
   @include layout-at(9, $desktop) {

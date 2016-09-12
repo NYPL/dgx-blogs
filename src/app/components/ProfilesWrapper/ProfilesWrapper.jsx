@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import ProfileStore from '../../stores/ProfileStore.js';
 import Actions from '../../actions/Actions';
@@ -56,13 +57,16 @@ class ProfilesWrapper extends React.Component {
       { name: 'twitter:image', content: this.imageMeta(null) }
     ];
 
-    console.log('PROFILES-WRAPPER: render this profiles:', this.state);
-
     return (
       <section className="profilesWrapper">
         <DocMeta tags={homeMetas} />
         <GenericHero title="NYPL Bloggers" />
         <div className="content">
+          <nav className="sidebar">
+            <h3 className="sidebar-title">Blogger Profiles</h3>
+            <Link to={`${appBaseUrl}`} className="sidebar-link">Blog</Link>
+            <a href="#" className="sidebar-link">Blog Topics</a>
+          </nav>
           <ProfilesList profiles={this.state.profiles.profiles} /> 
         </div>
       </section>

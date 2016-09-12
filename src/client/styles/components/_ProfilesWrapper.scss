@@ -2,6 +2,13 @@
   @include add-grid(3);
   min-height: 400px;
 
+  .content {
+
+    .sidebar {
+      @include visuallyHidden;
+    }
+  }
+
    @include layout-at(9, $portrait) {
     .content {
       margin-top: -65px;
@@ -14,6 +21,29 @@
     .content {
       @include grid-span(9);
       @include add-grid(9);
+
+      /* @todo make sidebar a separate component */
+      .sidebar {
+        @include displayVisuallyHidden;
+        @include grid-span(1);
+        border-top: 2px solid $CHARCOAL;
+        margin-top: 53px;
+        margin-left: 20px;
+        color: $CHARCOAL;
+
+        &-title {
+          text-align: right;
+          margin-top: 17px;
+        }
+        
+        &-link {
+          display: block;
+          text-align: right;
+          color: $CHARCOAL;
+          text-decoration: none;
+          padding: 5px 0;
+        }
+      }
     }
   }
 

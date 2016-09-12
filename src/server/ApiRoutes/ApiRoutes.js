@@ -224,29 +224,19 @@ function fetchThroughAjax(req, res, next) {
     }); /* end axios call */
 }
 
-function fetchProfiles(req, res) {
+function ajaxGetProfiles(callback) {
 
-  /* @todo check for using parser */
-  //const blogsApiUrl = 'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,blog-posts';
   const blogsApiUrl = 
     'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
 
-  /* harcoded response for dev time */
-  //profilesCache = ProfileModel.build(profilesMock.data);
-
   if (profilesCache) {
 
-    res.json({ 
-      profiles: profilesCache,
-      meta: {},
-    });
+    callback(profilesCache);
   } else {
 
     axios
       .get(blogsApiUrl)
       .then(response => {
-
-        //console.log('API-ROUTES: response', response);
 
         profilesCache = ProfileModel.build(
           response.data.data, 
@@ -255,10 +245,7 @@ function fetchProfiles(req, res) {
 
             profilesCache = formatedProfiles;
 
-            res.json({ 
-              profiles: formatedProfiles,
-              meta: {},
-            });
+            callback(formatedProfiles);
         });
 
       })
@@ -266,11 +253,58 @@ function fetchProfiles(req, res) {
         console.log(`Error calling API : ${error}`);
         console.log(`Attempted to call : ${apiUrl}`);
 
-        res.json({
-          error
-        });
+        callback(null);
       }); /* end axios call */
   }
+}
+
+/**
+ * ProfileQuery()
+ * Fetch profiles syncronously for first request to blogger profiles
+ */
+function ProfileQuery(req, res, next) {
+
+  ajaxGetProfiles((profiles) => {
+
+    if (profiles) {
+      res.locals.data = {
+        ProfileStore: {
+          profiles: profiles
+        },
+      };
+
+      next();
+    } else {
+      res.locals.data = {
+        ProfileStore: {
+          profiles: []
+        },
+      };
+
+      next();      
+    }
+  });
+}
+
+function ajaxProfileQuery(req, res) {
+
+  ajaxGetProfiles((profiles) => {
+
+    if (! profiles) {
+
+      console.log('API-ROUTES: error fetching profiles');
+      res.json({ 
+        profiles: [],
+        meta: {},
+      });
+    } else {
+
+      res.json({ 
+        profiles: profiles,
+        meta: {},
+      });
+    }
+  });
 }
 
 router
@@ -296,6 +330,10 @@ router
 
 router
   .route('/api/blogger-profiles')
-  .get(fetchProfiles);
+  .get(ajaxProfileQuery);
+
+router
+  .route(/\/blog\/beta\/blogger-profiles/)
+  .get(ProfileQuery);
 
 export default router;

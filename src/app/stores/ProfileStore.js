@@ -2,6 +2,9 @@ import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
 import axios from 'axios';
 
+import appConfig from '../../../appConfig.js';
+const { appBaseUrl, port } = appConfig;
+
 class ProfileStore {
   constructor() {
     this.bindListeners({
@@ -16,9 +19,8 @@ class ProfileStore {
 
   loadProfiles() {
     axios
-      .get(`http://localhost:3001/api/blogger-profiles`)
+      .get(`/api/blogger-profiles`)
       .then(response => {
-        console.log('PROFILE-STORE: ajax call result', response);
 
         Actions.handleProfiles(response.data);
       })
@@ -28,7 +30,6 @@ class ProfileStore {
   }
 
   handleProfiles(profiles) {
-    console.log('PROFILE-STORE: handleProfiles received profiles', profiles);
     this.setState({
       profiles: profiles,
     });

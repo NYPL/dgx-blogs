@@ -4,6 +4,7 @@
   height: 100%;
   z-index: 1000;
   top: 0;
+  left: 0;
 
   &-layer {
     position: fixed;
@@ -11,6 +12,7 @@
     height: 100%;
     background: #ddd;
     opacity: .95;
+    left: 0;
   }
 
   &-texts {
