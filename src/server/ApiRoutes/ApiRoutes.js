@@ -333,7 +333,7 @@ router
   .get(ajaxProfileQuery);
 
 router
-  .route('${appBaseUrl}/api/authors')
+  .route(`${appBaseUrl}api/authors`)
   .get(ajaxProfileQuery);  
 
 router
