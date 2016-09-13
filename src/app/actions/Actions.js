@@ -21,6 +21,14 @@ class Actions {
   turnToLoadingState(data) {
     this.dispatch(data);
   }
+
+  handleProfiles(data) {
+    this.dispatch(data);
+  }
+
+  loadProfiles() {
+    this.dispatch();
+  }
 }
 
 export default alt.createActions(Actions);

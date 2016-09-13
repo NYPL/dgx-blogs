@@ -1,0 +1,23 @@
+.profilesAuthor {
+  
+  &-name {
+    display: inline-block;
+    margin-top: 0;
+    vertical-align: top;
+    font-weight: normal;
+    margin-bottom: 5px;
+    width: auto;
+    margin-left: 80px;
+  }
+
+  &-title {
+    width: auto;
+    margin-left: 80px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 30px;
+    line-height: 20px;
+  }
+}

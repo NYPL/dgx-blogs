@@ -1,0 +1,18 @@
+.profilesListLetterTitle {
+  
+  height: 30px;
+  border-bottom: 2px solid $BLACK_COLOR;
+  margin: 20px 0;
+
+  &-letter {
+    @include Milo-Regular;
+    text-transform: capitalize;
+    font-size: 30px;
+    width: 40px;
+    position: relative;
+    bottom: -8px;
+    height: 32px;
+    background: $WHITE_COLOR;
+    text-align: center;
+  }
+}

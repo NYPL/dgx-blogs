@@ -1,0 +1,55 @@
+.genericHero {
+
+  height: 100px;
+
+  &-content {
+    padding-left: 25px;
+
+    &-title {
+      @include Kievit-Regular;
+      color: $WHITE_COLOR;
+      text-transform: uppercase;
+
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      line-height: 96px;
+
+      .nypl-icon-wedge-down {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &-default {
+    background: $COOLGRAY_COLOR;
+  }
+
+  @include layout-at(6, $landscape) {
+    height: auto;
+
+    max-height: 314px;
+    float: none;
+    overflow: hidden;
+
+    &-content {
+      padding-left: 50px;
+      @include grid-span(4, 2);
+      @include add-grid(6);
+
+      &-title {
+        @include grid-span(6);
+      }
+    }
+  }
+
+  @include layout-at(6, $desktop) {
+
+    &-content {
+      width: auto;
+      max-width: 1312px;
+      float: none;
+      margin: auto;
+    }
+  }
+}
