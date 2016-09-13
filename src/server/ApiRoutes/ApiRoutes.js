@@ -333,6 +333,10 @@ router
   .get(ajaxProfileQuery);
 
 router
+  .route('${appBaseUrl}/api/authors')
+  .get(ajaxProfileQuery);  
+
+router
   .route(/\/blog\/beta\/authors/)
   .get(ProfileQuery);
 

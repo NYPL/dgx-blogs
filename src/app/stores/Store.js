@@ -30,8 +30,6 @@ class BlogStore {
 
   handleBlogs(blogs) {
 
-    console.log('STORE: me está llegando', blogs);
-
     const newState = {
       blogs: {
         blogList: blogs.blogs.blogList,
@@ -49,13 +47,11 @@ class BlogStore {
     /* store now knows the last url so components know if they have the right data */
     if (blogs.goingToUrl) {
       newState.lastUrl = blogs.goingToUrl;
-      console.log('STORE: storing new ulr in the store', newState.lastUrl);
     }
 
     /* cache the last value just in case the user press back or returns in some other way */
     if (this.state.lastUrl) {
       this.state.cache[this.state.lastUrl] = this.state.blogs;
-      console.log('STORE: new value added to cache:', this.state.cache);
     }
 
     this.setState(newState);
