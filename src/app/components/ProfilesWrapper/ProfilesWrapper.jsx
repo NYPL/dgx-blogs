@@ -11,6 +11,7 @@ const appBaseUrl = appConfig.appBaseUrl;
 import DocMeta from 'react-doc-meta';
 
 import GenericHero from '../GenericHero/GenericHero';
+import { LeftWedgeIcon } from 'dgx-svg-icons';
 import ProfilesList from '../ProfilesList/ProfilesList';
 
 class ProfilesWrapper extends React.Component {
@@ -63,6 +64,10 @@ class ProfilesWrapper extends React.Component {
         <GenericHero title="NYPL Bloggers" />
         <div className="content">
           <nav className="sidebar">
+            <div className="sidebar-breadCrumb">
+              <LeftWedgeIcon ariahidden />
+              <a href="https://www.nypl.org">Home</a>
+            </div>
             <h3 className="sidebar-title">Blogger Profiles</h3>
             <Link to={`${appBaseUrl}`} className="sidebar-link">Blog</Link>
             <a href="#" className="sidebar-link">Blog Topics</a>

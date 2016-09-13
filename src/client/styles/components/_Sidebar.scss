@@ -1,0 +1,65 @@
+.sidebar {
+  
+  @include visuallyHidden;
+  margin-top: 16px;
+
+  &-title {
+    @include Kievit-Medium;
+    text-align: right;
+    line-height: 16px;
+    padding: 16px 0;
+    text-align: right;
+    text-transform: uppercase;
+    color: $COOLGRAY_COLOR;
+    font-size: 1.05em;
+    font-weight: normal;
+  }
+  
+  &-link {
+    @include Kievit-Regular;
+    display: block;
+    text-align: right;
+    color: $COOLGRAY_COLOR;
+    text-decoration: none;
+    padding: 10px 0;
+    color: #5F5B54;
+    font-size: 1.1em;
+    line-height: 1em;
+  }
+
+  &-breadCrumb {
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 5em;
+    border-bottom: 2px solid $CHARCOAL;
+    font-size: .9em;
+    font-weight: bold;
+    color: $COOLGRAY_COLOR;
+    height: 67px;
+
+    & > a {
+      text-decoration: none;
+      color: $COOLGRAY_COLOR;;
+    }
+
+    .left-wedge-icon {
+      height: 14px;
+      fill: $CHARCOAL;
+      width: 14px;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  @include layout-at(9, $landscape) {
+
+    @include displayVisuallyHidden;
+  }
+
+  @include layout-at(9, $desktop) {
+
+    .sidebar {
+      @include grid-span(1);
+    }
+  }
+}

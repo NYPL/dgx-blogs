@@ -127,6 +127,11 @@ class ProfileModel {
 
       /* remove the /blog/ part on the alias because it fails when /blog/beta is used */
       result.url = result.url.replace('blog/', '');
+
+      /* generate a slug to build the links */
+      let splittedAlias = result.url.split('/');
+      result.id = splittedAlias.pop();
+      
     } catch (e) {
       console.log('PROFILE-MODEL: error destructuring blog', e)
       result = undefined;

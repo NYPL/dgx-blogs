@@ -3,14 +3,14 @@
   height: 100px;
 
   &-content {
+    padding-left: 25px;
 
     &-title {
       @include Kievit-Regular;
-      margin-left: 50px;
       color: $WHITE_COLOR;
       text-transform: uppercase;
 
-      margin-top: 0;
+      margin: 0;
       font-size: 22px;
       letter-spacing: 0.04em;
       line-height: 96px;
@@ -25,28 +25,31 @@
     background: $COOLGRAY_COLOR;
   }
 
-  @include layout-at(9, $landscape) {
+  @include layout-at(6, $landscape) {
     height: auto;
 
-    @include grid-span(9);
     max-height: 314px;
     float: none;
     overflow: hidden;
 
     &-content {
+      padding-left: 50px;
+      @include grid-span(4, 2);
+      @include add-grid(6);
 
-      @include grid-span(7, 2);
-      @include add-grid(18);
-      max-width: 1312px;
-      margin: auto;
-      float: none;
+      &-title {
+        @include grid-span(6);
+      }
     }
   }
 
-  @include layout-at(18, $desktop) {
+  @include layout-at(6, $desktop) {
 
     &-content {
       width: auto;
+      max-width: 1312px;
+      float: none;
+      margin: auto;
     }
   }
 }

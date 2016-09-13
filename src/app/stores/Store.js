@@ -30,6 +30,8 @@ class BlogStore {
 
   handleBlogs(blogs) {
 
+    console.log('STORE: me está llegando', blogs);
+
     const newState = {
       blogs: {
         blogList: blogs.blogs.blogList,

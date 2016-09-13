@@ -4,10 +4,6 @@
 
   .content {
     @extend %clearfix;
-
-    .sidebar {
-      @include visuallyHidden;
-    }
   }
 
   .blogsList {
@@ -27,33 +23,16 @@
 
     .content {
       @include grid-span(9);
-      @include add-grid(9);
+      @include add-grid(6);
 
       .sidebar {
-        @include displayVisuallyHidden;
         @include grid-span(1);
-        border-top: 2px solid $CHARCOAL;
-        margin-top: 16px;
         margin-left: 20px;
-        color: $CHARCOAL;
-
-        &-title {
-          text-align: right;
-          margin-top: 17px;
-        }
-        
-        &-link {
-          display: block;
-          text-align: right;
-          color: $CHARCOAL;
-          text-decoration: none;
-          padding: 5px 0;
-        }
       }
 
       .blogsList {
-
-        @include grid-span(6, 2);
+        @include grid-span(4, 2);
+        margin-top: 83px;
       }
     }
   }
@@ -66,10 +45,14 @@
       margin-top: -65px;
       float: none;
       width: auto;
+      @include add-grid(6);
+
+      .sidebar {
+        @include grid-span(1);
+      }
 
       .blogsList {
-
-        @include grid-span(6,2);
+        @include grid-span(4, 2);
         @include add-grid(8);
       }
     }
