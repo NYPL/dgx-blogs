@@ -2,11 +2,11 @@ import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
-import Model from 'dgx-model-data';
 // import Immutable from 'immutable';
 
-import { navConfig } from 'dgx-header-component';
-
+/*
+ * @todo check how to make this work as in homepage
+ */
 import BlogsModel from '../../app/utils/BlogsModel';
 import ProfileModel from '../../app/utils/ProfileModel';
 
@@ -15,8 +15,7 @@ import profilesMock from '../../app/utils/ProfilesMock';
 
 import appConfig from '../../../appConfig.js';
 
-const { HeaderItemModel } = Model;
-const { api, headerApi, blogsApi, appBaseUrl } = appConfig;
+const { api, blogsApi, appBaseUrl } = appConfig;
 const router = express.Router();
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
@@ -35,35 +34,25 @@ function createOptions(api) {
   };
 }
 
-const headerOptions = createOptions(headerApi);
 const blogsOptions = createOptions(blogsApi);
 
 function fetchApiData(url) {
   return axios.get(url);
 }
 
-function getHeaderData() {
-  const headerApiUrl = parser.getCompleteApi(headerOptions);
-  return fetchApiData(headerApiUrl);
-}
-
 function fetchData(url, storeValue, req, res, next) {
+  const updatedUrl = `${url}&page[number]=1&page[size]=25`;
+  console.log('API-ROUTES: first api call:', updatedUrl);
 
-  url = `${url}&page[number]=1&page[size]=25`;
-
-  axios
-    .all([getHeaderData(), fetchApiData(url)])
-    .then(axios.spread((headerData, blogsData) => {
-      const headerParsed = parser.parse(headerData.data, headerOptions);
-      const headerModelData = HeaderItemModel.build(headerParsed);
-
+  fetchApiData(updatedUrl)
+    .then(blogsData => {
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
         BlogStore: {
           [storeValue]: {
-            meta: { 
+            meta: {
               count: blogsData.data.meta.count,
             },
             blogList: blogsModelData,
@@ -71,7 +60,7 @@ function fetchData(url, storeValue, req, res, next) {
           },
           cache: {
             [appBaseUrl]: {
-              meta: { 
+              meta: {
                 count: blogsData.data.meta.count,
               },
               blogList: blogsModelData,
@@ -79,22 +68,16 @@ function fetchData(url, storeValue, req, res, next) {
             }
           },
         },
-        HeaderStore: {
-          headerData: navConfig.current,
-        },
       };    
       next();
-    }))
+    })
     .catch(error => {
       console.log(`error calling API : ${error}`);
-      console.log(`Attempted to call : ${url}`);
+      console.log(`Attempted to call : ${updatedUrl}`);
 
       res.locals.data = {
         BlogStore: {
           [storeValue]: [],
-        },
-        HeaderStore: {
-          headerData: navConfig.current,
         },
       };
 
@@ -208,7 +191,7 @@ function fetchThroughAjax(req, res, next) {
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      res.json({ 
+      res.json({
         blogList: blogsModelData,
         meta: {
           count: response.data.meta.count },
@@ -219,7 +202,7 @@ function fetchThroughAjax(req, res, next) {
       console.log(`Attempted to call : ${apiUrl}`);
 
       res.json({
-        error
+        error,
       });
     }); /* end axios call */
 }
