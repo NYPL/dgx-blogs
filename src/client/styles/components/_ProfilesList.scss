@@ -1,0 +1,15 @@
+.profilesList {
+
+  &-item {
+    margin: 25px;
+  }
+
+  @include layout-at(9, $landscape) {
+
+      margin-top: 28px;
+
+    &-item {
+      margin: 25px 50px;
+    }
+  }
+}

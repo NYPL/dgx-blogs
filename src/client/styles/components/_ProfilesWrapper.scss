@@ -1,18 +1,8 @@
-.blogsWrapper {
-  
+.profilesWrapper {
   @include add-grid(3);
+  min-height: 400px;
 
-  .content {
-    @extend %clearfix;
-  }
-
-  .blogsList {
-    list-style: none;
-    padding: 0;
-    margin-top: 16px;
-  }
-
-  @include layout-at(9, $portrait) {
+   @include layout-at(9, $portrait) {
     .content {
       margin-top: -65px;
       padding-top: 65px;
@@ -30,9 +20,8 @@
         margin-left: 20px;
       }
 
-      .blogsList {
-        @include grid-span(4, 2);
-        margin-top: 83px;
+      .profilesList {
+        @include grid-span(4, 2)
       }
     }
   }
@@ -51,10 +40,10 @@
         @include grid-span(1);
       }
 
-      .blogsList {
-        @include grid-span(4, 2);
+      .profilesList {
+
         @include add-grid(8);
-      }
+      }   
     }
   }
 }

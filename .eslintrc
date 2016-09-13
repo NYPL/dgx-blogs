@@ -1,22 +1,13 @@
 {
-  "env": {
-    "browser": true,
-    "node": true
-  },
-
-  "globals": {
-    "React": true
-  },
-
-  "ecmaFeatures": {
-    "jsx": true
-  },
-
-  "indent": ["error", 2],
-
   "plugins": [
     "react"
   ],
-
-  "extends": "airbnb",
+  "extends": ["airbnb", "eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "jsx": true,
+      }
+  }
 }

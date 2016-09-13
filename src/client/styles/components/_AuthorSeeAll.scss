@@ -1,0 +1,27 @@
+.authorSeeAll {
+
+  background: transparent;
+  border: 2px solid $SECONDARY_UI_COLOR;
+  border-radius: 12px;
+  color: $SECONDARY_UI_COLOR;
+  display: block;
+  font-size: 16px;
+  height: 38px;
+  line-height: 1.5em;
+  margin: 20px auto;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 250px;
+  text-align: center;
+  line-height: 40px;
+  
+  & > span {
+    @include Kievit-Medium;
+    font-weight: 400;
+  }
+
+  @include layout-at(7, $portrait) {
+    margin-left: 0;
+  }  
+}
