@@ -17,8 +17,6 @@ class ProfilesTopPosts extends React.Component {
     let posts = [];
     for (let i = 0; i < this.props.maxPostsShown && i < this.props.posts.length; i++) {
 
-      console.log('PROFILES-TOP-POSTS: looping posts', this.props.posts[i]);
-
       posts.push((
         <li className="profilesTopPosts-item">
           <span className="profilesTopPosts-item-date">

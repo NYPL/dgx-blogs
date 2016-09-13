@@ -19,7 +19,7 @@ class ProfileStore {
 
   loadProfiles() {
     axios
-      .get(`/api/blogger-profiles`)
+      .get(`/api/authors`)
       .then(response => {
 
         Actions.handleProfiles(response.data);

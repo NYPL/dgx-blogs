@@ -329,11 +329,11 @@ router
   .get(fetchThroughAjax);
 
 router
-  .route('/api/blogger-profiles')
+  .route('/api/authors')
   .get(ajaxProfileQuery);
 
 router
-  .route(/\/blog\/beta\/blogger-profiles/)
+  .route(/\/blog\/beta\/authors/)
   .get(ProfileQuery);
 
 export default router;
