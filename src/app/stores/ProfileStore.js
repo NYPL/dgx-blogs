@@ -22,7 +22,7 @@ class ProfileStore {
     //Actions.switchToLoading('NYPL | Blogger Profiles');
 
     axios
-      .get(`/api/authors`)
+      .get(`${appBaseUrl}api/authors`)
       .then(response => {
 
         Actions.returnToReady();

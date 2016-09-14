@@ -23,6 +23,10 @@
     }
   }
 
+  canvas {
+    display: none;
+  }
+
   @include layout-at(7, $portrait) {
     @extend %clearfix;
     height: 270px;
@@ -37,7 +41,12 @@
 
     & > img {
       @include displayVisuallyHidden;
-    }    
+    }
+
+    canvas {
+      display: inline-block;
+      width: 100%;
+    }
   }
   
   @include layout-at(9, $landscape) {

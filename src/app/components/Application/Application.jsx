@@ -2,7 +2,7 @@ import React from 'react';
 
 import Store from '../../stores/Store.js';
 
-import { Header } from 'dgx-header-component';
+import { Header, navConfig } from 'dgx-header-component';
 import Footer from 'dgx-react-footer';
 
 class App extends React.Component {
@@ -13,7 +13,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-wrapper">
-        <Header skipNav={{ target: 'mainContent' }} />
+        <Header
+          skipNav={{ target: 'mainContent' }}
+          navData={navConfig.current}
+        />
         {this.props.children}
         <Footer id="footer" className="footer" />
       </div>
