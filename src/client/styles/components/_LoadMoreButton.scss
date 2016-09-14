@@ -15,6 +15,7 @@
     text-decoration: none;
     text-transform: uppercase;
     width: 158px;
+    clear: both;
 
     & > span {
       @include Kievit-Medium;
