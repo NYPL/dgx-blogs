@@ -37,17 +37,17 @@
   </head>
   <body>
     <%- app %>
+    <script type="text/javascript">
+      var appEnv = "<%- appEnv %>";
+      var path = "<%- path %>";
+    </script>
+
+  <% if (isProduction) { %>
+    <script async src="dist/bundle.js"></script>
+  <% } else { %>
+    <script src="http://localhost:3000/bundle.js"></script>
+  <% } %>
   </body>
 
-  <script type="text/javascript">
-    var appEnv = "<%- appEnv %>";
-    var path = "<%- path %>";
-  </script>
-
-<% if (isProduction) { %>
-  <script async src="dist/bundle.js"></script>
-<% } else { %>
-  <script src="http://localhost:3000/bundle.js"></script>
-<% } %>
 
 </html>
