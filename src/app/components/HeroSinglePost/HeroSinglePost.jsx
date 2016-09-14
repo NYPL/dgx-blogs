@@ -9,18 +9,20 @@ class HeroSinglePost extends React.Component {
 
   componentDidMount() {
     // Thanks to http://stackoverflow.com/questions/3688460/stopping-gif-animation-programmatically
-    const i = this.refs.img;
-    const c = document.createElement('canvas');
-    const w = c.width = i.width;
-    const h = c.height = i.height;
-    c.getContext('2d').drawImage(i, 0, 0, w, h);
-    try {
-      i.src = c.toDataURL("image/gif"); // if possible, retain all css aspects
-    } catch(e) { // cross-domain -- mimic original with all its tag attributes
-      for (let j = 0, a; a = i.attributes[j]; j++) {
-        c.setAttribute(a.name, a.value);
+    if (this.refs.img) {
+      const i = this.refs.img;
+      const c = document.createElement('canvas');
+      const w = c.width = i.width;
+      const h = c.height = i.height;
+      c.getContext('2d').drawImage(i, 0, 0, w, h);
+      try {
+        i.src = c.toDataURL("image/gif"); // if possible, retain all css aspects
+      } catch(e) { // cross-domain -- mimic original with all its tag attributes
+        for (let j = 0, a; a = i.attributes[j]; j++) {
+          c.setAttribute(a.name, a.value);
+        }
+        i.parentNode.replaceChild(c, i);
       }
-      i.parentNode.replaceChild(c, i);
     }
   }
 
