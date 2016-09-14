@@ -19,7 +19,7 @@ class ProfileStore {
 
   loadProfiles() {
     axios
-      .get(`/api/authors`)
+      .get(`${appBaseUrl}api/authors`)
       .then(response => {
 
         Actions.handleProfiles(response.data);
