@@ -66,10 +66,10 @@ class BlogAuthorCard extends React.Component {
           slug={this.props.data.slug}
           appBaseUrl={this.props.appBaseUrl}
         />
-        <p 
+        <div 
           className="blogAuthorCard-title"
           dangerouslySetInnerHTML={unescapedBio}
-          ></p>
+          ></div>
         <BlogAuthorViewMoreLink
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
