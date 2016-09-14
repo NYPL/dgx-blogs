@@ -13,9 +13,7 @@ class BackToBlogs extends React.Component {
   fetchBlogList(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState({
-      loadingTitle: 'Blogs Home | NYPL',
-    });
+    Actions.switchToLoading('Blogs Home | NYPL');
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=all`)
@@ -26,6 +24,7 @@ class BackToBlogs extends React.Component {
         });
       })
       .then(() => {
+        Actions.returnToReady('Blogs Home | NYPL');
         this.routeHandler();
       })
       .catch(error => {

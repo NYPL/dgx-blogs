@@ -17,9 +17,7 @@ class BlogSubjects extends React.Component {
   fetchSubject(subject, clickedSubject, e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState({
-      loadingTitle: clickedSubject.props.subjects[0].name,
-    });
+    Actions.switchToLoading(clickedSubject.props.subjects[0].name);
 
     axios
       .get(`${this.props.appBaseUrl}api?subject=${subject}`)
@@ -30,6 +28,7 @@ class BlogSubjects extends React.Component {
         });
       })
       .then(() => {
+        Actions.returnToReady();
         this.routeHandler(subject);
       })
       .catch(error => {

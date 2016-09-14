@@ -20,18 +20,15 @@ class AuthorSeeAll extends React.Component {
   fetchAuthor(e) {
     e.preventDefault();
 
-    console.log('AUTHORSEEALL: going to', `${appBaseUrl}author/${this.props.id}`);
-    console.log('calling for data', `${appBaseUrl}api?author=${this.props.id}`);
-
-    Actions.turnToLoadingState();
+    Actions.switchToLoading(`${this.props.name} | NYPL Author`);
 
     axios
       .get(`${appBaseUrl}api?author=${this.props.id}`)
       .then(response => {
-        console.log('gotten data', response);
         Actions.updateBlogs({ blogs: response.data });
       })
       .then(response => {
+        Actions.returnToReady();
         this.routeHandler();
       })
       .catch(error => {

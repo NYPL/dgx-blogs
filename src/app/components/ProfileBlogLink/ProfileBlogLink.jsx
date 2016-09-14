@@ -20,9 +20,7 @@ class ProfileBlogLink extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState({
-      loadingTitle: this.props.title,
-    });
+    Actions.switchToLoading(this.props.title);
 
     axios
       .get(`${appBaseUrl}api?blog=${this.props.url}`)
@@ -31,6 +29,7 @@ class ProfileBlogLink extends React.Component {
         Actions.updateBlogPost(response.data);
       })
       .then(() => {
+        Actions.returnToReady();
         this.routeHandler(`${appBaseUrl}${this.props.url}`);
       })
       .catch(error => {

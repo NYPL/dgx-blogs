@@ -1,18 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { LeftWedgeIcon } from 'dgx-svg-icons';
 
 import ProfileStore from '../../stores/ProfileStore.js';
 import Actions from '../../actions/Actions';
-
-import appConfig from '../../../../appConfig.js';
-const appBaseUrl = appConfig.appBaseUrl;
 
 /* metatags */
 import DocMeta from 'react-doc-meta';
 
 import GenericHero from '../GenericHero/GenericHero';
-import { LeftWedgeIcon } from 'dgx-svg-icons';
+import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import ProfilesList from '../ProfilesList/ProfilesList';
+
+import appConfig from '../../../../appConfig.js';
+
+const appBaseUrl = appConfig.appBaseUrl;
+
 
 class ProfilesWrapper extends React.Component {
   constructor(props) {
@@ -22,6 +25,7 @@ class ProfilesWrapper extends React.Component {
     this.onChange = this.onChange.bind(this);
 
     Actions.loadProfiles();
+    Actions.switchToLoading('NYPL | Blogger Profiles');
   }
 
   componentDidMount() {
@@ -34,7 +38,6 @@ class ProfilesWrapper extends React.Component {
 
   onChange() {
     this.setState(ProfileStore.getState());
-    console.log('PROFILES-WRAPPER: current state', this.state);
   }
 
   imageMeta(imageField) {
@@ -61,6 +64,7 @@ class ProfilesWrapper extends React.Component {
     return (
       <section className="profilesWrapper">
         <DocMeta tags={homeMetas} />
+        <LoadingLayer />
         <GenericHero title="NYPL Bloggers" />
         <div className="content">
           <nav className="sidebar">

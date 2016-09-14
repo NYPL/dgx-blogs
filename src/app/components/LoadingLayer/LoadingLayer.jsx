@@ -1,20 +1,31 @@
 import React from 'react';
 
+import AppStatusStore from '../../stores/AppStatusStore';
+
 import LoadingDots from '../LoadingDots/LoadingDots';
 
 class LoadingLayer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = AppStatusStore.getState();
+    this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    AppStatusStore.listen(this.onChange);
+  }
+
+  componentWillUnmount() {
+    AppStatusStore.unlisten(this.onChange);
+  }
+
+  onChange() {
+    this.setState(AppStatusStore.getState());
   }
   
   render() {
-
-    let seriesTitlePart = '';
-    if (this.props.seriesTitle.length > 0) {
-      seriesTitlePart = ' | ' + this.props.seriesTitle;
-    }
-
-    if (this.props.status === 'ready') {
+    if (this.state.status === 'ready') {
       return null;
     }
 
@@ -24,19 +35,13 @@ class LoadingLayer extends React.Component {
         <div className="loadingLayer-texts">
           <span className="loadingLayer-texts-loadingWord">Loading...</span>
           <span className="loadingLayer-texts-title">
-            {this.props.title}{seriesTitlePart}
+            {this.state.title}
           </span>
           <LoadingDots />
         </div>
       </div>
     );
   }
-}
-
-LoadingLayer.defaultProps = {
-  status: 'ready',
-  title: '',
-  seriesTitle: '',
 }
 
 export default LoadingLayer;
