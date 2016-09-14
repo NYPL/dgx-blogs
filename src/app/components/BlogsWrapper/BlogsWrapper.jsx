@@ -234,8 +234,8 @@ class BlogsWrapper extends React.Component {
           </nav>
           <main className="blogsList">
             {blogs}
-            {this.renderLoadMoreButton(currentState, filter)}
           </main>
+          {this.renderLoadMoreButton(currentState, filter)}
         </section>
       </div>
     );
