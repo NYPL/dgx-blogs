@@ -39,9 +39,7 @@ class BlogListing extends React.Component {
   fetchSeries(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState({
-      loadingTitle: this.props.series[0].title,
-    });
+    Actions.switchToLoading(this.props.series[0].title);
 
     axios
       .get(`/api?series=${this.props.series[0].id}`)
@@ -52,6 +50,7 @@ class BlogListing extends React.Component {
         });
       })
       .then(() => {
+        Actions.returnToReady();
         this.routeHandler(`${this.props.appBaseUrl}series/${this.props.series[0].id}`);
       })
       .catch(error => {

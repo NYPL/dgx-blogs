@@ -45,6 +45,7 @@ class ProfilesListLetter extends React.Component {
           <AuthorSeeAll
             id={profile.id}
             firstName={profile.authorData.attributes['first-name']}
+            name={profile.authorData.attributes['first-name'] + ' ' + profile.authorData.attributes['last-name']}
           />
         </article>
       );

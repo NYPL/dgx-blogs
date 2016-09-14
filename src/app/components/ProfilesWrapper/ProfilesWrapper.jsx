@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { LeftWedgeIcon } from 'dgx-svg-icons';
 
 import ProfileStore from '../../stores/ProfileStore.js';
 import Actions from '../../actions/Actions';
-
-import appConfig from '../../../../appConfig.js';
-const appBaseUrl = appConfig.appBaseUrl;
 
 /* metatags */
 import DocMeta from 'react-doc-meta';
 
 import GenericHero from '../GenericHero/GenericHero';
-import { LeftWedgeIcon } from 'dgx-svg-icons';
 import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import ProfilesList from '../ProfilesList/ProfilesList';
+
+import appConfig from '../../../../appConfig.js';
+
+const appBaseUrl = appConfig.appBaseUrl;
+
 
 class ProfilesWrapper extends React.Component {
   constructor(props) {
@@ -36,7 +38,6 @@ class ProfilesWrapper extends React.Component {
 
   onChange() {
     this.setState(ProfileStore.getState());
-    console.log('PROFILES-WRAPPER: current state', this.state);
   }
 
   imageMeta(imageField) {

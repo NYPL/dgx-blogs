@@ -1,6 +1,5 @@
 import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
-import axios from 'axios';
 
 import appConfig from '../../../appConfig.js';
 const { appBaseUrl, port } = appConfig;

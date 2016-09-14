@@ -19,7 +19,7 @@ class ProfilesAuthor extends React.Component {
   fetchAuthor(e) {
     e.preventDefault();
 
-    Actions.switchToLoading(this.props.name + ' | author');
+    Actions.switchToLoading( `${this.props.firstName} ${this.props.lastName} | Author`);
 
     axios
       .get(`${appBaseUrl}api?author=${this.props.id}`)

@@ -13,12 +13,12 @@ class BlogAuthorViewMoreLink extends React.Component {
   _fetchAuthor(e) {
     e.preventDefault();
 
-    Actions.switchToLoading();
+    Actions.switchToLoading(`${this.props.fullName} | NYPL Author`);
 
     axios
       .get(`/blog/beta/api?author=${this.props.slug}`)
       .then(response => {
-        Actions.updateBlogs(response.data);
+        Actions.updateBlogs({ blogs: response.data });
       })
       .then(response => {
         Actions.returnToReady();
