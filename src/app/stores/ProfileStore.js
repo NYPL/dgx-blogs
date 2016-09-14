@@ -18,10 +18,14 @@ class ProfileStore {
   }
 
   loadProfiles() {
+
+    //Actions.switchToLoading('NYPL | Blogger Profiles');
+
     axios
       .get(`/api/authors`)
       .then(response => {
 
+        Actions.returnToReady();
         Actions.handleProfiles(response.data);
       })
       .catch(error => {

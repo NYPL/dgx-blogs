@@ -16,9 +16,7 @@ class ReadMoreButton extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState({
-      loadingTitle: this.props.blogTitle, 
-    });
+    Actions.switchToLoading(this.props.blogTitle);
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
@@ -26,6 +24,7 @@ class ReadMoreButton extends React.Component {
         Actions.updateBlogPost(response.data);
       })
       .then(response => {
+        Actions.returnToReady();
         this.routeHandler();
       })
       .catch(error => {

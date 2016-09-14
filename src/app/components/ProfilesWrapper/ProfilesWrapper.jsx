@@ -12,6 +12,7 @@ import DocMeta from 'react-doc-meta';
 
 import GenericHero from '../GenericHero/GenericHero';
 import { LeftWedgeIcon } from 'dgx-svg-icons';
+import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import ProfilesList from '../ProfilesList/ProfilesList';
 
 class ProfilesWrapper extends React.Component {
@@ -22,6 +23,7 @@ class ProfilesWrapper extends React.Component {
     this.onChange = this.onChange.bind(this);
 
     Actions.loadProfiles();
+    Actions.switchToLoading('NYPL | Blogger Profiles');
   }
 
   componentDidMount() {
@@ -61,6 +63,7 @@ class ProfilesWrapper extends React.Component {
     return (
       <section className="profilesWrapper">
         <DocMeta tags={homeMetas} />
+        <LoadingLayer />
         <GenericHero title="NYPL Bloggers" />
         <div className="content">
           <nav className="sidebar">

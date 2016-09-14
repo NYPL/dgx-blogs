@@ -15,15 +15,6 @@ class ProfilesList extends React.Component {
 
   renderAlphabet() {
 
-    if (this.props.profiles.length <= 0) {
-      return (
-        <LoadingLayer 
-          status="loading"
-          title="Blogger Profiles | NYPL"
-        />
-      );
-    }
-
     return _.map(this.props.profiles, function(letterItem) {
 
       return (

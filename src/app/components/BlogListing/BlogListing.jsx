@@ -20,17 +20,15 @@ class BlogListing extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState({
-      loadingTitle: this.props.title,
-    });
+    Actions.switchToLoading(this.props.title);
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
       .then(response => {
-        console.log('BLOGLISTING: result', response.data);
         Actions.updateBlogPost(response.data);
       })
       .then(() => {
+        Actions.returnToReady();
         this.routeHandler(`${this.props.appBaseUrl}${this.props.slug}`);
       })
       .catch(error => {

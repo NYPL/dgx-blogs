@@ -13,9 +13,7 @@ class BlogAuthorName extends React.Component {
   fetchAuthor(e) {
     e.preventDefault();
 
-    Actions.turnToLoadingState({
-      loadingTitle: this.props.fullName + ' | author',
-    });
+    Actions.switchToLoading(this.props.fullName + ' | author');
 
     axios
       .get(`${this.props.appBaseUrl}api?author=${this.props.slug}`)
@@ -26,6 +24,7 @@ class BlogAuthorName extends React.Component {
         });
       })
       .then(() => {
+        Actions.returnToReady();
         this.routeHandler();
       })
       .catch(error => {

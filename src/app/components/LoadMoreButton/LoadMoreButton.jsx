@@ -14,7 +14,7 @@ class LoadMoreButton extends React.Component {
   handleClick(e) {
     e.preventDefault();
 
-    console.log('LOADMOREBUTTON: going to page', this.props.currentPage);
+    Actions.switchToLoading('Blogs Home | NYPL');
 
     /* build the url */
     let url = `/blog/beta/api?page=${this.props.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
@@ -25,6 +25,7 @@ class LoadMoreButton extends React.Component {
         Actions.addMoreBlogs(response.data);
       })
       .then(response => {
+        Actions.returnToReady();
         console.log('blogs added to the store');
       })
       .catch(error => {
