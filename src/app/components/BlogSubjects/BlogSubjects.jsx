@@ -11,7 +11,7 @@ class BlogSubjects extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.fetchSubject = this.fetchSubject.bind(this);
+    this.fetchSubject = this.fetchSubject.bind(this);
   }
 
   fetchSubject(subject, e) {
