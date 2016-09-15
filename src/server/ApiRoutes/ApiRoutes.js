@@ -4,9 +4,6 @@ import parser from 'jsonapi-parserinator';
 
 // import Immutable from 'immutable';
 
-/*
- * @todo check how to make this work as in homepage
- */
 import BlogsModel from '../../app/utils/BlogsModel';
 import ProfileModel from '../../app/utils/ProfileModel';
 
@@ -25,6 +22,7 @@ const apiRoot = api.root[appEnvironment];
  * @todo a better way of caching?
  */
 let profilesCache = null;
+let profilesCount = 0;
 
 function createOptions(api) {
   return {
@@ -212,10 +210,19 @@ function ajaxGetProfiles(callback) {
   const blogsApiUrl = 
     'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
 
+  /* each x quantity of request clean the cache */
+  if (profilesCount >= 10) {
+    profilesCache = null;
+    profilesCount = 0;
+  }
+
   if (profilesCache) {
 
+    profilesCount++;
+    console.log('PROFILESCOUNT IS NOW', profilesCount);
     callback(profilesCache);
   } else {
+
 
     axios
       .get(blogsApiUrl)
