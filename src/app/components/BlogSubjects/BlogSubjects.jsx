@@ -11,25 +11,25 @@ class BlogSubjects extends React.Component {
   constructor(props) {
     super(props);
 
-    this.fetchSubject = this.fetchSubject.bind(this);
+    // this.fetchSubject = this.fetchSubject.bind(this);
   }
 
-  fetchSubject(subject, clickedSubject, e) {
+  fetchSubject(subject, e) {
     e.preventDefault();
 
-    Actions.switchToLoading(clickedSubject.props.subjects[0].name);
+    Actions.switchToLoading(subject.name);
 
     axios
-      .get(`${this.props.appBaseUrl}api?subject=${subject}`)
+      .get(`${this.props.appBaseUrl}api?subject=${subject.id}`)
       .then(response => {
         Actions.updateBlogs({
           blogs: response.data,
-          goingToUrl: `${this.props.appBaseUrl}subjects/${subject}`,
+          goingToUrl: `${this.props.appBaseUrl}subjects/${subject.id}`,
         });
       })
       .then(() => {
         Actions.returnToReady();
-        this.routeHandler(subject);
+        this.routeHandler(subject.id);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
@@ -49,7 +49,7 @@ class BlogSubjects extends React.Component {
           <Link
             to={`${this.props.appBaseUrl}subjects/${subject.id}`}
             className="tagLink"
-            onClick={this.fetchSubject.bind(subject, subject.id, this)}>
+            onClick={this.fetchSubject.bind(this, subject)}>
             <TagIcon ariaHidden />
             {subject.name}
           </Link>
