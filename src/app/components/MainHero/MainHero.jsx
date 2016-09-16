@@ -22,9 +22,8 @@ class MainHero extends React.Component {
 
 MainHero.defaultProps = {
   title: 'NYPL Blogs',
-  subtitle: `Welcome to the New York Public Library's weblogs, a space where a small but growing
-    number of librarians, curators and other stuff are posting regular dispatches from their corner
-    of the NYPL community.`,
+  subtitle: `From great literature or children's books to job search help and New York 
+  City history, our librarians, curators, and staff offer valuable insight. Join the conversation.`,
 }
 
 export default MainHero;
