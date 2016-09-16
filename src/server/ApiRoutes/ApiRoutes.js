@@ -97,7 +97,7 @@ function BlogsMainList(req, res, next) {
 // This will be used to any route on:
 // /blog/:blog /blog/subjects/:subject /blog/series/:series blog/author/:author
 function BlogQuery(req, res, next) {
-  const param = req.params[0];
+  const param = req.params[0].replace('authors', 'author');
   const paramArray = param.split('/');
 
   let blogType = paramArray[0];
@@ -315,8 +315,8 @@ router
   .route(`${appBaseUrl}api/authors`)
   .get(ajaxProfileQuery);  
 
-router
-  .route(/\/blog\/beta\/authors/)
-  .get(ProfileQuery);
+ router
+   .route(`${appBaseUrl}authors/`)
+   .get(ProfileQuery);
 
 export default router;
