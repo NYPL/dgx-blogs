@@ -1,6 +1,6 @@
 .mainHero {
 
-  @extend %clearfix;  
+  @extend %clearfix;
   background: $PRIMARY_COLOR;
   height: 100px;
 
@@ -10,11 +10,11 @@
     &-content {
       &-title {
         @include Milo-Light;
-        text-transform: capitalize;
-        font-size: 28px;
+        font-size: 2.5em;
+        font-weight: normal;
         margin-top: 35px;
-        letter-spacing: 1px;
         padding: 0 18px;
+        text-transform: capitalize;
       }
 
       &-subtitle {
@@ -46,7 +46,7 @@
   }
 
   @include layout-at(6, $desktop) {
-    height: 260px;
+    height: 320px;
 
     &-wrapper {
       @include add-grid(6);
@@ -59,9 +59,11 @@
         @include grid-span(3, 2);
 
         &-title {
-          margin-top: 68px;
+          margin-top: 108px;
+          margin-bottom: 0;
+          line-height: .35em;
         }
       }
     }
-  } 
+  }
 }
