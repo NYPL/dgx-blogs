@@ -21,6 +21,7 @@ const routes = {
     <Route path="/" component={Application}>
       <Route path={appBaseUrl} component={BlogsWrapper} />
       <Route path={`${appBaseUrl}author/:author`} component={BlogsWrapper} />
+      <Route path={`${appBaseUrl}authors/:author`} component={BlogsWrapper} />
       <Route path={`${appBaseUrl}authors`} component={ProfilesWrapper} />
       <Route path={`${appBaseUrl}series/:series`} component={BlogsWrapper} />
       <Route path={`${appBaseUrl}subjects/:subjects`} component={BlogsWrapper} />
@@ -32,6 +33,7 @@ const routes = {
     <Route path="/" component={Application}>
       <IndexRoute component={BlogsWrapper}/>
       <Route path='author/:author' component={BlogsWrapper} />
+      <Route path='authors/:author' component={BlogsWrapper} />
       <Route path='authors' component={ProfilesWrapper} />
       <Route path='series/:series' component={BlogsWrapper} />
       <Route path='subjects/:subjects' component={BlogsWrapper} />

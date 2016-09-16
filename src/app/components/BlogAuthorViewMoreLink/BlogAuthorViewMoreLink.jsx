@@ -30,14 +30,14 @@ class BlogAuthorViewMoreLink extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`/blog/beta/author/${this.props.slug}`);
+    this.context.router.push(`/blog/beta/authors/${this.props.slug}`);
   }
 
   render() {
     return (
       <Link
         className="authorLink"
-        to={`/blog/beta/author/${this.props.slug}`}
+        to={`/blog/beta/authors/${this.props.slug}`}
         onClick={this._fetchAuthor}
       >
         <b>View all posts by</b> {this.props.fullName}

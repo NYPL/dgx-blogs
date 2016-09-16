@@ -20,7 +20,7 @@ class BlogAuthorName extends React.Component {
       .then(response => {
         Actions.updateBlogs({
           blogs: response.data,
-          goingToUrl: `${this.props.appBaseUrl}author/${this.props.slug}`,
+          goingToUrl: `${this.props.appBaseUrl}authors/${this.props.slug}`,
         });
       })
       .then(() => {
@@ -33,7 +33,7 @@ class BlogAuthorName extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`${this.props.appBaseUrl}author/${this.props.slug}`);
+    this.context.router.push(`${this.props.appBaseUrl}authors/${this.props.slug}`);
   }
 
   render() {
@@ -41,7 +41,7 @@ class BlogAuthorName extends React.Component {
       return (
         <p className={this.props.className}>
           <Link
-            to={`${this.props.appBaseUrl}author/${this.props.slug}`}
+            to={`${this.props.appBaseUrl}authors/${this.props.slug}`}
             className="blogAuthor-name-link"
             onClick={this.fetchAuthor}
           >

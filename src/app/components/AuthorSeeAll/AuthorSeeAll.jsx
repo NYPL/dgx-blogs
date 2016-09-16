@@ -37,14 +37,14 @@ class AuthorSeeAll extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`${appBaseUrl}author/${this.props.id}`);
+    this.context.router.push(`${appBaseUrl}authors/${this.props.id}`);
   }
 
   render() {
     return (
       <Link
         className="authorSeeAll"
-        to={`${appBaseUrl}author/${this.props.id}`}
+        to={`${appBaseUrl}authors/${this.props.id}`}
         onClick={this.fetchAuthor}
       >
         <span>{`See all ${this.props.firstName}'s posts`}</span>
