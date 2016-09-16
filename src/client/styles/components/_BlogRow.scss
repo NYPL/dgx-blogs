@@ -7,7 +7,7 @@
   &-leftSidebar {
 
     &-date {
-      @include grid-span(1, 5);
+      //@include grid-span(1, 5);
       font-size: 16px;
       color: $COOLGRAY_COLOR;
       margin-top: 13px;
