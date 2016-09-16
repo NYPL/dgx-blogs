@@ -230,7 +230,6 @@ class BlogsWrapper extends React.Component {
             </div>
             <h3 className="sidebar-title">Blog</h3>
             <Link to={`${appBaseUrl}authors`} className="sidebar-link">Blogger Profiles</Link>
-            <a href="#" className="sidebar-link">Blog Topics</a>
           </nav>
           <main className="blogsList">
             {blogs}
