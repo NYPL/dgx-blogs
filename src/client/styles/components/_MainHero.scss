@@ -28,18 +28,20 @@
 
   @include layout-at(6, $landscape) {
 
-    height: 190px;
+    height: 290px;
 
     &-wrapper {
       @include grid-span(3, 2);
 
       &-content {
         &-title {
+          margin: 85px 0 0;
           padding: 0 25px;
         }
 
         &-subtitle {
           @include displayVisuallyHidden;
+          margin-top: 3px;
         }
       }
     }
