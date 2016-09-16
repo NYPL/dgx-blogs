@@ -63,21 +63,18 @@ class BlogPage extends React.Component {
     ];
 
     return (
-
       <section className="blogPage">
         <DocMeta tags={singleBlogMetas} />
         <LoadingLayer
           status={this.state.appLoading}
           title={this.state.loadingTitle}
-          />
+        />
         <HeroSinglePost coverUrl={mainPicture['full-uri']} />
         <div
           className="content"
           id="mainContent"
         >
-          <BackToBlogs 
-            appBaseUrl={appBaseUrl}
-          />
+          <BackToBlogs />
           <BlogSubjects
             subjects={subjects} 
             appBaseUrl={appBaseUrl}
