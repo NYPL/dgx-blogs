@@ -10,6 +10,7 @@ import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 import LoadingLayer from '../LoadingLayer/LoadingLayer';
+import MainHero from '../MainHero/MainHero';
 
 import { LeftWedgeIcon } from 'dgx-svg-icons';
 
@@ -127,7 +128,7 @@ class BlogsWrapper extends React.Component {
     let series;
     let subjects;
     let author;
-    let hero = <HeroSinglePost />;
+    let hero = <MainHero />;
 
     /* default filter to get the content through ajax */
     let filter = 'blog=all';

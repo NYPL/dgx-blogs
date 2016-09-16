@@ -30,7 +30,6 @@
   @include layout-at(7, $portrait) {
     @extend %clearfix;
     height: 270px;
-    background: grey;
     float: none;
     overflow: hidden;
 
@@ -56,9 +55,5 @@
 
   &NoImage {
     @extend .heroSinglePost;
-
-    @include layout-at(9, $landscape) {
-      height: 170px;
-    }
   }  
 }
