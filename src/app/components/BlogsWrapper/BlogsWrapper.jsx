@@ -144,59 +144,63 @@ class BlogsWrapper extends React.Component {
 
         author = currentState.blogList[0][pageType];
 
-        hero = (<Hero
-          type="author"
-          title={author.fullName}
-          description={author.title}
-          picture={author.profileImgUrl}
-          postCount={currentState.meta.count}
-        />);
-        backLink = (<BackToBlogs text="Blog" />);
-        sidebarTitle = author.fullName;
+        if (author) {
+          hero = (<Hero
+            type="author"
+            title={author.fullName}
+            description={author.title}
+            picture={author.profileImgUrl}
+            postCount={currentState.meta.count}
+          />);
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = author.fullName;
 
-        /* override the metas according to an author page */
-        homeMetas = [
-          { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: `${author.fullName } | The New York Public Library` },
-          { property: 'og:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
-          { property: 'og:image', content: this.imageMeta(author.profileImgUrl) },
-          //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
-          { name: 'twitter:title', content: `${author.fullName} | The New York Public Library` },
-          { name: 'twitter:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
-          { name: 'twitter:image', content: this.imageMeta(author.profileImgUrl) }
-        ];
+          /* override the metas according to an author page */
+          homeMetas = [
+            { property: 'og:type', content: 'website' },
+            { property: 'og:title', content: `${author.fullName } | The New York Public Library` },
+            { property: 'og:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
+            { property: 'og:image', content: this.imageMeta(author.profileImgUrl) },
+            //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+            { name: 'twitter:title', content: `${author.fullName} | The New York Public Library` },
+            { name: 'twitter:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
+            { name: 'twitter:image', content: this.imageMeta(author.profileImgUrl) }
+          ];
 
-        /* set filter to get ajax content only for an author */
-        filter = `author=${author.id}`;
+          /* set filter to get ajax content only for an author */
+          filter = `author=${author.id}`;
+        }
 
       } else if (pageType === 'series') {
 
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
 
-        hero = (<Hero
-          type="Blog Series"
-          title={series.title}
-          description={series.body.replace(/(<([^>]+)>)/ig, '')}
-          picture={series.image.url}
-          postCount={currentState.meta.count}
-        />);
-        backLink = (<BackToBlogs text="Blog" />);
-        sidebarTitle = series.title;
+        if (series) {
+          hero = (<Hero
+            type="Blog Series"
+            title={series.title}
+            description={series.body.replace(/(<([^>]+)>)/ig, '')}
+            picture={series.image.url}
+            postCount={currentState.meta.count}
+          />);
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = series.title;
 
-        /* set filter to get ajax content only for a series */
-        filter = `series=${series.id}`;
+          /* set filter to get ajax content only for a series */
+          filter = `series=${series.id}`;
 
-        /* override the metas according to a series page */
-        homeMetas = [
-          { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: `${series.title} | The New York Public Library` },
-          { property: 'og:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
-          { property: 'og:image', content: this.imageMeta(series.image.url) },
-          //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
-          { name: 'twitter:title', content: `${series.title} | The New York Public Library` },
-          { name: 'twitter:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
-          { name: 'twitter:image', content: this.imageMeta(series.image.url) }
-        ];
+          /* override the metas according to a series page */
+          homeMetas = [
+            { property: 'og:type', content: 'website' },
+            { property: 'og:title', content: `${series.title} | The New York Public Library` },
+            { property: 'og:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
+            { property: 'og:image', content: this.imageMeta(series.image.url) },
+            //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+            { name: 'twitter:title', content: `${series.title} | The New York Public Library` },
+            { name: 'twitter:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
+            { name: 'twitter:image', content: this.imageMeta(series.image.url) }
+          ];
+        }
 
       } else if (pageType === 'subjects') {
 

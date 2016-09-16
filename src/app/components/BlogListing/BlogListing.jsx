@@ -39,7 +39,7 @@ class BlogListing extends React.Component {
   fetchSeries(e) {
     e.preventDefault();
 
-    Actions.switchToLoading(this.props.series[0].title);
+    Actions.switchToLoading(`${this.props.series[0].title} | Series`);
 
     axios
       .get(`/api?series=${this.props.series[0].id}`)
