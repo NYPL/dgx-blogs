@@ -106,10 +106,6 @@ function BlogQuery(req, res, next) {
   let queryValue = paramArray[1];
   let storeValue = 'blogs';
 
-console.log('BLOGTYPE', blogType);
-console.log('QUERYVALUE', queryValue);
-console.log('PARAMARRAY', paramArray);
-
   blogsOptions.filters = {};
 
   // For the reverse proxy, the main path `/` is read here.
