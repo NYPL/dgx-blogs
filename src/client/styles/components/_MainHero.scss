@@ -1,0 +1,67 @@
+.mainHero {
+
+  @extend %clearfix;  
+  background: $PRIMARY_COLOR;
+  height: 100px;
+
+  &-wrapper {
+    color: $WHITE_COLOR;
+
+    &-content {
+      &-title {
+        @include Milo-Light;
+        text-transform: capitalize;
+        font-size: 28px;
+        margin-top: 35px;
+        letter-spacing: 1px;
+        padding: 0 18px;
+      }
+
+      &-subtitle {
+        @include visuallyHidden;
+        @include Kievit-Regular;
+        padding: 0 25px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  @include layout-at(6, $landscape) {
+
+    height: 190px;
+
+    &-wrapper {
+      @include grid-span(3, 2);
+
+      &-content {
+        &-title {
+          padding: 0 25px;
+        }
+
+        &-subtitle {
+          @include displayVisuallyHidden;
+        }
+      }
+    }
+  }
+
+  @include layout-at(6, $desktop) {
+    height: 260px;
+
+    &-wrapper {
+      @include add-grid(6);
+      max-width: 1312px;
+      margin: auto;
+      float: none;
+      width: auto;
+
+      &-content {
+        @include grid-span(3, 2);
+
+        &-title {
+          margin-top: 68px;
+        }
+      }
+    }
+  } 
+}
