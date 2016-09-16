@@ -54,7 +54,7 @@ class BackToBlogs extends React.Component {
 }
 
 BackToBlogs.defaultProps = {
-  text: 'back to blogs',
+  text: 'BLOG',
 };
 
 BackToBlogs.contextTypes = {

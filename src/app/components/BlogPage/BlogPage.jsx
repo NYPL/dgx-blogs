@@ -74,7 +74,7 @@ class BlogPage extends React.Component {
           className="content"
           id="mainContent"
         >
-          <BackToBlogs />
+          <BackToBlogs text="BACK TO BLOG"/>
           <BlogSubjects
             subjects={subjects} 
             appBaseUrl={appBaseUrl}
