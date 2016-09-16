@@ -9,10 +9,10 @@
 
     &-content {
       &-title {
-        @include Milo-Light;
-        font-size: 2.5em;
+        @include Kievit-Book;
+        font-size: 1.75em;
         font-weight: normal;
-        margin-top: 35px;
+        margin-top: 38px;
         padding: 0 18px;
         text-transform: capitalize;
       }
