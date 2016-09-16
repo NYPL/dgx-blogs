@@ -26,7 +26,7 @@ class ProfilesAuthor extends React.Component {
       .then(response => {
         Actions.updateBlogs({
           blogs: response.data,
-          goingToUrl: `${appBaseUrl}author/${this.props.id}`,
+          goingToUrl: `${appBaseUrl}authors/${this.props.id}`,
         });
       })
       .then(() => {
@@ -39,7 +39,7 @@ class ProfilesAuthor extends React.Component {
   }
 
   routeHandler() {
-    this.context.router.push(`${appBaseUrl}author/${this.props.id}`);
+    this.context.router.push(`${appBaseUrl}authors/${this.props.id}`);
   }
 
   render() {

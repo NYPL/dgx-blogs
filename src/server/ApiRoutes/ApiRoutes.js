@@ -4,9 +4,6 @@ import parser from 'jsonapi-parserinator';
 
 // import Immutable from 'immutable';
 
-/*
- * @todo check how to make this work as in homepage
- */
 import BlogsModel from '../../app/utils/BlogsModel';
 import ProfileModel from '../../app/utils/ProfileModel';
 
@@ -25,6 +22,7 @@ const apiRoot = api.root[appEnvironment];
  * @todo a better way of caching?
  */
 let profilesCache = null;
+let profilesCount = 0;
 
 function createOptions(api) {
   return {
@@ -99,7 +97,7 @@ function BlogsMainList(req, res, next) {
 // This will be used to any route on:
 // /blog/:blog /blog/subjects/:subject /blog/series/:series blog/author/:author
 function BlogQuery(req, res, next) {
-  const param = req.params[0];
+  const param = req.params[0].replace('authors', 'author');
   const paramArray = param.split('/');
 
   let blogType = paramArray[0];
@@ -208,34 +206,32 @@ function fetchThroughAjax(req, res, next) {
 }
 
 function ajaxGetProfiles(callback) {
-
   const blogsApiUrl = 
     'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
 
-  if (profilesCache) {
+  /* each x quantity of request clean the cache */
+  if (profilesCount >= 50) {
+    profilesCache = null;
+    profilesCount = 0;
+  }
 
+  if (profilesCache) {
+    profilesCount++;
+    console.log('PROFILESCOUNT', profilesCount);
     callback(profilesCache);
   } else {
-
     axios
       .get(blogsApiUrl)
       .then(response => {
-
         profilesCache = ProfileModel.build(
           response.data.data, 
-          response.data.included, 
-          function(formatedProfiles) {
-
-            profilesCache = formatedProfiles;
-
-            callback(formatedProfiles);
-        });
-
+          response.data.included
+        );
+        callback(profilesCache);
       })
       .catch(error => {
         console.log(`Error calling API : ${error}`);
         console.log(`Attempted to call : ${apiUrl}`);
-
         callback(null);
       }); /* end axios call */
   }
@@ -319,8 +315,8 @@ router
   .route(`${appBaseUrl}api/authors`)
   .get(ajaxProfileQuery);  
 
-router
-  .route(/\/blog\/beta\/authors/)
-  .get(ProfileQuery);
+ router
+   .route(`${appBaseUrl}authors/`)
+   .get(ProfileQuery);
 
 export default router;

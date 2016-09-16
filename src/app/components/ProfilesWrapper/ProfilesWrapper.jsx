@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { LeftWedgeIcon } from 'dgx-svg-icons';
 
 import ProfileStore from '../../stores/ProfileStore.js';
 import Actions from '../../actions/Actions';
@@ -8,6 +7,7 @@ import Actions from '../../actions/Actions';
 /* metatags */
 import DocMeta from 'react-doc-meta';
 
+import BackToBlogs from '../BackToBlogs/BackToBlogs';
 import GenericHero from '../GenericHero/GenericHero';
 import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import ProfilesList from '../ProfilesList/ProfilesList';
@@ -69,11 +69,9 @@ class ProfilesWrapper extends React.Component {
         <div className="content">
           <nav className="sidebar">
             <div className="sidebar-breadCrumb">
-              <LeftWedgeIcon ariahidden />
-              <a href="https://www.nypl.org">Home</a>
+              <BackToBlogs text="blog" />
             </div>
             <h3 className="sidebar-title">Blogger Profiles</h3>
-            <Link to={`${appBaseUrl}`} className="sidebar-link">Blog</Link>
           </nav>
           <ProfilesList profiles={this.state.profiles.profiles} /> 
         </div>

@@ -5,6 +5,7 @@ import Actions from '../../actions/Actions';
 
 import { Link } from 'react-router';
 
+import BackToBlogs from '../BackToBlogs/BackToBlogs';
 import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
@@ -129,6 +130,8 @@ class BlogsWrapper extends React.Component {
     let subjects;
     let author;
     let hero = <MainHero />;
+    let backLink = (<a href="https://www.nypl.org">Home</a>);
+    let sidebarTitle = 'Blog';
 
     /* default filter to get the content through ajax */
     let filter = 'blog=all';
@@ -149,6 +152,8 @@ class BlogsWrapper extends React.Component {
             picture={author.profileImgUrl}
             postCount={currentState.meta.count}
           />);
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = author.fullName;
 
           /* override the metas according to an author page */
           homeMetas = [
@@ -178,6 +183,8 @@ class BlogsWrapper extends React.Component {
             picture={series.image.url}
             postCount={currentState.meta.count}
           />);
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = series.title;
 
           /* set filter to get ajax content only for a series */
           filter = `series=${series.id}`;
@@ -205,6 +212,8 @@ class BlogsWrapper extends React.Component {
             title={subjects.name}
             postCount={currentState.meta.count}
           />);
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = subjects.name;
 
           /* set filter to get ajax content only for a subject */
           filter = `subject=${subjects.id}`;
@@ -233,10 +242,9 @@ class BlogsWrapper extends React.Component {
         <section className="content" id="mainContent">
           <nav className="sidebar">
             <div className="sidebar-breadCrumb">
-              <LeftWedgeIcon ariahidden />
-              <a href="https://www.nypl.org">Home</a>
+              {backLink}
             </div>
-            <h3 className="sidebar-title">Blog</h3>
+            <h3 className="sidebar-title">{sidebarTitle}</h3>
             <Link to={`${appBaseUrl}authors`} className="sidebar-link">Blogger Profiles</Link>
           </nav>
           <main className="blogsList">
