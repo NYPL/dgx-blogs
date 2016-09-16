@@ -206,43 +206,32 @@ function fetchThroughAjax(req, res, next) {
 }
 
 function ajaxGetProfiles(callback) {
-
   const blogsApiUrl = 
     'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
 
   /* each x quantity of request clean the cache */
-  if (profilesCount >= 10) {
+  if (profilesCount >= 50) {
     profilesCache = null;
     profilesCount = 0;
   }
 
   if (profilesCache) {
-
     profilesCount++;
-    console.log('PROFILESCOUNT IS NOW', profilesCount);
+    console.log('PROFILESCOUNT', profilesCount);
     callback(profilesCache);
   } else {
-
-
     axios
       .get(blogsApiUrl)
       .then(response => {
-
         profilesCache = ProfileModel.build(
           response.data.data, 
-          response.data.included, 
-          function(formatedProfiles) {
-
-            profilesCache = formatedProfiles;
-
-            callback(formatedProfiles);
-        });
-
+          response.data.included
+        );
+        callback(profilesCache);
       })
       .catch(error => {
         console.log(`Error calling API : ${error}`);
         console.log(`Attempted to call : ${apiUrl}`);
-
         callback(null);
       }); /* end axios call */
   }
