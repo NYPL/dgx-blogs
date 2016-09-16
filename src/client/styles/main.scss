@@ -56,7 +56,7 @@ Import components styling
 @import "components/_ReadMoreButton";
 @import "components/_Sidebar";
 
-#app {
+.app-wrapper {
   margin: 0;
   @include Kievit-Regular;
 
