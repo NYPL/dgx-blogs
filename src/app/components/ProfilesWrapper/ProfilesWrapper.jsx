@@ -74,7 +74,6 @@ class ProfilesWrapper extends React.Component {
             </div>
             <h3 className="sidebar-title">Blogger Profiles</h3>
             <Link to={`${appBaseUrl}`} className="sidebar-link">Blog</Link>
-            <a href="#" className="sidebar-link">Blog Topics</a>
           </nav>
           <ProfilesList profiles={this.state.profiles.profiles} /> 
         </div>

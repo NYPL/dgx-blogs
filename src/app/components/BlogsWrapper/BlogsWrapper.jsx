@@ -194,24 +194,27 @@ class BlogsWrapper extends React.Component {
       } else if (pageType === 'subjects') {
 
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
-        hero = (<Hero
-          type="Blog Subject"
-          title={subjects.name}
-          postCount={currentState.meta.count}
-        />);
 
-        /* set filter to get ajax content only for a subject */
-        filter = `subject=${subjects.id}`;
+        if (subjects) {
+          hero = (<Hero
+            type="Blog Subject"
+            title={subjects.name}
+            postCount={currentState.meta.count}
+          />);
 
-        /* override the metas according to a subject page */
-        homeMetas = [
-          { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: `${subjects.name} | The New York Public Library` },
-          { property: 'og:image', content: this.imageMeta(null) },
-          //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
-          { name: 'twitter:title', content: `${subjects.name} | The New York Public Library` },
-          { name: 'twitter:image', content: this.imageMeta(null) }
-        ];
+          /* set filter to get ajax content only for a subject */
+          filter = `subject=${subjects.id}`;
+
+          /* override the metas according to a subject page */
+          homeMetas = [
+            { property: 'og:type', content: 'website' },
+            { property: 'og:title', content: `${subjects.name} | The New York Public Library` },
+            { property: 'og:image', content: this.imageMeta(null) },
+            //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+            { name: 'twitter:title', content: `${subjects.name} | The New York Public Library` },
+            { name: 'twitter:image', content: this.imageMeta(null) }
+          ];
+        }
       }
     }
 
@@ -231,7 +234,6 @@ class BlogsWrapper extends React.Component {
             </div>
             <h3 className="sidebar-title">Blog</h3>
             <Link to={`${appBaseUrl}authors`} className="sidebar-link">Blogger Profiles</Link>
-            <a href="#" className="sidebar-link">Blog Topics</a>
           </nav>
           <main className="blogsList">
             {blogs}
