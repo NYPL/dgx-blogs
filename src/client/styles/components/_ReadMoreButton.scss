@@ -3,11 +3,11 @@
   text-transform: uppercase;
   color: $SECONDARY_UI_COLOR;
   border: 2px solid $SECONDARY_UI_COLOR;
-  border-radius: 22px;
+  border-radius: 25px;
   font-size: 16px;
   display: block;
-  width: 158px;
-  height: 38px;
+  width: 171px;
+  height: 40px;
   position: relative;
   margin-top: 20px;
   line-height: 1.5em;
@@ -16,14 +16,14 @@
     @include Kievit-Medium;
     font-weight: 400;
     position: absolute;
-    top: 8px;
+    top: 10px;
     right: 18px;
   }
 
   .svgIcon {
     fill: $SECONDARY_UI_COLOR;
-    position: absolute;
-    top: 6px;
     left: 18px;
+    position: absolute;
+    top: -4px;
   }
 }
