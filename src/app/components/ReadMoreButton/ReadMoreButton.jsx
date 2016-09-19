@@ -44,10 +44,10 @@ class ReadMoreButton extends React.Component {
         onClick={this.fetchSingleBlog}
       >
         <DotsIcon
-            height="48"
-            width="48"
-
-          ariaHidden />
+          height="48"
+          width="48"
+          ariaHidden
+        />
         <span>Read More</span>
       </Link>
     );
