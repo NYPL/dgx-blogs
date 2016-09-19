@@ -24,7 +24,7 @@ class BackToBlogs extends React.Component {
       .then(response => {
         Actions.updateBlogs({
           blogs: response.data,
-          goingToUrl: this.props.appBaseUrl,
+          goingToUrl: appBaseUrl,
         });
       })
       .then(() => {
@@ -61,6 +61,10 @@ BackToBlogs.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
   },
+};
+
+BackToBlogs.propTypes = {
+  text: React.PropTypes.string,
 };
 
 export default BackToBlogs;

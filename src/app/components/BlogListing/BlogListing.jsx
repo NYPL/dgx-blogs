@@ -112,7 +112,11 @@ class BlogListing extends React.Component {
             slug={this.props.slug}
             appBaseUrl={this.props.appBaseUrl}
             blogTitle={this.props.title}
-            blogSeries={(this.props.series !== null && this.props.series[0] !== null) ? this.props.series[0].title : ''}
+            blogSeries={
+              (this.props.series !== null && this.props.series[0] !== null) ?
+              this.props.series[0].title :
+              ''
+            }
           />
           <BlogSubjects
             className="blogSubjectsInList"
@@ -134,10 +138,10 @@ BlogListing.propTypes = {
   side: React.PropTypes.string,
   width: React.PropTypes.string,
   subjects: React.PropTypes.array,
-  mainPicture: React.PropTypes.shape(
-    {
-      'full-uri': React.PropTypes.string,
-    }),
+  mainPicture: React.PropTypes.shape({
+    'full-uri': React.PropTypes.string,
+  }),
+  appBaseUrl: React.PropTypes.string,
 };
 
 BlogListing.defaultProps = {

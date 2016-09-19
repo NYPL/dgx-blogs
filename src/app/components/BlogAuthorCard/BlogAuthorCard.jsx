@@ -10,20 +10,17 @@ import BlogAuthorViewMoreLink from '../BlogAuthorViewMoreLink/BlogAuthorViewMore
 import { isEmpty as _isEmpty } from 'underscore';
 
 class BlogAuthorCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   createMarkup(bodyText) {
     return { __html: bodyText };
   }
 
-  _renderAuthorPicture() {
+  renderAuthorPicture() {
     if (this.props.data.profileImgUrl) {
       return (
         <img
           className="blogAuthorCard-profilePicWrap-picture"
           src={this.props.data.profileImgUrl}
+          alt=""
         />
       );
     }
@@ -37,7 +34,7 @@ class BlogAuthorCard extends React.Component {
     );
   }
 
-  _renderAuthorFullname() {
+  renderAuthorFullname() {
     if (this.props.data.fullName) {
       return (
         <p className="blogAuthorCard-name">{this.props.data.fullName}</p>
@@ -58,7 +55,7 @@ class BlogAuthorCard extends React.Component {
     return (
       <address className="blogAuthorCard">
         <div className="blogAuthorCard-profilePicWrap">
-          {this._renderAuthorPicture()}
+          {this.renderAuthorPicture()}
         </div>
         <BlogAuthorName
           className="blogAuthorCard-name"
@@ -66,10 +63,11 @@ class BlogAuthorCard extends React.Component {
           slug={this.props.data.slug}
           appBaseUrl={this.props.appBaseUrl}
         />
-        <div 
+        <div
           className="blogAuthorCard-title"
           dangerouslySetInnerHTML={unescapedBio}
-          ></div>
+        >
+        </div>
         <BlogAuthorViewMoreLink
           fullName={this.props.data.fullName}
           slug={this.props.data.slug}
@@ -89,6 +87,7 @@ BlogAuthorCard.propTypes = {
     profileText: React.PropTypes.string,
   }),
   className: React.PropTypes.string,
+  appBaseUrl: React.PropTypes.string,
 };
 
 BlogAuthorCard.defaultProps = {

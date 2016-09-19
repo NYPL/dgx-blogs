@@ -14,6 +14,29 @@ class BlogSubjects extends React.Component {
     this.fetchSubject = this.fetchSubject.bind(this);
   }
 
+  getList(subjects) {
+    const subjectsList = subjects.slice(0, this.props.maxSubjectsShown);
+
+    return subjectsList.map((subject, index) => {
+      return (
+        <li className="tagItem" key={index}>
+          <Link
+            to={`${this.props.appBaseUrl}subjects/${subject.id}`}
+            className="tagLink"
+            onClick={this.fetchSubject.bind(this, subject)}
+          >
+            <TagIcon ariaHidden />
+            {subject.name}
+          </Link>
+        </li>
+        );
+    });
+  }
+
+  routeHandler(subject) {
+    this.context.router.push(`${this.props.appBaseUrl}subjects/${subject}`);
+  }
+
   fetchSubject(subject, e) {
     e.preventDefault();
 
@@ -36,28 +59,6 @@ class BlogSubjects extends React.Component {
       }); /* end Axios call */
   }
 
-  routeHandler(subject) {
-    this.context.router.push(`${this.props.appBaseUrl}subjects/${subject}`);
-  }
-
-  getList(subjects) {
-    const subjectsList = subjects.slice(0, this.props.maxSubjectsShown);
-
-    return subjectsList.map((subject, index) => {
-      return (
-        <li className="tagItem" key={index}>
-          <Link
-            to={`${this.props.appBaseUrl}subjects/${subject.id}`}
-            className="tagLink"
-            onClick={this.fetchSubject.bind(this, subject)}>
-            <TagIcon ariaHidden />
-            {subject.name}
-          </Link>
-        </li>
-        );
-    });
-  }
-
   render() {
     /* if there is not any subject this component musnt generate any html */
     if (! this.props.subjects || this.props.subjects.length === 0) {
@@ -66,7 +67,8 @@ class BlogSubjects extends React.Component {
 
     /* if there are subjects*/
     let subjects = this.props.subjects ? this.getList(this.props.subjects) : null;
-    subjects = this.props.maxSubjectsShown ? subjects.slice(0, this.props.maxSubjectsShown) : subjects;
+    subjects = this.props.maxSubjectsShown ?
+      subjects.slice(0, this.props.maxSubjectsShown) : subjects;
 
     return (
       <div className={this.props.className}>
@@ -82,6 +84,7 @@ BlogSubjects.propTypes = {
   subjects: React.PropTypes.array.isRequired,
   className: React.PropTypes.string.isRequired,
   maxSubjectsShown: React.PropTypes.number,
+  appBaseUrl: React.PropTypes.string,
 };
 
 BlogSubjects.defaultProps = {
