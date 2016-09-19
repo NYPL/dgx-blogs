@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 import AuthorSeeAll from '../AuthorSeeAll/AuthorSeeAll';
 import ProfilesAuthor from '../ProfilesAuthor/ProfilesAuthor';
@@ -18,9 +17,7 @@ class ProfilesListLetter extends React.Component {
   }
 
   renderProfiles() {
-
     return this.props.profiles.map((profile) => {
-
       const unescapedBio = this.createMarkup(profile.bio);
 
       return (
@@ -41,11 +38,14 @@ class ProfilesListLetter extends React.Component {
             dangerouslySetInnerHTML={unescapedBio}
           >
           </div>
-          <ProfilesTopPosts maxPostsShown={3} posts={profile.postsData}/>
+          <ProfilesTopPosts maxPostsShown={3} posts={profile.postsData} />
           <AuthorSeeAll
             id={profile.id}
             firstName={profile.authorData.attributes['first-name']}
-            name={profile.authorData.attributes['first-name'] + ' ' + profile.authorData.attributes['last-name']}
+            name={
+              `${profile.authorData.attributes['first-name']} ` +
+              `${profile.authorData.attributes['last-name']}`
+            }
           />
         </article>
       );
@@ -53,17 +53,20 @@ class ProfilesListLetter extends React.Component {
   }
 
   render() {
-
     return (
       <section className="profilesListLetter">
         {this.renderProfiles()}
       </section>
     );
   }
-};
+}
 
 ProfilesListLetter.defaultProps = {
-  profiles: []
+  profiles: [],
+};
+
+ProfilesListLetter.propTypes = {
+  profiles: React.PropTypes.array,
 };
 
 export default ProfilesListLetter;

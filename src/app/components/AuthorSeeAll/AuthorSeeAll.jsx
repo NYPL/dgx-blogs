@@ -59,4 +59,10 @@ AuthorSeeAll.contextTypes = {
   },
 };
 
+AuthorSeeAll.propTypes = {
+  name: React.PropTypes.string,
+  id: React.PropTypes.string,
+  firstName: React.PropTypes.string,
+};
+
 export default AuthorSeeAll;

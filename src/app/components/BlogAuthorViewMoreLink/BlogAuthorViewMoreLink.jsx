@@ -7,10 +7,10 @@ class BlogAuthorViewMoreLink extends React.Component {
   constructor(props) {
     super(props);
 
-    this._fetchAuthor = this._fetchAuthor.bind(this);
+    this.fetchAuthor = this.fetchAuthor.bind(this);
   }
 
-  _fetchAuthor(e) {
+  fetchAuthor(e) {
     e.preventDefault();
 
     Actions.switchToLoading(`${this.props.fullName} | NYPL Author`);
@@ -38,7 +38,7 @@ class BlogAuthorViewMoreLink extends React.Component {
       <Link
         className="authorLink"
         to={`/blog/beta/authors/${this.props.slug}`}
-        onClick={this._fetchAuthor}
+        onClick={this.fetchAuthor}
       >
         <b>View all posts by</b> {this.props.fullName}
       </Link>

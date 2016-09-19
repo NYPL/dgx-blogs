@@ -3,40 +3,38 @@ import React from 'react';
 /**
  * Intended to have a generic hero easy to adapt to new sections
  */
-
-class GenericHero extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  _renderCoverImageUrl() {
-
-    if(this.props.coverImageUrl) { 
-      return (
-        <img src={this.props.coverImageUrl} alt="" />
-      );
+const GenericHero = (props) => {
+  const renderCoverImageUrl = () => {
+    if (props.coverImageUrl) {
+      return (<img src={props.coverImageUrl} alt="" />);
     }
 
     return null;
-  }
-  
-  render() {
+  };
 
-    return (
-      <header className={`genericHero ${this.props.backgroundColorClass}`}>
-        <div className="genericHero-content">
-          <h1 className="genericHero-content-title">{this.props.title} <span className="nypl-icon-wedge-down"></span></h1>
-          {this._renderCoverImageUrl()}
-        </div>
-      </header>
-    );
-  }
-}
+  return (
+    <header className={`genericHero ${props.backgroundColorClass}`}>
+      <div className="genericHero-content">
+        <h1 className="genericHero-content-title">
+          {props.title}
+          <span className="nypl-icon-wedge-down"></span>
+        </h1>
+        {renderCoverImageUrl()}
+      </div>
+    </header>
+  );
+};
 
 GenericHero.defaultProps = {
   coverImageUrl: null,
   title: null,
   backgroundColorClass: 'genericHero-default',
+};
+
+GenericHero.propTypes = {
+  coverImageUrl: React.PropTypes.string,
+  title: React.PropTypes.string,
+  backgroundColorClass: React.PropTypes.string,
 };
 
 export default GenericHero;

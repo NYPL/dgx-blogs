@@ -6,14 +6,11 @@ import Actions from '../../actions/Actions';
 import { Link } from 'react-router';
 
 import BackToBlogs from '../BackToBlogs/BackToBlogs';
-import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import MainHero from '../MainHero/MainHero';
-
-import { LeftWedgeIcon } from 'dgx-svg-icons';
 
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
@@ -45,6 +42,18 @@ class BlogsWrapper extends React.Component {
     // }
   }
 
+  componentWillReceiveProps(nextProps) {
+    /* comparing new url with the url for the data we have */
+    if (this.state.lastUrl) {
+      /* if data is different we try to get the right one from cache */
+      if (nextProps.location.pathname !== this.state.lastUrl) {
+        if (this.state.cache[nextProps.location.pathname]) {
+          Actions.fromCache(nextProps.location.pathname);
+        }
+      }
+    }
+  }
+
   componentWillUnmount() {
     Store.unlisten(this.onChange);
   }
@@ -54,30 +63,23 @@ class BlogsWrapper extends React.Component {
   }
 
   getList(blogsList) {
-    return _map(blogsList, (blogRow, index) => {
-      return ( 
-        <BlogRow 
-          data={blogRow} 
-          key={index}
-          appBaseUrl={appBaseUrl}
-        /> );
-    });
+    return _map(blogsList, (blogRow, index) => (
+      <BlogRow
+        data={blogRow}
+        key={index}
+        appBaseUrl={appBaseUrl}
+      />
+    ));
   }
 
-  componentWillReceiveProps(nextProps) {
-
-    /* comparing new url with the url for the data we have */
-    if (this.state.lastUrl) {
-
-      /* if data is different we try to get the right one from cache */
-      if (nextProps.location.pathname !== this.state.lastUrl) {
-
-        if (this.state.cache[nextProps.location.pathname]) {
-          
-          Actions.fromCache(nextProps.location.pathname);
-        }
-      }
+  imageMeta(imageField) {
+    if (imageField && imageField.length !== 0) {
+      return imageField;
     }
+
+    /* this image will be used in case of missing images */
+    return 'https://d2720ur5668dri.cloudfront.net/sites/default/files/' +
+      'styles/extralarge/public/blog.jpg';
   }
 
   renderLoadMoreButton(currentState, filter) {
@@ -97,31 +99,29 @@ class BlogsWrapper extends React.Component {
     );
   }
 
-  imageMeta(imageField) {
-
-    if (imageField && imageField.length !== 0) {
-      return imageField;
-    }
-
-    return 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
-  }
-
   render() {
     const currentState = this.state.blogs;
     const blogs = this.getList(currentState.blogList);
 
-    /* this image will be used in case of missing images */
-    const imageFallback = 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/extralarge/public/blog.jpg';
-
     let homeMetas = [
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Library Voices | The New York Public Library' },
-      { property: 'og:description', content: 'From great literature or children\'s books to job search help and New York City history, our librarians, curators, and staff offer valuable insight. See what\'s on their minds.' },
+      {
+        property: 'og:description',
+        content: 'From great literature or children\'s books to job search help and ' +
+          'New York City history, our librarians, curators, and staff offer valuable insight. ' +
+          'See what\'s on their minds.',
+      },
       { property: 'og:image', content: this.imageMeta(null) },
-      //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+      // { property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
       { name: 'twitter:title', content: 'Library Voices | The New York Public Library' },
-      { name: 'twitter:description', content: 'From great literature or children\'s books to job search help and New York City history, our librarians, curators, and staff offer valuable insight. See what\'s on their minds.' },
-      { name: 'twitter:image', content: this.imageMeta(null) }
+      {
+        name: 'twitter:description',
+        content: 'From great literature or children\'s books to job search help and New ' +
+          'York City history, our librarians, curators, and staff offer valuable insight. ' +
+          'See what\'s on their minds.',
+      },
+      { name: 'twitter:image', content: this.imageMeta(null) },
     ];
 
     let pageType;
@@ -136,12 +136,11 @@ class BlogsWrapper extends React.Component {
     /* default filter to get the content through ajax */
     let filter = 'blog=all';
 
-    if (! _isEmpty(this.props.params)) {
+    if (!_isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
       param = this.props.params[pageType];
 
       if (pageType === 'author') {
-
         author = currentState.blogList[0][pageType];
 
         if (author) {
@@ -158,21 +157,25 @@ class BlogsWrapper extends React.Component {
           /* override the metas according to an author page */
           homeMetas = [
             { property: 'og:type', content: 'website' },
-            { property: 'og:title', content: `${author.fullName } | The New York Public Library` },
-            { property: 'og:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
+            { property: 'og:title', content: `${author.fullName} | The New York Public Library` },
+            {
+              property: 'og:description',
+              content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '',
+            },
             { property: 'og:image', content: this.imageMeta(author.profileImgUrl) },
             //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
             { name: 'twitter:title', content: `${author.fullName} | The New York Public Library` },
-            { name: 'twitter:description', content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '' },
-            { name: 'twitter:image', content: this.imageMeta(author.profileImgUrl) }
+            {
+              name: 'twitter:description',
+              content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '',
+            },
+            { name: 'twitter:image', content: this.imageMeta(author.profileImgUrl) },
           ];
 
           /* set filter to get ajax content only for an author */
           filter = `author=${author.id}`;
         }
-
       } else if (pageType === 'series') {
-
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
 
         if (series) {
@@ -198,20 +201,20 @@ class BlogsWrapper extends React.Component {
             //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
             { name: 'twitter:title', content: `${series.title} | The New York Public Library` },
             { name: 'twitter:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
-            { name: 'twitter:image', content: this.imageMeta(series.image.url) }
+            { name: 'twitter:image', content: this.imageMeta(series.image.url) },
           ];
         }
-
       } else if (pageType === 'subjects') {
-
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
 
         if (subjects) {
-          hero = (<Hero
-            type="Blog Subject"
-            title={subjects.name}
-            postCount={currentState.meta.count}
-          />);
+          hero = (
+            <Hero
+              type="Blog Subject"
+              title={subjects.name}
+              postCount={currentState.meta.count}
+            />
+          );
           backLink = (<BackToBlogs text="Blog" />);
           sidebarTitle = subjects.name;
 
@@ -225,7 +228,7 @@ class BlogsWrapper extends React.Component {
             { property: 'og:image', content: this.imageMeta(null) },
             //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
             { name: 'twitter:title', content: `${subjects.name} | The New York Public Library` },
-            { name: 'twitter:image', content: this.imageMeta(null) }
+            { name: 'twitter:image', content: this.imageMeta(null) },
           ];
         }
       }
@@ -235,7 +238,7 @@ class BlogsWrapper extends React.Component {
       <div className="blogsWrapper">
         <DocMeta tags={homeMetas} />
         <LoadingLayer
-          status={this.state.appLoading} 
+          status={this.state.appLoading}
           title={this.state.loadingTitle}
         />
         {hero}
@@ -261,6 +264,10 @@ BlogsWrapper.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
   },
+};
+
+BlogsWrapper.propTypes = {
+  params: React.PropTypes.object,
 };
 
 export default BlogsWrapper;

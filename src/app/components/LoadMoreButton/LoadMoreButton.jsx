@@ -17,7 +17,8 @@ class LoadMoreButton extends React.Component {
     Actions.switchToLoading('Blogs Home | NYPL');
 
     /* build the url */
-    let url = `/blog/beta/api?page=${this.props.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
+    const url = `/blog/beta/api?page=${this.props.currentPage}` +
+      `&pageSize=${this.props.pageSize}&${this.props.filter}`;
 
     axios
       .get(url)
@@ -55,7 +56,14 @@ LoadMoreButton.defaultProps = {
   postsLeft: 'more',
   filter: 'blog=all',
   pageSize: 25,
-  currentPage: 1
+  currentPage: 1,
+};
+
+LoadMoreButton.propTypes = {
+  postsLeft: React.PropTypes.string,
+  filter: React.PropTypes.string,
+  pageSize: React.PropTypes.number,
+  currentPage: React.PropTypes.number,
 };
 
 export default LoadMoreButton;

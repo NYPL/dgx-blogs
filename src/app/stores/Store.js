@@ -1,7 +1,6 @@
-import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
-// import ImmutableUtil from 'alt-utils/lib/ImmutableUtil';
-// import Immutable from 'immutable';
+
+import Actions from '../actions/Actions.js';
 
 class BlogStore {
   constructor() {
@@ -26,7 +25,6 @@ class BlogStore {
   }
 
   handleBlogs(blogs) {
-
     const newState = {
       blogs: {
         blogList: blogs.blogs.blogList,
@@ -53,18 +51,15 @@ class BlogStore {
   }
 
   handleBlogPost(blogPost) {
-
     this.setState({
       blogs: this.state.blogs,
-      blogPost: blogPost,
       cache: this.state.cache,
+      blogPost,
     });
   }
 
   addMoreBlogs(blogs) {
-
-    if (! blogs.error) {
-
+    if (!blogs.error) {
       const newBlogList = this.state.blogs.blogList.concat(blogs.blogList);
       const currentPage = this.state.blogs.currentPage + 1;
 
@@ -72,27 +67,23 @@ class BlogStore {
         blogs: {
           blogList: newBlogList,
           meta: this.state.blogs.meta,
-          currentPage: currentPage,
+          currentPage,
         },
         blogPost: this.state.blogPost,
         cache: this.state.cache,
       });
     } else {
-
       console.log('STORE: error on api response');
     }
-
   }
 
   fromCache(cacheKey) {
-
     if (this.state.cache[cacheKey]) {
-
       this.setState({
         blogs: this.state.cache[cacheKey],
         blogPost: this.state.blogPost,
         cache: this.state.cache,
-      });    
+      });
     } else {
       console.log('STORE: value is not on cache');
     }

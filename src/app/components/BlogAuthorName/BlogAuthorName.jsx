@@ -13,7 +13,7 @@ class BlogAuthorName extends React.Component {
   fetchAuthor(e) {
     e.preventDefault();
 
-    Actions.switchToLoading(this.props.fullName + ' | author');
+    Actions.switchToLoading(`${this.props.fullName} | author`);
 
     axios
       .get(`${this.props.appBaseUrl}api?author=${this.props.slug}`)
@@ -59,6 +59,7 @@ BlogAuthorName.propTypes = {
   fullName: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string,
   className: React.PropTypes.string,
+  appBaseUrl: React.PropTypes.string,
 };
 
 BlogAuthorName.defaultProps = {

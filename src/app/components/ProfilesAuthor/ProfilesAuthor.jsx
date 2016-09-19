@@ -19,7 +19,7 @@ class ProfilesAuthor extends React.Component {
   fetchAuthor(e) {
     e.preventDefault();
 
-    Actions.switchToLoading( `${this.props.firstName} ${this.props.lastName} | Author`);
+    Actions.switchToLoading(`${this.props.firstName} ${this.props.lastName} | Author`);
 
     axios
       .get(`${appBaseUrl}api?author=${this.props.id}`)
@@ -43,21 +43,21 @@ class ProfilesAuthor extends React.Component {
   }
 
   render() {
-      return (
-        <header>
-          <AuthorPicture picture={this.props.picture} />
-          <h2 className="profilesAuthor-name">
-            <Link
-              to={`${appBaseUrl}author/${this.props.id}`}
-              className="blogAuthor-name-link"
-              onClick={this.fetchAuthor}
-            >
-              {this.props.firstName} {this.props.lastName}
-            </Link>
-          </h2>
-          <p className="profilesAuthor-title">{this.props.title}</p>
-        </header>
-      );
+    return (
+      <header>
+        <AuthorPicture picture={this.props.picture} />
+        <h2 className="profilesAuthor-name">
+          <Link
+            to={`${appBaseUrl}author/${this.props.id}`}
+            className="blogAuthor-name-link"
+            onClick={this.fetchAuthor}
+          >
+            {this.props.firstName} {this.props.lastName}
+          </Link>
+        </h2>
+        <p className="profilesAuthor-title">{this.props.title}</p>
+      </header>
+    );
   }
 }
 
@@ -65,6 +65,14 @@ ProfilesAuthor.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
   },
+};
+
+ProfilesAuthor.propTypes = {
+  firstName: React.PropTypes.string,
+  lastName: React.PropTypes.string,
+  id: React.PropTypes.string,
+  picture: React.PropTypes.string,
+  title: React.PropTypes.string,
 };
 
 export default ProfilesAuthor;

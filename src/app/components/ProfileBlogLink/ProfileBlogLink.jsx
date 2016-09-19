@@ -60,4 +60,9 @@ ProfileBlogLink.contextTypes = {
   },
 };
 
+ProfileBlogLink.propTypes = {
+  title: React.PropTypes.string,
+  url: React.PropTypes.string,
+};
+
 export default ProfileBlogLink;

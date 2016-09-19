@@ -6,16 +6,13 @@ import { LionLogoIcon } from 'dgx-svg-icons';
 import BlogAuthorName from '../BlogAuthorName/BlogAuthorName';
 
 class BlogAuthor extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  _renderAuthorPicture() {
+  renderAuthorPicture() {
     if (this.props.data.profileImgUrl) {
       return (
         <img
           className="blogAuthor-profilePicWrap-picture"
           src={this.props.data.profileImgUrl}
+          alt=""
         />
       );
     }
@@ -28,7 +25,7 @@ class BlogAuthor extends React.Component {
     );
   }
 
-  _renderAuthorTitle() {
+  renderAuthorTitle() {
     if (this.props.data.title) {
       return (
         <p className="blogAuthor-title">{this.props.data.title}</p>
@@ -42,14 +39,14 @@ class BlogAuthor extends React.Component {
     return (
       <div className="blogAuthor">
         <div className="blogAuthor-profilePicWrap">
-          {this._renderAuthorPicture()}
+          {this.renderAuthorPicture()}
         </div>
         <BlogAuthorName
           fullName={this.props.data.fullName}
           slug={this.props.data.id}
           appBaseUrl={this.props.appBaseUrl}
         />
-        {this._renderAuthorTitle()}
+        {this.renderAuthorTitle()}
       </div>
     );
   }
@@ -61,7 +58,9 @@ BlogAuthor.propTypes = {
     title: React.PropTypes.string.isRequired,
     slug: React.PropTypes.string.isRequired,
     profileImgUrl: React.PropTypes.string,
+    id: React.PropTypes.string,
   }),
+  appBaseUrl: React.PropTypes.string,
 };
 
 BlogAuthor.defaultProps = {
@@ -69,6 +68,7 @@ BlogAuthor.defaultProps = {
     title: '',
     slug: '',
     fullName: '',
+    id: '',
   },
 };
 

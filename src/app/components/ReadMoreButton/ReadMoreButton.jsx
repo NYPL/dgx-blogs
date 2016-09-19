@@ -58,6 +58,7 @@ ReadMoreButton.propTypes = {
   slug: React.PropTypes.string.isRequired,
   blogTitle: React.PropTypes.string,
   blogSeries: React.PropTypes.string,
+  appBaseUrl: React.PropTypes.string,
 };
 
 ReadMoreButton.defaultProps = {

@@ -58,8 +58,8 @@ BlogRow.propTypes = {
     mainPicture: React.PropTypes.object,
     slug: React.PropTypes.string.isRequired,
     series: React.PropTypes.array,
-    appBaseUrl: React.PropTypes.string,
   }),
+  appBaseUrl: React.PropTypes.string,
 };
 
 export default BlogRow;

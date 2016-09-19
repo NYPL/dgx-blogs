@@ -12,21 +12,21 @@ class BlogsLandingPage extends React.Component {
     super(props);
 
     this.state = Store.getState();
-    this._getList = this._getList.bind(this);
+    this.getList = this.getList.bind(this);
   }
 
-  _getList(blogsList) {
+  getList(blogList) {
     return blogList.map((blogRow, index) => {
       return <BlogRow key={index} data={blogRow} />;
     });
   }
-  
-  render() { 
+
+  render() {
     return (
       <div className="blogsLandingPage">
         <Hero />
         <ul>
-          {blogsList}
+          {this.getList()}
         </ul>
       </div>
     );

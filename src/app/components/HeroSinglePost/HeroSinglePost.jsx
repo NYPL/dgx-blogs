@@ -16,8 +16,8 @@ class HeroSinglePost extends React.Component {
       const h = c.height = i.height;
       c.getContext('2d').drawImage(i, 0, 0, w, h);
       try {
-        i.src = c.toDataURL("image/gif"); // if possible, retain all css aspects
-      } catch(e) { // cross-domain -- mimic original with all its tag attributes
+        i.src = c.toDataURL('image/gif'); // if possible, retain all css aspects
+      } catch (e) { // cross-domain -- mimic original with all its tag attributes
         for (let j = 0, a; a = i.attributes[j]; j++) {
           c.setAttribute(a.name, a.value);
         }
@@ -27,7 +27,7 @@ class HeroSinglePost extends React.Component {
   }
 
   renderCoverImage() {
-    if(this.props.coverUrl) { 
+    if (this.props.coverUrl) {
       return (
         <img ref="img" src={this.props.coverUrl} alt="" />
       );
@@ -35,19 +35,24 @@ class HeroSinglePost extends React.Component {
 
     return null;
   }
-  
-  render() {
 
-    /*Change hero class depending if it has image*/
+  render() {
+    /* Change hero class depending if it has image*/
     const heroSinglePostClass = this.props.coverUrl ? 'heroSinglePost' : 'heroSinglePostNoImage';
 
     return (
       <header className={heroSinglePostClass}>
-        <h1 className="heroSinglePost-title">Blogs <span className="nypl-icon-wedge-down"></span></h1>
+        <h1 className="heroSinglePost-title">
+          Blogs <span className="nypl-icon-wedge-down"></span>
+        </h1>
         {this.renderCoverImage()}
       </header>
     );
   }
 }
+
+HeroSinglePost.propTypes = {
+  coverUrl: React.PropTypes.string,
+};
 
 export default HeroSinglePost;

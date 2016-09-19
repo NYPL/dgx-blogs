@@ -5,7 +5,7 @@ import colors from 'colors';
 
 import React from 'react';
 
-import { Router, match, RouterContext } from 'react-router';
+import { match, RouterContext } from 'react-router';
 
 import ReactDOMServer from 'react-dom/server';
 
@@ -98,7 +98,6 @@ app.use('/', (req, res) => {
     } else {
       res.status(404).send('Not found');
     }
-
   });
 });
 
@@ -110,7 +109,7 @@ const server = app.listen(app.get('port'), (error, result) => {
   console.log(colors.yellow.underline(appConfig.appName));
   console.log(
     colors.green('Express server is listening at'),
-    colors.cyan('localhost:' + app.get('port'))
+    colors.cyan(`localhost: ${app.get('port')}`)
   );
 });
 
