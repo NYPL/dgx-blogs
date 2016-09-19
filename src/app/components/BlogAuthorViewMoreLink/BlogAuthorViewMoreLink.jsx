@@ -22,15 +22,16 @@ class BlogAuthorViewMoreLink extends React.Component {
       })
       .then(response => {
         Actions.returnToReady();
-        this.routeHandler();
+        this.routeHandler(`authors/${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler('not-found');
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`/blog/beta/authors/${this.props.slug}`);
+  routeHandler(location) {
+    this.context.router.push(`/blog/beta/${location}`);
   }
 
   render() {

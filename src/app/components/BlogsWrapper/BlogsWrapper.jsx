@@ -91,7 +91,6 @@ class BlogsWrapper extends React.Component {
 
     return (
       <LoadMoreButton
-        postsLeft={postsLeft}
         filter={filter}
         currentPage={currentState.currentPage}
         appBaseUrl={appBaseUrl}
@@ -101,6 +100,11 @@ class BlogsWrapper extends React.Component {
 
   render() {
     const currentState = this.state.blogs;
+
+    if (!currentState) {
+      window.location = '/blog/beta/not-found';
+    }
+
     const blogs = this.getList(currentState.blogList);
 
     let homeMetas = [
