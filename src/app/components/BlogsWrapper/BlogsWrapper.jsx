@@ -83,24 +83,32 @@ class BlogsWrapper extends React.Component {
   }
 
   renderLoadMoreButton(currentState, filter) {
-    const postsLeft = currentState.meta.count - currentState.blogList.length;
+    if (currentState) {
+      const postsLeft = currentState.meta.count - currentState.blogList.length;
 
-    if (postsLeft <= 0) {
-      return null;
+      if (postsLeft <= 0) {
+        return null;
+      }
+
+      return (
+        <LoadMoreButton
+          filter={filter}
+          currentPage={currentState.currentPage}
+          appBaseUrl={appBaseUrl}
+        />
+      );
     }
 
-    return (
-      <LoadMoreButton
-        postsLeft={postsLeft}
-        filter={filter}
-        currentPage={currentState.currentPage}
-        appBaseUrl={appBaseUrl}
-      />
-    );
+    return null;
   }
 
   render() {
     const currentState = this.state.blogs;
+
+    if (!currentState) {
+      window.location = '/blog/beta/not-found';
+    }
+
     const blogs = this.getList(currentState.blogList);
 
     let homeMetas = [
@@ -149,7 +157,7 @@ class BlogsWrapper extends React.Component {
             title={author.fullName}
             description={author.title}
             picture={author.profileImgUrl}
-            postCount={currentState.meta.count}
+            postCount={currentState ? currentState.meta.count : ''}
           />);
           backLink = (<BackToBlogs text="Blog" />);
           sidebarTitle = author.fullName;
@@ -184,7 +192,7 @@ class BlogsWrapper extends React.Component {
             title={series.title}
             description={series.body.replace(/(<([^>]+)>)/ig, '')}
             picture={series.image.url}
-            postCount={currentState.meta.count}
+            postCount={currentState ? currentState.meta.count : null}
           />);
           backLink = (<BackToBlogs text="Blog" />);
           sidebarTitle = series.title;
@@ -212,7 +220,7 @@ class BlogsWrapper extends React.Component {
             <Hero
               type="Blog Subject"
               title={subjects.name}
-              postCount={currentState.meta.count}
+              postCount={currentState ? currentState.meta.count : null}
             />
           );
           backLink = (<BackToBlogs text="Blog" />);

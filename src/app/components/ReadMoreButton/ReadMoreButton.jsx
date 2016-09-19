@@ -25,15 +25,16 @@ class ReadMoreButton extends React.Component {
       })
       .then(response => {
         Actions.returnToReady();
-        this.routeHandler();
+        this.routeHandler(this.props.slug);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler('not-found');
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`${this.props.appBaseUrl}${this.props.slug}`);
+  routeHandler(location) {
+    this.context.router.push(`${this.props.appBaseUrl}${location}`);
   }
 
   render() {

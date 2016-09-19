@@ -27,7 +27,7 @@ class BlogPage extends React.Component {
     Store.listen(this.onChange);
 
     if (this.state.blogPost.blogList[0] === undefined) {
-      this.context.router.push('${appBaseUrl}not-found');
+      this.context.router.push(`${appBaseUrl}not-found`);
       return;
     }
   }

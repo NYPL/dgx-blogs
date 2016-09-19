@@ -29,15 +29,16 @@ class AuthorSeeAll extends React.Component {
       })
       .then(response => {
         Actions.returnToReady();
-        this.routeHandler();
+        this.routeHandler(`authors/${this.props.id}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler('not-found');
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`${appBaseUrl}authors/${this.props.id}`);
+  routeHandler(location) {
+    this.context.router.push(`${appBaseUrl}${location}`);
   }
 
   render() {

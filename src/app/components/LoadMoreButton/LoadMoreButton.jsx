@@ -53,14 +53,12 @@ class LoadMoreButton extends React.Component {
 }
 
 LoadMoreButton.defaultProps = {
-  postsLeft: 'more',
   filter: 'blog=all',
   pageSize: 25,
   currentPage: 1,
 };
 
 LoadMoreButton.propTypes = {
-  postsLeft: React.PropTypes.string,
   filter: React.PropTypes.string,
   pageSize: React.PropTypes.number,
   currentPage: React.PropTypes.number,
