@@ -33,8 +33,8 @@ class BlogSubjects extends React.Component {
     });
   }
 
-  routeHandler(subject) {
-    this.context.router.push(`${this.props.appBaseUrl}subjects/${subject}`);
+  routeHandler(location) {
+    this.context.router.push(`${this.props.appBaseUrl}${location}`);
   }
 
   fetchSubject(subject, e) {
@@ -52,10 +52,11 @@ class BlogSubjects extends React.Component {
       })
       .then(() => {
         Actions.returnToReady();
-        this.routeHandler(subject.id);
+        this.routeHandler(`subjects/${subject.id}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler(`not-found`);
       }); /* end Axios call */
   }
 

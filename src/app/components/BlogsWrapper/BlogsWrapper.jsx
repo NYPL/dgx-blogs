@@ -104,7 +104,12 @@ class BlogsWrapper extends React.Component {
 
   render() {
     const currentState = this.state.blogs;
-    const blogs = currentState ? this.getList(currentState.blogList) : null;
+
+    if (!currentState) {
+      window.location = '/blog/beta/not-found';
+    }
+
+    const blogs = this.getList(currentState.blogList);
 
     let homeMetas = [
       { property: 'og:type', content: 'website' },

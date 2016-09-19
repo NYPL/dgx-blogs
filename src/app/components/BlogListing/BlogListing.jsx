@@ -33,6 +33,7 @@ class BlogListing extends React.Component {
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler(`${this.props.appBaseUrl}not-found`);
       }); /* end Axios call */
   }
 
@@ -55,6 +56,7 @@ class BlogListing extends React.Component {
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler(`${this.props.appBaseUrl}not-found`);
       }); /* end Axios call */
   }
 

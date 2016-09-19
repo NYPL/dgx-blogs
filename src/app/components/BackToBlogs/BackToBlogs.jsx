@@ -33,6 +33,7 @@ class BackToBlogs extends React.Component {
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler();
       }); /* end Axios call */
   }
 

@@ -25,15 +25,16 @@ class BlogAuthorName extends React.Component {
       })
       .then(() => {
         Actions.returnToReady();
-        this.routeHandler();
+        this.routeHandler(`authors/${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler('not-found');
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`${this.props.appBaseUrl}authors/${this.props.slug}`);
+  routeHandler(location) {
+    this.context.router.push(`${this.props.appBaseUrl}${location}`);
   }
 
   render() {
