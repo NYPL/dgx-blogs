@@ -2,13 +2,8 @@ import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
-// import Immutable from 'immutable';
-
 import BlogsModel from '../../app/utils/BlogsModel';
 import ProfileModel from '../../app/utils/ProfileModel';
-
-/* profiles refinery response to speed up response on dev time */
-import profilesMock from '../../app/utils/ProfilesMock';
 
 import appConfig from '../../../appConfig.js';
 
@@ -24,11 +19,11 @@ const apiRoot = api.root[appEnvironment];
 let profilesCache = null;
 let profilesCount = 0;
 
-function createOptions(api) {
+function createOptions(apiObj) {
   return {
-    endpoint: `${apiRoot}${api.endpoint}`,
-    includes: api.includes,
-    filters: api.filters,
+    endpoint: `${apiRoot}${apiObj.endpoint}`,
+    includes: apiObj.includes,
+    filters: apiObj.filters,
   };
 }
 
@@ -63,10 +58,10 @@ function fetchData(url, storeValue, req, res, next) {
               },
               blogList: blogsModelData,
               currentPage: 2,
-            }
+            },
           },
         },
-      };    
+      };
       next();
     })
     .catch(error => {
@@ -184,7 +179,7 @@ function fetchThroughAjax(req, res, next) {
   const completeUrl = apiUrl + pageSuffix;
 
   axios
-    .get(apiUrl + pageSuffix)
+    .get(completeUrl)
     .then(response => {
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
@@ -197,7 +192,7 @@ function fetchThroughAjax(req, res, next) {
     })
     .catch(error => {
       console.log(`Error calling API : ${error}`);
-      console.log(`Attempted to call : ${apiUrl}`);
+      console.log(`Attempted to call : ${completeUrl}`);
 
       res.json({
         error,
@@ -206,8 +201,10 @@ function fetchThroughAjax(req, res, next) {
 }
 
 function ajaxGetProfiles(callback) {
-  const blogsApiUrl = 
-    'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author,headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
+  const blogsApiUrl =
+    'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author' +
+    ',headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields' +
+    '[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
 
   /* each x quantity of request clean the cache */
   if (profilesCount >= 50) {
@@ -224,14 +221,14 @@ function ajaxGetProfiles(callback) {
       .get(blogsApiUrl)
       .then(response => {
         profilesCache = ProfileModel.build(
-          response.data.data, 
+          response.data.data,
           response.data.included
         );
         callback(profilesCache);
       })
       .catch(error => {
         console.log(`Error calling API : ${error}`);
-        console.log(`Attempted to call : ${apiUrl}`);
+        console.log(`Attempted to call : ${blogsApiUrl}`);
         callback(null);
       }); /* end axios call */
   }
@@ -242,13 +239,11 @@ function ajaxGetProfiles(callback) {
  * Fetch profiles syncronously for first request to blogger profiles
  */
 function ProfileQuery(req, res, next) {
-
   ajaxGetProfiles((profiles) => {
-
     if (profiles) {
       res.locals.data = {
         ProfileStore: {
-          profiles: profiles
+          profiles,
         },
       };
 
@@ -256,31 +251,27 @@ function ProfileQuery(req, res, next) {
     } else {
       res.locals.data = {
         ProfileStore: {
-          profiles: []
+          profiles: [],
         },
       };
 
-      next();      
+      next();
     }
   });
 }
 
 function ajaxProfileQuery(req, res) {
-
   ajaxGetProfiles((profiles) => {
-
-    if (! profiles) {
-
+    if (!profiles) {
       console.log('API-ROUTES: error fetching profiles');
-      res.json({ 
+      res.json({
         profiles: [],
         meta: {},
       });
     } else {
-
-      res.json({ 
-        profiles: profiles,
+      res.json({
         meta: {},
+        profiles,
       });
     }
   });
@@ -313,10 +304,10 @@ router
 
 router
   .route(`${appBaseUrl}api/authors`)
-  .get(ajaxProfileQuery);  
+  .get(ajaxProfileQuery);
 
- router
-   .route(`${appBaseUrl}authors/`)
-   .get(ProfileQuery);
+router
+  .route(`${appBaseUrl}authors/`)
+  .get(ProfileQuery);
 
 export default router;

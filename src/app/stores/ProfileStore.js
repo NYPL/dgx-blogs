@@ -1,9 +1,10 @@
-import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
 import axios from 'axios';
 
+import Actions from '../actions/Actions.js';
 import appConfig from '../../../appConfig.js';
-const { appBaseUrl, port } = appConfig;
+
+const { appBaseUrl } = appConfig;
 
 class ProfileStore {
   constructor() {
@@ -13,30 +14,24 @@ class ProfileStore {
     });
 
     this.state = {
-      profiles: []
+      profiles: [],
     };
   }
 
   loadProfiles() {
-
-    //Actions.switchToLoading('NYPL | Blogger Profiles');
-
     axios
       .get(`${appBaseUrl}api/authors`)
       .then(response => {
-
         Actions.returnToReady();
         Actions.handleProfiles(response.data);
       })
       .catch(error => {
         console.log(`PROFILE-STORE: error making ajax call: ${error}`);
-      }); /* end Axios call */    
+      }); /* end Axios call */
   }
 
   handleProfiles(profiles) {
-    this.setState({
-      profiles: profiles,
-    });
+    this.setState({ profiles });
   }
 }
 

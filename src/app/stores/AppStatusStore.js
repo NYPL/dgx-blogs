@@ -1,8 +1,5 @@
-import Actions from '../actions/Actions.js';
 import alt from 'dgx-alt-center';
-
-import appConfig from '../../../appConfig.js';
-const { appBaseUrl, port } = appConfig;
+import Actions from '../actions/Actions.js';
 
 class AppStatusStore {
   constructor() {
@@ -20,7 +17,7 @@ class AppStatusStore {
   switchToLoading(title) {
     this.setState({
       status: 'loading',
-      title: title,
+      title,
     });
   }
 
