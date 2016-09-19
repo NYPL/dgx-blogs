@@ -45,10 +45,8 @@ class BlogsWrapper extends React.Component {
   componentWillReceiveProps(nextProps) {
     /* comparing new url with the url for the data we have */
     if (this.state.lastUrl) {
-
       /* if data is different we try to get the right one from cache */
       if (nextProps.location.pathname !== this.state.lastUrl) {
-
         if (this.state.cache[nextProps.location.pathname]) {
           Actions.fromCache(nextProps.location.pathname);
         }
@@ -66,21 +64,20 @@ class BlogsWrapper extends React.Component {
 
   getList(blogsList) {
     return _map(blogsList, (blogRow, index) => (
-        <BlogRow
-          data={blogRow}
-          key={index}
-          appBaseUrl={appBaseUrl}
-        />
-      )
-    );
+      <BlogRow
+        data={blogRow}
+        key={index}
+        appBaseUrl={appBaseUrl}
+      />
+    ));
   }
 
   imageMeta(imageField) {
-
     if (imageField && imageField.length !== 0) {
       return imageField;
     }
 
+    /* this image will be used in case of missing images */
     return 'https://d2720ur5668dri.cloudfront.net/sites/default/files/' +
       'styles/extralarge/public/blog.jpg';
   }
@@ -106,10 +103,6 @@ class BlogsWrapper extends React.Component {
     const currentState = this.state.blogs;
     const blogs = this.getList(currentState.blogList);
 
-    /* this image will be used in case of missing images */
-    const imageFallback = 'https://d2720ur5668dri.cloudfront.net/sites/default/files/' +
-      'styles/extralarge/public/blog.jpg';
-
     let homeMetas = [
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Library Voices | The New York Public Library' },
@@ -120,7 +113,7 @@ class BlogsWrapper extends React.Component {
           'See what\'s on their minds.',
       },
       { property: 'og:image', content: this.imageMeta(null) },
-      //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
+      // { property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
       { name: 'twitter:title', content: 'Library Voices | The New York Public Library' },
       {
         name: 'twitter:description',
@@ -148,7 +141,6 @@ class BlogsWrapper extends React.Component {
       param = this.props.params[pageType];
 
       if (pageType === 'author') {
-
         author = currentState.blogList[0][pageType];
 
         if (author) {
@@ -165,7 +157,7 @@ class BlogsWrapper extends React.Component {
           /* override the metas according to an author page */
           homeMetas = [
             { property: 'og:type', content: 'website' },
-            { property: 'og:title', content: `${author.fullName } | The New York Public Library` },
+            { property: 'og:title', content: `${author.fullName} | The New York Public Library` },
             {
               property: 'og:description',
               content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '',
@@ -183,9 +175,7 @@ class BlogsWrapper extends React.Component {
           /* set filter to get ajax content only for an author */
           filter = `author=${author.id}`;
         }
-
       } else if (pageType === 'series') {
-
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
 
         if (series) {
@@ -214,9 +204,7 @@ class BlogsWrapper extends React.Component {
             { name: 'twitter:image', content: this.imageMeta(series.image.url) },
           ];
         }
-
       } else if (pageType === 'subjects') {
-
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
 
         if (subjects) {
@@ -240,7 +228,7 @@ class BlogsWrapper extends React.Component {
             { property: 'og:image', content: this.imageMeta(null) },
             //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
             { name: 'twitter:title', content: `${subjects.name} | The New York Public Library` },
-            { name: 'twitter:image', content: this.imageMeta(null) }
+            { name: 'twitter:image', content: this.imageMeta(null) },
           ];
         }
       }

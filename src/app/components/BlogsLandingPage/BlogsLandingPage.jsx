@@ -20,8 +20,8 @@ class BlogsLandingPage extends React.Component {
       return <BlogRow key={index} data={blogRow} />;
     });
   }
-  
-  render() { 
+
+  render() {
     return (
       <div className="blogsLandingPage">
         <Hero />

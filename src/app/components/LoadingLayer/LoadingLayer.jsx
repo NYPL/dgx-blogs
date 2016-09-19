@@ -23,7 +23,7 @@ class LoadingLayer extends React.Component {
   onChange() {
     this.setState(AppStatusStore.getState());
   }
-  
+
   render() {
     if (this.state.status === 'ready') {
       return null;

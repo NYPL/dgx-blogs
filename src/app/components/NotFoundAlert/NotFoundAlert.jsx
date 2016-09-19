@@ -18,7 +18,11 @@ class NotFoundAlert extends React.Component {
 }
 
 NotFoundAlert.defaultProps = {
-  message: 'Oops! Seems like the blog you are trying to access does not exist.'
-}
+  message: 'Oops! Seems like the blog you are trying to access does not exist.',
+};
+
+NotFoundAlert.propTypes = {
+  message: React.PropTypes.string,
+};
 
 export default NotFoundAlert;
