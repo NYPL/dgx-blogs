@@ -40,8 +40,11 @@ class LoadMoreButton extends React.Component {
           className="loadMoreButton-btn"
           onClick={this.handleClick}
         >
-          <DotsIcon ariaHidden />
-          <span>{this.props.postsLeft}</span>
+          <DotsIcon
+            height="48"
+            width="48"
+            ariaHidden />
+          <span>load more</span>
         </button>
       </div>
     );
