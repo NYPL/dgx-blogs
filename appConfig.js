@@ -1,6 +1,6 @@
 export default {
-  appTitle: 'NYPL | Blogs',
-  appName: 'NYPL App',
+  appTitle: 'NYPL | Blog: Library Voices',
+  appName: 'NYPL Blogs',
   favIconPath: '//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico',
   port: 3001,
   webpackDevServerPort: 3000,

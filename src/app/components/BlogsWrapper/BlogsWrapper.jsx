@@ -139,7 +139,7 @@ class BlogsWrapper extends React.Component {
     let author;
     let hero = <MainHero />;
     let backLink = (<a href="https://www.nypl.org">Home</a>);
-    let sidebarTitle = 'Blog';
+    let sidebarTitle = 'Blog: Library Voices';
 
     /* default filter to get the content through ajax */
     let filter = 'blog=all';
@@ -251,7 +251,7 @@ class BlogsWrapper extends React.Component {
         />
         {hero}
         <section className="content" id="mainContent">
-          <nav className="sidebar">
+          <nav className="sidebar" role="navigation">
             <div className="sidebar-breadCrumb">
               {backLink}
             </div>
