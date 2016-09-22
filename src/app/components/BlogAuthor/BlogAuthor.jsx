@@ -12,7 +12,7 @@ class BlogAuthor extends React.Component {
         <img
           className="blogAuthor-profilePicWrap-picture"
           src={this.props.data.profileImgUrl}
-          alt=""
+          alt="''"
         />
       );
     }

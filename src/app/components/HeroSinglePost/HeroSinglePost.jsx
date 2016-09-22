@@ -29,7 +29,7 @@ class HeroSinglePost extends React.Component {
   renderCoverImage() {
     if (this.props.coverUrl) {
       return (
-        <img ref="img" src={this.props.coverUrl} alt="" />
+        <img ref="img" src={this.props.coverUrl} alt="''" />
       );
     }
 

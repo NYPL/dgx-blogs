@@ -3,7 +3,7 @@ import React from 'react';
 class Hero extends React.Component {
   renderPicture() {
     if (this.props.picture) {
-      return (<img className="hero-content-picture" src={this.props.picture} alt="" />);
+      return (<img className="hero-content-picture" src={this.props.picture} alt="''" />);
     }
 
     return null;

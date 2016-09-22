@@ -7,7 +7,7 @@ const AuthorPicture = ({ image }) => {
       <img
         className="authorPicture"
         src={image}
-        alt=""
+        alt="''"
       />
     );
   }

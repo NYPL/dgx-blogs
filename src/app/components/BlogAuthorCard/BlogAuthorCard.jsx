@@ -20,7 +20,7 @@ class BlogAuthorCard extends React.Component {
         <img
           className="blogAuthorCard-profilePicWrap-picture"
           src={this.props.data.profileImgUrl}
-          alt=""
+          alt="''"
         />
       );
     }
