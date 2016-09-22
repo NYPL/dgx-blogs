@@ -211,18 +211,17 @@ class BlogsModel {
 
       return fullUri;
     } catch (e) {
-      //console.log(e)
+      // console.log(e)
       return undefined;
     }
   }
 
   getSeries(array) {
-    let result;
     if (!array || array.length === 0) {
       return null;
     }
 
-    result = _map(array, series => {
+    const result = _map(array, series => {
       let obj;
       try {
         const {
@@ -262,12 +261,11 @@ class BlogsModel {
   }
 
   getSubjects(array) {
-    let result;
     if (!array || array.length === 0) {
       return [];
     }
 
-    result = _map(array, subject => {
+    const result = _map(array, subject => {
       try {
         return {
           id: subject.id,
@@ -296,7 +294,7 @@ class BlogsModel {
   }
 
   modelBlog(b) {
-    let newBlog = this.emptyBlog();
+    const newBlog = this.emptyBlog();
     newBlog.id = b.id;
     newBlog.title = b.attributes.title.en.text;
 

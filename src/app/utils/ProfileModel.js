@@ -35,12 +35,9 @@ class ProfileModel {
     if (data.length > 0) {
       /* parse the included for an easier reading */
       const parsedIncludedFields = this.parseIncluded(included);
+      const completeList = _map(data, profile => this.modelProfile(profile, parsedIncludedFields));
 
-      const completeList = _map(data, profile => {
-        return this.modelProfile(profile, parsedIncludedFields);
-      });
-
-      let listByAlphabet = {};
+      const listByAlphabet = {};
       _each(completeList, (modeledProfile) => {
         const firstCharLastName = modeledProfile.authorData.attributes['last-name'].charAt(0);
 
@@ -60,9 +57,7 @@ class ProfileModel {
         });
 
         /* sort arrays by letter by alphabet to show them in the right order */
-        orderedArray.sort((a, b) => {
-          return a.letter < b.letter ? -1 : 1;
-        });
+        orderedArray.sort((a, b) => (a.letter < b.letter ? -1 : 1));
       });
 
       return orderedArray;
@@ -141,7 +136,7 @@ class ProfileModel {
       blogs: {},
     };
 
-    _each(included, (includedField, i) => {
+    _each(included, (includedField) => {
       if (includedField.type === 'author') {
         parsedIncludedFields.authors[includedField.id] = includedField;
       }
