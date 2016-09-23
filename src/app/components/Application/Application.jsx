@@ -7,6 +7,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-wrapper">
+
         {this.props.children}
         <Footer id="footer" className="footer" />
       </div>

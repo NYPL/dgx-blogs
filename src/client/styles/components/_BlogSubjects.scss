@@ -20,6 +20,7 @@
   .tagLink {
     text-transform: uppercase;
     color: $SECONDARY_UI_COLOR;
+    background-color: $WHITE_COLOR;
     font-size: 14px;
     line-height: 15px;
     text-decoration: underline;
@@ -115,6 +116,7 @@
     }
     @include layout-at(7, $portrait) {
       .tagLink {
+        background-color: $WHITE_COLOR;
         text-decoration: none;
       }
     }

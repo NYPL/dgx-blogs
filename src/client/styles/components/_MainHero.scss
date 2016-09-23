@@ -2,6 +2,7 @@
 
   @extend %clearfix;
   background: $PRIMARY_COLOR;
+  color: $WHITE_COLOR;
   height: 100px;
 
   &-wrapper {

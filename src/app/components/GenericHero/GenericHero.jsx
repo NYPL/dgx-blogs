@@ -6,7 +6,7 @@ import React from 'react';
 const GenericHero = (props) => {
   const renderCoverImageUrl = () => {
     if (props.coverImageUrl) {
-      return (<img src={props.coverImageUrl} alt="" />);
+      return (<img src={props.coverImageUrl} alt="''" />);
     }
 
     return null;

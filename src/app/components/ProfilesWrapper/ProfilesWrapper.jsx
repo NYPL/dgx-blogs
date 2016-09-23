@@ -76,7 +76,7 @@ class ProfilesWrapper extends React.Component {
         <LoadingLayer />
         <GenericHero title="NYPL Bloggers" />
         <div className="content">
-          <nav className="sidebar">
+          <nav className="sidebar" role="navigation">
             <div className="sidebar-breadCrumb">
               <BackToBlogs text="blog" />
             </div>
