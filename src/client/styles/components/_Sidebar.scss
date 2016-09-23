@@ -1,5 +1,5 @@
 .sidebar {
-  
+
   @include visuallyHidden;
   margin-top: 16px;
 
@@ -14,7 +14,7 @@
     font-size: 1.05em;
     font-weight: normal;
   }
-  
+
   &-link {
     @include Kievit-Regular;
     display: block;
@@ -33,14 +33,16 @@
     text-align: right;
     line-height: 5em;
     border-bottom: 2px solid $CHARCOAL;
-    font-size: .9em;
+    font-size: 1em;
     font-weight: bold;
     color: $COOLGRAY_COLOR;
     height: 67px;
 
     & > a {
+      color: $COOLGRAY_COLOR;
+      font-family: 'Kievit-Medium';
+      font-weight: normal;
       text-decoration: none;
-      color: $COOLGRAY_COLOR;;
     }
 
     .left-wedge-icon {
