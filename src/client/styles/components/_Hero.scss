@@ -1,6 +1,6 @@
 .hero {
 
-  @extend %clearfix;  
+  @extend %clearfix;
   background: $BLOGS_DARK_COLOR;
   height: 100px;
 
@@ -36,7 +36,7 @@
   @include layout-at(9, $portrait) {
 
   }
-  
+
   @include layout-at(9, $landscape) {
     @include aspect-ratio(16, 3);
     height: auto;
@@ -60,12 +60,12 @@
           @include displayVisuallyHidden;
           text-transform: uppercase;
           font-size: 14px;
-          font-weight: bold;
+          font-weight: normal;
           margin-top: 3%;
         }
 
         &-title {
-          letter-spacing: 1px;
+          font-weight: normal;
           margin-top: 0;
         }
 
@@ -84,12 +84,12 @@
           padding: 7px 0px 5px 14px;
           width: 60px;
           font-size: 12px;
-        }   
+        }
       }
 
       &-texts.no-picture {
         @include grid-span(10);
-      } 
+      }
 
       &-picture {
         @include displayVisuallyHidden;
