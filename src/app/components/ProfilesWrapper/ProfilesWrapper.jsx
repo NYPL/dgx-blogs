@@ -10,6 +10,7 @@ import BackToBlogs from '../BackToBlogs/BackToBlogs';
 import GenericHero from '../GenericHero/GenericHero';
 import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import ProfilesList from '../ProfilesList/ProfilesList';
+import SkinnyBanner from '../SkinnyBanner/SkinnyBanner.jsx';
 
 import appConfig from '../../../../appConfig.js';
 
@@ -75,6 +76,7 @@ class ProfilesWrapper extends React.Component {
         <DocMeta tags={homeMetas} />
         <LoadingLayer />
         <GenericHero title="NYPL Bloggers" />
+        <SkinnyBanner path={this.props.location.pathname} />
         <div className="content">
           <nav className="sidebar" role="navigation">
             <div className="sidebar-breadCrumb">

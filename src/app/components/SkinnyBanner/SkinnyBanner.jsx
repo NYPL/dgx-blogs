@@ -29,6 +29,7 @@ class SkinnyBanner extends React.Component {
         }
         .contentWrapper {
           margin: 0 auto;
+          margin-left: 15px;
           max-width: 1312px;
         }
         .skinnyBannerContent {
@@ -42,6 +43,9 @@ class SkinnyBanner extends React.Component {
           .skinnyBanner {
             padding: 24px;
           }
+          .contentWrapper {
+            margin-left: 17%;
+          }
         }
         @media (min-width: 1023px) {
           .skinnyBanner {
@@ -54,6 +58,19 @@ class SkinnyBanner extends React.Component {
           }
           .skinnyBannerContent {
             padding: 0 0 0 140px;
+          }
+          .contentWrapper {
+            margin-left: 8%;
+          }
+        }
+        @media (min-width: 1500px) {
+          .contentWrapper {
+            margin-left: 13%;
+          }
+        }
+        @media (min-width: 1500px) {
+          .contentWrapper {
+            margin-left: 15%;
           }
         }
       `
