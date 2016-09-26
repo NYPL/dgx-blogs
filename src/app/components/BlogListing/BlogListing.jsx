@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Actions from '../../actions/Actions';
+import { DotsIcon } from 'dgx-svg-icons';
 
 class BlogListing extends React.Component {
   constructor(props) {
@@ -99,34 +100,32 @@ class BlogListing extends React.Component {
     return (
       <div className="blogListing">
         {this.seriesTitle()}
-        <h1 className={`blogListing-title ${this.props.width}`}>
-          <Link
-            to={`${this.props.appBaseUrl}${this.props.slug}`}
-            onClick={this.fetchSingleBlog}
-          >
-            {this.props.title}
-          </Link>
-        </h1>
-        {this.mainPicture()}
-        <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
-          <span dangerouslySetInnerHTML={unescapedBody}></span>
-          <ReadMoreButton
-            slug={this.props.slug}
-            appBaseUrl={this.props.appBaseUrl}
-            blogTitle={this.props.title}
-            blogSeries={
-              (this.props.series !== null && this.props.series[0] !== null) ?
-              this.props.series[0].title :
-              ''
-            }
-          />
-          <BlogSubjects
-            className="blogSubjectsInList"
-            subjects={this.props.subjects}
-            maxSubjectsShown={3}
-            appBaseUrl={this.props.appBaseUrl}
-          />
-        </div>
+        <Link
+          to={`${this.props.appBaseUrl}${this.props.slug}`}
+          onClick={this.fetchSingleBlog}
+        >
+          <h1 className={`blogListing-title ${this.props.width}`}>
+          {this.props.title}
+          </h1>
+          {this.mainPicture()}
+          <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
+            <span dangerouslySetInnerHTML={unescapedBody}></span>
+            <span className="readMoreButton">
+              <DotsIcon
+                height="48"
+                width="48"
+                ariaHidden
+              />
+              <span>Read More</span>
+            </span>
+          </div>
+        </Link>
+        <BlogSubjects
+          className="blogSubjectsInList"
+          subjects={this.props.subjects}
+          maxSubjectsShown={3}
+          appBaseUrl={this.props.appBaseUrl}
+        />
       </div>
     );
   }

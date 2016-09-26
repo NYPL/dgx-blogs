@@ -68,7 +68,7 @@
       padding: 0;
 
       & > li {
-        padding: 5px 0;
+        padding: 15px 0;
       }
     }
 
@@ -79,7 +79,7 @@
 
       &-list {
         @include add-grid(3);
-        padding-left: 17px;
+        padding-left: 15px;
         margin-top: 15px;
 
         .tagItem {
@@ -91,6 +91,8 @@
 
           .tagLink {
             line-height: 15px;
+            font-size: 14px;
+            font-size: 0.9em;
 
             .svgIcon {
               @extend %tagSvgIcon;
