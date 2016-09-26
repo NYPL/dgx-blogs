@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Header, navConfig } from 'dgx-header-component';
+import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
 
 class App extends React.Component {
