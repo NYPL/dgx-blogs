@@ -21,9 +21,10 @@
 
       &-title {
         @include Kievit-Regular;
-        text-transform: capitalize;
         font-size: 28px;
+        font-weight: normal;
         margin-top: 35px;
+        text-transform: capitalize;
 
         .nypl-icon-wedge-down {
           @include visuallyHidden;
@@ -58,10 +59,10 @@
 
         &-serie {
           @include displayVisuallyHidden;
-          text-transform: uppercase;
           font-size: 14px;
           font-weight: normal;
           margin-top: 3%;
+          text-transform: uppercase;
         }
 
         &-title {
