@@ -4,6 +4,16 @@
   padding-bottom: 40px;
   margin-top: 20px;
 
+  & > a {
+    float: left;
+    font-weight: 400;
+    font-size: 30px;
+    font-size: 0.95em;
+    color: $BLACK_COLOR;
+    background-color: $WHITE_COLOR;
+    text-decoration: none;
+  }
+
   &-title {
     @include grid-span(3, 3);
   	@include Milo-Light;
@@ -11,15 +21,6 @@
     font-size: 32px;
     font-weight: 400;
     cursor: pointer;
-
-    & > a {
-      font-weight: 400;
-      font-size: 30px;
-      font-size: 0.95em;
-      color: $BLACK_COLOR;
-      background-color: $WHITE_COLOR;
-      text-decoration: none;
-    }
   }
 
   &-image {
