@@ -86,26 +86,36 @@ class SkinnyBanner extends React.Component {
     );
     const getContent = (path) => {
       if (path === '/' || path === '/blog/beta/') {
-        return (<span>Go back to existing <a href="/blog">blog homepage</a></span>);
+        return (<span>Thank you for previewing our upcoming blogging platform.
+          Fill out <a href="">a survey</a> or <a href="/blog">return to current version</a>.</span>);
       } else if (path === '/blog/beta/authors' || path === '/authors') {
-        return (<span>Go back to existing <a href="/voices/blogs/authors">authors page</a></span>);
+        return (<span>Thank you for previewing our upcoming blogging platform.
+          Fill out <a href="">a survey</a> or <a href="/voices/blogs/authors">
+          return to current blogger profiles</a>.</span>);
       } else if (path.indexOf('subjects') !== -1) {
-        return (<span>Go back to <a href="/blog/subject">subjects</a></span>);
+        return (<span>Thank you for previewing our upcoming blogging platform.
+          Fill out <a href="">a survey</a> or <a href="/blog/subject">
+          return to "Subjects" in the current version</a>.</span>);
       } else if (path.indexOf('series') !== -1) {
         let seriesIndex = path.indexOf('series') + 7;
-        return (<span>Go back to <a href={`/voices/blogs/blog-channels/${path.substring(seriesIndex)}`}>
-          series page</a></span>);
+        return (<span>Thank you for previewing our upcoming blogging platform.
+          Fill out <a href="">a survey</a> or 
+          <a href={`/voices/blogs/blog-channels/${path.substring(seriesIndex)}`}>
+          return to the current version of this series</a>.</span>);
       } else if (path.indexOf('authors') !== -1 && (path.length > 18 || path.length > 9)) {
         let authorIndex = path.indexOf('authors') + 8;
-        return (<span>Go back to <a href={`/blog/author/${path.substring(authorIndex)}`}>author page
-          </a></span>);
+        return (<span>Thank you for previewing our upcoming blogging platform.
+          Fill out <a href="">a survey</a> or
+          <a href={`/blog/author/${path.substring(authorIndex)}`}>
+          return to the current author page</a>.</span>);
       } else {
         let index = 1;
         if (path.indexOf('/blog/beta/') !== -1) {
           index = 11;
         }
-        return (<span>View blog post in <a href={`/blog/${path.substring(index)}`}>
-          existing template</a></span>);
+        return (<span>Thank you for previewing our upcoming blogging platform.
+          Fill out <a href="">a survey</a> or <a href={`/blog/${path.substring(index)}`}>
+          return to the current version of this blog post</a>.</span>);
       }
 
     };
