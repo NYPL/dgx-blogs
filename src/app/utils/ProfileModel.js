@@ -78,15 +78,18 @@ class ProfileModel {
     newProfile.bio = profile.attributes['profile-text'].en.text;
 
     /* get the author id and get it from included fields */
-    const authorId = profile.relationships.author.data.id;
+    const authorId = profile.relationships.author ?
+      profile.relationships.author.data.id : '';
     newProfile.authorData = parsedIncludedFields.authors[authorId];
 
     /* a new array with all the blog posts for this profile */
     newProfile.postsData = [];
     /* loop the author's blog posts and add them to a new array */
-    _each(profile.relationships['blog-posts'].data, (postMeta) => {
-      newProfile.postsData.push(parsedIncludedFields.blogs[postMeta.id]);
-    });
+    if (profile.relationships['blog-posts']) {
+      _each(profile.relationships['blog-posts'].data, (postMeta) => {
+        newProfile.postsData.push(parsedIncludedFields.blogs[postMeta.id]);
+      });
+    }
 
     return newProfile;
   }
