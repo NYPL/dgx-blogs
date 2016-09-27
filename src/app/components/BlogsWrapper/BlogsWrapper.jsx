@@ -11,6 +11,7 @@ import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 import LoadingLayer from '../LoadingLayer/LoadingLayer';
 import MainHero from '../MainHero/MainHero';
+import SkinnyBanner from '../SkinnyBanner/SkinnyBanner.jsx';
 
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
@@ -250,6 +251,7 @@ class BlogsWrapper extends React.Component {
           title={this.state.loadingTitle}
         />
         {hero}
+        <SkinnyBanner path={this.props.location.pathname} />
         <section className="content" id="mainContent">
           <nav className="sidebar" role="navigation">
             <div className="sidebar-breadCrumb">
