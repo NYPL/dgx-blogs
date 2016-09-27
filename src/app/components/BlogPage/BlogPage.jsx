@@ -72,7 +72,7 @@ class BlogPage extends React.Component {
       { name: "twitter:creator", content: '@nypl' },
     ];
     const path = this.props.location.pathname;
-console.log(this.props);
+
     return (
       <section className="blogPage">
         <DocMeta tags={singleBlogMetas} />

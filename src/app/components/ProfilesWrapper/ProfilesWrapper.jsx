@@ -52,7 +52,7 @@ class ProfilesWrapper extends React.Component {
   render() {
     let homeMetas = [
       { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: 'NYPL | BLog: Library Voices' },
+      { property: 'og:title', content: 'NYPL | Blog: Library Voices' },
       { property: 'og:site_name', content: 'The New York Public Library' },
       {
         property: 'og:description',
@@ -62,7 +62,7 @@ class ProfilesWrapper extends React.Component {
       },
       { property: 'og:image', content: this.imageMeta(null) },
       { property: 'og:url', content: `http://nypl.org${appBaseUrl}` },
-      { name: 'twitter:title', content: 'NYPL | BLog: Library Voices' },
+      { name: 'twitter:title', content: 'NYPL | Blog: Library Voices' },
       {
         name: 'twitter:description',
         content: 'From great literature or children\'s books to job search help and New' +
