@@ -10,7 +10,7 @@ class NotFoundAlert extends React.Component {
       <div className="notFoundAlert">
         <div className="notFoundAlert-message">
           {this.props.message}
-          <a href="/blog/beta/">Go back to the home page</a>
+          <a href="/blog/beta/">Go back to the NYPL Blogs home page</a>
         </div>
       </div>
     );

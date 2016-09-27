@@ -1,6 +1,6 @@
 .hero {
 
-  @extend %clearfix;  
+  @extend %clearfix;
   background: $BLOGS_DARK_COLOR;
   height: 100px;
 
@@ -21,9 +21,10 @@
 
       &-title {
         @include Kievit-Regular;
-        text-transform: capitalize;
         font-size: 28px;
+        font-weight: normal;
         margin-top: 35px;
+        text-transform: capitalize;
 
         .nypl-icon-wedge-down {
           @include visuallyHidden;
@@ -36,7 +37,7 @@
   @include layout-at(9, $portrait) {
 
   }
-  
+
   @include layout-at(9, $landscape) {
     @include aspect-ratio(16, 3);
     height: auto;
@@ -55,17 +56,18 @@
 
       &-texts {
         @include grid-span(10, 6);
+        padding-top: 30px;
 
         &-serie {
           @include displayVisuallyHidden;
-          text-transform: uppercase;
           font-size: 14px;
-          font-weight: bold;
+          font-weight: normal;
           margin-top: 3%;
+          text-transform: uppercase;
         }
 
         &-title {
-          letter-spacing: 1px;
+          font-weight: normal;
           margin-top: 0;
         }
 
@@ -84,12 +86,12 @@
           padding: 7px 0px 5px 14px;
           width: 60px;
           font-size: 12px;
-        }   
+        }
       }
 
       &-texts.no-picture {
         @include grid-span(10);
-      } 
+      }
 
       &-picture {
         @include displayVisuallyHidden;
@@ -108,6 +110,7 @@
 
       &-texts {
         @include grid-span(11, 8);
+        padding-top: 53px;
       }
 
       &-texts.no-picture {
