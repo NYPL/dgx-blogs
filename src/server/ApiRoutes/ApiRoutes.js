@@ -204,7 +204,8 @@ function ajaxGetProfiles(callback) {
   const blogsApiUrl =
     'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author' +
     ',headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields' +
-    '[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created';
+    '[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created' +
+    '&page[size]=82';
 
   /* each x quantity of request clean the cache */
   if (profilesCount >= 50) {
