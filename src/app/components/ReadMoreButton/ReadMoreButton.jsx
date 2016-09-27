@@ -3,6 +3,9 @@ import { Link } from 'react-router';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
 
+/* svg */
+import { DotsIcon } from 'dgx-svg-icons';
+
 class ReadMoreButton extends React.Component {
   constructor(props) {
     super(props);
@@ -13,32 +16,25 @@ class ReadMoreButton extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
+    Actions.switchToLoading(this.props.blogTitle);
+
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogPost(response.data);
       })
       .then(response => {
-        this.routeHandler();
+        Actions.returnToReady();
+        this.routeHandler(this.props.slug);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler('not-found');
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`${this.props.appBaseUrl}${this.props.slug}`);
-  }
-
-  svgDots() {
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" className="svgIcon blue">
-        <title>circle.more.icon.v1</title>
-        <circle cx="16" cy="16" r="1.9029" />
-        <circle cx="24" cy="16" r="1.9029" />
-        <circle cx="8" cy="16" r="1.9029" />
-      </svg>
-      );
+  routeHandler(location) {
+    this.context.router.push(`${this.props.appBaseUrl}${location}`);
   }
 
   render() {
@@ -48,7 +44,11 @@ class ReadMoreButton extends React.Component {
         to={`${this.props.appBaseUrl}${this.props.slug}`}
         onClick={this.fetchSingleBlog}
       >
-        {this.svgDots()}
+        <DotsIcon
+          height="48"
+          width="48"
+          ariaHidden
+        />
         <span>Read More</span>
       </Link>
     );
@@ -57,6 +57,14 @@ class ReadMoreButton extends React.Component {
 
 ReadMoreButton.propTypes = {
   slug: React.PropTypes.string.isRequired,
+  blogTitle: React.PropTypes.string,
+  blogSeries: React.PropTypes.string,
+  appBaseUrl: React.PropTypes.string,
+};
+
+ReadMoreButton.defaultProps = {
+  blogTitle: '',
+  blogSeries: '',
 };
 
 ReadMoreButton.contextTypes = {

@@ -8,19 +8,9 @@
 
     <link rel="icon" type="image/png" href="<%- favicon %>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta property="og:title" content=" | The New York Public Library">
-    <meta property="og:description" content="">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="">
-    <meta property="og:site_name" content=" | The New York Public Library">
-    <meta property="og:url" content="http://www.nypl.org/">
-    <meta name="twitter:title" content=" | The New York Public Library">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@nypl">
-    <meta name="twitter:creator" content="@nypl">
-    <meta name="twitter:image" content="">
+    <% for (var i=0; i < metatags.length; i++) {%>
+     <%- metatags[i] %>
+    <% } %>
 
     
 <% if (isProduction) { %>
@@ -40,20 +30,22 @@
       ga('send', 'pageview');
     </script>
 
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
   </head>
   <body>
-    <div id="app"><%- app %></div>
+    <%- app %>
+    <script type="text/javascript">
+      var appEnv = "<%- appEnv %>";
+      var path = "<%- path %>";
+    </script>
+
+  <% if (isProduction) { %>
+    <script async src="dist/bundle.js"></script>
+  <% } else { %>
+    <script src="http://localhost:3000/bundle.js"></script>
+  <% } %>
   </body>
-
-  <script type="text/javascript">
-    var appEnv = "<%- appEnv %>";
-    var path = "<%- path %>";
-  </script>
-
-<% if (isProduction) { %>
-  <script async src="dist/bundle.js"></script>
-<% } else { %>
-  <script src="http://localhost:3000/bundle.js"></script>
-<% } %>
-
 </html>

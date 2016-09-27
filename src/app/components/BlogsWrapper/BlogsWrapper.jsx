@@ -3,13 +3,21 @@ import React from 'react';
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions';
 
-import HeroSinglePost from '../HeroSinglePost/HeroSinglePost';
+import { Link } from 'react-router';
+
+import BackToBlogs from '../BackToBlogs/BackToBlogs';
 import Hero from '../Hero/Hero';
 import BlogRow from '../BlogRow/BlogRow';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
+import LoadingLayer from '../LoadingLayer/LoadingLayer';
+import MainHero from '../MainHero/MainHero';
+import SkinnyBanner from '../SkinnyBanner/SkinnyBanner.jsx';
 
 import appConfig from '../../../../appConfig.js';
 const appBaseUrl = appConfig.appBaseUrl;
+
+/* metatags */
+import DocMeta from 'react-doc-meta';
 
 import {
   map as _map,
@@ -21,7 +29,7 @@ import {
 class BlogsWrapper extends React.Component {
   constructor(props) {
     super(props);
-    console.log('BLOGSWRAPPER: baseUrl', appBaseUrl);
+
     this.state = Store.getState();
     this.onChange = this.onChange.bind(this);
   }
@@ -35,6 +43,18 @@ class BlogsWrapper extends React.Component {
     // }
   }
 
+  componentWillReceiveProps(nextProps) {
+    /* comparing new url with the url for the data we have */
+    if (this.state.lastUrl) {
+      /* if data is different we try to get the right one from cache */
+      if (nextProps.location.pathname !== this.state.lastUrl) {
+        if (this.state.cache[nextProps.location.pathname]) {
+          Actions.fromCache(nextProps.location.pathname);
+        }
+      }
+    }
+  }
+
   componentWillUnmount() {
     Store.unlisten(this.onChange);
   }
@@ -44,125 +64,223 @@ class BlogsWrapper extends React.Component {
   }
 
   getList(blogsList) {
-    return _map(blogsList, (blogRow, index) => {
-      return ( 
-        <BlogRow 
-          data={blogRow} 
-          key={index}
-          appBaseUrl={appBaseUrl}
-        /> );
-    });
+    return _map(blogsList, (blogRow, index) => (
+      <BlogRow
+        data={blogRow}
+        key={index}
+        appBaseUrl={appBaseUrl}
+      />
+    ));
   }
 
-  componentWillReceiveProps(nextProps) {
-
-    /* comparing new url with the url for the data we have */
-    if (this.state.lastUrl) {
-
-      /* if data is different we try to get the right one from cache */
-      if (nextProps.location.pathname !== this.state.lastUrl) {
-
-        if (this.state.cache[nextProps.location.pathname]) {
-          
-          Actions.fromCache(nextProps.location.pathname);
-        }
-      }
+  imageMeta(imageField) {
+    if (imageField && imageField.length !== 0) {
+      return imageField;
     }
+
+    /* this image will be used in case of missing images */
+    return 'https://d2720ur5668dri.cloudfront.net/sites/default/files/' +
+      'styles/extralarge/public/blog.jpg';
   }
 
   renderLoadMoreButton(currentState, filter) {
-    const postsLeft = currentState.meta.count - currentState.blogList.length;
+    if (currentState) {
+      const postsLeft = currentState.meta.count - currentState.blogList.length;
 
-    if (postsLeft <= 0) {
-      return null;
+      if (postsLeft <= 0) {
+        return null;
+      }
+
+      return (
+        <LoadMoreButton
+          filter={filter}
+          currentPage={currentState.currentPage}
+          appBaseUrl={appBaseUrl}
+        />
+      );
     }
 
-    return (
-      <LoadMoreButton
-        postsLeft={postsLeft}
-        filter={filter}
-        currentPage={currentState.currentPage}
-        appBaseUrl={appBaseUrl}
-      />
-    );
+    return null;
   }
 
   render() {
     const currentState = this.state.blogs;
+
+    if (!currentState) {
+      window.location = '/blog/beta/not-found';
+    }
+
     const blogs = this.getList(currentState.blogList);
+
+    let homeMetas = [
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'NYPL | Blog: Library Voices' },
+      { property: 'og:site_name', content: 'The New York Public Library' },
+      {
+        property: 'og:description',
+        content: 'From great literature or children\'s books to job search help and ' +
+          'New York City history, our librarians, curators, and staff offer valuable insight. ' +
+          'See what\'s on their minds.',
+      },
+      { property: 'og:image', content: this.imageMeta(null) },
+      { property: 'og:url', content: `http://nypl.org${appBaseUrl}` },
+      { name: 'twitter:title', content: 'Library Voices | The New York Public Library' },
+      {
+        name: 'twitter:description',
+        content: 'From great literature or children\'s books to job search help and New ' +
+          'York City history, our librarians, curators, and staff offer valuable insight. ' +
+          'See what\'s on their minds.',
+      },
+      { name: 'twitter:image', content: this.imageMeta(null) },
+      { name: "twitter:card", content: 'summary_large_image' },
+      { name: "twitter:site", content: '@nypl' },
+      { name: "twitter:creator", content: '@nypl' },
+    ];
 
     let pageType;
     let param;
     let series;
     let subjects;
     let author;
-    let hero = <HeroSinglePost />;
+    let hero = <MainHero />;
+    let backLink = (<a href="https://www.nypl.org">Home</a>);
+    let sidebarTitle = 'Blog: Library Voices';
 
     /* default filter to get the content through ajax */
     let filter = 'blog=all';
 
-    if (! _isEmpty(this.props.params)) {
+    if (!_isEmpty(this.props.params)) {
       pageType = _keys(this.props.params)[0];
       param = this.props.params[pageType];
 
       if (pageType === 'author') {
-
         author = currentState.blogList[0][pageType];
 
-        hero = (<Hero
-          type="author"
-          title={author.fullName}
-          description={author.title}
-          picture={author.profileImgUrl}
-          postCount={currentState.meta.count}
-        />);
+        if (author) {
+          hero = (<Hero
+            type="author"
+            title={author.fullName}
+            description={author.title}
+            picture={author.profileImgUrl}
+            postCount={currentState ? currentState.meta.count : ''}
+          />);
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = author.fullName;
 
-        /* set filter to get ajax content only for an author */
-        filter = `author=${author.id}`;
+          /* override the metas according to an author page */
+          homeMetas = [
+            { property: 'og:type', content: 'website' },
+            { property: 'og:title', content: `${author.fullName} | The New York Public Library` },
+            { property: 'og:site_name', content: `The New York Public Library` },
+            {
+              property: 'og:description',
+              content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '',
+            },
+            { property: 'og:image', content: this.imageMeta(author.profileImgUrl) },
+            { property: 'og:url', content: `http://nypl.org${appBaseUrl}` },
+            { name: 'twitter:title', content: `${author.fullName} | The New York Public Library` },
+            {
+              name: 'twitter:description',
+              content: (author.profileText) ? author.profileText.replace(/(<([^>]+)>)/ig, '') : '',
+            },
+            { name: 'twitter:image', content: this.imageMeta(author.profileImgUrl) },
+            { name: "twitter:card", content: 'summary_large_image' },
+            { name: "twitter:site", content: '@nypl' },
+            { name: "twitter:creator", content: '@nypl' },
+          ];
 
+          /* set filter to get ajax content only for an author */
+          filter = `author=${author.id}`;
+        }
       } else if (pageType === 'series') {
-
         series = _findWhere(currentState.blogList[0][pageType], { id: param });
 
-        hero = (<Hero
-          type="Blog Series"
-          title={series.title}
-          description={series.body.replace(/(<([^>]+)>)/ig, '')}
-          picture={series.image.url}
-          postCount={currentState.meta.count}
-        />);
+        if (series) {
+          hero = (<Hero
+            type="Blog Series"
+            title={series.title}
+            description={series.body.replace(/(<([^>]+)>)/ig, '')}
+            picture={series.image.url}
+            postCount={currentState ? currentState.meta.count : null}
+          />);
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = series.title;
 
-        /* set filter to get ajax content only for a series */
-        filter = `series=${series.id}`;
+          /* set filter to get ajax content only for a series */
+          filter = `series=${series.id}`;
 
+          /* override the metas according to a series page */
+          homeMetas = [
+            { property: 'og:type', content: 'website' },
+            { property: 'og:title', content: `${series.title} | The New York Public Library` },
+            { property: 'og:site_name', content: `The New York Public Library` },
+            { property: 'og:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
+            { property: 'og:image', content: this.imageMeta(series.image.url) },
+            { property: 'og:url', content: `http://nypl.org${appBaseUrl}` },
+            { name: 'twitter:title', content: `${series.title} | The New York Public Library` },
+            { name: 'twitter:description', content: series.body.replace(/(<([^>]+)>)/ig, '') },
+            { name: 'twitter:image', content: this.imageMeta(series.image.url) },
+            { name: "twitter:card", content: 'summary_large_image' },
+            { name: "twitter:site", content: '@nypl' },
+            { name: "twitter:creator", content: '@nypl' },
+          ];
+        }
       } else if (pageType === 'subjects') {
-
         subjects = _findWhere(currentState.blogList[0][pageType], { id: param });
-        hero = (<Hero
-          type="Blog Subject"
-          title={subjects.name}
-          postCount={currentState.meta.count}
-        />);
 
-        /* set filter to get ajax content only for a subject */
-        filter = `subject=${subjects.id}`;
+        if (subjects) {
+          hero = (
+            <Hero
+              type="Blog Subject"
+              title={subjects.name}
+              postCount={currentState ? currentState.meta.count : null}
+            />
+          );
+          backLink = (<BackToBlogs text="Blog" />);
+          sidebarTitle = subjects.name;
+
+          /* set filter to get ajax content only for a subject */
+          filter = `subject=${subjects.id}`;
+
+          /* override the metas according to a subject page */
+          homeMetas = [
+            { property: 'og:type', content: 'website' },
+            { property: 'og:title', content: `${subjects.name} | The New York Public Library` },
+            { property: 'og:site_name', content: `The New York Public Library` },
+            { property: 'og:image', content: this.imageMeta(null) },
+            { property: 'og:url', content: `http://nypl.org${appBaseUrl}` },
+            { name: 'twitter:title', content: `${subjects.name} | The New York Public Library` },
+            { name: 'twitter:image', content: this.imageMeta(null) },
+            { name: "twitter:card", content: 'summary_large_image' },
+            { name: "twitter:site", content: '@nypl' },
+            { name: "twitter:creator", content: '@nypl' },
+          ];
+        }
       }
     }
 
     return (
       <div className="blogsWrapper">
+        <DocMeta tags={homeMetas} />
+        <LoadingLayer
+          status={this.state.appLoading}
+          title={this.state.loadingTitle}
+        />
         {hero}
-        <div className="content">
-          <div className="sidebar">
-            <h3 className="sidebar-title">Blog</h3>
-            <a href="#" className="sidebar-link">Blogger Profiles</a>
-            <a href="#" className="sidebar-link">Blog Topics</a>
-          </div>
-          <ul className="blogsList">
+        <SkinnyBanner path={this.props.location.pathname} />
+        <section className="content" id="mainContent">
+          <nav className="sidebar" role="navigation">
+            <div className="sidebar-breadCrumb">
+              {backLink}
+            </div>
+            <h3 className="sidebar-title">{sidebarTitle}</h3>
+            <Link to={`${appBaseUrl}authors`} className="sidebar-link">Blogger Profiles</Link>
+          </nav>
+          <main className="blogsList">
             {blogs}
-            {this.renderLoadMoreButton(currentState, filter)}
-          </ul>
-        </div>
+          </main>
+          {this.renderLoadMoreButton(currentState, filter)}
+        </section>
       </div>
     );
   }
@@ -172,6 +290,10 @@ BlogsWrapper.contextTypes = {
   router: function contextType() {
     return React.PropTypes.func.isRequired;
   },
+};
+
+BlogsWrapper.propTypes = {
+  params: React.PropTypes.object,
 };
 
 export default BlogsWrapper;

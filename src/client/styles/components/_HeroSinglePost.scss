@@ -23,10 +23,13 @@
     }
   }
 
+  canvas {
+    display: none;
+  }
+
   @include layout-at(7, $portrait) {
     @extend %clearfix;
     height: 270px;
-    background: grey;
     float: none;
     overflow: hidden;
 
@@ -37,7 +40,12 @@
 
     & > img {
       @include displayVisuallyHidden;
-    }    
+    }
+
+    canvas {
+      display: inline-block;
+      width: 100%;
+    }
   }
   
   @include layout-at(9, $landscape) {
@@ -47,9 +55,5 @@
 
   &NoImage {
     @extend .heroSinglePost;
-
-    @include layout-at(9, $landscape) {
-      height: 170px;
-    }
   }  
 }

@@ -20,6 +20,7 @@
   .tagLink {
     text-transform: uppercase;
     color: $SECONDARY_UI_COLOR;
+    background-color: $WHITE_COLOR;
     font-size: 14px;
     line-height: 15px;
     text-decoration: underline;
@@ -60,24 +61,26 @@
   }
 
   &InList {
-    @include visuallyHidden;
+    display: none;
 
     &-list {
       list-style: none;
       padding: 0;
 
       & > li {
-        padding: 5px 0;
+        padding: 15px 0;
       }
     }
 
     @include layout-at(7, $portrait) {
-      @include displayVisuallyHidden;
+      display: inline;
+
       margin-top: 20px;
 
       &-list {
         @include add-grid(3);
-        padding-left: 17px;
+        padding-left: 15px;
+        margin-top: 15px;
 
         .tagItem {
           @include float-span(1);
@@ -88,6 +91,8 @@
 
           .tagLink {
             line-height: 15px;
+            font-size: 14px;
+            font-size: 0.9em;
 
             .svgIcon {
               @extend %tagSvgIcon;
@@ -99,13 +104,13 @@
     }
 
     @include layout-at(7, $landscape) {
-      @include visuallyHidden;
+      display: none;
     }
   }
 
   &InPostSidebar {
     @extend .blogSubjects;
-    @include visuallyHidden;
+    display: none;
     font-size: 12px;
 
     &-list {
@@ -113,12 +118,13 @@
     }
     @include layout-at(7, $portrait) {
       .tagLink {
+        background-color: $WHITE_COLOR;
         text-decoration: none;
       }
     }
 
     @include layout-at(7, $landscape) {
-      @include displayVisuallyHidden;
+      display: inline-block;
       text-align: left;
       margin: 0;
 

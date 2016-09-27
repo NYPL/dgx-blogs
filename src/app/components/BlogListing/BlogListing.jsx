@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
 import BlogSubjects from '../BlogSubjects/BlogSubjects';
 import Actions from '../../actions/Actions';
+import { DotsIcon } from 'dgx-svg-icons';
 
 class BlogListing extends React.Component {
   constructor(props) {
@@ -20,27 +21,30 @@ class BlogListing extends React.Component {
   fetchSingleBlog(e) {
     e.preventDefault();
 
-    console.log('BLOGLISTING: calling: ', `${this.props.appBaseUrl}api?blog=${this.props.slug}`);
+    Actions.switchToLoading(this.props.title);
 
     axios
       .get(`${this.props.appBaseUrl}api?blog=${this.props.slug}`)
       .then(response => {
-        console.log('BLOGLISTING: result', response.data);
         Actions.updateBlogPost(response.data);
       })
       .then(() => {
+        Actions.returnToReady();
         this.routeHandler(`${this.props.appBaseUrl}${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler(`${this.props.appBaseUrl}not-found`);
       }); /* end Axios call */
   }
 
   fetchSeries(e) {
     e.preventDefault();
 
+    Actions.switchToLoading(`${this.props.series[0].title} | Series`);
+
     axios
-      .get(`/api?series=${this.props.series[0].id}`)
+      .get(`${this.props.appBaseUrl}api?series=${this.props.series[0].id}`)
       .then(response => {
         Actions.updateBlogs({
           blogs: response.data,
@@ -48,10 +52,12 @@ class BlogListing extends React.Component {
         });
       })
       .then(() => {
+        Actions.returnToReady();
         this.routeHandler(`${this.props.appBaseUrl}series/${this.props.series[0].id}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler(`${this.props.appBaseUrl}not-found`);
       }); /* end Axios call */
   }
 
@@ -65,6 +71,7 @@ class BlogListing extends React.Component {
         <img
           className={`blogListing-image image-${this.props.side}`}
           src={this.props.mainPicture['full-uri']}
+          alt="''"
         />
       );
     }
@@ -93,28 +100,32 @@ class BlogListing extends React.Component {
     return (
       <div className="blogListing">
         {this.seriesTitle()}
-        <h2 className={`blogListing-title ${this.props.width}`}>
-          <Link
-            to={`${this.props.appBaseUrl}${this.props.slug}`}
-            onClick={this.fetchSingleBlog}
-          >
-            {this.props.title}
-          </Link>
-        </h2>
-        {this.mainPicture()}
-        <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
-          <span dangerouslySetInnerHTML={unescapedBody}></span>
-          <ReadMoreButton
-            slug={this.props.slug}
-            appBaseUrl={this.props.appBaseUrl}
-          />
-          <BlogSubjects
-            className="blogSubjectsInList"
-            subjects={this.props.subjects}
-            maxSubjectsShown={3}
-            appBaseUrl={this.props.appBaseUrl}
-          />
-        </div>
+        <Link
+          to={`${this.props.appBaseUrl}${this.props.slug}`}
+          onClick={this.fetchSingleBlog}
+        >
+          <h1 className={`blogListing-title ${this.props.width}`}>
+          {this.props.title}
+          </h1>
+          {this.mainPicture()}
+          <div className={`blogListing-paragraph ${this.props.side} ${this.props.width}`}>
+            <span dangerouslySetInnerHTML={unescapedBody}></span>
+            <span className="readMoreButton">
+              <DotsIcon
+                height="48"
+                width="48"
+                ariaHidden
+              />
+              <span>Read More</span>
+            </span>
+          </div>
+        </Link>
+        <BlogSubjects
+          className="blogSubjectsInList"
+          subjects={this.props.subjects}
+          maxSubjectsShown={3}
+          appBaseUrl={this.props.appBaseUrl}
+        />
       </div>
     );
   }
@@ -128,10 +139,10 @@ BlogListing.propTypes = {
   side: React.PropTypes.string,
   width: React.PropTypes.string,
   subjects: React.PropTypes.array,
-  mainPicture: React.PropTypes.shape(
-    {
-      'full-uri': React.PropTypes.string,
-    }),
+  mainPicture: React.PropTypes.shape({
+    'full-uri': React.PropTypes.string,
+  }),
+  appBaseUrl: React.PropTypes.string,
 };
 
 BlogListing.defaultProps = {

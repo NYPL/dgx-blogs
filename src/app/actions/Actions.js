@@ -17,6 +17,27 @@ class Actions {
   fromCache(cacheKey) {
     this.dispatch(cacheKey);
   }
+
+  turnToLoadingState(data) {
+    this.dispatch(data);
+  }
+
+  handleProfiles(data) {
+    this.dispatch(data);
+  }
+
+  loadProfiles() {
+    this.dispatch();
+  }
+
+  /* Actions for app status */
+  switchToLoading(title) {
+    this.dispatch(title);
+  }
+
+  returnToReady() {
+    this.dispatch();
+  }
 }
 
 export default alt.createActions(Actions);

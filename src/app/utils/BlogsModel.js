@@ -1,4 +1,8 @@
-import _ from 'underscore';
+import {
+  map as _map,
+  isArray as _isArray,
+  isEmpty as _isEmpty,
+} from 'underscore';
 
 class BlogsModel {
 
@@ -14,7 +18,7 @@ class BlogsModel {
     /**
      * Make sure there's an input.
      */
-    if (!data || !(_.isArray(data))) {
+    if (!data || !(_isArray(data))) {
       return null;
     }
 
@@ -22,9 +26,7 @@ class BlogsModel {
      * Make sure the data is not empty.
      */
     if (data.length > 0) {
-      return _.map(data, b => {
-        return this.modelBlog(b);
-      });
+      return _map(data, b => this.modelBlog(b));
     }
 
     return null;
@@ -59,7 +61,7 @@ class BlogsModel {
    */
   getHeadshotImage(obj) {
     let result;
-    if (!obj || _.isEmpty(obj)) {
+    if (!obj || _isEmpty(obj)) {
       return null;
     }
 
@@ -88,7 +90,7 @@ class BlogsModel {
    */
   getText(obj) {
     let result;
-    if (!obj || _.isEmpty(obj)) {
+    if (!obj || _isEmpty(obj)) {
       return null;
     }
 
@@ -97,7 +99,7 @@ class BlogsModel {
         attributes: {
           ['profile-text']: {
             en: {
-              text: profileText = ''
+              text: profileText = '',
             },
           },
         },
@@ -115,7 +117,7 @@ class BlogsModel {
    * Uses ES6 Destructuring to extract author's properties.
    * @returns {object}
    */
-  getAuthor(array) { 
+  getAuthor(array) {
     let result;
     if (!array || array.length === 0) {
       return undefined;
@@ -166,7 +168,7 @@ class BlogsModel {
 
   getSeriesImg(series) {
     let result;
-    if (!series || _.isEmpty(series)) {
+    if (!series || _isEmpty(series)) {
       return null;
     }
 
@@ -209,18 +211,17 @@ class BlogsModel {
 
       return fullUri;
     } catch (e) {
-      //console.log(e)
+      // console.log(e)
       return undefined;
     }
-  }  
+  }
 
   getSeries(array) {
-    let result;
     if (!array || array.length === 0) {
       return null;
     }
 
-    result = _.map(array, series => {
+    const result = _map(array, series => {
       let obj;
       try {
         const {
@@ -249,7 +250,7 @@ class BlogsModel {
           id,
         };
       } catch (e) {
-        console.log(e)
+        console.log(e);
         obj = undefined;
       }
 
@@ -260,12 +261,11 @@ class BlogsModel {
   }
 
   getSubjects(array) {
-    let result;
     if (!array || array.length === 0) {
       return [];
     }
 
-    result = _.map(array, subject => {
+    const result = _map(array, subject => {
       try {
         return {
           id: subject.id,
@@ -294,7 +294,7 @@ class BlogsModel {
   }
 
   modelBlog(b) {
-    let newBlog = this.emptyBlog();
+    const newBlog = this.emptyBlog();
     newBlog.id = b.id;
     newBlog.title = b.attributes.title.en.text;
 

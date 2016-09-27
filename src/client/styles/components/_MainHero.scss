@@ -1,0 +1,73 @@
+.mainHero {
+
+  @extend %clearfix;
+  background: $PRIMARY_COLOR;
+  color: $WHITE_COLOR;
+  height: 100px;
+
+  &-wrapper {
+    color: $WHITE_COLOR;
+
+    &-content {
+      &-title {
+        @include Kievit-Book;
+        font-size: 1.75em;
+        font-weight: normal;
+        margin-top: 38px;
+        padding: 0 18px;
+        text-transform: capitalize;
+      }
+
+      &-subtitle {
+        @include visuallyHidden;
+        @include Kievit-Regular;
+        padding: 0 25px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  @include layout-at(6, $landscape) {
+
+    height: 290px;
+
+    &-wrapper {
+      @include grid-span(3, 2);
+
+      &-content {
+        &-title {
+          @include Milo-Light;
+          font-size: 2.5em;
+          margin: 85px 0 0;
+          padding: 0 25px;
+        }
+
+        &-subtitle {
+          @include displayVisuallyHidden;
+          margin-top: 3px;
+        }
+      }
+    }
+  }
+
+  @include layout-at(6, $desktop) {
+    height: 320px;
+
+    &-wrapper {
+      @include add-grid(6);
+      max-width: 1312px;
+      margin: auto;
+      float: none;
+      width: auto;
+
+      &-content {
+        @include grid-span(3, 2);
+
+        &-title {
+          margin-top: 108px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

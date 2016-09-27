@@ -5,14 +5,12 @@ import colors from 'colors';
 
 import React from 'react';
 
-import { Router, match, RouterContext } from 'react-router';
+import { match, RouterContext } from 'react-router';
 
 import ReactDOMServer from 'react-dom/server';
 
 import Iso from 'iso';
 import alt from 'dgx-alt-center';
-
-import FeatureFlags from 'dgx-feature-flags';
 
 import appConfig from './appConfig.js';
 import analytics from './analytics.js';
@@ -22,6 +20,8 @@ import webpackConfig from './webpack.config.js';
 
 import appRoutes from './src/app/routes/routes.js';
 import apiRoutes from './src/server/ApiRoutes/ApiRoutes.js';
+
+import DocMeta from 'react-doc-meta';
 
 const { appBaseUrl } = appConfig;
 
@@ -76,8 +76,10 @@ app.use('/', (req, res) => {
     } else if (renderProps) {
       const html = ReactDOMServer.renderToString(<RouterContext {...renderProps} />);
 
-      // Fire off the Feature Flag prior to render
-      FeatureFlags.utils.activateFeature('shop-link');
+      const metaTags = DocMeta.rewind();
+      const renderedTags = metaTags.map((tag, index) =>
+        ReactDOMServer.renderToString(<meta data-doc-meta="true" key={index} {...tag} />)
+      );
 
       iso.add(html, alt.flush());
       res
@@ -90,12 +92,12 @@ app.use('/', (req, res) => {
           webpackPort: WEBPACK_DEV_PORT,
           appEnv: process.env.APP_ENV,
           path: req.url,
+          metatags: renderedTags,
           isProduction,
         });
     } else {
       res.status(404).send('Not found');
     }
-
   });
 });
 
@@ -107,7 +109,7 @@ const server = app.listen(app.get('port'), (error, result) => {
   console.log(colors.yellow.underline(appConfig.appName));
   console.log(
     colors.green('Express server is listening at'),
-    colors.cyan('localhost:' + app.get('port'))
+    colors.cyan(`localhost: ${app.get('port')}`)
   );
 });
 

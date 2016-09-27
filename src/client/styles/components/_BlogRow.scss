@@ -7,8 +7,8 @@
   &-leftSidebar {
 
     &-date {
-      @include grid-span(1, 5);
-      font-size: 13px;
+      //@include grid-span(1, 5);
+      font-size: 16px;
       color: $COOLGRAY_COLOR;
       margin-top: 13px;
       line-height: 1.6;
@@ -19,8 +19,9 @@
     text-transform: uppercase;
     text-decoration: none;
     color: $SECONDARY_UI_COLOR;
+    background-color: $WHITE_COLOR;
     font-size: 12px;
-      
+
     .svgIcon {
       fill: $SECONDARY_UI_COLOR;
       position: relative;
@@ -28,12 +29,12 @@
     }
   }
 
-  @include layout-at(7, $portrait) { 
+  @include layout-at(7, $portrait) {
 
     &-leftSidebar {
       @include grid-span(1);
       @include add-grid(1);
-      
+
       &-date {
         @include grid-span(1);
       }
@@ -58,7 +59,7 @@
     }
   }
 
-  @include layout-at(7, $desktop) { 
+  @include layout-at(7, $desktop) {
 
   }
 }

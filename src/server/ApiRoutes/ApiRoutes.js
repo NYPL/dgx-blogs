@@ -2,62 +2,50 @@ import express from 'express';
 import axios from 'axios';
 import parser from 'jsonapi-parserinator';
 
-import Model from 'dgx-model-data';
-// import Immutable from 'immutable';
-
-import { navConfig } from 'dgx-header-component';
-
-/*
- * @todo check how to make this work as in homepage 
- */
 import BlogsModel from '../../app/utils/BlogsModel';
+import ProfileModel from '../../app/utils/ProfileModel';
 
 import appConfig from '../../../appConfig.js';
 
-const { HeaderItemModel } = Model;
-const { api, headerApi, blogsApi, appBaseUrl } = appConfig;
+const { api, blogsApi, appBaseUrl } = appConfig;
 const router = express.Router();
 const appEnvironment = process.env.APP_ENV || 'production';
 const apiRoot = api.root[appEnvironment];
 
-function createOptions(api) {
+/**
+ * cache variable for profiles long response from the refinery.
+ * @todo a better way of caching?
+ */
+let profilesCache = null;
+let profilesCount = 0;
+
+function createOptions(apiObj) {
   return {
-    endpoint: `${apiRoot}${api.endpoint}`,
-    includes: api.includes,
-    filters: api.filters,
+    endpoint: `${apiRoot}${apiObj.endpoint}`,
+    includes: apiObj.includes,
+    filters: apiObj.filters,
   };
 }
 
-const headerOptions = createOptions(headerApi);
 const blogsOptions = createOptions(blogsApi);
 
 function fetchApiData(url) {
   return axios.get(url);
 }
 
-function getHeaderData() {
-  const headerApiUrl = parser.getCompleteApi(headerOptions);
-  return fetchApiData(headerApiUrl);
-}
-
 function fetchData(url, storeValue, req, res, next) {
+  const updatedUrl = `${url}&page[number]=1&page[size]=25`;
+  console.log('API-ROUTES: first api call:', updatedUrl);
 
-  url = `${url}&page[number]=1&page[size]=25`;
-  console.log('API-ROUTES: first api call:', url);
-
-  axios
-    .all([getHeaderData(), fetchApiData(url)])
-    .then(axios.spread((headerData, blogsData) => {
-      const headerParsed = parser.parse(headerData.data, headerOptions);
-      const headerModelData = HeaderItemModel.build(headerParsed);
-
+  fetchApiData(updatedUrl)
+    .then(blogsData => {
       const blogsParsed = parser.parse(blogsData.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
       res.locals.data = {
         BlogStore: {
           [storeValue]: {
-            meta: { 
+            meta: {
               count: blogsData.data.meta.count,
             },
             blogList: blogsModelData,
@@ -65,30 +53,24 @@ function fetchData(url, storeValue, req, res, next) {
           },
           cache: {
             [appBaseUrl]: {
-              meta: { 
+              meta: {
                 count: blogsData.data.meta.count,
               },
               blogList: blogsModelData,
               currentPage: 2,
-            }
+            },
           },
         },
-        HeaderStore: {
-          headerData: navConfig.current,
-        },
-      };    
+      };
       next();
-    }))
+    })
     .catch(error => {
       console.log(`error calling API : ${error}`);
-      console.log(`Attempted to call : ${url}`);
+      console.log(`Attempted to call : ${updatedUrl}`);
 
       res.locals.data = {
         BlogStore: {
           [storeValue]: [],
-        },
-        HeaderStore: {
-          headerData: navConfig.current,
         },
       };
 
@@ -110,7 +92,7 @@ function BlogsMainList(req, res, next) {
 // This will be used to any route on:
 // /blog/:blog /blog/subjects/:subject /blog/series/:series blog/author/:author
 function BlogQuery(req, res, next) {
-  const param = req.params[0];
+  const param = req.params[0].replace('authors', 'author');
   const paramArray = param.split('/');
 
   let blogType = paramArray[0];
@@ -197,13 +179,12 @@ function fetchThroughAjax(req, res, next) {
   const completeUrl = apiUrl + pageSuffix;
 
   axios
-    .get(apiUrl + pageSuffix)
+    .get(completeUrl)
     .then(response => {
-      console.log('ajax call to:', completeUrl);
       const blogsParsed = parser.parse(response.data, blogsOptions);
       const blogsModelData = BlogsModel.build(blogsParsed);
 
-      res.json({ 
+      res.json({
         blogList: blogsModelData,
         meta: {
           count: response.data.meta.count },
@@ -211,12 +192,90 @@ function fetchThroughAjax(req, res, next) {
     })
     .catch(error => {
       console.log(`Error calling API : ${error}`);
-      console.log(`Attempted to call : ${apiUrl}`);
+      console.log(`Attempted to call : ${completeUrl}`);
 
       res.json({
-        error
+        error,
       });
     }); /* end axios call */
+}
+
+function ajaxGetProfiles(callback) {
+  const blogsApiUrl =
+    'http://refinery.nypl.org/api/nypl/ndo/v0.1/blogs/blogger-profiles?include=author' +
+    ',headshot,location,blog-posts&fields[author]=first-name,last-name,title&fields' +
+    '[library]=full-name,slug&fields[image]=uri&fields[blog]=title,alias,date-created' +
+    '&page[size]=82';
+
+  /* each x quantity of request clean the cache */
+  if (profilesCount >= 50) {
+    profilesCache = null;
+    profilesCount = 0;
+  }
+
+  if (profilesCache) {
+    profilesCount++;
+    console.log('PROFILESCOUNT', profilesCount);
+    callback(profilesCache);
+  } else {
+    axios
+      .get(blogsApiUrl)
+      .then(response => {
+        profilesCache = ProfileModel.build(
+          response.data.data,
+          response.data.included
+        );
+        callback(profilesCache);
+      })
+      .catch(error => {
+        console.log(`Error calling API : ${error}`);
+        console.log(`Attempted to call : ${blogsApiUrl}`);
+        callback(null);
+      }); /* end axios call */
+  }
+}
+
+/**
+ * ProfileQuery()
+ * Fetch profiles syncronously for first request to blogger profiles
+ */
+function ProfileQuery(req, res, next) {
+  ajaxGetProfiles((profiles) => {
+    if (profiles) {
+      res.locals.data = {
+        ProfileStore: {
+          profiles,
+        },
+      };
+
+      next();
+    } else {
+      res.locals.data = {
+        ProfileStore: {
+          profiles: [],
+        },
+      };
+
+      next();
+    }
+  });
+}
+
+function ajaxProfileQuery(req, res) {
+  ajaxGetProfiles((profiles) => {
+    if (!profiles) {
+      console.log('API-ROUTES: error fetching profiles');
+      res.json({
+        profiles: [],
+        meta: {},
+      });
+    } else {
+      res.json({
+        meta: {},
+        profiles,
+      });
+    }
+  });
 }
 
 router
@@ -227,6 +286,7 @@ router
   .route(appBaseUrl)
   .get(BlogsMainList);
 
+/* @todo HARCODED BLOG BETA HERE!! */
 router
   .route(/\/blog\/beta\/([^]+)\/?/)
   .get(BlogQuery);
@@ -238,5 +298,17 @@ router
 router
   .route(`${appBaseUrl}api`)
   .get(fetchThroughAjax);
+
+router
+  .route('/api/authors')
+  .get(ajaxProfileQuery);
+
+router
+  .route(`${appBaseUrl}api/authors`)
+  .get(ajaxProfileQuery);
+
+router
+  .route(`${appBaseUrl}authors/`)
+  .get(ProfileQuery);
 
 export default router;

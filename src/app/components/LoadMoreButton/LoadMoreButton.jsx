@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
 
+/* svg */
+import { DotsIcon } from 'dgx-svg-icons';
+
 class LoadMoreButton extends React.Component {
   constructor(props) {
     super(props);
@@ -11,10 +14,11 @@ class LoadMoreButton extends React.Component {
   handleClick(e) {
     e.preventDefault();
 
-    console.log('LOADMOREBUTTON: going to page', this.props.currentPage);
+    Actions.switchToLoading('Blogs Home | NYPL');
 
     /* build the url */
-    let url = `/blog/beta/api?page=${this.props.currentPage}&pageSize=${this.props.pageSize}&${this.props.filter}`;
+    const url = `/blog/beta/api?page=${this.props.currentPage}` +
+      `&pageSize=${this.props.pageSize}&${this.props.filter}`;
 
     axios
       .get(url)
@@ -22,22 +26,12 @@ class LoadMoreButton extends React.Component {
         Actions.addMoreBlogs(response.data);
       })
       .then(response => {
+        Actions.returnToReady();
         console.log('blogs added to the store');
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
       });
-  }
-
-  svgDots() {
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" className="svgIcon blue">
-        <title>circle.more.icon.v1</title>
-        <circle cx="16" cy="16" r="1.9029" />
-        <circle cx="24" cy="16" r="1.9029" />
-        <circle cx="8" cy="16" r="1.9029" />
-      </svg>
-      );
   }
 
   render() {
@@ -47,8 +41,11 @@ class LoadMoreButton extends React.Component {
           className="loadMoreButton-btn"
           onClick={this.handleClick}
         >
-          {this.svgDots()}
-          <span>{this.props.postsLeft}</span>
+          <DotsIcon
+            height="48"
+            width="48"
+            ariaHidden />
+          <span>load more</span>
         </button>
       </div>
     );
@@ -56,10 +53,15 @@ class LoadMoreButton extends React.Component {
 }
 
 LoadMoreButton.defaultProps = {
-  postsLeft: 'more',
   filter: 'blog=all',
   pageSize: 25,
-  currentPage: 1
+  currentPage: 1,
+};
+
+LoadMoreButton.propTypes = {
+  filter: React.PropTypes.string,
+  pageSize: React.PropTypes.number,
+  currentPage: React.PropTypes.number,
 };
 
 export default LoadMoreButton;

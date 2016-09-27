@@ -1,6 +1,31 @@
 .blogPage {
   @include add-grid(7);
   @include add-gutter(0);
+
+  // Just for the beta release link
+  &-back-link {
+    padding: 20px 20px 0;
+
+    a {
+      background-color: #fff;
+      color: #000;
+      font-size: 1.0em;
+    }
+
+    @include min-screen(768px) {
+      position: absolute;
+      right: 0;
+      width: 11%;
+    }
+
+    @include min-screen(1024px) {
+      width: 20%;
+    }
+
+    @include min-screen(1500px) {
+      width: 24%;
+    }
+  }
   
   .backToLink {
     @include visuallyHidden;
@@ -22,22 +47,16 @@
   }
 
   @include layout-at(7, $portrait) {
-
     .content {
       /* reset display */
       display: block;
-      //margin: 0 20px;
+      margin-top: -105px;
+      padding-top: 105px;
       @include add-grid(7);      
 
       .backToLink {
         @include displayVisuallyHidden;
         @include grid-span(1);     
-        text-transform: uppercase;
-        color: $COOLGRAY_COLOR; 
-        font-size: 14px;
-        margin-top: 24px;
-        text-decoration: none;
-        text-align: right;
         
         .nypl-icon-wedge-left {
           font-size: 22px;
@@ -54,23 +73,18 @@
   }
   
   @include layout-at(9, $landscape) {
-
     @include grid-span(9);
     @include add-grid(9);
 
     .backToLink {
       @include displayVisuallyHidden;
       @include grid-span(2, 2);     
-      text-transform: uppercase;
-      color: $COOLGRAY_COLOR;
-      font-size: 14px;
-      margin-top: 22px;
-      text-decoration: none;
-      text-align: right;
-
     }
 
-    .content { 
+    .content {
+      margin-top: -135px;
+      padding-top: 135px;
+
       .backToLink {   
         @include grid-span(1, 2);
       }
@@ -84,6 +98,9 @@
   @include layout-at(9, $desktop) {
 
     .content {
+      margin-top: -198px;
+      padding-top: 198px;
+
       .backToLink {   
         @include grid-span(2);
       }

@@ -7,35 +7,39 @@ class BlogAuthorViewMoreLink extends React.Component {
   constructor(props) {
     super(props);
 
-    this._fetchAuthor = this._fetchAuthor.bind(this);
+    this.fetchAuthor = this.fetchAuthor.bind(this);
   }
 
-  _fetchAuthor(e) {
+  fetchAuthor(e) {
     e.preventDefault();
+
+    Actions.switchToLoading(`${this.props.fullName} | NYPL Author`);
 
     axios
       .get(`/blog/beta/api?author=${this.props.slug}`)
       .then(response => {
-        Actions.updateBlogs(response.data);
+        Actions.updateBlogs({ blogs: response.data });
       })
       .then(response => {
-        this.routeHandler();
+        Actions.returnToReady();
+        this.routeHandler(`authors/${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler('not-found');
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`/blog/beta/author/${this.props.slug}`);
+  routeHandler(location) {
+    this.context.router.push(`/blog/beta/${location}`);
   }
 
   render() {
     return (
       <Link
         className="authorLink"
-        to={`/blog/beta/author/${this.props.slug}`}
-        onClick={this._fetchAuthor}
+        to={`/blog/beta/authors/${this.props.slug}`}
+        onClick={this.fetchAuthor}
       >
         <b>View all posts by</b> {this.props.fullName}
       </Link>

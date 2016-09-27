@@ -17,8 +17,8 @@ class BlogRow extends React.Component {
     const side = (title.length % 2) ? 'rightSide' : 'leftSide';
 
     return (
-      <li className="blogRow">
-        <div className="blogRow-leftSidebar">
+      <article className="blogRow">
+        <aside className="blogRow-leftSidebar">
           <p className="blogRow-leftSidebar-date">{date}</p>
           <BlogAuthor
             data={author}
@@ -30,7 +30,7 @@ class BlogRow extends React.Component {
             maxSubjectsShown={3}
             appBaseUrl={this.props.appBaseUrl}
           />
-        </div>
+        </aside>
         <BlogListing
           series={series}
           title={title}
@@ -42,7 +42,7 @@ class BlogRow extends React.Component {
           side={side}
           appBaseUrl={this.props.appBaseUrl}
         />
-      </li>
+      </article>
     );
   }
 }
@@ -58,8 +58,8 @@ BlogRow.propTypes = {
     mainPicture: React.PropTypes.object,
     slug: React.PropTypes.string.isRequired,
     series: React.PropTypes.array,
-    appBaseUrl: React.PropTypes.string,
   }),
+  appBaseUrl: React.PropTypes.string,
 };
 
 export default BlogRow;

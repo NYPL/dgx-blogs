@@ -13,24 +13,28 @@ class BlogAuthorName extends React.Component {
   fetchAuthor(e) {
     e.preventDefault();
 
+    Actions.switchToLoading(`${this.props.fullName} | author`);
+
     axios
       .get(`${this.props.appBaseUrl}api?author=${this.props.slug}`)
       .then(response => {
         Actions.updateBlogs({
           blogs: response.data,
-          goingToUrl: `${this.props.appBaseUrl}author/${this.props.slug}`,
+          goingToUrl: `${this.props.appBaseUrl}authors/${this.props.slug}`,
         });
       })
       .then(() => {
-        this.routeHandler();
+        Actions.returnToReady();
+        this.routeHandler(`authors/${this.props.slug}`);
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
+        this.routeHandler('not-found');
       }); /* end Axios call */
   }
 
-  routeHandler() {
-    this.context.router.push(`${this.props.appBaseUrl}author/${this.props.slug}`);
+  routeHandler(location) {
+    this.context.router.push(`${this.props.appBaseUrl}${location}`);
   }
 
   render() {
@@ -38,7 +42,7 @@ class BlogAuthorName extends React.Component {
       return (
         <p className={this.props.className}>
           <Link
-            to={`${this.props.appBaseUrl}author/${this.props.slug}`}
+            to={`${this.props.appBaseUrl}authors/${this.props.slug}`}
             className="blogAuthor-name-link"
             onClick={this.fetchAuthor}
           >
@@ -56,10 +60,11 @@ BlogAuthorName.propTypes = {
   fullName: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string,
   className: React.PropTypes.string,
+  appBaseUrl: React.PropTypes.string,
 };
 
 BlogAuthorName.defaultProps = {
-  fullName: undefined,
+  fullName: '',
   className: 'blogAuthor-name',
 };
 
