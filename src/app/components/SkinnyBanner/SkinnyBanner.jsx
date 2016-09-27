@@ -77,7 +77,7 @@ class SkinnyBanner extends React.Component {
     ;
     const surveyLink = (
       <a
-        href="https://www.surveymonkey.com/r/BQGKY96"
+        href="https://docs.google.com/a/nypl.org/forms/d/e/1FAIpQLScGrRWq8okHleFQnc9NS5iGyNobizkP0ulSurvYLsPkQRcnXw/viewform"
         target="_blank"
         style={{ color: 'inherit' }}
       >
@@ -87,25 +87,25 @@ class SkinnyBanner extends React.Component {
     const getContent = (path) => {
       if (path === '/' || path === '/blog/beta/') {
         return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out <a href="">a survey</a> or <a href="/blog">return to current version</a>.</span>);
+          Fill out a {surveyLink} or <a href="/blog">return to current version</a>.</span>);
       } else if (path === '/blog/beta/authors' || path === '/authors') {
         return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out <a href="">a survey</a> or <a href="/voices/blogs/authors">
+          Fill out a {surveyLink} or <a href="/voices/blogs/authors">
           return to current blogger profiles</a>.</span>);
       } else if (path.indexOf('subjects') !== -1) {
         return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out <a href="">a survey</a> or <a href="/blog/subject">
+          Fill out a {surveyLink} or <a href="/blog/subject">
           return to "Subjects" in the current version</a>.</span>);
       } else if (path.indexOf('series') !== -1) {
         let seriesIndex = path.indexOf('series') + 7;
         return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out <a href="">a survey</a> or 
+          Fill out a {surveyLink} or 
           <a href={`/voices/blogs/blog-channels/${path.substring(seriesIndex)}`}>
           return to the current version of this series</a>.</span>);
       } else if (path.indexOf('authors') !== -1 && (path.length > 18 || path.length > 9)) {
         let authorIndex = path.indexOf('authors') + 8;
         return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out <a href="">a survey</a> or
+          Fill out a {surveyLink} or
           <a href={`/blog/author/${path.substring(authorIndex)}`}>
           return to the current author page</a>.</span>);
       } else {
@@ -114,7 +114,7 @@ class SkinnyBanner extends React.Component {
           index = 11;
         }
         return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out <a href="">a survey</a> or <a href={`/blog/${path.substring(index)}`}>
+          Fill out a {surveyLink} or <a href={`/blog/${path.substring(index)}`}>
           return to the current version of this blog post</a>.</span>);
       }
 
