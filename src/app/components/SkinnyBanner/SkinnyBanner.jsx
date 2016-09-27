@@ -81,43 +81,29 @@ class SkinnyBanner extends React.Component {
         target="_blank"
         style={{ color: 'inherit' }}
       >
-        survey
+        Take a survey about our new blogging platform
       </a>
     );
     const getContent = (path) => {
       if (path === '/' || path === '/blog/beta/') {
-        return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out a {surveyLink} or <a href="/blog">return to current version</a>.</span>);
+        return (<span>{surveyLink}, or <a href="/blog">return to current version</a>.</span>);
       } else if (path === '/blog/beta/authors' || path === '/authors') {
-        return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out a {surveyLink} or <a href="/voices/blogs/authors">
-          return to current blogger profiles</a>.</span>);
+        return (<span>{surveyLink}, or <a href="/voices/blogs/authors">return to current blogger profiles</a>.</span>);
       } else if (path.indexOf('subjects') !== -1) {
-        return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out a {surveyLink} or <a href="/blog/subject">
-          return to "Subjects" in the current version</a>.</span>);
+        return (<span>{surveyLink}, or <a href="/blog/subject">return to "Subjects" in the current version</a>.</span>);
       } else if (path.indexOf('series') !== -1) {
         let seriesIndex = path.indexOf('series') + 7;
-        return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out a {surveyLink} or 
-          <a href={`/voices/blogs/blog-channels/${path.substring(seriesIndex)}`}>
-          return to the current version of this series</a>.</span>);
+        return (<span>{surveyLink}, or <a href={`/voices/blogs/blog-channels/${path.substring(seriesIndex)}`}>return to the current version of this series</a>.</span>);
       } else if (path.indexOf('authors') !== -1 && (path.length > 18 || path.length > 9)) {
         let authorIndex = path.indexOf('authors') + 8;
-        return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out a {surveyLink} or
-          <a href={`/blog/author/${path.substring(authorIndex)}`}>
-          return to the current author page</a>.</span>);
+        return (<span>{surveyLink}, or <a href={`/blog/author/${path.substring(authorIndex)}`}>return to the current author page</a>.</span>);
       } else {
         let index = 1;
         if (path.indexOf('/blog/beta/') !== -1) {
           index = 11;
         }
-        return (<span>Thank you for previewing our upcoming blogging platform.
-          Fill out a {surveyLink} or <a href={`/blog/${path.substring(index)}`}>
-          return to the current version of this blog post</a>.</span>);
+        return (<span>{surveyLink}, or <a href={`/blog/${path.substring(index)}`}>return to the current version of this blog post</a>.</span>);
       }
-
     };
 
     const content = getContent(this.props.path);
