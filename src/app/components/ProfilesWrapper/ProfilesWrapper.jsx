@@ -52,7 +52,8 @@ class ProfilesWrapper extends React.Component {
   render() {
     let homeMetas = [
       { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: 'Library Voices | The New York Public Library' },
+      { property: 'og:title', content: 'NYPL | BLog: Library Voices' },
+      { property: 'og:site_name', content: 'The New York Public Library' },
       {
         property: 'og:description',
         content: 'From great literature or children\'s books to job search help and New' +
@@ -60,8 +61,8 @@ class ProfilesWrapper extends React.Component {
         'See what\'s on their minds.',
       },
       { property: 'og:image', content: this.imageMeta(null) },
-      //{ property: 'og:url', content: `http://blogs.nypl.org${appBaseUrl}` },
-      { name: 'twitter:title', content: 'Library Voices | The New York Public Library' },
+      { property: 'og:url', content: `http://nypl.org${appBaseUrl}` },
+      { name: 'twitter:title', content: 'NYPL | BLog: Library Voices' },
       {
         name: 'twitter:description',
         content: 'From great literature or children\'s books to job search help and New' +
@@ -69,6 +70,9 @@ class ProfilesWrapper extends React.Component {
         'See what\'s on their minds.',
       },
       { name: 'twitter:image', content: this.imageMeta(null) },
+      { name: "twitter:card", content: 'summary_large_image' },
+      { name: "twitter:site", content: '@nypl' },
+      { name: "twitter:creator", content: '@nypl' },
     ];
 
     return (

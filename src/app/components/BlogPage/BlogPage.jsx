@@ -54,18 +54,22 @@ class BlogPage extends React.Component {
     const singleBlogMetas = [
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: `${title} | The New York Public Library` },
+      { property: 'og:site_name', content: `The New York Public Library` },
       {
         property: 'og:image',
         content: (mainPicture && mainPicture['full-uri']) ? mainPicture['full-uri'] : fallbackImage,
       },
       { property: 'og:description', content: blog.body.short },
-      // { property: 'og:url', content: 'url'},
+      { property: 'og:url', content: `https://nypl.org${this.props.location.pathname}` },
       { name: 'twitter:title', content: `${title} | The New York Public Library` },
       { name: 'twitter:description', content: blog.body.short },
       {
         name: 'twitter:image',
         content: (mainPicture && mainPicture['full-uri']) ? mainPicture['full-uri'] : fallbackImage,
       },
+      { name: "twitter:card", content: 'summary_large_image' },
+      { name: "twitter:site", content: '@nypl' },
+      { name: "twitter:creator", content: '@nypl' },
     ];
 
     return (
