@@ -71,7 +71,8 @@ class BlogPage extends React.Component {
       { name: "twitter:site", content: '@nypl' },
       { name: "twitter:creator", content: '@nypl' },
     ];
-
+    const path = this.props.location.pathname;
+console.log(this.props);
     return (
       <section className="blogPage">
         <DocMeta tags={singleBlogMetas} />
@@ -85,6 +86,17 @@ class BlogPage extends React.Component {
           id="mainContent"
         >
           <BackToBlogs text="BACK TO BLOG" />
+          <span className="blogPage-back-link">
+            <a
+              href="https://docs.google.com/a/nypl.org/forms/d/e/1FAIpQLScGrRWq8okHleFQnc9NS5iGyNobizkP0ulSurvYLsPkQRcnXw/viewform"
+              target="_blank"
+              style={{ color: 'inherit' }}
+            >
+              Take a survey about our new blog redesign
+            </a>, or
+            <a href={`/blog/${path.substring(11)}`}> return to the current version
+            of this blog post</a>.
+          </span>
           <BlogSubjects
             subjects={subjects}
             appBaseUrl={appBaseUrl}

@@ -1,6 +1,31 @@
 .blogPage {
   @include add-grid(7);
   @include add-gutter(0);
+
+  // Just for the beta release link
+  &-back-link {
+    padding: 20px 20px 0;
+
+    a {
+      background-color: #fff;
+      color: #000;
+      font-size: 1.0em;
+    }
+
+    @include min-screen(768px) {
+      position: absolute;
+      right: 0;
+      width: 11%;
+    }
+
+    @include min-screen(1024px) {
+      width: 20%;
+    }
+
+    @include min-screen(1500px) {
+      width: 24%;
+    }
+  }
   
   .backToLink {
     @include visuallyHidden;
@@ -22,7 +47,6 @@
   }
 
   @include layout-at(7, $portrait) {
-
     .content {
       /* reset display */
       display: block;
@@ -49,7 +73,6 @@
   }
   
   @include layout-at(9, $landscape) {
-
     @include grid-span(9);
     @include add-grid(9);
 
