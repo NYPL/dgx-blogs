@@ -76,6 +76,7 @@ class ProfileModel {
     newProfile.picture = null;
     newProfile.title = 'Harcoded title';
     newProfile.bio = profile.attributes['profile-text'].en.text;
+    newProfile.active = profile.attributes.active;
 
     /* get the author id and get it from included fields */
     const authorId = profile.relationships.author ?

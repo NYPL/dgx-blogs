@@ -45,7 +45,10 @@ class BlogAuthorCard extends React.Component {
   }
 
   render() {
-    const unescapedBio = this.createMarkup(this.props.data.profileText);
+    console.log('authorCard', this.props.data);
+    const profileText = this.props.data.active ?
+      this.props.data.profileText : '';
+    const unescapedBio = this.createMarkup(profileText);
 
     /* if there is not author data nothing should be shown */
     if (! this.props.data || _isEmpty(this.props.data.fullName)) {
