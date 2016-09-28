@@ -16,7 +16,6 @@ import appConfig from '../../../../appConfig.js';
 
 const appBaseUrl = appConfig.appBaseUrl;
 
-
 class ProfilesWrapper extends React.Component {
   constructor(props) {
     super(props);

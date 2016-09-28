@@ -140,6 +140,7 @@ class BlogsModel {
             ['full-name']: fullName = '',
             unit: unit = '',
             title: title = '',
+            active: active = false,
           },
         },
       } = blogAuthor;
@@ -156,6 +157,7 @@ class BlogsModel {
         profileImgUrl: this.getHeadshotImage(blogAuthor),
         slug,
         profileText: this.getText(blogAuthor),
+        active,
       };
     } catch (e) {
       // console.log(e);
