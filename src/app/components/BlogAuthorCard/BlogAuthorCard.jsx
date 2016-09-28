@@ -45,7 +45,6 @@ class BlogAuthorCard extends React.Component {
   }
 
   render() {
-    console.log('authorCard', this.props.data);
     const profileText = this.props.data.active ?
       this.props.data.profileText : '';
     const unescapedBio = this.createMarkup(profileText);
@@ -63,7 +62,7 @@ class BlogAuthorCard extends React.Component {
         <BlogAuthorName
           className="blogAuthorCard-name"
           fullName={this.props.data.fullName}
-          slug={this.props.data.slug}
+          slug={this.props.data.id}
           appBaseUrl={this.props.appBaseUrl}
         />
         <div
@@ -73,7 +72,7 @@ class BlogAuthorCard extends React.Component {
         </div>
         <BlogAuthorViewMoreLink
           fullName={this.props.data.fullName}
-          slug={this.props.data.slug}
+          slug={this.props.data.id}
           appBaseUrl={this.props.appBaseUrl}
         />
       </address>
