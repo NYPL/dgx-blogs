@@ -5,10 +5,10 @@
   line-height: 26px;
 
   &-date {
-    @include Kievit-Regular;
+    @include Kievit-Book;
     text-transform: uppercase;
     margin-top: 30px;
-    padding: 0 20px;   
+    padding: 0 20px;
 
     &:nth-child(even) {
       @include visuallyHidden;
@@ -25,9 +25,9 @@
   }
 
   &-author {
-    @include Kievit-Regular;
+    @include Kievit-Book;
     padding: 0 20px;
-    
+
     & > b {
       font-weight: 600;
     }
@@ -161,7 +161,7 @@
       margin: 0;
       margin-bottom: 30px;
       font-size: 14px;
-    
+
       &:nth-child(odd) {
         @include visuallyHidden;
       }
@@ -180,7 +180,7 @@
     }
   }
 
-  @include layout-at(9, $landscape) { 
+  @include layout-at(9, $landscape) {
     @include grid-span(5, 3);
     margin-top: -50px;
     margin-right: 0;
@@ -188,14 +188,14 @@
 
   @include layout-at(9, $desktop) {
     @include grid-span(5, 3);
-    margin-right: 0;  
+    margin-right: 0;
     margin-top: -100px;
 
     &-date {
       margin-bottom: 40px;
       font-size: 16px;
     }
-    
+
     &-title {
       margin: 20px 0 47px 0;
       font-size: 48px;
