@@ -63,7 +63,7 @@ app.use('/', apiRoutes);
 
 app.use('/', (req, res) => {
   const iso = new Iso();
-  const blogAppUrl = (req.url).indexOf('blog') !== -1;
+  const blogAppUrl = ((req.url).indexOf('blog') !== -1) && ((req.url).indexOf('blog') < 5);
   const routes = blogAppUrl ? appRoutes.client : appRoutes.server;
 
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
