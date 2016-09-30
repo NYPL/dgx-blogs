@@ -27,7 +27,7 @@ class LoadMoreButton extends React.Component {
       })
       .then(response => {
         Actions.returnToReady();
-        console.log('blogs added to the store');
+        // console.log('blogs added to the store');
       })
       .catch(error => {
         console.log(`error making ajax call: ${error}`);
