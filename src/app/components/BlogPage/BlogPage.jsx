@@ -71,7 +71,10 @@ class BlogPage extends React.Component {
       { name: "twitter:site", content: '@nypl' },
       { name: "twitter:creator", content: '@nypl' },
     ];
-    const path = this.props.location.pathname;
+    let path = this.props.location.pathname;
+    if (path.indexOf('/blog/beta') !== -1) {
+      path = path.substring(11);
+    }
 
     return (
       <section className="blogPage">
@@ -94,7 +97,7 @@ class BlogPage extends React.Component {
             >
               Take a survey about our new blog redesign
             </a>, or
-            <a href={`/blog/${path.substring(11)}`}> return to the current version
+            <a href={`/blog/${path}`}> return to the current version
             of this blog post</a>.
           </span>
           <BlogSubjects

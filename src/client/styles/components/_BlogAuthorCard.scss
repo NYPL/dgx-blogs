@@ -40,6 +40,10 @@
     margin-right: 0;
     margin-top: 20px;
     margin-bottom: 40px;
+
+    & > a {
+      color: $SECONDARY_UI_COLOR;
+    }
   }
 
   .authorLink {
