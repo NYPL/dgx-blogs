@@ -25,7 +25,7 @@ class ProfileBlogLink extends React.Component {
     axios
       .get(`${appBaseUrl}api?blog=${this.props.url}`)
       .then(response => {
-        console.log('BLOGLISTING: result', response.data);
+        // console.log('BLOGLISTING: result', response.data);
         Actions.updateBlogPost(response.data);
       })
       .then(() => {

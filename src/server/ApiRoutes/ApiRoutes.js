@@ -35,7 +35,7 @@ function fetchApiData(url) {
 
 function fetchData(url, storeValue, req, res, next) {
   const updatedUrl = `${url}&page[number]=1&page[size]=25`;
-  console.log('API-ROUTES: first api call:', updatedUrl);
+  // console.log('API-ROUTES: first api call:', updatedUrl);
 
   fetchApiData(updatedUrl)
     .then(blogsData => {
@@ -135,13 +135,17 @@ function BlogQuery(req, res, next) {
       blogPost = blogPost.substring(1);
     }
 
-    const blogPostUrl = req.params[0].indexOf('blog') !== -1 ? blogPost : `blog/${blogPost}`;
+    let blogPostUrl = req.params[0].indexOf('blog') !== -1 ? blogPost : `blog/${blogPost}`;
+    if (blogPost.indexOf('blog') > 5) {
+      blogPostUrl = `blog/${blogPost}`;
+    }
+
     blogsOptions.filters = { alias: blogPostUrl };
     storeValue = 'blogPost';
   }
 
   const blogsApiUrl = parser.getCompleteApi(blogsOptions);
-
+console.log(blogsApiUrl);
   fetchData(blogsApiUrl, storeValue, req, res, next);
 }
 
@@ -177,7 +181,7 @@ function fetchThroughAjax(req, res, next) {
   const pageSuffix = `&page[number]=${page}&page[size]=${pageSize}`;
   const apiUrl = parser.getCompleteApi(blogsOptions);
   const completeUrl = apiUrl + pageSuffix;
-
+console.log(completeUrl);
   axios
     .get(completeUrl)
     .then(response => {
@@ -215,7 +219,7 @@ function ajaxGetProfiles(callback) {
 
   if (profilesCache) {
     profilesCount++;
-    console.log('PROFILESCOUNT', profilesCount);
+    // console.log('PROFILESCOUNT', profilesCount);
     callback(profilesCache);
   } else {
     axios
@@ -264,7 +268,7 @@ function ProfileQuery(req, res, next) {
 function ajaxProfileQuery(req, res) {
   ajaxGetProfiles((profiles) => {
     if (!profiles) {
-      console.log('API-ROUTES: error fetching profiles');
+      // console.log('API-ROUTES: error fetching profiles');
       res.json({
         profiles: [],
         meta: {},
