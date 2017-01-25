@@ -16,3 +16,9 @@ To run the app in production mode, run:
 `npm run dist` will compile and minify the Javascript and SCSS.
 `NODE_ENV=production` is an environment variable that tells the app to run in production mode,
 and to not start the webpack dev server.
+
+## Changelog
+
+### v0.1.10
+#### Added
+- Enabled Feature Flags plugin on the client-side and added Optimizely script in the index.ejs file.
