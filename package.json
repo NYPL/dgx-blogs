@@ -1,6 +1,6 @@
 {
   "name": "dgx-blogs",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "NYPL Blogs React App",
   "main": "index.js",
   "scripts": {
@@ -50,7 +50,6 @@
     "compression": "^1.6.1",
     "css-loader": "^0.15.6",
     "dgx-alt-center": "git+ssh://bitbucket.org/NYPL/dgx-alt-center.git#master",
-    "dgx-feature-flags": "git+ssh://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "dgx-svg-icons": "git+ssh://git@bitbucket.org/NYPL/dgx-svg-icons.git#master",
     "ejs": "^2.4.1",
