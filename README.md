@@ -20,8 +20,8 @@ and to not start the webpack dev server.
 ## Changelog
 
 ### v0.1.11
-#### Added
-- Added HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
+#### Updated
+- Updated the Header Component to v1.5.1. The update includes HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
 
 ### v0.1.10
 #### Added
