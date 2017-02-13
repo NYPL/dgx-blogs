@@ -1,5 +1,5 @@
 // Polyfill Promise for legacy browsers
-import "babel-polyfill";
+import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -9,12 +9,17 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 import Iso from 'iso';
 
 import alt from 'dgx-alt-center';
+import FeatureFlags from 'dgx-feature-flags';
 
 import routes from '../app/routes/routes.js';
 
 import './styles/main.scss';
 
 window.onload = () => {
+  if (!window.dgxFeatureFlags) {
+    window.dgxFeatureFlags = FeatureFlags.utils;
+  }
+
   Iso.bootstrap((state, container) => {
     alt.bootstrap(state);
 
