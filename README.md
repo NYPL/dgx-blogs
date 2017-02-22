@@ -19,6 +19,10 @@ and to not start the webpack dev server.
 
 ## Changelog
 
+### v0.1.12
+#### Updated
+- Updated the Header Component to v1.5.2. The update is to turn off the feature flag of OAuth Login and set it as default.
+
 ### v0.1.11
 #### Updated
 - Updated the Header Component to v1.5.1. The update includes HTTPS fix and the JavaScript fallback for the log in button on the Header Component.
