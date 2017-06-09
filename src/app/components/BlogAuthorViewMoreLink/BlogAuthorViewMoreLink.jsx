@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
@@ -48,8 +49,8 @@ class BlogAuthorViewMoreLink extends React.Component {
 }
 
 BlogAuthorViewMoreLink.propTypes = {
-  slug: React.PropTypes.string,
-  fullName: React.PropTypes.string,
+  slug: PropTypes.string,
+  fullName: PropTypes.string,
 };
 
 BlogAuthorViewMoreLink.defaultProps = {
@@ -61,9 +62,7 @@ BlogAuthorViewMoreLink.defaultProps = {
  */
 
 BlogAuthorViewMoreLink.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default BlogAuthorViewMoreLink;

@@ -2,6 +2,7 @@
  * BlogAuthor
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LionLogoIcon } from 'dgx-svg-icons';
 import BlogAuthorName from '../BlogAuthorName/BlogAuthorName';
 
@@ -53,14 +54,14 @@ class BlogAuthor extends React.Component {
 }
 
 BlogAuthor.propTypes = {
-  data: React.PropTypes.shape({
-    fullName: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
-    slug: React.PropTypes.string.isRequired,
-    profileImgUrl: React.PropTypes.string,
-    id: React.PropTypes.string,
+  data: PropTypes.shape({
+    fullName: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    profileImgUrl: PropTypes.string,
+    id: PropTypes.string,
   }),
-  appBaseUrl: React.PropTypes.string,
+  appBaseUrl: PropTypes.string,
 };
 
 BlogAuthor.defaultProps = {

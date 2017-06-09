@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router';
 import ReadMoreButton from '../ReadMoreButton/ReadMoreButton';
@@ -132,17 +133,17 @@ class BlogListing extends React.Component {
 }
 
 BlogListing.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  body: React.PropTypes.string.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  series: React.PropTypes.array,
-  side: React.PropTypes.string,
-  width: React.PropTypes.string,
-  subjects: React.PropTypes.array,
-  mainPicture: React.PropTypes.shape({
-    'full-uri': React.PropTypes.string,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  series: PropTypes.array,
+  side: PropTypes.string,
+  width: PropTypes.string,
+  subjects: PropTypes.array,
+  mainPicture: PropTypes.shape({
+    'full-uri': PropTypes.string,
   }),
-  appBaseUrl: React.PropTypes.string,
+  appBaseUrl: PropTypes.string,
 };
 
 BlogListing.defaultProps = {
@@ -153,9 +154,7 @@ BlogListing.defaultProps = {
  * @see http://stackoverflow.com/questions/32033247/react-router-transitionto-is-not-a-function
  */
 BlogListing.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default BlogListing;

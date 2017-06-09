@@ -2,6 +2,7 @@
  * Blog component
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Blog = (props) => {
   const createMarkup = (bodyText) => ({ __html: bodyText });
@@ -25,13 +26,13 @@ const Blog = (props) => {
 };
 
 Blog.propTypes = {
-  date: React.PropTypes.string,
-  title: React.PropTypes.string,
-  body: React.PropTypes.string,
-  mainPicture: React.PropTypes.string,
-  author: React.PropTypes.shape({
-    fullName: React.PropTypes.string,
-    title: React.PropTypes.string,
+  date: PropTypes.string,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  mainPicture: PropTypes.string,
+  author: PropTypes.shape({
+    fullName: PropTypes.string,
+    title: PropTypes.string,
   }),
 };
 

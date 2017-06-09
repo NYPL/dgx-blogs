@@ -1,7 +1,6 @@
 import React from 'react';
 
 import AppStatusStore from '../../stores/AppStatusStore';
-
 import LoadingDots from '../LoadingDots/LoadingDots';
 
 class LoadingLayer extends React.Component {
