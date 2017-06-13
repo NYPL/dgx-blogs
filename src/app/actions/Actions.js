@@ -3,40 +3,40 @@ import alt from 'dgx-alt-center';
 
 class Actions {
   updateBlogs(data) {
-    this.dispatch(data);
+    return data;
   }
 
   addMoreBlogs(data) {
-    this.dispatch(data);
+    return data;
   }
 
   updateBlogPost(data) {
-    this.dispatch(data);
+    return data;
   }
 
   fromCache(cacheKey) {
-    this.dispatch(cacheKey);
+    return cacheKey;
   }
 
   turnToLoadingState(data) {
-    this.dispatch(data);
+    return data;
   }
 
   handleProfiles(data) {
-    this.dispatch(data);
+    return data;
   }
 
   loadProfiles() {
-    this.dispatch();
+    return;
   }
 
   /* Actions for app status */
   switchToLoading(title) {
-    this.dispatch(title);
+    return title;
   }
 
   returnToReady() {
-    this.dispatch();
+    return;
   }
 }
 

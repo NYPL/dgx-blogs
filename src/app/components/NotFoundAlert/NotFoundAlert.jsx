@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class NotFoundAlert extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ NotFoundAlert.defaultProps = {
 };
 
 NotFoundAlert.propTypes = {
-  message: React.PropTypes.string,
+  message: PropTypes.string,
 };
 
 export default NotFoundAlert;

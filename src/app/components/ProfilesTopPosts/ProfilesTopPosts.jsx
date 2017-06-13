@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ProfileBlogLink from '../ProfileBlogLink/ProfileBlogLink';
 
@@ -38,8 +39,8 @@ ProfilesTopPosts.defaultProps = {
 };
 
 ProfilesTopPosts.propTypes = {
-  maxPostsShown: React.PropTypes.number,
-  posts: React.PropTypes.array,
+  maxPostsShown: PropTypes.number,
+  posts: PropTypes.array,
 };
 
 export default ProfilesTopPosts;

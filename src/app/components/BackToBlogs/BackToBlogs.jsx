@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router';
 import Actions from '../../actions/Actions';
@@ -59,13 +60,11 @@ BackToBlogs.defaultProps = {
 };
 
 BackToBlogs.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 BackToBlogs.propTypes = {
-  text: React.PropTypes.string,
+  text: PropTypes.string,
 };
 
 export default BackToBlogs;

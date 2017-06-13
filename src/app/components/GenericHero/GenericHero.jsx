@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Intended to have a generic hero easy to adapt to new sections
@@ -32,9 +33,9 @@ GenericHero.defaultProps = {
 };
 
 GenericHero.propTypes = {
-  coverImageUrl: React.PropTypes.string,
-  title: React.PropTypes.string,
-  backgroundColorClass: React.PropTypes.string,
+  coverImageUrl: PropTypes.string,
+  title: PropTypes.string,
+  backgroundColorClass: PropTypes.string,
 };
 
 export default GenericHero;

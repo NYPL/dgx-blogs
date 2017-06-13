@@ -19,17 +19,18 @@ var commonSettings = {
   // React App that is to be rendered.
   entry: [
     'babel-polyfill',
-    path.resolve(ROOT_PATH, 'src/client/App.jsx')
+    path.resolve(ROOT_PATH, 'src/client/App.jsx'),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
   output: {
     // Sets the output path to ROOT_PATH/dist
     path: path.resolve(ROOT_PATH, 'dist'),
     // Sets the name of the bundled application files
     // Additionally we can isolate vendor files as well
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    library: 'dgxBlogs',
   },
   module: {
     loaders: [
@@ -70,27 +71,30 @@ if (ENV === 'development') {
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       'babel-polyfill',
-      path.resolve(ROOT_PATH, 'src/client/App.jsx')
+      path.resolve(ROOT_PATH, 'src/client/App.jsx'),
     ],
     output: {
-      publicPath: 'http://localhost:3000/'
+      publicPath: 'http://localhost:3000/',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
     ],
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss']
+      extensions: ['', '.js', '.jsx', '.scss'],
     },
     module: {
       loaders: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loaders: ['react-hot', 'babel']
-        }
-      ]
-    }
+          loader: 'babel',
+          query: {
+            presets: ['react', 'es2015'],
+          },
+        },
+      ],
+    },
   });
 }
 
@@ -110,17 +114,25 @@ if (ENV === 'production') {
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loaders: ['babel']
-        }
-      ]
+          loader: 'babel',
+          query: {
+            presets: ['react', 'es2015'],
+          },
+        },
+      ],
     },
     plugins: [
       // Minification (Utilized in Production)
       new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: false
-        }
-      })
-    ]
+          warnings: false,
+        },
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production'),
+        },
+      }),
+    ],
   });
 }

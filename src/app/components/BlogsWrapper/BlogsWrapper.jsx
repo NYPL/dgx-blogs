@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Store from '../../stores/Store.js';
 import Actions from '../../actions/Actions';
@@ -287,13 +288,11 @@ class BlogsWrapper extends React.Component {
 }
 
 BlogsWrapper.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 BlogsWrapper.propTypes = {
-  params: React.PropTypes.object,
+  params: PropTypes.object,
 };
 
 export default BlogsWrapper;

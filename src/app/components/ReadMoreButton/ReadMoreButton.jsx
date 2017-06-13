@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
@@ -56,10 +57,10 @@ class ReadMoreButton extends React.Component {
 }
 
 ReadMoreButton.propTypes = {
-  slug: React.PropTypes.string.isRequired,
-  blogTitle: React.PropTypes.string,
-  blogSeries: React.PropTypes.string,
-  appBaseUrl: React.PropTypes.string,
+  slug: PropTypes.string.isRequired,
+  blogTitle: PropTypes.string,
+  blogSeries: PropTypes.string,
+  appBaseUrl: PropTypes.string,
 };
 
 ReadMoreButton.defaultProps = {
@@ -68,9 +69,7 @@ ReadMoreButton.defaultProps = {
 };
 
 ReadMoreButton.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default ReadMoreButton;
