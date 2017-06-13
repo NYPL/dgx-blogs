@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Store from '../../stores/Store.js';
 
 // blog components
@@ -121,9 +122,7 @@ class BlogPage extends React.Component {
 }
 
 BlogPage.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default BlogPage;

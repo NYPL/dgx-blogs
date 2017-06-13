@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MainHero = (props) => (
   <header className="mainHero">
@@ -13,14 +14,14 @@ const MainHero = (props) => (
 
 MainHero.defaultProps = {
   title: 'NYPL Blogs',
-  subtitle: `From great literature or children's books to job search help and New York 
+  subtitle: `From great literature or children's books to job search help and New York
     City history, our librarians, curators, and staff offer valuable insight.
     Join the conversation.`,
 };
 
 MainHero.propTypes = {
-  title: React.PropTypes.string,
-  subtitle: React.PropTypes.string,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
 };
 
 export default MainHero;

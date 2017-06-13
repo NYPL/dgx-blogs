@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import BlogAuthor from '../BlogAuthor/BlogAuthor';
 import BlogListing from '../BlogListing/BlogListing';
@@ -49,17 +50,17 @@ class BlogRow extends React.Component {
 
 
 BlogRow.propTypes = {
-  data: React.PropTypes.shape({
-    date: React.PropTypes.string,
-    author: React.PropTypes.object,
-    subjects: React.PropTypes.array,
-    title: React.PropTypes.string.isRequired,
-    body: React.PropTypes.object,
-    mainPicture: React.PropTypes.object,
-    slug: React.PropTypes.string.isRequired,
-    series: React.PropTypes.array,
+  data: PropTypes.shape({
+    date: PropTypes.string,
+    author: PropTypes.object,
+    subjects: PropTypes.array,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.object,
+    mainPicture: PropTypes.object,
+    slug: PropTypes.string.isRequired,
+    series: PropTypes.array,
   }),
-  appBaseUrl: React.PropTypes.string,
+  appBaseUrl: PropTypes.string,
 };
 
 export default BlogRow;

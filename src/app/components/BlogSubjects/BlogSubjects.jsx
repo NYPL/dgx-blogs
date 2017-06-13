@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import axios from 'axios';
 
@@ -82,10 +83,10 @@ class BlogSubjects extends React.Component {
 }
 
 BlogSubjects.propTypes = {
-  subjects: React.PropTypes.array.isRequired,
-  className: React.PropTypes.string.isRequired,
-  maxSubjectsShown: React.PropTypes.number,
-  appBaseUrl: React.PropTypes.string,
+  subjects: PropTypes.array.isRequired,
+  className: PropTypes.string.isRequired,
+  maxSubjectsShown: PropTypes.number,
+  appBaseUrl: PropTypes.string,
 };
 
 BlogSubjects.defaultProps = {
@@ -95,9 +96,7 @@ BlogSubjects.defaultProps = {
 };
 
 BlogSubjects.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default BlogSubjects;

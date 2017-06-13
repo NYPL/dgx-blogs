@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router';
 import Actions from '../../actions/Actions';
@@ -63,17 +64,15 @@ class ProfilesAuthor extends React.Component {
 }
 
 ProfilesAuthor.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 ProfilesAuthor.propTypes = {
-  firstName: React.PropTypes.string,
-  lastName: React.PropTypes.string,
-  id: React.PropTypes.string,
-  picture: React.PropTypes.string,
-  title: React.PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  id: PropTypes.string,
+  picture: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default ProfilesAuthor;

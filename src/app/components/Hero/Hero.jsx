@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Hero extends React.Component {
   renderPicture() {
@@ -56,11 +57,11 @@ Hero.defaultProps = {
 };
 
 Hero.propTypes = {
-  picture: React.PropTypes.string,
-  type: React.PropTypes.string,
-  title: React.PropTypes.string,
-  description: React.PropTypes.string,
-  postCount: React.PropTypes.number,
+  picture: PropTypes.string,
+  type: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  postCount: PropTypes.number,
 };
 
 export default Hero;

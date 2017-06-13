@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router';
 import Actions from '../../actions/Actions';
@@ -57,10 +58,10 @@ class BlogAuthorName extends React.Component {
 }
 
 BlogAuthorName.propTypes = {
-  fullName: React.PropTypes.string.isRequired,
-  slug: React.PropTypes.string,
-  className: React.PropTypes.string,
-  appBaseUrl: React.PropTypes.string,
+  fullName: PropTypes.string.isRequired,
+  slug: PropTypes.string,
+  className: PropTypes.string,
+  appBaseUrl: PropTypes.string,
 };
 
 BlogAuthorName.defaultProps = {
@@ -73,9 +74,7 @@ BlogAuthorName.defaultProps = {
  */
 
 BlogAuthorName.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 export default BlogAuthorName;
