@@ -1,5 +1,8 @@
 ## Changelog
 
+### v0.2.1
+- Updated Header to 2.1.0.
+
 ### v0.2.0
 - Updated to React 15.
 
