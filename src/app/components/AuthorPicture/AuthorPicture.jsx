@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LionLogoIcon } from 'dgx-svg-icons';
 
 const AuthorPicture = ({ image }) => {
@@ -22,7 +23,7 @@ const AuthorPicture = ({ image }) => {
 };
 
 AuthorPicture.propTypes = {
-  image: React.PropTypes.string,
+  image: PropTypes.string,
 };
 
 export default AuthorPicture;

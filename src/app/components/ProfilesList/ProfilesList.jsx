@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import {
   map as _map,
 } from 'underscore';
@@ -35,7 +35,7 @@ ProfilesList.defaultProps = {
 };
 
 ProfilesList.propTypes = {
-  profiles: React.PropTypes.array,
+  profiles: PropTypes.array,
 };
 
 export default ProfilesList;

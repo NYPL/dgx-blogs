@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import AuthorSeeAll from '../AuthorSeeAll/AuthorSeeAll';
 import ProfilesAuthor from '../ProfilesAuthor/ProfilesAuthor';
@@ -66,7 +67,7 @@ ProfilesListLetter.defaultProps = {
 };
 
 ProfilesListLetter.propTypes = {
-  profiles: React.PropTypes.array,
+  profiles: PropTypes.array,
 };
 
 export default ProfilesListLetter;

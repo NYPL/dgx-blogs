@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ProfilesListLetterTitle = ({ letter }) => (
   <div className="profilesListLetterTitle">
@@ -13,7 +14,7 @@ ProfilesListLetterTitle.defaultProps = {
 };
 
 ProfilesListLetterTitle.propTypes = {
-  letter: React.PropTypes.string,
+  letter: PropTypes.string,
 };
 
 export default ProfilesListLetterTitle;

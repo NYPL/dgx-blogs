@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
 
@@ -59,9 +60,9 @@ LoadMoreButton.defaultProps = {
 };
 
 LoadMoreButton.propTypes = {
-  filter: React.PropTypes.string,
-  pageSize: React.PropTypes.number,
-  currentPage: React.PropTypes.number,
+  filter: PropTypes.string,
+  pageSize: PropTypes.number,
+  currentPage: PropTypes.number,
 };
 
 export default LoadMoreButton;

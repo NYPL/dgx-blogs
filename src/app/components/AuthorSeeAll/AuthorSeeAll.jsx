@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
@@ -50,20 +51,18 @@ class AuthorSeeAll extends React.Component {
       >
         <span>{`See all ${this.props.firstName}'s posts`}</span>
       </Link>
-      );
+    );
   }
 }
 
 AuthorSeeAll.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 AuthorSeeAll.propTypes = {
-  name: React.PropTypes.string,
-  id: React.PropTypes.string,
-  firstName: React.PropTypes.string,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  firstName: PropTypes.string,
 };
 
 export default AuthorSeeAll;

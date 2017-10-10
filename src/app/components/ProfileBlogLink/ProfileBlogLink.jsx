@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import axios from 'axios';
 import Actions from '../../actions/Actions';
@@ -56,14 +57,12 @@ class ProfileBlogLink extends React.Component {
 }
 
 ProfileBlogLink.contextTypes = {
-  router: function contextType() {
-    return React.PropTypes.func.isRequired;
-  },
+  router: PropTypes.object,
 };
 
 ProfileBlogLink.propTypes = {
-  title: React.PropTypes.string,
-  url: React.PropTypes.string,
+  title: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default ProfileBlogLink;

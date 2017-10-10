@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class HeroSinglePost extends React.Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class HeroSinglePost extends React.Component {
 }
 
 HeroSinglePost.propTypes = {
-  coverUrl: React.PropTypes.string,
+  coverUrl: PropTypes.string,
 };
 
 export default HeroSinglePost;
