@@ -10,6 +10,7 @@ import Iso from 'iso';
 
 import alt from 'dgx-alt-center';
 import FeatureFlags from 'dgx-feature-flags';
+import { gaUtils } from 'dgx-react-ga';
 
 import routes from '../app/routes/routes.js';
 
@@ -18,6 +19,12 @@ import './styles/main.scss';
 window.onload = () => {
   if (!window.dgxFeatureFlags) {
     window.dgxFeatureFlags = FeatureFlags.utils;
+  }
+
+  if (!window.ga) {
+    const gaOpts = { debug: false, titleCase: false };
+
+    gaUtils.initialize('UA-1420324-3', gaOpts);
   }
 
   Iso.bootstrap((state, container) => {
