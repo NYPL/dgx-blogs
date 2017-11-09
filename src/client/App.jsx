@@ -37,4 +37,5 @@ window.onload = () => {
       container
     );
   });
+  gaUtils.trackPageview('send', 'pageview', window.location.pathname);
 };
