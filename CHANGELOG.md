@@ -1,5 +1,8 @@
 ## Changelog
 
+### v0.2.3
+- Updated Header to 2.2.0.
+
 ### v0.2.2
 - Updated Header to 2.1.1.
 
