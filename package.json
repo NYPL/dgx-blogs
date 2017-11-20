@@ -32,7 +32,7 @@
     "eslint-plugin-react": "6.2.1"
   },
   "dependencies": {
-    "@nypl/dgx-header-component": "2.2.0",
+    "@nypl/dgx-header-component": "git+https://bitbucket.org/NYPL/dgx-header-component.git#integrate-fundraising-component",
     "@nypl/dgx-react-footer": "0.4.0",
     "alt": "0.18.2",
     "alt-utils": "1.0.0",
