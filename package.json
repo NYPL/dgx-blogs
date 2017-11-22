@@ -1,6 +1,6 @@
 {
   "name": "dgx-blogs",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "NYPL Blogs React App",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "eslint-plugin-react": "6.2.1"
   },
   "dependencies": {
-    "@nypl/dgx-header-component": "git+https://bitbucket.org/NYPL/dgx-header-component.git#integrate-fundraising-component",
+    "@nypl/dgx-header-component": "2.3.0",
     "@nypl/dgx-react-footer": "0.4.0",
     "alt": "0.18.2",
     "alt-utils": "1.0.0",
