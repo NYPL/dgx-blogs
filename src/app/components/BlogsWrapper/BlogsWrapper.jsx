@@ -86,6 +86,10 @@ class BlogsWrapper extends React.Component {
 
   renderLoadMoreButton(currentState, filter) {
     if (currentState) {
+      if (!currentState.meta.count || !currentState.blogList.length) {
+        return null;
+      }
+
       const postsLeft = currentState.meta.count - currentState.blogList.length;
 
       if (postsLeft <= 0) {
