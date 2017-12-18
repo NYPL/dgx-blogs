@@ -1,7 +1,5 @@
 @mixin visuallyHidden {
   position: absolute;
-  left: -10000px;
-  top: auto;
   width: 1px;
   height: 1px;
   overflow: hidden;
@@ -57,7 +55,7 @@
   }
 }
 
-/* min-and-max-screen($min, $max, $orientation) 
+/* min-and-max-screen($min, $max, $orientation)
  * $min - required
  * $max - required
  * $orientation - optional
@@ -69,7 +67,7 @@
   }
 }
 
-/* max-screen($max, $orientation) 
+/* max-screen($max, $orientation)
  * $max - required
  * $orientation - optional
  * Ex #1: @include max-screen(768px, landscape) { ... }
@@ -81,7 +79,7 @@
   }
 }
 
-/* min-screen($min, $orientation) 
+/* min-screen($min, $orientation)
  * $min - required
  * $orientation - optional
  * Ex #1: @include min-screen(768px, landscape) { ... }
@@ -106,7 +104,7 @@
     width: 100%;
     padding-top: ($height / $width) * 100%;
   }
-  
+
   &-content {
     position: absolute;
     top: 0;
