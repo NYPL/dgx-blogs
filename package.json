@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index",
     "dist": "NODE_ENV=production webpack --config webpack.config.js",
-    "test": "node_modules/.bin/mocha --compilers js:babel-core/register"
+    "test": "node_modules/.bin/mocha --compilers js:babel-core/register",
+    "eb-start": "npm run dist && npm run start"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,7 @@
     "babel-polyfill": "6.20.0",
     "babel-preset-es2015": "6.5.0",
     "babel-preset-react": "6.5.0",
-    "brace-expansion": "1.1.6",
+    "brace-expansion": "1.1.11",
     "breakpoint-sass": "2.7.0",
     "chai": "3.5.0",
     "clean-webpack-plugin": "0.1.8",
