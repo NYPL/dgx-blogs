@@ -21,7 +21,7 @@ deploy:
   bucket_path: nypl-blogs-production
   on:
     repo: NYPL/dgx-blogs
-    branch: PS-639-travis-ci-integration
+    branch: master
 - provider: elasticbeanstalk
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
