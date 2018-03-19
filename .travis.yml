@@ -33,7 +33,7 @@ deploy:
   bucket_path: nypl-blogs-qa
   on:
     repo: NYPL/dgx-blogs
-    branch: qa
+    branch: PS-639-travis-ci-integration
 - provider: elasticbeanstalk
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID_DEVELOPMENT"
@@ -45,7 +45,7 @@ deploy:
   bucket_path: nypl-blogs-development
   on:
     repo: NYPL/dgx-blogs
-    branch: PS-639-travis-ci-integration
+    branch: development
 after_deploy: echo 'Successfully executed deploy trigger for NYPL Blogs on
   AWS'
 env:
