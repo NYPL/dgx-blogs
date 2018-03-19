@@ -21,7 +21,7 @@ deploy:
   bucket_path: nypl-blogs-production
   on:
     repo: NYPL/dgx-blogs
-    branch: master
+    branch: PS-639-travis-ci-integration
 - provider: elasticbeanstalk
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
@@ -33,7 +33,7 @@ deploy:
   bucket_path: nypl-blogs-qa
   on:
     repo: NYPL/dgx-blogs
-    branch: PS-639-travis-ci-integration
+    branch: qa
 - provider: elasticbeanstalk
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID_DEVELOPMENT"
