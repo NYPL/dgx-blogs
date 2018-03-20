@@ -1,0 +1,53 @@
+language: node_js
+node_js:
+- '6'
+cache:
+  directories:
+  - node_modules
+install: npm install
+before_script: npm run dist
+script: npm test
+before_deploy: echo 'All unit tests passed; Successfully built distribution assets;
+  Preparing to deploy NYPL Blogs to AWS'
+deploy:
+- provider: elasticbeanstalk
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
+  region: us-east-1
+  app: nypl-blogs
+  env: nypl-blogs-production
+  bucket_name: elasticbeanstalk-us-east-1-946183545209
+  bucket_path: nypl-blogs-production
+  on:
+    repo: NYPL/dgx-blogs
+    branch: master
+- provider: elasticbeanstalk
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
+  region: us-east-1
+  app: nypl-blogs
+  env: nypl-blogs-qa
+  bucket_name: elasticbeanstalk-us-east-1-946183545209
+  bucket_path: nypl-blogs-qa
+  on:
+    repo: NYPL/dgx-blogs
+    branch: qa
+- provider: elasticbeanstalk
+  skip_cleanup: true
+  access_key_id: "$AWS_ACCESS_KEY_ID_DEVELOPMENT"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY_DEVELOPMENT"
+  region: us-east-1
+  app: nypl-blogs
+  env: nypl-blogs-development
+  bucket_name: elasticbeanstalk-us-east-1-224280085904
+  bucket_path: nypl-blogs-development
+  on:
+    repo: NYPL/dgx-blogs
+    branch: development
+after_deploy: echo 'Successfully executed deploy trigger for NYPL Blogs on
+  AWS'
+env:
+  global:
+    secure: QSHE+YXQEqMzz/vD5L0CDdFAcihBdvH8vlibIfaWw+R0XyiEnbKrso9Ur04Olg4WoNH4ZfJlHNP15b4XNwtsyjrdJ7FvelJqKngxoXWQ0aO1FmiS/sHhB09iK5r/eJaqVJLsfRp366e+lAMRH0IQ0wxUZTbAiZzwdTmmork5FslqXm+OEeyrCki29slE49lkmENj2rtPDv1t74JiFkpy40OF/a9Ocis+2IA7Q68PV3Dq9YXX1Og3D5X8c/fCJxrbNHoz1TRrj1gcKIlWDOQvKavpT2gS7xoIt5ZdlpQV1JsQw5yXHNtDcwde+HlwBEYno4W6VkHrTmwyIpyocEtymJOiHTA0xewB/zWgqf27DRZRMnid7oEPA0a/vtuwxPuHPAVcKEbR2xSOlMdhLCp3KeJZblVktzPUioxaKffklPpC+xJlldJpFyEhhcq5Re3gWGwFUU7lYc7jFptQei9NRgl1wHCnEbup8LMYnNSc8QtXxLgIMyE3XRduenrjX197x23iNckH0Mya3946ZBqUlETGz5RJHV4+0gpTP0BXRtlsubhjLV/pBPs3kVq9FmMkOMJ+unhW7fB4uuQC2spK+C/t4nyi5csI+1fs6PWHiedUPZF9LEX7t6Tzt+ZLtD7XXnp/otdZbWaMG/rzFJXQvCCf7x7y9G2nVhKHwwY8840=

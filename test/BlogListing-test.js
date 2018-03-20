@@ -15,16 +15,15 @@ describe('BlogListing', () => {
     expect(component.find('.blogListing')).to.have.length(1);
   });
 
-  it('contains an h2.blogListing-title', () => {
-    const title = component.find('h2');
+  it('contains an h1.blogListing-title', () => {
+    const title = component.find('h1');
     expect(title).to.have.length(1);
     expect(title.hasClass('blogListing-title')).to.equal(true);
     expect(title.text()).to.equal('title');
   });
 
-  it('has a a link in the heading', () => {
-    const link = component.find('h2').find('a');
+  it('has a link in the heading', () => {
+    const link = component.find('.blogListing').find('a').at(1);
     expect(link).to.have.length(1);
-    expect(link.prop('href')).to.equal('/blog/slug');
   });
 });
