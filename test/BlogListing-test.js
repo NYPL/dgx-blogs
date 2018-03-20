@@ -22,7 +22,7 @@ describe('BlogListing', () => {
     expect(title.text()).to.equal('title');
   });
 
-  it('has a a link in the heading', () => {
+  it('has a link in the heading', () => {
     const link = component.find('.blogListing').find('a').at(1);
     expect(link).to.have.length(1);
   });
