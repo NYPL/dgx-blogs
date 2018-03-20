@@ -1,5 +1,11 @@
 # NYPL Blogs app
 
+| Branch         | Status|  
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------|  
+| `master`   | [![Build Status](https://travis-ci.org/NYPL/dgx-blogs.svg?branch=master)](https://travis-ci.org/NYPL/dgx-blogs)      |  
+| `qa`           | [![Build Status](https://travis-ci.org/NYPL/dgx-blogs.svg?branch=qa)](https://travis-ci.org/NYPL/dgx-blogs) |  
+| `development`  | [![Build Status](https://travis-ci.org/NYPL/dgx-blogs.svg?branch=development)](https://travis-ci.org/NYPL/dgx-blogs)      |
+
 # Version
 > v0.2.8
 
