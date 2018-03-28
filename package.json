@@ -1,6 +1,6 @@
 {
   "name": "dgx-blogs",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "NYPL Blogs React App",
   "main": "index.js",
   "scripts": {
