@@ -1,7 +1,7 @@
 # NYPL Blogs app
 
 # Version
-> v0.2.8
+> v0.3.0
 
 # Install
 Checkout the `development` branch and perform `npm install`
