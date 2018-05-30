@@ -1,6 +1,6 @@
 {
   "name": "dgx-blogs",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "NYPL Blogs React App",
   "main": "index.js",
   "scripts": {
@@ -33,8 +33,8 @@
     "react-addons-test-utils": "15.6.2"
   },
   "dependencies": {
-    "@nypl/dgx-header-component": "2.4.7",
-    "@nypl/dgx-react-footer": "0.4.1",
+    "@nypl/dgx-header-component": "2.4.8",
+    "@nypl/dgx-react-footer": "git+https://git@github.com/NYPL/dgx-react-footer.git#svg-update",
     "alt": "0.18.2",
     "alt-utils": "1.0.0",
     "axios": "0.9.1",
