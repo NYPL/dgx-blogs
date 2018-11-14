@@ -12,6 +12,9 @@ var ROOT_PATH = path.resolve(__dirname);
 // either development or production
 var ENV = process.env.NODE_ENV || 'development';
 
+// Sets appEnv so the the header component will point to the search app on either Dev or Prod
+const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
+
 // Holds the common settings for any environment
 var commonSettings = {
   // path.resolve - resolves to an absolute path
@@ -50,7 +53,11 @@ var commonSettings = {
     // Alternately, we can run rm -rf dist/ as
     // part of the package.json scripts.
     new cleanBuild(['dist']),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css'),
+    new webpack.DefinePlugin({
+      'loadA11y': process.env.loadA11y || false,
+      appEnv: JSON.stringify(appEnv)
+    })
   ]
 };
 
