@@ -7,7 +7,7 @@
 | `development`  | [![Build Status](https://travis-ci.org/NYPL/dgx-blogs.svg?branch=development)](https://travis-ci.org/NYPL/dgx-blogs)      |
 
 # Version
-> v0.3.2
+> v0.3.6
 
 # Install
 Checkout the `development` branch and perform `npm install`
