@@ -39,7 +39,7 @@ and to not start the webpack dev server.
 
  - Cut feature branch from `development`
  - Create PR against `development`
- - After approval, author merges feature into `development`
+ - After approval, author merges feature into `development` (Note development CD currently disabled)
  - Merge `development` > `qa`
  - Merge `qa` > `master` (production)
 
