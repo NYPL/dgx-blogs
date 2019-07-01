@@ -73,7 +73,7 @@ Note a similar thing is happening in [dgx-new-arrivals](https://github.com/NYPL/
 
 ### "error calling API" in logs
 
-At writing, connecting the app to production refinery prodoces a lot of errors in the logs, which appear to be 404s against this URL:
+At writing, connecting the app to production refinery produces a lot of errors in the logs, which appear to be 404s against this URL:
 
 https://www.nypl.org/refinery/api/v0.1/node/blog?limit=25&offset=1&filter[_enhanced][uri_relative]=blog%2Fbeta%2F
 
