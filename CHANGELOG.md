@@ -1,5 +1,8 @@
 ## Changelog
 
+### v0.3.11
+- Updating @nypl/dgx-header-component to 2.5.6.
+
 ### v0.3.10
 - Added fix to skip CrowdStrike installation to prevent deployment failures.
 
