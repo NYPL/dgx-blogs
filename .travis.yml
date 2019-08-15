@@ -24,8 +24,8 @@ deploy:
     branch: master
 - provider: elasticbeanstalk
   skip_cleanup: true
-  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
-  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
+  access_key_id: "$AWS_ACCESS_KEY_ID_QA"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY_QA"
   region: us-east-1
   app: nypl-blogs
   env: nypl-blogs-qa
@@ -46,8 +46,9 @@ deploy:
   on:
     repo: NYPL/dgx-blogs
     branch: development
-after_deploy: echo 'Successfully executed deploy trigger for NYPL Blogs on
-  AWS'
+    # We've removed development EB, so skip deployment:
+    condition: 1 == 0
+after_deploy: echo 'Successfully executed deploy trigger for NYPL Blogs on AWS'
 env:
   global:
-    secure: QSHE+YXQEqMzz/vD5L0CDdFAcihBdvH8vlibIfaWw+R0XyiEnbKrso9Ur04Olg4WoNH4ZfJlHNP15b4XNwtsyjrdJ7FvelJqKngxoXWQ0aO1FmiS/sHhB09iK5r/eJaqVJLsfRp366e+lAMRH0IQ0wxUZTbAiZzwdTmmork5FslqXm+OEeyrCki29slE49lkmENj2rtPDv1t74JiFkpy40OF/a9Ocis+2IA7Q68PV3Dq9YXX1Og3D5X8c/fCJxrbNHoz1TRrj1gcKIlWDOQvKavpT2gS7xoIt5ZdlpQV1JsQw5yXHNtDcwde+HlwBEYno4W6VkHrTmwyIpyocEtymJOiHTA0xewB/zWgqf27DRZRMnid7oEPA0a/vtuwxPuHPAVcKEbR2xSOlMdhLCp3KeJZblVktzPUioxaKffklPpC+xJlldJpFyEhhcq5Re3gWGwFUU7lYc7jFptQei9NRgl1wHCnEbup8LMYnNSc8QtXxLgIMyE3XRduenrjX197x23iNckH0Mya3946ZBqUlETGz5RJHV4+0gpTP0BXRtlsubhjLV/pBPs3kVq9FmMkOMJ+unhW7fB4uuQC2spK+C/t4nyi5csI+1fs6PWHiedUPZF9LEX7t6Tzt+ZLtD7XXnp/otdZbWaMG/rzFJXQvCCf7x7y9G2nVhKHwwY8840=
+    secure: oCNguOL7IrGpru/OgzHB2CWkcklmjcrktHA+pZwdNpEpAshvQUfwEaU1qDGolLVsnBW5M3XylCxCKNorY0o++E4vO3CcrduTM+Hl0peDiXRGNXy2XtY2qJQq+jseMiYMTm7syP9Jlj8tfhLHK+3pwJ0fKb6Gsmwj8ACn5pjXVgWqWezHxyCGrhyPldPrL8nturG+vJOF85B/s9W+TubPiX8O4x5uL15wzbnh7BGlv/Dfk0CHK2iwQubCiAyezOX9NNRdOj45ED2aEqk+D4MoY88aFS1NHg8JEvFu240oiT5Q2M4ifvu5m7Vzq+qtJAW7HqolqFj4wsNz+tv71YKCN4ThvQeWJIzS5ohREL0l7LzJps63w/Th/jtNF7ByPDTG4+TcxSmC9DyATeloGbTRF9N8RvNbmzmr9Yj5zKYQXM/eKWlFldPzjYhzOwuAtkeCAkSFhCwQ4fHQ4Wgicka1A1eGHC91x6ROcsnATcHa3kmP0Gr6PxUb81WGOUHvlK3LI/1yNEyDeuyJtPEe6yeqBLVfVnU4bNpgunIbSB6FE6aRVLLy5yUNOq+qGtNDVtO88mdoV1d8zPz9gBXTn32l8h3MEWnAgBcRG3yL3DydgRcy1xn2CFkRtCeBdNmdn9q5pkfkMVg3ro7hM1lPkF3svKGWqifv/iNEUgmKVQE9TtY=
