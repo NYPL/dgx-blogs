@@ -1,7 +1,7 @@
 # NYPL Blogs app
 
 ## Version
-> v0.3.12
+> v0.3.13
 
 ## Install
 
