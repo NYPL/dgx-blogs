@@ -67,7 +67,7 @@
     "immutable": "3.8.1",
     "iso": "5.1.0",
     "jsonapi-parserinator": "0.4.8",
-    "kind-of": "3.0.4",
+    "kind-of": "6.0.3",
     "mocha": "2.4.5",
     "node-sass": "3.4.2",
     "radium": "0.13.5",
