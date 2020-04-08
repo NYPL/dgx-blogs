@@ -1,6 +1,6 @@
 {
   "name": "dgx-blogs",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "NYPL Blogs React App",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@nypl/dgx-header-component": "2.6.0",
-    "@nypl/dgx-react-footer": "0.5.2",
+    "@nypl/dgx-react-footer": "0.5.4",
     "alt": "0.18.2",
     "alt-utils": "1.0.0",
     "axios": "0.9.1",
