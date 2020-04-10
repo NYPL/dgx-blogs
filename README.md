@@ -1,3 +1,6 @@
+# Deprecated
+This app is no longer in use at NYPL. Please contact the DXP/RENO team in Digital for more information.
+
 # NYPL Blogs app
 
 ## Version
