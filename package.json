@@ -69,7 +69,7 @@
     "jsonapi-parserinator": "0.4.8",
     "kind-of": "3.0.4",
     "mocha": "2.4.5",
-    "node-sass": "3.4.2",
+    "node-sass": "7.0.0",
     "radium": "0.13.5",
     "react": "15.5.4",
     "react-doc-meta": "0.2.0",
