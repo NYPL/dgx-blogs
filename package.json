@@ -57,7 +57,7 @@
     "dgx-svg-icons": "git+https://git@bitbucket.org/NYPL/dgx-svg-icons.git#master",
     "ejs": "2.5.5",
     "enzyme": "2.2.0",
-    "esdoc": "0.3.1",
+    "esdoc": "1.1.0",
     "eslint": "3.2.2",
     "eslint-config-airbnb": "10.0.0",
     "eslint-plugin-react": "6.0.0",
